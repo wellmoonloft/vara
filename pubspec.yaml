@@ -1,0 +1,41 @@
+name: vara
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  font_awesome_flutter: ^8.8.1
+  flutter_swiper: ^1.1.6
+  intl: ^0.16.0
+  charts_flutter: ^0.9.0  
+  fl_chart: ^0.10.1
+  sqflite: ^1.3.1
+  path: ^1.6.4
+  path_provider: ^1.6.11
+  file_picker: ^1.12.0
+  excel: ^1.1.2
+
+dependency_overrides:
+  xml: '4.2.0'
+  petitparser: ^3.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/Icons/  
+    - assets/Images/

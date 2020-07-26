@@ -1,0 +1,10 @@
+vara.iml
+pubspec.lock
+android/
+ios/
+build/
+.dart_tool/
+.vscode/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
