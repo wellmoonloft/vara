@@ -1,4 +1,7 @@
 # Vara
+
+![](https://img.shields.io/badge/toolkit-flutter-blue.svg)  ![](https://img.shields.io/badge/language-dart-orange.svg)  ![](https://img.shields.io/apm/l/vim-mode)
+
  个人资产管理APP
 
  🇨🇳简体中文 | 🇺🇸[English](https://github.com/wellmoonloft/vara)
@@ -33,12 +36,6 @@
 2. 在项目目录中执行 `flutter create . `
 
 3. 在项目目录中执行 `flutter packages get`
-
-
-
-## 许可证
-
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 
 ## 依赖

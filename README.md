@@ -1,4 +1,7 @@
 # Vara
+![](https://img.shields.io/badge/toolkit-flutter-blue.svg)  ![](https://img.shields.io/badge/language-dart-orange.svg)  ![](https://img.shields.io/apm/l/vim-mode)
+
+
 Personal asset management
 🇨🇳[简体中文](README-zh-cn.md) | 🇺🇸English
 
@@ -28,11 +31,6 @@ Therefore I need an APP like this:
 2. Do `flutter create . ` in your project directory
 
 3. Do `flutter packages get` in your project directory
-
-
-## License
-
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
 
 
 ## Dependents
