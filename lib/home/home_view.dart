@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:vara/asset/currency.dart';
+import 'package:vara/asset/overview.dart';
+import 'package:vara/utils/title_view.dart';
 
 import '../asset/asset_page.dart';
-import '../invest/invest_screen.dart';
 import '../models/tab_icon_data.dart';
 import '../secont.dart';
 import 'bottom_bar_view.dart';
 import '../utils/color_theme.dart';
+import 'top_bar_view.dart';
 
 class HomeView extends StatefulWidget {
   final String title;
@@ -23,9 +26,6 @@ class _StickyDemoState extends State<HomeView>
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
   bool _offstage = true;
-  Widget tabBody = Container(
-    color: ColorTheme.background,
-  );
   List bannerTab = [
     'assets/Images/banner_tab1.jpg',
     'assets/Images/banner_tab2.jpg',
@@ -38,7 +38,6 @@ class _StickyDemoState extends State<HomeView>
       tab.isSelected = false;
     });
     //tabIconsList[0].isSelected = true;
-    tabBody = InvestPage();
 
     _controller.addListener(() {
       //print(_controller.offset);
@@ -47,7 +46,9 @@ class _StickyDemoState extends State<HomeView>
         setState(() {
           _offstage = false;
         });
-      } else if (_controller.offset < 114) {
+      }
+      if (_controller.offset < 450 &&
+          _controller.position.userScrollDirection.index == 1) {
         //_offstage = false;
         setState(() {
           _offstage = true;
@@ -109,157 +110,7 @@ class _StickyDemoState extends State<HomeView>
               ),
               background: Container(
                 //color: Colors.grey,
-                child: Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: MediaQuery.of(context).padding.top,
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(top: 10, left: 16),
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.width * 0.3 -
-                                        32,
-                                width: MediaQuery.of(context).size.width * 0.3 -
-                                    38,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.white,
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(8.0),
-                                      bottomLeft: Radius.circular(8.0),
-                                      bottomRight: Radius.circular(8.0),
-                                      topRight: Radius.circular(8.0)),
-                                  boxShadow: <BoxShadow>[
-                                    BoxShadow(
-                                        color: ColorTheme.grey.withOpacity(0.2),
-                                        offset: Offset(1.1, 1.1),
-                                        blurRadius: 10.0),
-                                  ],
-                                  image: DecorationImage(
-                                      fit: BoxFit.fill,
-                                      image: AssetImage(
-                                          'assets/Images/datebg.jpg')),
-                                ),
-                                child: Column(children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 16),
-                                    child: Text(
-                                      'Today',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 14,
-                                        letterSpacing: 1.2,
-                                        color: ColorTheme.white,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 10),
-                                    child: Text(
-                                      '25',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 28,
-                                        letterSpacing: 1.2,
-                                        color: ColorTheme.white,
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 14, left: 16),
-                              child: Container(
-                                  height:
-                                      (MediaQuery.of(context).size.width * 0.3 -
-                                              40) /
-                                          2,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.3 -
-                                          38,
-                                  decoration: BoxDecoration(
-                                    color: ColorTheme.nearlyBlack,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8.0),
-                                        bottomLeft: Radius.circular(8.0),
-                                        bottomRight: Radius.circular(8.0),
-                                        topRight: Radius.circular(8.0)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color:
-                                              ColorTheme.grey.withOpacity(0.2),
-                                          offset: Offset(1.1, 1.1),
-                                          blurRadius: 10.0),
-                                    ],
-                                  ),
-                                  child: Align(
-                                      alignment: Alignment.center,
-                                      widthFactor: 2.0,
-                                      heightFactor: 2.0,
-                                      child: new Icon(Icons.search,
-                                          color: ColorTheme.white))),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 10, left: 14),
-                          child: Container(
-                            height:
-                                (MediaQuery.of(context).size.width * 0.3 - 32) *
-                                        1.5 +
-                                    10,
-                            width: MediaQuery.of(context).size.width * 0.7 - 8,
-                            decoration: BoxDecoration(
-                              color: ColorTheme.nearlyBlack,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(8.0),
-                                  bottomLeft: Radius.circular(8.0),
-                                  bottomRight: Radius.circular(8.0),
-                                  topRight: Radius.circular(8.0)),
-                              boxShadow: <BoxShadow>[
-                                BoxShadow(
-                                    color: ColorTheme.grey.withOpacity(0.2),
-                                    offset: Offset(1.1, 1.1),
-                                    blurRadius: 10.0),
-                              ],
-                            ),
-                            child: Swiper(
-                              itemBuilder: (BuildContext context, int index) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage(bannerTab[index]),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(8.0),
-                                    ),
-                                  ),
-                                );
-                              },
-                              itemCount: 3,
-                              pagination: new SwiperPagination(
-                                  builder: DotSwiperPaginationBuilder(
-                                color: ColorTheme.white,
-                                activeColor: ColorTheme.darkpale,
-                              )),
-                              // onTap: ,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                child: TopBarView(),
               ),
             ),
           ),
@@ -269,44 +120,84 @@ class _StickyDemoState extends State<HomeView>
               child: bottomBar(),
             ),
           ),
-          // SliverFillRemaining(child: tabBody),
-          SliverFixedExtentList(
-            itemExtent: 250,
-            delegate: SliverChildBuilderDelegate((content, index) {
-              return Container(
-                  //color: Colors.primaries[index % Colors.primaries.length],
-                  child: ListView(
-                // This next line does the trick.
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    color: Colors.red,
-                    child: Padding(padding: EdgeInsets.all(10)),
-                  ),
-                  new Container(
-                    width: 160.0,
-                    color: Colors.blue,
-                    child: Text('2'),
-                  ),
-                  new Container(
-                    width: 160.0,
-                    color: Colors.green,
-                    child: Text('3'),
-                  ),
-                  new Container(
-                    width: 160.0,
-                    color: Colors.yellow,
-                    child: Text('4'),
-                  ),
-                  new Container(
-                    width: 160.0,
-                    color: Colors.orange,
-                    child: Text('5'),
-                  ),
-                ],
-              ));
-            }, childCount: 4),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, int index) {
+                Container postPiece;
+                if (index == 0) {
+                  postPiece = Container(
+                    child: TitleView(
+                      titleTxt: 'Summary',
+                      //subTxt: 'Details',
+                    ),
+                  );
+                } else if (index == 1) {
+                  postPiece = Container(
+                    child: OverviewView(),
+                  );
+                } else if (index == 2) {
+                  postPiece = Container(
+                    child: TitleView(
+                      titleTxt: 'Charts',
+                      //subTxt: 'Details',
+                    ),
+                  );
+                } else if (index == 3) {
+                  postPiece = Container(
+                    child: CurrencyView(),
+                  );
+                } else if (index == 4) {
+                  postPiece = Container(
+                    child: TitleView(
+                      titleTxt: 'Income',
+                      //subTxt: 'Details',
+                    ),
+                  );
+                } else if (index == 5) {
+                  postPiece = Container(
+                      height: 260,
+                      child: ListView(
+                        // This next line does the trick.
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            color: Colors.red,
+                            child: Padding(padding: EdgeInsets.all(10)),
+                          ),
+                          new Container(
+                            width: 160.0,
+                            color: Colors.blue,
+                            child: Text('2'),
+                          ),
+                          new Container(
+                            width: 160.0,
+                            color: Colors.green,
+                            child: Text('3'),
+                          ),
+                          new Container(
+                            width: 160.0,
+                            color: Colors.yellow,
+                            child: Text('4'),
+                          ),
+                          new Container(
+                            width: 160.0,
+                            color: Colors.orange,
+                            child: Text('5'),
+                          ),
+                        ],
+                      ));
+                } else if (index == 6) {
+                  postPiece = Container(
+                    child: SizedBox(
+                      height: 80,
+                    ),
+                  );
+                }
+                return postPiece;
+              },
+              childCount: 7,
+            ),
           ),
         ],
       ),
