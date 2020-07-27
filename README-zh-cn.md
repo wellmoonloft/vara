@@ -1,6 +1,5 @@
 # Vara
-
-![](https://img.shields.io/badge/toolkit-flutter-blue.svg)  ![](https://img.shields.io/badge/language-dart-orange.svg)  ![](https://img.shields.io/apm/l/vim-mode)
+![](https://img.shields.io/badge/Toolkit-Flutter-blue.svg)  ![](https://img.shields.io/badge/Language-Dart-orange.svg)  ![](https://img.shields.io/apm/l/vim-mode)  ![](https://img.shields.io/badge/Process-Developing-blueviolet.svg)
 
  个人资产管理APP
 

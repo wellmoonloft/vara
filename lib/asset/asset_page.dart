@@ -17,6 +17,7 @@ class _InvestPageState extends State<InvestPage> with TickerProviderStateMixin {
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
   double topBarOpacity = 0.0;
+  bool isOffSet = true;
 
   @override
   void initState() {
@@ -44,22 +45,22 @@ class _InvestPageState extends State<InvestPage> with TickerProviderStateMixin {
       CurrencyView(),
     );
 
-    // listViews.add(
-    //   TitleView(
-    //     titleTxt: 'Asset usage cycle',
-    //     //subTxt: 'more',
-    //   ),
-    // );
+    listViews.add(
+      TitleView(
+        titleTxt: 'Asset usage cycle',
+        //subTxt: 'more',
+      ),
+    );
 
-    // listViews.add(
-    //   OverviewView(),
-    // );
+    listViews.add(
+      OverviewView(),
+    );
 
-    // listViews.add(
-    //   SizedBox(
-    //     height: 300,
-    //   ),
-    // );
+    listViews.add(
+      SizedBox(
+        height: 300,
+      ),
+    );
   }
 
   Future<bool> getData() async {
@@ -90,7 +91,9 @@ class _InvestPageState extends State<InvestPage> with TickerProviderStateMixin {
           return const SizedBox();
         } else {
           return ListView.builder(
-            physics: new NeverScrollableScrollPhysics(),
+            physics: isOffSet
+                ? new NeverScrollableScrollPhysics()
+                : new BouncingScrollPhysics(),
             controller: scrollController,
             padding: EdgeInsets.only(
               top: AppBar().preferredSize.height - 39,

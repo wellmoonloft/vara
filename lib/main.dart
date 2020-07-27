@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_view.dart';
+import 'home/home_view.dart';
 import 'utils/db_helper.dart';
 
 void main() {

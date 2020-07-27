@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
-import 'asset/asset_page.dart';
-import 'invest/invest_screen.dart';
-import 'utils/color_theme.dart';
+import '../asset/asset_page.dart';
+import '../invest/invest_screen.dart';
+import '../models/tab_icon_data.dart';
+import '../secont.dart';
+import 'bottom_bar_view.dart';
+import '../utils/color_theme.dart';
 
 class HomeView extends StatefulWidget {
   final String title;
@@ -16,10 +19,13 @@ class HomeView extends StatefulWidget {
 
 class _StickyDemoState extends State<HomeView>
     with SingleTickerProviderStateMixin {
-  TabController tabController;
   ScrollController _controller = new ScrollController();
-  int _selectedIndex = 0;
+  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+
   bool _offstage = true;
+  Widget tabBody = Container(
+    color: ColorTheme.background,
+  );
   List bannerTab = [
     'assets/Images/banner_tab1.jpg',
     'assets/Images/banner_tab2.jpg',
@@ -28,19 +34,20 @@ class _StickyDemoState extends State<HomeView>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(vsync: this, length: 4);
-    tabController.addListener(() {
-      setState(() => _selectedIndex = tabController.index);
+    tabIconsList.forEach((TabIconData tab) {
+      tab.isSelected = false;
     });
+    //tabIconsList[0].isSelected = true;
+    tabBody = InvestPage();
 
     _controller.addListener(() {
       //print(_controller.offset);
-      if (_controller.offset > 116) {
+      if (_controller.offset > 115) {
         //_offstage = true;
         setState(() {
           _offstage = false;
         });
-      } else if (_controller.offset < 115) {
+      } else if (_controller.offset < 114) {
         //_offstage = false;
         setState(() {
           _offstage = true;
@@ -118,7 +125,7 @@ class _StickyDemoState extends State<HomeView>
                                     MediaQuery.of(context).size.width * 0.3 -
                                         32,
                                 width: MediaQuery.of(context).size.width * 0.3 -
-                                    32,
+                                    38,
                                 decoration: BoxDecoration(
                                   color: ColorTheme.white,
                                   borderRadius: BorderRadius.only(
@@ -170,15 +177,15 @@ class _StickyDemoState extends State<HomeView>
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(top: 10, left: 16),
+                              padding: EdgeInsets.only(top: 14, left: 16),
                               child: Container(
                                   height:
                                       (MediaQuery.of(context).size.width * 0.3 -
-                                              32) /
+                                              40) /
                                           2,
                                   width:
                                       MediaQuery.of(context).size.width * 0.3 -
-                                          32,
+                                          38,
                                   decoration: BoxDecoration(
                                     color: ColorTheme.nearlyBlack,
                                     borderRadius: BorderRadius.only(
@@ -204,13 +211,13 @@ class _StickyDemoState extends State<HomeView>
                           ],
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: 10, left: 10),
+                          padding: EdgeInsets.only(top: 10, left: 14),
                           child: Container(
                             height:
                                 (MediaQuery.of(context).size.width * 0.3 - 32) *
                                         1.5 +
                                     10,
-                            width: MediaQuery.of(context).size.width * 0.7 - 10,
+                            width: MediaQuery.of(context).size.width * 0.7 - 8,
                             decoration: BoxDecoration(
                               color: ColorTheme.nearlyBlack,
                               borderRadius: BorderRadius.only(
@@ -259,101 +266,98 @@ class _StickyDemoState extends State<HomeView>
           SliverPersistentHeader(
             pinned: true,
             delegate: StickyTabBarDelegate(
-              child: TabBar(
-                  controller: tabController,
-                  labelColor: ColorTheme.darkpale,
-                  labelStyle: TextStyle(height: 0.5, fontSize: 14),
-                  // labelStyle: TextStyle(
-                  //   fontSize: 15.0,
-                  // ),
-                  unselectedLabelColor: ColorTheme.deactivatedText,
-                  // unselectedLabelStyle: TextStyle(
-                  //   fontSize: 12.0,
-                  // ),
-                  labelPadding: EdgeInsets.only(left: 0, right: 0, bottom: 0),
-                  indicator: BoxDecoration(
-                      border: Border(
-                          bottom:
-                              BorderSide(color: ColorTheme.white, width: 1))),
-                  tabs: <Widget>[
-                    Tab(
-                      icon: _selectedIndex == 0
-                          ? Image.asset(
-                              'assets/Icons/tab_1s.png',
-                              width: 50,
-                              height: 50,
-                            )
-                          : Image.asset(
-                              'assets/Icons/tab_1.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                      text: "Asset",
-                    ),
-                    Tab(
-                      icon: _selectedIndex == 1
-                          ? Image.asset(
-                              'assets/Icons/tab_2s.png',
-                              width: 50,
-                              height: 50,
-                            )
-                          : Image.asset(
-                              'assets/Icons/tab_2.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                      text: "Invest",
-                    ),
-                    Tab(
-                      icon: _selectedIndex == 2
-                          ? Image.asset(
-                              'assets/Icons/tab_3s.png',
-                              width: 50,
-                              height: 50,
-                            )
-                          : Image.asset(
-                              'assets/Icons/tab_3.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                      text: "Bill",
-                    ),
-                    Tab(
-                      icon: _selectedIndex == 3
-                          ? Image.asset(
-                              'assets/Icons/tab_4s.png',
-                              width: 50,
-                              height: 50,
-                            )
-                          : Image.asset(
-                              'assets/Icons/tab_4.png',
-                              width: 50,
-                              height: 50,
-                            ),
-                      text: "Detail",
-                    )
-                  ]),
+              child: bottomBar(),
             ),
           ),
-          SliverFillRemaining(
-            child: TabBarView(
-              controller: this.tabController,
-              children: <Widget>[
-                InvestPage(),
-                InvestScreen(),
-                Center(child: Text('Content of Profile')),
-                Center(child: Text('Content of Profile')),
-              ],
-            ),
+          // SliverFillRemaining(child: tabBody),
+          SliverFixedExtentList(
+            itemExtent: 250,
+            delegate: SliverChildBuilderDelegate((content, index) {
+              return Container(
+                  //color: Colors.primaries[index % Colors.primaries.length],
+                  child: ListView(
+                // This next line does the trick.
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    color: Colors.red,
+                    child: Padding(padding: EdgeInsets.all(10)),
+                  ),
+                  new Container(
+                    width: 160.0,
+                    color: Colors.blue,
+                    child: Text('2'),
+                  ),
+                  new Container(
+                    width: 160.0,
+                    color: Colors.green,
+                    child: Text('3'),
+                  ),
+                  new Container(
+                    width: 160.0,
+                    color: Colors.yellow,
+                    child: Text('4'),
+                  ),
+                  new Container(
+                    width: 160.0,
+                    color: Colors.orange,
+                    child: Text('5'),
+                  ),
+                ],
+              ));
+            }, childCount: 4),
           ),
         ],
       ),
     );
   }
+
+  Widget bottomBar() {
+    return Column(
+      children: <Widget>[
+        const Expanded(
+          child: SizedBox(),
+        ),
+        BottomBarView(
+          tabIconsList: tabIconsList,
+          addClick: () {},
+          changeIndex: (int index) {
+            if (index == 0) {
+              setState(() {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new CustomSliverHeaderDemo()),
+                );
+                // tabBody =
+                //     OverviewScreen(animationController: animationController);
+              });
+            } else if (index == 1) {
+              setState(() {
+                // tabBody =
+                //     InvestScreen(animationController: animationController);
+              });
+            } else if (index == 2) {
+              setState(() {
+                // tabBody = InvestListScreen(
+                //     animationController: animationController);
+              });
+            } else if (index == 3) {
+              setState(() {
+                // tabBody =
+                //     BillScreen(animationController: animationController);
+              });
+            }
+          },
+        ),
+      ],
+    );
+  }
 }
 
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar child;
+  final Widget child;
   StickyTabBarDelegate({@required this.child});
 
   @override
@@ -366,10 +370,10 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => this.child.preferredSize.height;
+  double get maxExtent => 65;
 
   @override
-  double get minExtent => this.child.preferredSize.height;
+  double get minExtent => 65;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
