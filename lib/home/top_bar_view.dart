@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:vara/utils/color_theme.dart';
 
@@ -19,6 +21,7 @@ class TopBarState extends State<TopBarView>
     'assets/Images/banner_tab2.jpg',
     'assets/Images/banner_tab3.jpg'
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -60,15 +63,15 @@ class TopBarState extends State<TopBarView>
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             //fontFamily: AppTheme.fontName,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            letterSpacing: 1.2,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            letterSpacing: 0,
                             color: ColorTheme.white,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 10),
+                        padding: EdgeInsets.only(top: 6),
                         child: Text(
                           '25',
                           textAlign: TextAlign.center,
@@ -136,22 +139,36 @@ class TopBarState extends State<TopBarView>
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage(bannerTab[index]),
-                          fit: BoxFit.cover,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage(bannerTab[index]),
+                            fit: BoxFit.cover,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(8.0),
+                          ),
                         ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8.0),
-                        ),
-                      ),
-                    );
+                        child: Stack(
+                            alignment: Alignment.bottomRight,
+                            children: <Widget>[
+                              Text(
+                                '25',
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  //fontFamily: AppTheme.fontName,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 28,
+                                  letterSpacing: 1.2,
+                                  color: ColorTheme.white,
+                                ),
+                              ),
+                            ]));
                   },
                   itemCount: 3,
                   pagination: new SwiperPagination(
                       builder: DotSwiperPaginationBuilder(
-                    color: ColorTheme.white,
-                    activeColor: ColorTheme.darkpale,
+                    color: ColorTheme.transparent,
+                    activeColor: ColorTheme.transparent,
                   )),
                   // onTap: ,
                 ),

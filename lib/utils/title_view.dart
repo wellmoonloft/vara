@@ -39,7 +39,7 @@ class TitleView extends StatelessWidget {
                   //fontFamily: AppTheme.fontName,
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  letterSpacing: 0.5,
+                  //letterSpacing: 0,
                   color: ColorTheme.nearlyBlack,
                 ),
               ),

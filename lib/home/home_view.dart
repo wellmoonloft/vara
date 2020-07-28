@@ -1,10 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:vara/asset/currency.dart';
 import 'package:vara/asset/overview.dart';
 import 'package:vara/utils/title_view.dart';
-
-import '../asset/asset_page.dart';
 import '../models/tab_icon_data.dart';
 import '../secont.dart';
 import 'bottom_bar_view.dart';
@@ -24,13 +24,8 @@ class _StickyDemoState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   ScrollController _controller = new ScrollController();
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
-
   bool _offstage = true;
-  List bannerTab = [
-    'assets/Images/banner_tab1.jpg',
-    'assets/Images/banner_tab2.jpg',
-    'assets/Images/banner_tab3.jpg'
-  ];
+
   @override
   void initState() {
     super.initState();
@@ -41,7 +36,9 @@ class _StickyDemoState extends State<HomeView>
 
     _controller.addListener(() {
       //print(_controller.offset);
-      if (_controller.offset > 115) {
+      //print(_controller.position.userScrollDirection.index);
+      if (_controller.offset > 115 &&
+          _controller.position.userScrollDirection.index == 2) {
         //_offstage = true;
         setState(() {
           _offstage = false;
@@ -102,7 +99,7 @@ class _StickyDemoState extends State<HomeView>
                       //fontFamily: AppTheme.fontName,
                       fontWeight: FontWeight.w700,
                       fontSize: 14,
-                      letterSpacing: 1.2,
+                      letterSpacing: 0,
                       color: ColorTheme.nearlyBlack,
                     ),
                   ),
@@ -235,6 +232,7 @@ class _StickyDemoState extends State<HomeView>
                 //     animationController: animationController);
               });
             } else if (index == 3) {
+              _getIPAddress();
               setState(() {
                 // tabBody =
                 //     BillScreen(animationController: animationController);
@@ -244,6 +242,29 @@ class _StickyDemoState extends State<HomeView>
         ),
       ],
     );
+  }
+}
+
+_getIPAddress() async {
+  var url =
+      'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=demo';
+  var httpClient = new HttpClient();
+
+  //String result;
+  try {
+    var request = await httpClient.getUrl(Uri.parse(url));
+    var response = await request.close();
+    print('start');
+    if (response.statusCode == HttpStatus.OK) {
+      var json = await response.transform(utf8.decoder).join();
+      var data = jsonDecode(json);
+      //result = data['origin'];
+      print(json);
+    } else {
+      print('Error getting IP address:\nHttp status ${response.statusCode}');
+    }
+  } catch (exception) {
+    print('Failed getting IP address');
   }
 }
 
