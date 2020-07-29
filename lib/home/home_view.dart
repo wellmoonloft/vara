@@ -6,7 +6,6 @@ import 'package:vara/asset/currency.dart';
 import 'package:vara/asset/overview.dart';
 import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
-import '../secont.dart';
 import 'bottom_bar_view.dart';
 import '../utils/color_theme.dart';
 import 'top_bar_view.dart';
@@ -73,37 +72,40 @@ class _StickyDemoState extends State<HomeView>
               title: Offstage(
                 offstage: _offstage,
                 child: Container(
-                  height: 30,
-                  width: MediaQuery.of(context).size.width - 32,
-                  decoration: BoxDecoration(
-                    color: ColorTheme.white,
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(8.0),
-                        bottomRight: Radius.circular(8.0),
-                        topRight: Radius.circular(8.0)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: ColorTheme.grey.withOpacity(0.2),
-                          offset: Offset(1.1, 1.1),
-                          blurRadius: 10.0),
-                    ],
-                    // image: DecorationImage(
-                    //     fit: BoxFit.fill,
-                    //     image: AssetImage('assets/Images/datebg.jpg')),
-                  ),
-                  child: Text(
-                    'I will put a searching bar here later.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      //fontFamily: AppTheme.fontName,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      letterSpacing: 0,
-                      color: ColorTheme.nearlyBlack,
+                    height: 30,
+                    width: MediaQuery.of(context).size.width - 32,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.white,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8.0),
+                          bottomLeft: Radius.circular(8.0),
+                          bottomRight: Radius.circular(8.0),
+                          topRight: Radius.circular(8.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: ColorTheme.grey.withOpacity(0.2),
+                            offset: Offset(1.1, 1.1),
+                            blurRadius: 10.0),
+                      ],
+                      // image: DecorationImage(
+                      //     fit: BoxFit.fill,
+                      //     image: AssetImage('assets/Images/datebg.jpg')),
                     ),
-                  ),
-                ),
+                    child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: <Widget>[
+                          Text(
+                            'I will put a searching bar here later.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              //fontFamily: AppTheme.fontName,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 14,
+                              letterSpacing: 0,
+                              color: ColorTheme.nearlyBlack,
+                            ),
+                          ),
+                        ])),
               ),
               background: Container(
                 //color: Colors.grey,
@@ -213,11 +215,11 @@ class _StickyDemoState extends State<HomeView>
           changeIndex: (int index) {
             if (index == 0) {
               setState(() {
-                Navigator.push(
-                  context,
-                  new MaterialPageRoute(
-                      builder: (context) => new CustomSliverHeaderDemo()),
-                );
+                // Navigator.push(
+                //   context,
+                //   new MaterialPageRoute(
+                //       builder: (context) => new CustomSliverHeaderDemo()),
+                // );
                 // tabBody =
                 //     OverviewScreen(animationController: animationController);
               });
@@ -255,11 +257,11 @@ _getIPAddress() async {
     var request = await httpClient.getUrl(Uri.parse(url));
     var response = await request.close();
     print('start');
-    if (response.statusCode == HttpStatus.OK) {
+    if (response.statusCode == HttpStatus.ok) {
       var json = await response.transform(utf8.decoder).join();
       var data = jsonDecode(json);
       //result = data['origin'];
-      print(json);
+      print(data);
     } else {
       print('Error getting IP address:\nHttp status ${response.statusCode}');
     }

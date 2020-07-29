@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'dart:convert';
+
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:vara/utils/color_theme.dart';
 

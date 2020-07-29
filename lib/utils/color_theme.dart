@@ -4,6 +4,7 @@ class ColorTheme {
   ColorTheme._();
   static const Color nearlyWhite = Color(0xFFFAFAFA);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color black = Color(0x00000000);
   static const Color background = Color(0xFFF2F3F8);
   static const Color nearlyDarkBlue = Color(0xFF2633C5);
   static const Color nearlyBlue = Color(0xFF00B6F0);
@@ -31,6 +32,9 @@ class ColorTheme {
   static const Color darkpale = Color.fromARGB(255, 67, 87, 193);
 
   static const Color transparent = Colors.transparent;
+
+  //
+  static const Color appBackGrandColor_black = Color(0x00000000);
 }
 
 class HexColor extends Color {

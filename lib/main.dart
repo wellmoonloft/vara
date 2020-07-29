@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'home/home_view.dart';
-import 'utils/db_helper.dart';
+import 'splash_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  DBHelper dbHelper = DBHelper();
-  //初始化数据库
-  dbHelper.initDatabase();
   runApp(MyApp());
 }
 
@@ -21,7 +17,7 @@ class MyApp extends StatelessWidget {
         //textTheme: TextTheme.lerp(a, b, t),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomeView(),
+      home: SplashPage(),
     );
   }
 }
