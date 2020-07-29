@@ -38,7 +38,7 @@ class LineChartSample1State extends State<LineChartSample1> {
   @override
   void initState() {
     super.initState();
-    isShowingMainData = true;
+    isShowingMainData = false;
   }
 
   @override
@@ -63,9 +63,9 @@ class LineChartSample1State extends State<LineChartSample1> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                const SizedBox(
-                  height: 27,
-                ),
+                // const SizedBox(
+                //   height: 27,
+                // ),
                 Text(
                   'May, 2020',
                   style: TextStyle(
@@ -75,9 +75,9 @@ class LineChartSample1State extends State<LineChartSample1> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(
-                  height: 37,
-                ),
+                // const SizedBox(
+                //   height: 37,
+                // ),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(right: 16.0, left: 6.0),
@@ -87,9 +87,9 @@ class LineChartSample1State extends State<LineChartSample1> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
               ],
             ),
             // IconButton(

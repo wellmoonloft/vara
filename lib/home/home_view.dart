@@ -1,7 +1,5 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:vara/asset/currency.dart';
 import 'package:vara/asset/overview.dart';
 import 'package:vara/utils/title_view.dart';
@@ -11,9 +9,8 @@ import '../utils/color_theme.dart';
 import 'top_bar_view.dart';
 
 class HomeView extends StatefulWidget {
-  final String title;
-
-  HomeView({Key key, this.title}) : super(key: key);
+  final Map<String, dynamic> btc;
+  HomeView({Key key, this.btc}) : super(key: key);
 
   @override
   _StickyDemoState createState() => _StickyDemoState();
@@ -24,6 +21,7 @@ class _StickyDemoState extends State<HomeView>
   ScrollController _controller = new ScrollController();
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   bool _offstage = true;
+  Map<String, dynamic> btc;
 
   @override
   void initState() {
@@ -31,8 +29,14 @@ class _StickyDemoState extends State<HomeView>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    //tabIconsList[0].isSelected = true;
 
+    //tabIconsList[0].isSelected = true;
+    print(widget.btc);
+    // print(btc['1. From_Currency Code']);
+    // print(btc['3. To_Currency Code']);
+    // print(btc['5. Exchange Rate']);
+    // print(btc['6. Last Refreshed']);
+    // print(btc['7. Time Zone']);
     _controller.addListener(() {
       //print(_controller.offset);
       //print(_controller.position.userScrollDirection.index);
@@ -95,7 +99,15 @@ class _StickyDemoState extends State<HomeView>
                         alignment: AlignmentDirectional.center,
                         children: <Widget>[
                           Text(
-                            'I will put a searching bar here later.',
+                            widget.btc['1. From_Currency Code'] +
+                                '/' +
+                                widget.btc['3. To_Currency Code'] +
+                                ':' +
+                                double.parse(widget.btc['5. Exchange Rate'])
+                                    .toStringAsFixed(2) +
+                                '  ' +
+                                DateFormat('yyyy-MM-dd HH:MM')
+                                    .format(DateTime.now()),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               //fontFamily: AppTheme.fontName,
@@ -234,7 +246,6 @@ class _StickyDemoState extends State<HomeView>
                 //     animationController: animationController);
               });
             } else if (index == 3) {
-              _getIPAddress();
               setState(() {
                 // tabBody =
                 //     BillScreen(animationController: animationController);
@@ -244,29 +255,6 @@ class _StickyDemoState extends State<HomeView>
         ),
       ],
     );
-  }
-}
-
-_getIPAddress() async {
-  var url =
-      'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=CNY&apikey=demo';
-  var httpClient = new HttpClient();
-
-  //String result;
-  try {
-    var request = await httpClient.getUrl(Uri.parse(url));
-    var response = await request.close();
-    print('start');
-    if (response.statusCode == HttpStatus.ok) {
-      var json = await response.transform(utf8.decoder).join();
-      var data = jsonDecode(json);
-      //result = data['origin'];
-      print(data);
-    } else {
-      print('Error getting IP address:\nHttp status ${response.statusCode}');
-    }
-  } catch (exception) {
-    print('Failed getting IP address');
   }
 }
 
