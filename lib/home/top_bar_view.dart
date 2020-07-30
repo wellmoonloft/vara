@@ -148,22 +148,22 @@ class TopBarState extends State<TopBarView>
                           ),
                         ),
                         child: Padding(
-                            padding: EdgeInsets.only(top: 10),
+                            padding: EdgeInsets.only(top: 6, right: 6),
                             child: Stack(
-                                alignment: Alignment.bottomRight,
+                                alignment: Alignment.topRight,
                                 children: <Widget>[
+                                  LineChartView(),
                                   Text(
-                                    '25',
+                                    'BTC/USD',
                                     textAlign: TextAlign.start,
                                     style: TextStyle(
                                       //fontFamily: AppTheme.fontName,
                                       fontWeight: FontWeight.w700,
-                                      fontSize: 28,
+                                      fontSize: 16,
                                       letterSpacing: 1.2,
-                                      color: ColorTheme.black,
+                                      color: ColorTheme.white,
                                     ),
                                   ),
-                                  LineChartView()
                                 ])));
                   },
                   itemCount: 3,

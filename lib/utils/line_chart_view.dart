@@ -1,31 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:vara/utils/app_theme.dart';
 
 import '../utils/color_theme.dart';
-
-// class LineChartView extends StatelessWidget {
-//   const LineChartView({Key key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       children: <Widget>[
-//         Padding(
-//           padding: const EdgeInsets.only(
-//               left: AppTheme.leftRightPadding,
-//               right: AppTheme.leftRightPadding,
-//               top: 20,
-//               bottom: 20),
-//           child: Stack(
-//             overflow: Overflow.visible,
-//             children: <Widget>[LineChartSample1()],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
 
 class LineChartView extends StatefulWidget {
   @override
@@ -40,40 +16,19 @@ class LineChartViewState extends State<LineChartView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ColorTheme.white,
-        image: DecorationImage(
-            fit: BoxFit.fill, image: AssetImage('assets/Images/datebg.jpg')),
-        borderRadius: const BorderRadius.all(Radius.circular(8)),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-              color: ColorTheme.grey.withOpacity(0.2),
-              offset: Offset(1.1, 1.1),
-              blurRadius: 10.0),
-        ],
-      ),
-      child: Stack(
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                  child: LineChart(
-                    sampleData1(),
-                    swapAnimationDuration: const Duration(milliseconds: 250),
-                  ),
-                ),
-              ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-            ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: LineChart(
+              sampleData1(),
+              swapAnimationDuration: const Duration(milliseconds: 250),
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -90,13 +45,13 @@ class LineChartViewState extends State<LineChartView> {
       titlesData: FlTitlesData(
         bottomTitles: SideTitles(
           showTitles: true,
-          reservedSize: 22,
+          reservedSize: 20,
           textStyle: TextStyle(
             color: ColorTheme.white,
             fontWeight: FontWeight.bold,
-            fontSize: 14,
+            fontSize: 12,
           ),
-          margin: 10,
+          //margin: 10,
           getTitles: (value) {
             switch (value.toInt()) {
               case 2:
@@ -114,7 +69,7 @@ class LineChartViewState extends State<LineChartView> {
           textStyle: TextStyle(
             color: ColorTheme.white,
             fontWeight: FontWeight.bold,
-            fontSize: 14,
+            fontSize: 12,
           ),
           getTitles: (value) {
             switch (value.toInt()) {
@@ -129,8 +84,8 @@ class LineChartViewState extends State<LineChartView> {
             }
             return '';
           },
-          margin: 8,
-          reservedSize: 30,
+          //margin: 8,
+          reservedSize: 20,
         ),
       ),
       borderData: FlBorderData(

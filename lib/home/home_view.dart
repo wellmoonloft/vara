@@ -9,6 +9,7 @@ import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import 'bottom_bar_view.dart';
 import '../utils/color_theme.dart';
+import 'filters_screen.dart';
 import 'top_bar_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -230,6 +231,24 @@ class _StickyDemoState extends State<HomeView>
     );
   }
 
+  _navigateAndDisplaySelection(BuildContext context) async {
+    // final result = await Navigator.push(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => FiltersScreen()),
+    // );
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FiltersScreen()),
+    );
+
+    tabIconsList.forEach((TabIconData tab) {
+      tab.isSelected = false;
+    });
+    // Scaffold.of(context)
+    //   ..removeCurrentSnackBar()
+    //   ..showSnackBar(SnackBar(content: Text("$result")));
+  }
+
   Widget bottomBar() {
     return Column(
       children: <Widget>[
@@ -261,10 +280,12 @@ class _StickyDemoState extends State<HomeView>
                 //     animationController: animationController);
               });
             } else if (index == 3) {
-              setState(() {
-                // tabBody =
-                //     BillScreen(animationController: animationController);
-              });
+              _navigateAndDisplaySelection(context);
+              // Navigator.of(context).push(
+              //                   new MaterialPageRoute(
+              //                       builder: (context) =>
+              //                           new FiltersScreen(),
+              //                       ));
             }
           },
         ),
