@@ -75,6 +75,18 @@ class DBHelper {
     return personList;
   }
 
+  //   Future<List<Person>> getAsset() async {
+  //   var dbClient = await db;
+  //   List<Map> maps = await dbClient.query('person',
+  //       columns: ['id', 'firstname', 'midname', 'lastname', 'age', 'sex']);
+  //   List<Person> personList = [];
+  //   for (int i = 0; i < maps.length; i++) {
+  //     personList.add(Person.fromMap(maps[i]));
+  //   }
+
+  //   return personList;
+  // }
+
   Future<List<Invest>> getInvest() async {
     var dbClient = await db;
     List<Map> maps = await dbClient.query('invest', columns: [

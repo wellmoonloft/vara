@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/asset/currency.dart';
+
 import 'package:vara/asset/overview.dart';
+import 'package:vara/utils/app_theme.dart';
+
 import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import 'bottom_bar_view.dart';
@@ -155,7 +158,19 @@ class _StickyDemoState extends State<HomeView>
                   );
                 } else if (index == 3) {
                   postPiece = Container(
-                    child: CurrencyView(),
+                    // padding: EdgeInsets.only(
+                    //     top: 10, bottom: 10, left: 16, right: 16),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: AppTheme.leftRightPadding,
+                          right: AppTheme.leftRightPadding,
+                          top: 20,
+                          bottom: 20),
+                      child: Stack(
+                        overflow: Overflow.visible,
+                        children: <Widget>[LineChartSample1()],
+                      ),
+                    ),
                   );
                 } else if (index == 4) {
                   postPiece = Container(

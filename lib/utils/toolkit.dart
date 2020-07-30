@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:convert';
+
 class Toolkit {
   formatNum(double num, int postion) {
     if ((num.toString().length - num.toString().lastIndexOf(".") - 1) <
@@ -20,4 +23,28 @@ class Toolkit {
     print(dateSlug);
     return dateSlug;
   }
+
+  // _getInternetData() async {
+  //   var url =
+  //       'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV';
+  //   var httpClient = new HttpClient();
+
+  //   //String result;
+  //   try {
+  //     var request = await httpClient.getUrl(Uri.parse(url));
+  //     var response = await request.close();
+  //     print('start');
+  //     if (response.statusCode == HttpStatus.ok) {
+  //       var json = await response.transform(utf8.decoder).join();
+  //       var data = jsonDecode(json);
+  //       return data;
+  //     } else {
+  //       print('Error getting data:\nHttp status ${response.statusCode}');
+  //       return response.statusCode;
+  //     }
+  //   } catch (exception) {
+  //     print('Failed getting data');
+  //     return 'Failed getting data';
+  //   }
+  // }
 }

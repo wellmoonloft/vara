@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:vara/utils/color_theme.dart';
+import 'package:vara/utils/line_chart_view.dart';
 
 class TopBarView extends StatefulWidget {
   final String title;
@@ -146,21 +147,24 @@ class TopBarState extends State<TopBarView>
                             Radius.circular(8.0),
                           ),
                         ),
-                        child: Stack(
-                            alignment: Alignment.bottomRight,
-                            children: <Widget>[
-                              Text(
-                                '25',
-                                textAlign: TextAlign.start,
-                                style: TextStyle(
-                                  //fontFamily: AppTheme.fontName,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 28,
-                                  letterSpacing: 1.2,
-                                  color: ColorTheme.white,
-                                ),
-                              ),
-                            ]));
+                        child: Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: Stack(
+                                alignment: Alignment.bottomRight,
+                                children: <Widget>[
+                                  Text(
+                                    '25',
+                                    textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      //fontFamily: AppTheme.fontName,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 28,
+                                      letterSpacing: 1.2,
+                                      color: ColorTheme.black,
+                                    ),
+                                  ),
+                                  LineChartView()
+                                ])));
                   },
                   itemCount: 3,
                   pagination: new SwiperPagination(
