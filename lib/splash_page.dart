@@ -26,6 +26,7 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ]));
   Map<String, dynamic> btc;
+  Map<String, dynamic> btcweek;
 
   @override
   void initState() {
@@ -38,25 +39,24 @@ class _SplashPageState extends State<SplashPage> {
     DBHelper dbHelper = DBHelper();
     //1. init
     dbHelper.initDatabase();
-    await _getInternetData();
+    await _getBtcCurrency();
+    await _getBtcWeekly();
     //await Future<dynamic>.delayed(const Duration(milliseconds: 5000));
 
     print("----数据获取完毕------");
     setState(() {
-      tabBody = HomeView(btc: btc);
+      tabBody = HomeView(btc: btc, btcweek: btcweek);
     });
   }
 
-  _getInternetData() async {
+  _getBtcCurrency() async {
     var url =
         'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV';
     var httpClient = new HttpClient();
 
-    //String result;
     try {
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
-      print('start');
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
@@ -67,6 +67,30 @@ class _SplashPageState extends State<SplashPage> {
     } catch (exception) {
       print('Failed getting data');
     }
+    httpClient.close();
+  }
+
+  _getBtcWeekly() async {
+    var url =
+        'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=9AAGEESEANSVTYTV';
+    var httpClient = new HttpClient();
+
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      print('start');
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
+        var data = jsonDecode(json);
+        btcweek = data['Time Series (Digital Currency Daily)'];
+        //print(btcweek.length);
+      } else {
+        print('Error getting data:\nHttp status ${response.statusCode}');
+      }
+    } catch (exception) {
+      print('Failed getting data');
+    }
+    httpClient.close();
   }
 
   @override

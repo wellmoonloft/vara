@@ -9,18 +9,19 @@ import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import 'bottom_bar_view.dart';
 import '../utils/color_theme.dart';
-import 'filters_screen.dart';
+import 'bill_import.dart';
 import 'top_bar_view.dart';
 
 class HomeView extends StatefulWidget {
   final Map<String, dynamic> btc;
-  HomeView({Key key, this.btc}) : super(key: key);
+  final Map<String, dynamic> btcweek;
+  HomeView({Key key, this.btc, this.btcweek}) : super(key: key);
 
   @override
-  _StickyDemoState createState() => _StickyDemoState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _StickyDemoState extends State<HomeView>
+class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   ScrollController _controller = new ScrollController();
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -34,13 +35,6 @@ class _StickyDemoState extends State<HomeView>
       tab.isSelected = false;
     });
 
-    //tabIconsList[0].isSelected = true;
-    print(widget.btc);
-    // print(btc['1. From_Currency Code']);
-    // print(btc['3. To_Currency Code']);
-    // print(btc['5. Exchange Rate']);
-    // print(btc['6. Last Refreshed']);
-    // print(btc['7. Time Zone']);
     _controller.addListener(() {
       //print(_controller.offset);
       //print(_controller.position.userScrollDirection.index);
@@ -125,7 +119,7 @@ class _StickyDemoState extends State<HomeView>
               ),
               background: Container(
                 //color: Colors.grey,
-                child: TopBarView(),
+                child: TopBarView(btcweek: widget.btcweek),
               ),
             ),
           ),
@@ -238,7 +232,7 @@ class _StickyDemoState extends State<HomeView>
     // );
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => FiltersScreen()),
+      MaterialPageRoute(builder: (context) => BillImportView()),
     );
 
     tabIconsList.forEach((TabIconData tab) {

@@ -24,6 +24,7 @@ dependencies:
   path_provider: ^1.6.11
   file_picker: ^1.12.0
   excel: ^1.1.2
+  http: ^0.12.2
 
 
 dependency_overrides:

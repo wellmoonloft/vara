@@ -1,16 +1,38 @@
+import 'dart:ffi';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/color_theme.dart';
 
 class LineChartView extends StatefulWidget {
+  final Map<String, dynamic> btcweek;
+  LineChartView({Key key, this.btcweek}) : super(key: key);
   @override
   LineChartViewState createState() => LineChartViewState();
 }
 
 class LineChartViewState extends State<LineChartView> {
+  List<FlSpot> flspot1 = [FlSpot(0, 0.0)];
+
   @override
   void initState() {
+    for (var i = 0; i < 30; i++) {
+      Map<String, dynamic> data = widget.btcweek[DateFormat('yyyy-MM-dd')
+          .format(DateTime.now().subtract(new Duration(days: i)))
+          .toString()];
+
+      flspot1
+          .asMap()
+          .entries
+          .map((i) =>
+              FlSpot(i.key.toDouble(), double.parse(data['4b. close (USD)'])))
+          .toList();
+
+      //flspot1.add(FlSpot(i.toDouble(), double.parse(data['4b. close (USD)'])));
+    }
+    print(flspot1);
     super.initState();
   }
 
@@ -54,11 +76,11 @@ class LineChartViewState extends State<LineChartView> {
           //margin: 10,
           getTitles: (value) {
             switch (value.toInt()) {
-              case 2:
+              case 1:
                 return '1';
-              case 7:
+              case 15:
                 return '15';
-              case 12:
+              case 30:
                 return '30';
             }
             return '';
@@ -71,19 +93,19 @@ class LineChartViewState extends State<LineChartView> {
             fontWeight: FontWeight.bold,
             fontSize: 12,
           ),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 1:
-                return '1';
-              case 2:
-                return '2';
-              case 3:
-                return '3';
-              case 4:
-                return '5';
-            }
-            return '';
-          },
+          // getTitles: (value) {
+          //   switch (value.toInt()) {
+          //     case 1:
+          //       return '1';
+          //     case 2:
+          //       return '2';
+          //     case 3:
+          //       return '3';
+          //     case 4:
+          //       return '5';
+          //   }
+          //   return '';
+          // },
           //margin: 8,
           reservedSize: 20,
         ),
@@ -116,15 +138,7 @@ class LineChartViewState extends State<LineChartView> {
 
   List<LineChartBarData> linesBarData() {
     final LineChartBarData lineChartBarData1 = LineChartBarData(
-      spots: [
-        FlSpot(1, 1),
-        FlSpot(3, 1.5),
-        FlSpot(5, 1.4),
-        FlSpot(7, 3.4),
-        FlSpot(10, 2),
-        FlSpot(12, 2.2),
-        FlSpot(13, 1.8),
-      ],
+      spots: flspot1,
       isCurved: true,
       colors: [
         ColorTheme.debt,
@@ -162,31 +176,9 @@ class LineChartViewState extends State<LineChartView> {
       ]),
     );
 
-    final LineChartBarData lineChartBarData3 = LineChartBarData(
-      spots: [
-        FlSpot(1, 2.8),
-        FlSpot(3, 1.9),
-        FlSpot(6, 3),
-        FlSpot(10, 1.3),
-        FlSpot(13, 2.5),
-      ],
-      isCurved: true,
-      colors: const [
-        ColorTheme.netAssets,
-      ],
-      barWidth: 4,
-      isStrokeCapRound: true,
-      dotData: FlDotData(
-        show: false,
-      ),
-      belowBarData: BarAreaData(
-        show: false,
-      ),
-    );
     return [
       lineChartBarData1,
       lineChartBarData2,
-      lineChartBarData3,
     ];
   }
 }

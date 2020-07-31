@@ -9,12 +9,12 @@ import 'package:vara/models/db_models.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/db_helper.dart';
 
-class FiltersScreen extends StatefulWidget {
+class BillImportView extends StatefulWidget {
   @override
-  _FiltersScreenState createState() => _FiltersScreenState();
+  _BillImportViewState createState() => _BillImportViewState();
 }
 
-class _FiltersScreenState extends State<FiltersScreen> {
+class _BillImportViewState extends State<BillImportView> {
   String _fileName;
   String _path;
   Map<String, String> _paths;

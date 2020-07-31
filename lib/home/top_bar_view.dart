@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:intl/intl.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/line_chart_view.dart';
 
 class TopBarView extends StatefulWidget {
   final String title;
-
-  TopBarView({Key key, this.title}) : super(key: key);
+  final Map<String, dynamic> btcweek;
+  TopBarView({Key key, this.title, this.btcweek}) : super(key: key);
 
   @override
   TopBarState createState() => TopBarState();
@@ -20,6 +21,11 @@ class TopBarState extends State<TopBarView>
     'assets/Images/banner_tab2.jpg',
     'assets/Images/banner_tab3.jpg'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +78,7 @@ class TopBarState extends State<TopBarView>
                       Padding(
                         padding: EdgeInsets.only(top: 6),
                         child: Text(
-                          '25',
+                          DateFormat('dd').format(DateTime.now()),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             //fontFamily: AppTheme.fontName,
@@ -152,7 +158,7 @@ class TopBarState extends State<TopBarView>
                             child: Stack(
                                 alignment: Alignment.topRight,
                                 children: <Widget>[
-                                  LineChartView(),
+                                  LineChartView(btcweek: widget.btcweek),
                                   Text(
                                     'BTC/USD',
                                     textAlign: TextAlign.start,
