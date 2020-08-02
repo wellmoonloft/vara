@@ -1,8 +1,6 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:vara/models/tab_icon_data.dart';
-
 import '../utils/color_theme.dart';
 
 class BottomBarView extends StatefulWidget {
@@ -42,7 +40,7 @@ class _BottomBarViewState extends State<BottomBarView>
             return Column(
               children: <Widget>[
                 Container(
-                  height: 65,
+                  height: 70,
                   // decoration: BoxDecoration(
                   //     border: Border(
                   //         bottom: BorderSide(

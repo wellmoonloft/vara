@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vara/utils/color_theme.dart';
 
-import 'color_theme.dart';
-
-class TitleView extends StatelessWidget {
+class BillTitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
 
-  const TitleView({
+  const BillTitleView({
     Key key,
     this.titleTxt: "",
     this.subTxt: "",
@@ -24,7 +23,7 @@ class TitleView extends StatelessWidget {
               height: 28,
               width: 4,
               decoration: BoxDecoration(
-                color: ColorTheme.darkpale.withOpacity(0.8),
+                color: ColorTheme.darkorange.withOpacity(0.8),
                 borderRadius: BorderRadius.all(Radius.circular(4.0)),
               ),
             ),
@@ -58,9 +57,9 @@ class TitleView extends StatelessWidget {
                       style: TextStyle(
                         //fontFamily: AppTheme.fontName,
                         fontWeight: FontWeight.normal,
-                        fontSize: 18,
+                        fontSize: 16,
                         letterSpacing: 0.0,
-                        color: ColorTheme.nearlyDarkBlue,
+                        color: ColorTheme.darkorange,
                       ),
                     ),
                     SizedBox(

@@ -6,9 +6,8 @@ import 'utils/color_theme.dart';
 import 'utils/db_helper.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key key, this.title}) : super(key: key);
-
   final String title;
+  SplashPage({Key key, this.title}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -17,6 +16,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  Map<String, dynamic> btc;
+  Map<String, dynamic> btcdaily;
+  Map<String, dynamic> usdcnydaily;
+  Map<String, dynamic> eurcnydaily;
+  List<Map> asset;
   Widget tabBody = Container(
       color: ColorTheme.white,
       child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
@@ -25,8 +29,6 @@ class _SplashPageState extends State<SplashPage> {
           fit: BoxFit.fill,
         ),
       ]));
-  Map<String, dynamic> btc;
-  Map<String, dynamic> btcweek;
 
   @override
   void initState() {
@@ -34,19 +36,35 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
   }
 
-  _navigatorAfterGetData() async {
-    print("----等待获取数据------");
-    DBHelper dbHelper = DBHelper();
-    //1. init
-    dbHelper.initDatabase();
-    await _getBtcCurrency();
-    await _getBtcWeekly();
-    //await Future<dynamic>.delayed(const Duration(milliseconds: 5000));
-
-    print("----数据获取完毕------");
-    setState(() {
-      tabBody = HomeView(btc: btc, btcweek: btcweek);
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      return tabBody;
     });
+  }
+
+  _navigatorAfterGetData() async {
+    print("----get data start------");
+    await _doDatabase();
+    await _getBtcCurrency();
+    await _getBTCWeekly();
+    await _getUSDCNYWeekly();
+    await _getEURCNYWeekly();
+    print("----get data done------");
+    setState(() {
+      tabBody = HomeView(
+          btc: btc,
+          btcdaily: btcdaily,
+          usdcnydaily: usdcnydaily,
+          eurcnydaily: eurcnydaily,
+          asset: asset);
+    });
+  }
+
+  _doDatabase() async {
+    DBHelper dbHelper = DBHelper();
+    await dbHelper.initDatabase();
+    asset = await dbHelper.getAsset();
   }
 
   _getBtcCurrency() async {
@@ -70,7 +88,7 @@ class _SplashPageState extends State<SplashPage> {
     httpClient.close();
   }
 
-  _getBtcWeekly() async {
+  _getBTCWeekly() async {
     var url =
         'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=9AAGEESEANSVTYTV';
     var httpClient = new HttpClient();
@@ -78,12 +96,11 @@ class _SplashPageState extends State<SplashPage> {
     try {
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
-      print('start');
+      print('start btc');
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        btcweek = data['Time Series (Digital Currency Daily)'];
-        //print(btcweek.length);
+        btcdaily = data['Time Series (Digital Currency Daily)'];
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }
@@ -93,10 +110,49 @@ class _SplashPageState extends State<SplashPage> {
     httpClient.close();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return tabBody;
-    });
+  _getUSDCNYWeekly() async {
+    var url =
+        'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=CNY&apikey=9AAGEESEANSVTYTV';
+    var httpClient = new HttpClient();
+
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      print('start usd');
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
+        var data = jsonDecode(json);
+        usdcnydaily = data['Time Series FX (Daily)'];
+        print(usdcnydaily.length);
+      } else {
+        print('Error getting data:\nHttp status ${response.statusCode}');
+      }
+    } catch (exception) {
+      print('Failed getting data');
+    }
+    httpClient.close();
+  }
+
+  _getEURCNYWeekly() async {
+    var url =
+        'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=CNY&apikey=9AAGEESEANSVTYTV';
+    var httpClient = new HttpClient();
+
+    try {
+      var request = await httpClient.getUrl(Uri.parse(url));
+      var response = await request.close();
+      print('start eur');
+      if (response.statusCode == HttpStatus.ok) {
+        var json = await response.transform(utf8.decoder).join();
+        var data = jsonDecode(json);
+        eurcnydaily = data['Time Series FX (Daily)'];
+        print(eurcnydaily.length);
+      } else {
+        print('Error getting data:\nHttp status ${response.statusCode}');
+      }
+    } catch (exception) {
+      print('Failed getting data');
+    }
+    httpClient.close();
   }
 }

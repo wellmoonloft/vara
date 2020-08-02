@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: Colors.white,
-        //textTheme: TextTheme.lerp(a, b, t),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SplashPage(),

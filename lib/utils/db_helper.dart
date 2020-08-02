@@ -18,7 +18,7 @@ class DBHelper {
 
   initDatabase() async {
     io.Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, 'VaradDB', 'Varad.db');
+    String path = join(documentDirectory.path, 'VaraDB', 'Vara.db');
     final db = await openDatabase(path, version: 1, onCreate: _onCreate);
     debugPrint(path);
     return db;
@@ -31,7 +31,7 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,currency TEXT)');
     await db.execute(
-        'CREATE TABLE asset (id INTEGER PRIMARY KEY, addtime TEXT, assetamount INTEGER, currency TEXT)');
+        'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
         'CREATE TABLE incomedetail (id INTEGER PRIMARY KEY, addtime TEXT, currency INTEGER, use TEXT, detailamount TEXT)');
 
@@ -39,15 +39,15 @@ class DBHelper {
     Person person = Person();
     person.firstname = 'Anonymous';
     person.midname = '';
-    person.lastname = 'Varad';
+    person.lastname = 'Vara';
     person.age = 25;
     person.sex = 0;
     await db.insert('person', person.toMap());
 
     Asset asset = Asset();
-    asset.addtime = new DateTime.now().toString();
-    asset.assetamount = 0;
-    asset.currency = 'EUR';
+    asset.date = new DateTime.now().toString();
+    asset.asset = 0;
+    asset.debt = 0;
     await db.insert('asset', asset.toMap());
   }
 
@@ -75,17 +75,13 @@ class DBHelper {
     return personList;
   }
 
-  //   Future<List<Person>> getAsset() async {
-  //   var dbClient = await db;
-  //   List<Map> maps = await dbClient.query('person',
-  //       columns: ['id', 'firstname', 'midname', 'lastname', 'age', 'sex']);
-  //   List<Person> personList = [];
-  //   for (int i = 0; i < maps.length; i++) {
-  //     personList.add(Person.fromMap(maps[i]));
-  //   }
+  Future<List<Map>> getAsset() async {
+    var dbClient = await db;
+    List<Map> maps =
+        await dbClient.query('asset', columns: ['id', 'date', 'asset', 'debt']);
 
-  //   return personList;
-  // }
+    return maps;
+  }
 
   Future<List<Invest>> getInvest() async {
     var dbClient = await db;

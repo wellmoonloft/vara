@@ -91,26 +91,26 @@ class Invest {
 
 class Asset {
   int id;
-  String addtime;
-  int assetamount;
-  String currency;
-  //Asset(this.id, this.addtime, this.assetamount, this.currency);
+  String date;
+  num asset;
+  num debt;
+  Asset({this.id, this.date, this.asset, this.debt});
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'id': id,
-      'addtime': addtime,
-      'assetamount': assetamount,
-      'currency': currency,
+      'date': date,
+      'asset': asset,
+      'debt': debt,
     };
     return map;
   }
 
-  // Asset.fromMap(Map<String, dynamic> map) {
-  //   id = map['id'];
-  //   addtime = map['addtime'];
-  //   assetamount = map['assetamount'];
-  //   currency = map['currency'];
-  // }
+  Asset.fromMap(Map<String, dynamic> map) {
+    id = map['id'];
+    date = map['date'];
+    asset = map['asset'];
+    debt = map['debt'];
+  }
 }
 
 class IncomeDetail {

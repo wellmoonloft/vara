@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:vara/asset/currency.dart';
-
-import 'package:vara/asset/overview.dart';
+import 'package:vara/asset/asset_title_view.dart';
+import 'package:vara/asset/asset_view.dart';
+import 'package:vara/bill/bill_summary.dart';
+import 'package:vara/bill/bill_title_view.dart';
+import 'package:vara/invest/invest_summary.dart';
+import 'package:vara/invest/invest_title_view.dart';
 import 'package:vara/utils/app_theme.dart';
-
 import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
-import 'bottom_bar_view.dart';
 import '../utils/color_theme.dart';
+import 'top/top_bar_view.dart';
 import 'bill_import.dart';
-import 'top_bar_view.dart';
+import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
   final Map<String, dynamic> btc;
-  final Map<String, dynamic> btcweek;
-  HomeView({Key key, this.btc, this.btcweek}) : super(key: key);
+  final Map<String, dynamic> btcdaily;
+  final Map<String, dynamic> usdcnydaily;
+  final Map<String, dynamic> eurcnydaily;
+  final List<Map> asset;
+  HomeView(
+      {Key key,
+      this.btc,
+      this.btcdaily,
+      this.usdcnydaily,
+      this.eurcnydaily,
+      this.asset})
+      : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -45,7 +57,7 @@ class _HomeViewState extends State<HomeView>
           _offstage = false;
         });
       }
-      if (_controller.offset < 450 &&
+      if (_controller.offset < 400 &&
           _controller.position.userScrollDirection.index == 1) {
         //_offstage = false;
         setState(() {
@@ -119,7 +131,10 @@ class _HomeViewState extends State<HomeView>
               ),
               background: Container(
                 //color: Colors.grey,
-                child: TopBarView(btcweek: widget.btcweek),
+                child: TopBarView(
+                    btcdaily: widget.btcdaily,
+                    usdcnydaily: widget.usdcnydaily,
+                    eurcnydaily: widget.eurcnydaily),
               ),
             ),
           ),
@@ -135,83 +150,40 @@ class _HomeViewState extends State<HomeView>
                 Container postPiece;
                 if (index == 0) {
                   postPiece = Container(
-                    child: TitleView(
-                      titleTxt: 'Summary',
-                      //subTxt: 'Details',
+                    child: AssetTitleView(
+                      titleTxt: 'Asset',
                     ),
                   );
                 } else if (index == 1) {
                   postPiece = Container(
-                    child: OverviewView(),
+                    child: AssetView(asset: widget.asset),
                   );
                 } else if (index == 2) {
                   postPiece = Container(
-                    child: TitleView(
-                      titleTxt: 'Charts',
-                      //subTxt: 'Details',
+                    child: InvestTitleView(
+                      titleTxt: 'Invest',
+                      subTxt: 'Details',
                     ),
                   );
                 } else if (index == 3) {
                   postPiece = Container(
-                    // padding: EdgeInsets.only(
-                    //     top: 10, bottom: 10, left: 16, right: 16),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: AppTheme.leftRightPadding,
-                          right: AppTheme.leftRightPadding,
-                          top: 20,
-                          bottom: 20),
-                      child: Stack(
-                        overflow: Overflow.visible,
-                        children: <Widget>[LineChartSample1()],
-                      ),
-                    ),
+                    child: InvestSummaryView(asset: widget.asset),
                   );
                 } else if (index == 4) {
                   postPiece = Container(
-                    child: TitleView(
-                      titleTxt: 'Income',
-                      //subTxt: 'Details',
+                    child: BillTitleView(
+                      titleTxt: 'Bill',
+                      subTxt: 'Details',
                     ),
                   );
                 } else if (index == 5) {
                   postPiece = Container(
-                      height: 260,
-                      child: ListView(
-                        // This next line does the trick.
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            color: Colors.red,
-                            child: Padding(padding: EdgeInsets.all(10)),
-                          ),
-                          new Container(
-                            width: 160.0,
-                            color: Colors.blue,
-                            child: Text('2'),
-                          ),
-                          new Container(
-                            width: 160.0,
-                            color: Colors.green,
-                            child: Text('3'),
-                          ),
-                          new Container(
-                            width: 160.0,
-                            color: Colors.yellow,
-                            child: Text('4'),
-                          ),
-                          new Container(
-                            width: 160.0,
-                            color: Colors.orange,
-                            child: Text('5'),
-                          ),
-                        ],
-                      ));
+                    child: BillSummaryView(asset: widget.asset),
+                  );
                 } else if (index == 6) {
                   postPiece = Container(
                     child: SizedBox(
-                      height: 80,
+                      height: 65,
                     ),
                   );
                 }
@@ -226,10 +198,6 @@ class _HomeViewState extends State<HomeView>
   }
 
   _navigateAndDisplaySelection(BuildContext context) async {
-    // final result = await Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => FiltersScreen()),
-    // );
     await Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => BillImportView()),
@@ -238,9 +206,6 @@ class _HomeViewState extends State<HomeView>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
-    // Scaffold.of(context)
-    //   ..removeCurrentSnackBar()
-    //   ..showSnackBar(SnackBar(content: Text("$result")));
   }
 
   Widget bottomBar() {
@@ -302,10 +267,10 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  double get maxExtent => 65;
+  double get maxExtent => 70;
 
   @override
-  double get minExtent => 65;
+  double get minExtent => 70;
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
