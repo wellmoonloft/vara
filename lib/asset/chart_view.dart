@@ -40,7 +40,7 @@ class ChartView extends StatelessWidget {
                     Expanded(
                       child: Padding(
                           padding: const EdgeInsets.only(
-                              top: 15, bottom: 5, left: 15),
+                              top: 10, bottom: 5, left: 15),
                           child: charts.TimeSeriesChart(
                             _createSampleData(),
                             primaryMeasureAxis: charts.NumericAxisSpec(
@@ -88,7 +88,8 @@ class ChartView extends StatelessWidget {
     return [
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        //colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
         domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: data,

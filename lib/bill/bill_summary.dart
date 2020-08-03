@@ -53,10 +53,10 @@ class BillSummaryView extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      height: 58,
-                                      width: 2,
+                                      height: 50,
+                                      width: 3,
                                       decoration: BoxDecoration(
-                                        color: ColorTheme.darkorange
+                                        color: ColorTheme.cantaloupe
                                             .withOpacity(0.5),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(4.0)),
@@ -81,7 +81,7 @@ class BillSummaryView extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 18,
                                                 letterSpacing: -0.1,
-                                                color: ColorTheme.lightText,
+                                                color: ColorTheme.greydarker,
                                               ),
                                             ),
                                           ),
@@ -109,7 +109,7 @@ class BillSummaryView extends StatelessWidget {
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 24,
                                                     color:
-                                                        ColorTheme.darkorange,
+                                                        ColorTheme.cantaloupe,
                                                   ),
                                                 ),
                                               ),
@@ -166,7 +166,7 @@ class BillSummaryView extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             fontSize: 18,
                                             letterSpacing: 0.0,
-                                            color: ColorTheme.darkorange,
+                                            color: ColorTheme.cantaloupe,
                                           ),
                                         ),
                                         Text(
@@ -189,9 +189,9 @@ class BillSummaryView extends StatelessWidget {
                                   padding: const EdgeInsets.all(4.0),
                                   child: CustomPaint(
                                     painter: CurvePainter(colors: [
-                                      ColorTheme.darkorange,
-                                      HexColor("#FACCC9"),
-                                      HexColor("#FACCC9")
+                                      ColorTheme.cantaloupe,
+                                      ColorTheme.cantaloupelighter,
+                                      ColorTheme.cantaloupelighter
                                     ], angle: (360 - 10) * 0.29),
                                     child: SizedBox(
                                       width: 108,
@@ -235,7 +235,7 @@ class BillSummaryView extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                   letterSpacing: -0.2,
-                                  color: ColorTheme.lightText,
+                                  color: ColorTheme.greydarker,
                                 ),
                               ),
                               Padding(
@@ -255,8 +255,8 @@ class BillSummaryView extends StatelessWidget {
                                         height: 4,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(colors: [
-                                            ColorTheme.nearlyDarkBlue,
-                                            ColorTheme.nearlyDarkBlue
+                                            ColorTheme.puristbluedarker,
+                                            ColorTheme.puristbluedarker
                                                 .withOpacity(0.3),
                                           ]),
                                           borderRadius: BorderRadius.all(
@@ -276,7 +276,7 @@ class BillSummaryView extends StatelessWidget {
                                     //fontFamily: AppTheme.fontName,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
-                                    color: ColorTheme.nearlyDarkBlue,
+                                    color: ColorTheme.puristbluedarker,
                                   ),
                                 ),
                               ),
@@ -299,7 +299,7 @@ class BillSummaryView extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       letterSpacing: -0.2,
-                                      color: ColorTheme.lightText,
+                                      color: ColorTheme.greydarker,
                                     ),
                                   ),
                                   Padding(
@@ -321,8 +321,8 @@ class BillSummaryView extends StatelessWidget {
                                             height: 4,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
-                                                ColorTheme.darkorange,
-                                                ColorTheme.darkorange
+                                                ColorTheme.cantaloupe,
+                                                ColorTheme.cantaloupe
                                                     .withOpacity(0.3),
                                               ]),
                                               borderRadius: BorderRadius.all(
@@ -342,7 +342,7 @@ class BillSummaryView extends StatelessWidget {
                                         //fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 16,
-                                        color: ColorTheme.darkorange,
+                                        color: ColorTheme.cantaloupe,
                                       ),
                                     ),
                                   ),

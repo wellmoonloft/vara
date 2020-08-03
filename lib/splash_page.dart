@@ -23,10 +23,15 @@ class _SplashPageState extends State<SplashPage> {
   List<Map> asset;
   Widget tabBody = Container(
       color: ColorTheme.white,
-      child: Stack(alignment: AlignmentDirectional.center, children: <Widget>[
+      child: Column(children: <Widget>[
         Image(
           image: AssetImage('assets/Images/logo.png'),
           fit: BoxFit.fill,
+        ),
+        LinearProgressIndicator(
+          backgroundColor: Colors.grey[200],
+          valueColor: AlwaysStoppedAnimation(Colors.blue),
+          value: .5,
         ),
       ]));
 

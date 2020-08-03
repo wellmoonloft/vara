@@ -6,8 +6,6 @@ import 'package:vara/bill/bill_summary.dart';
 import 'package:vara/bill/bill_title_view.dart';
 import 'package:vara/invest/invest_summary.dart';
 import 'package:vara/invest/invest_title_view.dart';
-import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
 import 'top/top_bar_view.dart';
@@ -78,7 +76,7 @@ class _HomeViewState extends State<HomeView>
             floating: true,
             elevation: 0.0,
             forceElevated: true,
-            backgroundColor: Colors.white,
+            backgroundColor: ColorTheme.background,
             brightness: Brightness.light,
             expandedHeight: MediaQuery.of(context).size.width * 0.5 - 30,
             flexibleSpace: FlexibleSpaceBar(
@@ -89,7 +87,7 @@ class _HomeViewState extends State<HomeView>
                     height: 30,
                     width: MediaQuery.of(context).size.width - 32,
                     decoration: BoxDecoration(
-                      color: ColorTheme.white,
+                      color: ColorTheme.palelighter,
                       borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(8.0),
                           bottomLeft: Radius.circular(8.0),
@@ -124,7 +122,7 @@ class _HomeViewState extends State<HomeView>
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
                               letterSpacing: 0,
-                              color: ColorTheme.nearlyBlack,
+                              color: ColorTheme.white,
                             ),
                           ),
                         ])),
@@ -261,7 +259,7 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return new Container(
-      color: ColorTheme.white,
+      color: ColorTheme.background,
       child: this.child,
     );
   }

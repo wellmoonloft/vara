@@ -112,7 +112,7 @@ class TopBarView extends StatelessWidget {
                           (MediaQuery.of(context).size.width * 0.3 - 40) / 2,
                       width: MediaQuery.of(context).size.width * 0.3 - 38,
                       decoration: BoxDecoration(
-                        color: ColorTheme.nearlyBlack,
+                        color: ColorTheme.cassisdarker,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(8.0),
                             bottomLeft: Radius.circular(8.0),
@@ -152,7 +152,7 @@ class TopBarView extends StatelessWidget {
                     (MediaQuery.of(context).size.width * 0.3 - 32) * 1.5 + 10,
                 width: MediaQuery.of(context).size.width * 0.7 - 8,
                 decoration: BoxDecoration(
-                  color: ColorTheme.nearlyBlack,
+                  color: ColorTheme.greytripledarker,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(8.0),
                       bottomLeft: Radius.circular(8.0),

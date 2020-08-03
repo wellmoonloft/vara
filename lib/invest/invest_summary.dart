@@ -53,11 +53,11 @@ class InvestSummaryView extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      height: 58,
-                                      width: 2,
+                                      height: 50,
+                                      width: 3,
                                       decoration: BoxDecoration(
-                                        color: ColorTheme.darkpink
-                                            .withOpacity(0.5),
+                                        color: ColorTheme.cassislighter
+                                            .withOpacity(0.8),
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(4.0)),
                                       ),
@@ -81,7 +81,7 @@ class InvestSummaryView extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 18,
                                                 letterSpacing: -0.1,
-                                                color: ColorTheme.lightText,
+                                                color: ColorTheme.greydarker,
                                               ),
                                             ),
                                           ),
@@ -108,7 +108,8 @@ class InvestSummaryView extends StatelessWidget {
                                                     //     AppTheme.fontName,
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 24,
-                                                    color: ColorTheme.darkpink,
+                                                    color: ColorTheme
+                                                        .cassislighter,
                                                   ),
                                                 ),
                                               ),
@@ -165,7 +166,7 @@ class InvestSummaryView extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             fontSize: 18,
                                             letterSpacing: 0.0,
-                                            color: ColorTheme.darkpink,
+                                            color: ColorTheme.cassislighter,
                                           ),
                                         ),
                                         Text(
@@ -188,9 +189,9 @@ class InvestSummaryView extends StatelessWidget {
                                   padding: const EdgeInsets.all(4.0),
                                   child: CustomPaint(
                                     painter: CurvePainter(colors: [
-                                      ColorTheme.darkpink,
-                                      HexColor("#F7ABC2"),
-                                      HexColor("#F7ABC2")
+                                      ColorTheme.cassislighter,
+                                      ColorTheme.neogreenlighter,
+                                      ColorTheme.neogreenlighter
                                     ], angle: (360 - 10) * 0.101),
                                     child: SizedBox(
                                       width: 108,
@@ -234,7 +235,7 @@ class InvestSummaryView extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                   letterSpacing: -0.2,
-                                  color: ColorTheme.lightText,
+                                  color: ColorTheme.greydarker,
                                 ),
                               ),
                               Padding(
@@ -267,9 +268,8 @@ class InvestSummaryView extends StatelessWidget {
                                         height: 4,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(colors: [
-                                            ColorTheme.nearlyDarkBlue,
-                                            ColorTheme.nearlyDarkBlue
-                                                .withOpacity(0.1),
+                                            ColorTheme.puristbluedarker,
+                                            ColorTheme.puristbluelighter,
                                           ]),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(4.0)),
@@ -288,7 +288,7 @@ class InvestSummaryView extends StatelessWidget {
                                     // fontFamily: AppTheme.fontName,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 14,
-                                    color: ColorTheme.nearlyDarkBlue,
+                                    color: ColorTheme.puristbluedarker,
                                   ),
                                 ),
                               ),
@@ -312,7 +312,7 @@ class InvestSummaryView extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       letterSpacing: -0.2,
-                                      color: ColorTheme.lightText,
+                                      color: ColorTheme.greydarker,
                                     ),
                                   ),
                                   Padding(
@@ -367,7 +367,7 @@ class InvestSummaryView extends StatelessWidget {
                                         //fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 14,
-                                        color: ColorTheme.darkpink,
+                                        color: ColorTheme.cassislighter,
                                       ),
                                     ),
                                   ),
@@ -392,7 +392,7 @@ class InvestSummaryView extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       letterSpacing: -0.2,
-                                      color: ColorTheme.lightText,
+                                      color: ColorTheme.greydarker,
                                     ),
                                   ),
                                   Padding(
@@ -448,7 +448,7 @@ class InvestSummaryView extends StatelessWidget {
                                         //fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w600,
                                         fontSize: 14,
-                                        color: ColorTheme.darkorange,
+                                        color: ColorTheme.cantaloupe,
                                       ),
                                     ),
                                   ),

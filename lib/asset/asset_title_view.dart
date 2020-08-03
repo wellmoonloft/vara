@@ -23,7 +23,7 @@ class AssetTitleView extends StatelessWidget {
               height: 28,
               width: 4,
               decoration: BoxDecoration(
-                color: ColorTheme.nearlyDarkBlue.withOpacity(0.8),
+                color: ColorTheme.puristbluedarker,
                 borderRadius: BorderRadius.all(Radius.circular(4.0)),
               ),
             ),
@@ -39,7 +39,7 @@ class AssetTitleView extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                   //letterSpacing: 0,
-                  color: ColorTheme.nearlyBlack,
+                  color: ColorTheme.greytripledarker,
                 ),
               ),
             ),

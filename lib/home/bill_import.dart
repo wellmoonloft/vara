@@ -132,7 +132,7 @@ class _BillImportViewState extends State<BillImportView> {
                     new Container(
                       height: 48,
                       decoration: BoxDecoration(
-                        color: ColorTheme.darkpale,
+                        color: ColorTheme.pale,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8.0)),
                         boxShadow: <BoxShadow>[
@@ -170,7 +170,7 @@ class _BillImportViewState extends State<BillImportView> {
                     new Container(
                       height: 48,
                       decoration: BoxDecoration(
-                        color: ColorTheme.darkpale,
+                        color: ColorTheme.pale,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8.0)),
                         boxShadow: <BoxShadow>[
@@ -208,7 +208,7 @@ class _BillImportViewState extends State<BillImportView> {
                     new Container(
                       height: 48,
                       decoration: BoxDecoration(
-                        color: ColorTheme.darkpale,
+                        color: ColorTheme.pale,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8.0)),
                         boxShadow: <BoxShadow>[
@@ -246,7 +246,7 @@ class _BillImportViewState extends State<BillImportView> {
                     new Container(
                       height: 48,
                       decoration: BoxDecoration(
-                        color: ColorTheme.darkpale,
+                        color: ColorTheme.pale,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8.0)),
                         boxShadow: <BoxShadow>[

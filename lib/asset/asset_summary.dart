@@ -53,8 +53,8 @@ class AssetSummaryView extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      height: 58,
-                                      width: 2,
+                                      height: 50,
+                                      width: 3,
                                       decoration: BoxDecoration(
                                         color: HexColor('#87A0E5')
                                             .withOpacity(0.5),
@@ -81,7 +81,7 @@ class AssetSummaryView extends StatelessWidget {
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 18,
                                                 letterSpacing: -0.1,
-                                                color: ColorTheme.lightText,
+                                                color: ColorTheme.greydarker,
                                               ),
                                             ),
                                           ),
@@ -109,7 +109,7 @@ class AssetSummaryView extends StatelessWidget {
                                                     fontWeight: FontWeight.w700,
                                                     fontSize: 24,
                                                     color: ColorTheme
-                                                        .nearlyDarkBlue,
+                                                        .puristbluedarker,
                                                   ),
                                                 ),
                                               ),
@@ -143,7 +143,7 @@ class AssetSummaryView extends StatelessWidget {
                                       ),
                                       border: new Border.all(
                                           width: 4,
-                                          color: ColorTheme.nearlyDarkBlue
+                                          color: ColorTheme.puristbluedarker
                                               .withOpacity(0.2)),
                                     ),
                                     child: Column(
@@ -166,7 +166,7 @@ class AssetSummaryView extends StatelessWidget {
                                             fontWeight: FontWeight.w700,
                                             fontSize: 18,
                                             letterSpacing: 0.0,
-                                            color: ColorTheme.nearlyDarkBlue,
+                                            color: ColorTheme.puristbluedarker,
                                           ),
                                         ),
                                         Text(
@@ -190,9 +190,9 @@ class AssetSummaryView extends StatelessWidget {
                                   child: CustomPaint(
                                     painter: CurvePainter(
                                         colors: [
-                                          ColorTheme.nearlyDarkBlue,
-                                          HexColor("#8A98E8"),
-                                          HexColor("#8A98E8")
+                                          ColorTheme.puristbluedarker,
+                                          ColorTheme.puristbluelighter,
+                                          ColorTheme.puristbluelighter
                                         ],
                                         angle: (360 - 10) *
                                             (asset.last['debt'] /
@@ -239,7 +239,7 @@ class AssetSummaryView extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
                                   letterSpacing: -0.2,
-                                  color: ColorTheme.lightText,
+                                  color: ColorTheme.greydarker,
                                 ),
                               ),
                               Padding(
@@ -259,8 +259,8 @@ class AssetSummaryView extends StatelessWidget {
                                         height: 4,
                                         decoration: BoxDecoration(
                                           gradient: LinearGradient(colors: [
-                                            ColorTheme.nearlyDarkBlue,
-                                            ColorTheme.nearlyDarkBlue
+                                            ColorTheme.puristbluedarker,
+                                            ColorTheme.puristbluedarker
                                                 .withOpacity(0.3),
                                           ]),
                                           borderRadius: BorderRadius.all(
@@ -280,7 +280,7 @@ class AssetSummaryView extends StatelessWidget {
                                     //fontFamily: AppTheme.fontName,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 16,
-                                    color: ColorTheme.nearlyDarkBlue,
+                                    color: ColorTheme.puristbluedarker,
                                   ),
                                 ),
                               ),
@@ -303,7 +303,7 @@ class AssetSummaryView extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 16,
                                       letterSpacing: -0.2,
-                                      color: ColorTheme.lightText,
+                                      color: ColorTheme.greydarker,
                                     ),
                                   ),
                                   Padding(
@@ -325,9 +325,9 @@ class AssetSummaryView extends StatelessWidget {
                                             height: 4,
                                             decoration: BoxDecoration(
                                               gradient: LinearGradient(colors: [
-                                                ColorTheme.darkorange
+                                                ColorTheme.cantaloupe
                                                     .withOpacity(0.1),
-                                                ColorTheme.darkorange,
+                                                ColorTheme.cantaloupe,
                                               ]),
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(4.0)),
@@ -346,7 +346,7 @@ class AssetSummaryView extends StatelessWidget {
                                         //fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 16,
-                                        color: ColorTheme.darkorange,
+                                        color: ColorTheme.cantaloupe,
                                       ),
                                     ),
                                   ),

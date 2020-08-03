@@ -23,7 +23,7 @@ class BillTitleView extends StatelessWidget {
               height: 28,
               width: 4,
               decoration: BoxDecoration(
-                color: ColorTheme.darkorange.withOpacity(0.8),
+                color: ColorTheme.cantaloupe.withOpacity(0.8),
                 borderRadius: BorderRadius.all(Radius.circular(4.0)),
               ),
             ),
@@ -39,7 +39,7 @@ class BillTitleView extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                   //letterSpacing: 0,
-                  color: ColorTheme.nearlyBlack,
+                  color: ColorTheme.greytripledarker,
                 ),
               ),
             ),
@@ -59,7 +59,7 @@ class BillTitleView extends StatelessWidget {
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         letterSpacing: 0.0,
-                        color: ColorTheme.darkorange,
+                        color: ColorTheme.cantaloupe,
                       ),
                     ),
                     SizedBox(
@@ -67,7 +67,7 @@ class BillTitleView extends StatelessWidget {
                       width: 26,
                       child: Icon(
                         Icons.arrow_forward,
-                        color: ColorTheme.darkText,
+                        color: ColorTheme.greydarker,
                         size: 18,
                       ),
                     ),
