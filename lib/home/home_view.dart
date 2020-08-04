@@ -8,6 +8,7 @@ import 'package:vara/invest/invest_summary.dart';
 import 'package:vara/invest/invest_title_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
+import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
 import 'bill_import.dart';
 import 'bottom_bar_view.dart';
@@ -206,6 +207,17 @@ class _HomeViewState extends State<HomeView>
     });
   }
 
+  _navigateAndDisplaySelection1(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => FilePickerDemo()),
+    );
+
+    tabIconsList.forEach((TabIconData tab) {
+      tab.isSelected = false;
+    });
+  }
+
   Widget bottomBar() {
     return Column(
       children: <Widget>[
@@ -232,10 +244,7 @@ class _HomeViewState extends State<HomeView>
                 //     InvestScreen(animationController: animationController);
               });
             } else if (index == 2) {
-              setState(() {
-                // tabBody = InvestListScreen(
-                //     animationController: animationController);
-              });
+              _navigateAndDisplaySelection1(context);
             } else if (index == 3) {
               _navigateAndDisplaySelection(context);
               // Navigator.of(context).push(

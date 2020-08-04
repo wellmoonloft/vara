@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/invest/invest_list.dart';
+import 'package:vara/invest/list/invest_list.dart';
 import 'package:vara/utils/color_theme.dart';
 
 class InvestTitleView extends StatelessWidget {

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vara/utils/color_theme.dart';
 
-class InvestListView extends StatefulWidget {
+import 'choice_bar.dart';
+
+class BillListView extends StatefulWidget {
   @override
-  InvestListState createState() => InvestListState();
+  BillListState createState() => BillListState();
 }
 
-class InvestListState extends State<InvestListView> {
-  int perPage = 10;
+class BillListState extends State<BillListView> {
+  int perPage = 25;
   int present = 0; //10
   List<String> originalItems = List<String>.generate(10000, (i) => "Item $i");
   List<String> items = List<String>();
-  String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
-  String dropdownValue = 'One';
 
   @override
   void initState() {
@@ -43,7 +42,7 @@ class InvestListState extends State<InvestListView> {
         appBar: AppBar(
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
-          title: Text('Invest List',
+          title: Text('BIll List',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 20,
@@ -79,47 +78,7 @@ class InvestListState extends State<InvestListView> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    RaisedButton(
-                      color: ColorTheme.white,
-                      child: Text(date),
-                      onPressed: () async {
-                        var result = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            initialDatePickerMode: DatePickerMode.day,
-                            firstDate: DateTime(2020),
-                            lastDate: DateTime(2030));
-                        if (result != null) {
-                          setState(() {
-                            date = DateFormat('yyyy-MM-dd')
-                                .format(result)
-                                .toString();
-                          });
-                        }
-                        print('$result');
-                      },
-                    ),
-                    DropdownButton<String>(
-                      dropdownColor: ColorTheme.white,
-                      //focusColor: ColorTheme.black,
-                      value: dropdownValue,
-                      onChanged: (String newValue) {
-                        setState(() {
-                          dropdownValue = newValue;
-                        });
-                      },
-                      items: <String>['One', 'Two', 'Free', 'Four']
-                          .map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
+                ChoiceBar(),
                 Flexible(
                   child: NotificationListener<ScrollNotification>(
                     // ignore: missing_return

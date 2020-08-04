@@ -29,7 +29,7 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE person (id INTEGER PRIMARY KEY, firstname TEXT, midname TEXT, lastname TEXT, age INTEGER, sex INTEGER)');
     await db.execute(
-        'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,currency TEXT)');
+        'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,currency TEXT,country TEXT)');
     await db.execute(
         'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
@@ -83,7 +83,7 @@ class DBHelper {
     return maps;
   }
 
-  Future<List<Invest>> getInvest() async {
+  Future<List<Map>> getInvest() async {
     var dbClient = await db;
     List<Map> maps = await dbClient.query('invest', columns: [
       'id',
@@ -95,14 +95,11 @@ class DBHelper {
       'investcode',
       'investtype',
       'status',
-      'currency'
+      'currency',
+      'country'
     ]);
-    List<Invest> investList = [];
-    for (int i = 0; i < maps.length; i++) {
-      investList.add(Invest.fromMap(maps[i]));
-    }
 
-    return investList;
+    return maps;
   }
 
   Future<int> delete(int id) async {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vara/utils/color_theme.dart';
 
+import 'list/bill_list.dart';
+
 class BillTitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
@@ -35,10 +37,8 @@ class BillTitleView extends StatelessWidget {
                 titleTxt,
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  //fontFamily: AppTheme.fontName,
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
-                  //letterSpacing: 0,
                   color: ColorTheme.greytripledarker,
                 ),
               ),
@@ -46,7 +46,13 @@ class BillTitleView extends StatelessWidget {
             InkWell(
               highlightColor: Colors.transparent,
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  new MaterialPageRoute(
+                      builder: (context) => new BillListView()),
+                );
+              },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Row(
@@ -55,7 +61,6 @@ class BillTitleView extends StatelessWidget {
                       subTxt,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        //fontFamily: AppTheme.fontName,
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         letterSpacing: 0.0,

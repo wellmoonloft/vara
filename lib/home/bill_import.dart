@@ -20,7 +20,6 @@ class _BillImportViewState extends State<BillImportView> {
   String _extension;
   bool _loadingPath = false;
   FileType _pickingType = FileType.any;
-
   double distValue = 50.0;
 
   void _openFileExplorer() async {
@@ -34,63 +33,83 @@ class _BillImportViewState extends State<BillImportView> {
               : null);
       if (_path == null) {
       } else {
-        Invest invest = Invest(0, '0', '0', 0, '0', 0, '0', '0', '0', '0');
         var bytes = File(_path).readAsBytesSync();
         var excel = Excel.decodeBytes(bytes);
-        int y = 0;
+        int investtime = 0;
+        int pertime = 0;
+        int investamount = 0;
+        int endtime = 0;
+        int received = 0;
+        int investcode = 0;
+        int investtype = 0;
+        int status = 0;
+        int currency = 0; //Estimated next payment (interest)
+        int country = 0;
+        Invest invest = new Invest();
+        List investlist = await DBHelper().getInvest();
+
         for (var table in excel.tables.keys) {
           print('table   ' + table);
           print('excel.tables maxCols   ' +
               excel.tables[table].maxCols.toString());
           print('excel.tables maxRows   ' +
               excel.tables[table].maxRows.toString());
-          // for (var row in excel.tables[table].rows) {
-          //   print("Row  $row");
-          // }
 
           for (int row = 0; row < excel.tables[table].maxRows; row++) {
             excel.tables[table].row(row).forEach((cell) {
-              var val = cell.value; //  Value stored in the particular cell
-              print("Cell  |" + row.toString() + "|  $val");
-              if (row > 0) {
-                if (y == 0) {
-                  invest.investcode = val.toString();
-                  y++;
-                } else if (y == 1) {
+              var val = cell.value;
+              if (row == 0) {
+                if (cell.value == 'Date of purchase') {
+                  investtime = cell.colIndex;
+                } else if (cell.value == 'Estimated payment date') {
+                  pertime = cell.colIndex;
+                } else if (cell.value == 'Invested amount') {
+                  investamount = cell.colIndex;
+                } else if (cell.value == 'Final payment date') {
+                  endtime = cell.colIndex;
+                } else if (cell.value == 'Received payments') {
+                  received = cell.colIndex;
+                } else if (cell.value == 'Loan ID') {
+                  investcode = cell.colIndex;
+                } else if (cell.value == 'Loan type') {
+                  investtype = cell.colIndex;
+                } else if (cell.value == 'Status') {
+                  status = cell.colIndex;
+                } else if (cell.value == 'Estimated next payment (principal)') {
+                  currency = cell.colIndex;
+                } else if (cell.value == 'Country') {
+                  country = cell.colIndex;
+                }
+              } else {
+                print("Cell  |" + row.toString() + "|  $val");
+
+                if (cell.colIndex == investtime) {
                   invest.investtime = val.toString();
-                  y++;
-                } else if (y == 2) {
-                  invest.investtype = val.toString();
-                  y++;
-                } else if (y == 3) {
-                  invest.investamount = val;
-                  y++;
-                } else if (y == 4) {
+                } else if (cell.colIndex == pertime) {
                   invest.pertime = val.toString();
-                  y++;
-                } else if (y == 5) {
+                } else if (cell.colIndex == investamount) {
+                  invest.investamount = val;
+                } else if (cell.colIndex == endtime) {
                   invest.endtime = val.toString();
-                  y++;
-                } else if (y == 6) {
+                } else if (cell.colIndex == received) {
                   invest.received = val;
-                  y++;
-                } else if (y == 7) {
+                } else if (cell.colIndex == investcode) {
+                  invest.investcode = val.toString();
+                } else if (cell.colIndex == investtype) {
+                  invest.investtype = val;
+                } else if (cell.colIndex == status) {
                   invest.status = val.toString();
-                  y++;
-                } else if (y == 8) {
-                  invest.currency = val.toString();
-                  print('=========');
-                  DBHelper().addData(invest);
-                  // var dbClient = await db;
-                  //invest.id = await DBHelper().db.insert('invest', invest.toMap());
-                  y = 0;
-                } else {
-                  return;
+                } else if (cell.colIndex == currency) {
+                  invest.currency = 'EUR';
+                } else if (cell.colIndex == country) {
+                  invest.country = val.toString();
                 }
               }
-
               //cell.value = ' My custom Value ';
             });
+            print('=========');
+            invest.id = investlist.length + row;
+            await DBHelper().addData(invest);
           }
         }
       }
