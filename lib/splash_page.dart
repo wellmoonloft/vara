@@ -21,19 +21,25 @@ class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> usdcnydaily;
   Map<String, dynamic> eurcnydaily;
   List<Map> asset;
-  Widget tabBody = Container(
-      color: ColorTheme.white,
-      child: Column(children: <Widget>[
-        Image(
-          image: AssetImage('assets/Images/logo.png'),
-          fit: BoxFit.fill,
-        ),
-        LinearProgressIndicator(
-          backgroundColor: Colors.grey[200],
-          valueColor: AlwaysStoppedAnimation(Colors.blue),
-          value: .5,
-        ),
-      ]));
+  static String _getText(String xx) {
+    return xx;
+  }
+
+  Widget tabBody = Scaffold(
+      body: Container(
+          color: ColorTheme.white,
+          child: Column(children: <Widget>[
+            Image(
+              image: AssetImage('assets/Images/logo.png'),
+              fit: BoxFit.fill,
+            ),
+            Text(_getText('')),
+            LinearProgressIndicator(
+              backgroundColor: Colors.grey[200],
+              valueColor: AlwaysStoppedAnimation(Colors.blue),
+              value: .5,
+            ),
+          ])));
 
   @override
   void initState() {
@@ -51,6 +57,9 @@ class _SplashPageState extends State<SplashPage> {
   _navigatorAfterGetData() async {
     print("----get data start------");
     await _doDatabase();
+    setState(() {
+      _getText('44444444');
+    });
     await _getBtcCurrency();
     await _getBTCWeekly();
     await _getUSDCNYWeekly();
