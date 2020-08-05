@@ -43,6 +43,7 @@ class Invest {
   num investamount;
   num received;
   String status;
+  num interest;
   String investcode;
   String investtype;
   String currency;
@@ -59,7 +60,8 @@ class Invest {
       this.investtype,
       this.status,
       this.currency,
-      this.country});
+      this.country,
+      this.interest});
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
@@ -72,6 +74,7 @@ class Invest {
       'investcode': investcode,
       'investtype': investtype,
       'status': status,
+      'interest': interest,
       'currency': currency,
       'country': country
     };
@@ -88,6 +91,7 @@ class Invest {
     investcode = map['investcode'];
     investtype = map['investtype'];
     status = map['status'];
+    interest = map['interest'];
     currency = map['currency'];
     country = map['country'];
   }

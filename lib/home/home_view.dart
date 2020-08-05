@@ -4,13 +4,13 @@ import 'package:vara/asset/asset_title_view.dart';
 import 'package:vara/asset/asset_view.dart';
 import 'package:vara/bill/bill_summary.dart';
 import 'package:vara/bill/bill_title_view.dart';
-import 'package:vara/invest/invest_summary.dart';
 import 'package:vara/invest/invest_title_view.dart';
+import 'package:vara/invest/invest_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
 import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
-import 'bill_import.dart';
+import '../invest/bill_import.dart';
 import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -19,13 +19,15 @@ class HomeView extends StatefulWidget {
   final Map<String, dynamic> usdcnydaily;
   final Map<String, dynamic> eurcnydaily;
   final List<Map> asset;
+  final List<Map> investList;
   HomeView(
       {Key key,
       this.btc,
       this.btcdaily,
       this.usdcnydaily,
       this.eurcnydaily,
-      this.asset})
+      this.asset,
+      this.investList})
       : super(key: key);
 
   @override
@@ -166,7 +168,7 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 3) {
                   postPiece = Container(
-                    child: InvestSummaryView(asset: widget.asset),
+                    child: InvestView(investList: widget.investList),
                   );
                 } else if (index == 4) {
                   postPiece = Container(

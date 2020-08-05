@@ -29,7 +29,7 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE person (id INTEGER PRIMARY KEY, firstname TEXT, midname TEXT, lastname TEXT, age INTEGER, sex INTEGER)');
     await db.execute(
-        'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,currency TEXT,country TEXT)');
+        'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,interest INTEGER,currency TEXT,country TEXT)');
     await db.execute(
         'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
@@ -95,6 +95,7 @@ class DBHelper {
       'investcode',
       'investtype',
       'status',
+      'interest',
       'currency',
       'country'
     ]);

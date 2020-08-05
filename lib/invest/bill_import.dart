@@ -43,6 +43,7 @@ class _BillImportViewState extends State<BillImportView> {
         int investcode = 0;
         int investtype = 0;
         int status = 0;
+        int interest = 0;
         int currency = 0; //Estimated next payment (interest)
         int country = 0;
         Invest invest = new Invest();
@@ -75,6 +76,8 @@ class _BillImportViewState extends State<BillImportView> {
                   investtype = cell.colIndex;
                 } else if (cell.value == 'Status') {
                   status = cell.colIndex;
+                } else if (cell.value == 'Estimated next payment (interest)') {
+                  interest = cell.colIndex;
                 } else if (cell.value == 'Estimated next payment (principal)') {
                   currency = cell.colIndex;
                 } else if (cell.value == 'Country') {
@@ -99,17 +102,20 @@ class _BillImportViewState extends State<BillImportView> {
                   invest.investtype = val;
                 } else if (cell.colIndex == status) {
                   invest.status = val.toString();
+                } else if (cell.colIndex == interest) {
+                  invest.interest = val;
                 } else if (cell.colIndex == currency) {
                   invest.currency = 'EUR';
                 } else if (cell.colIndex == country) {
                   invest.country = val.toString();
                 }
               }
-              //cell.value = ' My custom Value ';
             });
-            print('=========');
-            invest.id = investlist.length + row;
-            await DBHelper().addData(invest);
+            if (row > 0) {
+              print('=========');
+              invest.id = investlist.length + row;
+              await DBHelper().addData(invest);
+            }
           }
         }
       }

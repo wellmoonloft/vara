@@ -3,9 +3,45 @@ import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
-class InvestSummaryView extends StatelessWidget {
-  final List<Map> asset;
-  const InvestSummaryView({Key key, this.asset}) : super(key: key);
+class InvestSummaryView extends StatefulWidget {
+  final List<Map> investList;
+  const InvestSummaryView({Key key, this.investList}) : super(key: key);
+
+  @override
+  _InvestSummaryState createState() {
+    return _InvestSummaryState();
+  }
+}
+
+class _InvestSummaryState extends State<InvestSummaryView> {
+  double investIncome = 0.0;
+  double totalYield = 0.0;
+  double totalInvest = 0.0;
+  double short = 0.0;
+  double mid = 0.0;
+  double long = 0.0;
+
+  @override
+  void initState() {
+    widget.investList.forEach((element) {
+      print(element);
+      investIncome = investIncome + element['interest'];
+      totalInvest = totalInvest + element['investamount'];
+      if (element['investtype'] == 'SHORT') {
+        short = short + element['interest'];
+      }
+      if (element['investtype'] == 'SHORT') {
+        mid = mid + element['investamount'];
+      }
+      if (element['investtype'] == 'SHORT') {
+        long = long + element['investamount'];
+      }
+    });
+
+    totalYield = investIncome / totalInvest;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,10 +134,8 @@ class InvestSummaryView extends StatelessWidget {
                                                     bottom: 3),
                                                 child: Text(
                                                   '€ ' +
-                                                      (asset.last['asset'] -
-                                                              asset
-                                                                  .last['debt'])
-                                                          .toString(),
+                                                      investIncome
+                                                          .toStringAsFixed(2),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     // fontFamily:
@@ -153,13 +187,7 @@ class InvestSummaryView extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: <Widget>[
                                         Text(
-                                          // formatNum(
-                                          //             (asset.last['debt'] /
-                                          //                 asset.last['asset'] *
-                                          //                 100),
-                                          //             2)
-                                          //         .toString() +
-                                          '10.01%',
+                                          totalYield.toStringAsFixed(2) + '%',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             //fontFamily: AppTheme.fontName,
@@ -282,7 +310,7 @@ class InvestSummaryView extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Text(
-                                  '€${(523.00).toStringAsFixed(2)}',
+                                  '€ ' + short.toStringAsFixed(2),
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     // fontFamily: AppTheme.fontName,
@@ -361,7 +389,7 @@ class InvestSummaryView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      '€${(523.00).toStringAsFixed(2)}',
+                                      '€ ' + mid.toStringAsFixed(2),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,
@@ -442,7 +470,7 @@ class InvestSummaryView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      '€${(523.00).toStringAsFixed(2)}',
+                                      '€ ' + long.toStringAsFixed(2),
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,

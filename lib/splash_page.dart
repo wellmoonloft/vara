@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'home/home_view.dart';
 import 'utils/color_theme.dart';
 import 'utils/db_helper.dart';
 
 class SplashPage extends StatefulWidget {
-  final String title;
-  SplashPage({Key key, this.title}) : super(key: key);
+  final editParentText;
+  SplashPage({Key key, this.editParentText}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
+  _SplashPageState createState() {
     return _SplashPageState();
   }
 }
@@ -21,25 +20,10 @@ class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> usdcnydaily;
   Map<String, dynamic> eurcnydaily;
   List<Map> asset;
-  static String _getText(String xx) {
-    return xx;
-  }
-
-  Widget tabBody = Scaffold(
-      body: Container(
-          color: ColorTheme.white,
-          child: Column(children: <Widget>[
-            Image(
-              image: AssetImage('assets/Images/logo.png'),
-              fit: BoxFit.fill,
-            ),
-            Text(_getText('')),
-            LinearProgressIndicator(
-              backgroundColor: Colors.grey[200],
-              valueColor: AlwaysStoppedAnimation(Colors.blue),
-              value: .5,
-            ),
-          ])));
+  String etext = '';
+  double progressValue = 0.0;
+  List<Map> investList;
+  //List investlist = await DBHelper().getInvest();
 
   @override
   void initState() {
@@ -49,36 +33,68 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return tabBody;
-    });
+    return Scaffold(
+        backgroundColor: ColorTheme.white,
+        body: Align(
+            // padding: EdgeInsets.only(top: 50),
+            // color: ColorTheme.white,
+            alignment: Alignment.center,
+            widthFactor: 2.0,
+            heightFactor: 2.0,
+            child: Column(children: <Widget>[
+              Image(
+                image: AssetImage('assets/Images/logo.png'),
+                fit: BoxFit.fill,
+              ),
+              LinearProgressIndicator(
+                backgroundColor: Colors.grey[200],
+                valueColor: AlwaysStoppedAnimation(Colors.blue),
+                value: progressValue,
+              ),
+              Container(
+                padding: EdgeInsets.all(8),
+                child: Text(etext),
+              )
+            ])));
   }
 
   _navigatorAfterGetData() async {
     print("----get data start------");
+    setState(() {
+      etext = '----get data from db------';
+      progressValue = 0.1;
+    });
     await _doDatabase();
     setState(() {
-      _getText('44444444');
+      etext = '----get data of btc------';
+      progressValue = 0.2;
     });
-    await _getBtcCurrency();
-    await _getBTCWeekly();
-    await _getUSDCNYWeekly();
-    await _getEURCNYWeekly();
-    print("----get data done------");
+    btc = await _getBtcCurrency();
     setState(() {
-      tabBody = HomeView(
-          btc: btc,
-          btcdaily: btcdaily,
-          usdcnydaily: usdcnydaily,
-          eurcnydaily: eurcnydaily,
-          asset: asset);
+      etext = '----get data of tbc daily------';
+      progressValue = 0.4;
     });
+    btcdaily = await _getBTCWeekly();
+    setState(() {
+      etext = '----get data of usd------';
+      progressValue = 0.6;
+    });
+    usdcnydaily = await _getUSDCNYWeekly();
+    setState(() {
+      etext = '----get data of eur------';
+      progressValue = 0.8;
+    });
+    eurcnydaily = await _getEURCNYWeekly();
+    print("----get data done------");
+    widget.editParentText(
+        false, btc, btcdaily, usdcnydaily, eurcnydaily, asset, investList);
   }
 
   _doDatabase() async {
     DBHelper dbHelper = DBHelper();
     await dbHelper.initDatabase();
     asset = await dbHelper.getAsset();
+    investList = await DBHelper().getInvest();
   }
 
   _getBtcCurrency() async {
@@ -92,7 +108,8 @@ class _SplashPageState extends State<SplashPage> {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        btc = data['Realtime Currency Exchange Rate'];
+        //btc = data['Realtime Currency Exchange Rate'];
+        return data['Realtime Currency Exchange Rate'];
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }
@@ -114,7 +131,8 @@ class _SplashPageState extends State<SplashPage> {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        btcdaily = data['Time Series (Digital Currency Daily)'];
+        //btcdaily = data['Time Series (Digital Currency Daily)'];
+        return data['Time Series (Digital Currency Daily)'];
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }
@@ -136,8 +154,8 @@ class _SplashPageState extends State<SplashPage> {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        usdcnydaily = data['Time Series FX (Daily)'];
-        print(usdcnydaily.length);
+        //usdcnydaily = data['Time Series FX (Daily)'];
+        return data['Time Series FX (Daily)'];
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }
@@ -159,8 +177,9 @@ class _SplashPageState extends State<SplashPage> {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        eurcnydaily = data['Time Series FX (Daily)'];
-        print(eurcnydaily.length);
+        //eurcnydaily = data['Time Series FX (Daily)'];
+        return data['Time Series FX (Daily)'];
+        //print(eurcnydaily.length);
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }
