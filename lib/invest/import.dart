@@ -8,12 +8,12 @@ import 'package:vara/models/db_models.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/db_helper.dart';
 
-class BillImportView extends StatefulWidget {
+class ImportView extends StatefulWidget {
   @override
-  _BillImportViewState createState() => _BillImportViewState();
+  _ImportViewState createState() => _ImportViewState();
 }
 
-class _BillImportViewState extends State<BillImportView> {
+class _ImportViewState extends State<ImportView> {
   String _fileName;
   String _path;
   Map<String, String> _paths;

@@ -5,11 +5,13 @@ import 'package:vara/utils/color_theme.dart';
 class InvestTitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
+  final List<Map> investList;
 
   const InvestTitleView({
     Key key,
     this.titleTxt: "",
     this.subTxt: "",
+    this.investList,
   }) : super(key: key);
 
   @override
@@ -51,7 +53,8 @@ class InvestTitleView extends StatelessWidget {
                 Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (context) => new InvestListView()),
+                      builder: (context) =>
+                          new InvestListView(investList: investList)),
                 );
               },
               child: Padding(

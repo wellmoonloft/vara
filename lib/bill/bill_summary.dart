@@ -4,8 +4,8 @@ import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
-  final List<Map> asset;
-  const BillSummaryView({Key key, this.asset}) : super(key: key);
+  final List<Map> billList;
+  const BillSummaryView({Key key, this.billList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -97,11 +97,7 @@ class BillSummaryView extends StatelessWidget {
                                                     top: 10,
                                                     bottom: 3),
                                                 child: Text(
-                                                  '€ ' +
-                                                      (asset.last['asset'] -
-                                                              asset
-                                                                  .last['debt'])
-                                                          .toString(),
+                                                  '€ ',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                     // fontFamily:
@@ -270,7 +266,7 @@ class BillSummaryView extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Text(
-                                  '€ ' + asset.last['asset'].toString(),
+                                  '€ ',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     //fontFamily: AppTheme.fontName,
@@ -336,7 +332,7 @@ class BillSummaryView extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Text(
-                                      '€ ' + asset.last['debt'].toString(),
+                                      '€ ',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,

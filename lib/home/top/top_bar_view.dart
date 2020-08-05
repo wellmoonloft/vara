@@ -136,7 +136,6 @@ class TopBarView extends StatelessWidget {
                             //fontFamily: AppTheme.fontName,
                             fontWeight: FontWeight.w700,
                             fontSize: 14,
-                            letterSpacing: 1.2,
                             color: ColorTheme.white,
                           ),
                         ),

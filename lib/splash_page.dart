@@ -35,12 +35,10 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: ColorTheme.white,
-        body: Align(
-            // padding: EdgeInsets.only(top: 50),
+        body: Container(
+            padding: EdgeInsets.only(top: 50),
             // color: ColorTheme.white,
             alignment: Alignment.center,
-            widthFactor: 2.0,
-            heightFactor: 2.0,
             child: Column(children: <Widget>[
               Image(
                 image: AssetImage('assets/Images/logo.png'),
@@ -61,27 +59,27 @@ class _SplashPageState extends State<SplashPage> {
   _navigatorAfterGetData() async {
     print("----get data start------");
     setState(() {
-      etext = '----get data from db------';
+      etext = 'GET PERSONAL DATA FROM DATABASE ...';
       progressValue = 0.1;
     });
     await _doDatabase();
     setState(() {
-      etext = '----get data of btc------';
+      etext = 'GET BTC DATA FROM alphavantage.co ...';
       progressValue = 0.2;
     });
     btc = await _getBtcCurrency();
     setState(() {
-      etext = '----get data of tbc daily------';
+      etext = 'GET BTC DAILY FROM alphavantage.co ...';
       progressValue = 0.4;
     });
     btcdaily = await _getBTCWeekly();
     setState(() {
-      etext = '----get data of usd------';
+      etext = 'GET USD DAILY FROM alphavantage.co ...';
       progressValue = 0.6;
     });
     usdcnydaily = await _getUSDCNYWeekly();
     setState(() {
-      etext = '----get data of eur------';
+      etext = 'GET EUR DAILY FROM alphavantage.co ...';
       progressValue = 0.8;
     });
     eurcnydaily = await _getEURCNYWeekly();

@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/asset/asset_title_view.dart';
 import 'package:vara/asset/asset_view.dart';
-import 'package:vara/bill/bill_summary.dart';
 import 'package:vara/bill/bill_title_view.dart';
+import 'package:vara/bill/bill_view.dart';
 import 'package:vara/invest/invest_title_view.dart';
 import 'package:vara/invest/invest_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
 import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
-import '../invest/bill_import.dart';
+import '../invest/import.dart';
 import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -162,9 +162,9 @@ class _HomeViewState extends State<HomeView>
                 } else if (index == 2) {
                   postPiece = Container(
                     child: InvestTitleView(
-                      titleTxt: 'Invest',
-                      subTxt: 'Details',
-                    ),
+                        titleTxt: 'Invest',
+                        subTxt: 'Details',
+                        investList: widget.investList),
                   );
                 } else if (index == 3) {
                   postPiece = Container(
@@ -179,7 +179,7 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 5) {
                   postPiece = Container(
-                    child: BillSummaryView(asset: widget.asset),
+                    child: BillView(billList: widget.asset),
                   );
                 } else if (index == 6) {
                   postPiece = Container(
@@ -201,7 +201,7 @@ class _HomeViewState extends State<HomeView>
   _navigateAndDisplaySelection(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => BillImportView()),
+      MaterialPageRoute(builder: (context) => ImportView()),
     );
 
     tabIconsList.forEach((TabIconData tab) {

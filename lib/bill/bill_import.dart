@@ -3,7 +3,7 @@ import 'package:vara/invest/import.dart';
 import 'package:vara/utils/app_theme.dart';
 import '../utils/color_theme.dart';
 
-class InvestImportView extends StatelessWidget {
+class BillImportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +45,7 @@ class InvestImportView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: 10),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -60,7 +60,7 @@ class InvestImportView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 15),
                     child: Text(
                       'You can import your bill use XLSX.',
                       style: TextStyle(
@@ -70,10 +70,10 @@ class InvestImportView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: EdgeInsets.only(top: 20),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
-                        color: ColorTheme.cassislighter,
+                        color: ColorTheme.cantaloupe,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(30.0),
                             bottomLeft: Radius.circular(30.0),

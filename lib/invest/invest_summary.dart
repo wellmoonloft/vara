@@ -24,16 +24,16 @@ class _InvestSummaryState extends State<InvestSummaryView> {
   @override
   void initState() {
     widget.investList.forEach((element) {
-      print(element);
+      //print(element);
       investIncome = investIncome + element['interest'];
       totalInvest = totalInvest + element['investamount'];
       if (element['investtype'] == 'SHORT') {
-        short = short + element['interest'];
+        short = short + element['investamount'];
       }
-      if (element['investtype'] == 'SHORT') {
+      if (element['investtype'] == 'MID') {
         mid = mid + element['investamount'];
       }
-      if (element['investtype'] == 'SHORT') {
+      if (element['investtype'] == 'LONG') {
         long = long + element['investamount'];
       }
     });
@@ -113,10 +113,8 @@ class _InvestSummaryState extends State<InvestSummaryView> {
                                               'Invest Income',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
-                                                //fontFamily: AppTheme.fontName,
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 18,
-                                                letterSpacing: -0.1,
                                                 color: ColorTheme.greydarker,
                                               ),
                                             ),
@@ -129,9 +127,7 @@ class _InvestSummaryState extends State<InvestSummaryView> {
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 4,
-                                                    top: 10,
-                                                    bottom: 3),
+                                                    left: 4, top: 5),
                                                 child: Text(
                                                   '€ ' +
                                                       investIncome
@@ -154,6 +150,70 @@ class _InvestSummaryState extends State<InvestSummaryView> {
                                     )
                                   ],
                                 ),
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 48,
+                                      width: 3,
+                                      decoration: BoxDecoration(
+                                        color: HexColor('#F56E98')
+                                            .withOpacity(0.5),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(4.0)),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 4, bottom: 2),
+                                            child: Text(
+                                              'Total Invest',
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 18,
+                                                color: ColorTheme.greydarker,
+                                              ),
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 4,
+                                                    top: 10,
+                                                    bottom: 3),
+                                                child: Text(
+                                                  '€ ' +
+                                                      totalInvest
+                                                          .toStringAsFixed(2),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 24,
+                                                    color: ColorTheme
+                                                        .cassislighter,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )
                               ],
                             ),
                           ),
@@ -198,7 +258,7 @@ class _InvestSummaryState extends State<InvestSummaryView> {
                                           ),
                                         ),
                                         Text(
-                                          'Total Yield',
+                                          'Total Yield year',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             //fontFamily: AppTheme.fontName,
@@ -236,7 +296,7 @@ class _InvestSummaryState extends State<InvestSummaryView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
-                        left: 24, right: 24, top: 8, bottom: 8),
+                        left: 24, right: 24, top: 5, bottom: 8),
                     child: Container(
                       height: 2,
                       decoration: BoxDecoration(
