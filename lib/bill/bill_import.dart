@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/invest/import.dart';
+import 'package:vara/bill/import.dart';
 import 'package:vara/utils/app_theme.dart';
 import '../utils/color_theme.dart';
 

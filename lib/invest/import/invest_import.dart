@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vara/invest/import.dart';
+
 import 'package:vara/utils/app_theme.dart';
-import '../utils/color_theme.dart';
+import '../../utils/color_theme.dart';
+import 'import_list.dart';
 
 class InvestImportView extends StatelessWidget {
   @override
@@ -87,7 +88,32 @@ class InvestImportView extends StatelessWidget {
                               padding: EdgeInsets.all(10),
                               child: InkWell(
                                   onTap: () {
-                                    _navigateAndDisplaySelection(context);
+                                    //_navigateAndDisplaySelection(context);
+                                    showGeneralDialog(
+                                        context: context,
+                                        barrierColor:
+                                            Colors.black.withOpacity(.5),
+                                        barrierDismissible: true,
+                                        barrierLabel: '',
+                                        transitionDuration:
+                                            Duration(milliseconds: 250),
+                                        transitionBuilder:
+                                            (BuildContext context,
+                                                Animation<double> animation,
+                                                Animation<double>
+                                                    secondaryAnimation,
+                                                Widget child) {
+                                          return ScaleTransition(
+                                              scale: animation, child: child);
+                                        },
+                                        pageBuilder: (BuildContext context,
+                                            Animation<double> animation,
+                                            Animation<double>
+                                                secondaryAnimation) {
+                                          return Center(
+                                            child: InvestImportList(),
+                                          );
+                                        });
                                   },
                                   child: Container(
                                     alignment: Alignment(0, 0),
@@ -107,12 +133,5 @@ class InvestImportView extends StatelessWidget {
                 ],
               ),
             )));
-  }
-
-  _navigateAndDisplaySelection(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ImportView()),
-    );
   }
 }

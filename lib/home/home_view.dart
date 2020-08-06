@@ -10,7 +10,7 @@ import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
 import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
-import '../invest/import.dart';
+import '../bill/import.dart';
 import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -40,10 +40,32 @@ class _HomeViewState extends State<HomeView>
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   bool _offstage = true;
   Map<String, dynamic> btc;
+  String bannertitle;
 
   @override
   void initState() {
     super.initState();
+    String from = '';
+    String to = '';
+    String rate = '0.0';
+    if (widget.btc != null) {
+      if (widget.btc['1. From_Currency Code'] != null) {
+        from = widget.btc['1. From_Currency Code'];
+      }
+      if (widget.btc['3. To_Currency Code'] != null) {
+        from = widget.btc['3. To_Currency Code'];
+      }
+      if (widget.btc['5. Exchange Rate'] != null) {
+        rate = widget.btc['5. Exchange Rate'];
+      }
+    }
+    bannertitle = from +
+        '/' +
+        to +
+        ':' +
+        double.parse(rate).toStringAsFixed(2) +
+        '  ' +
+        DateFormat('yyyy-MM-dd HH:MM').format(DateTime.now());
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
@@ -110,15 +132,7 @@ class _HomeViewState extends State<HomeView>
                         alignment: AlignmentDirectional.center,
                         children: <Widget>[
                           Text(
-                            widget.btc['1. From_Currency Code'] +
-                                '/' +
-                                widget.btc['3. To_Currency Code'] +
-                                ':' +
-                                double.parse(widget.btc['5. Exchange Rate'])
-                                    .toStringAsFixed(2) +
-                                '  ' +
-                                DateFormat('yyyy-MM-dd HH:MM')
-                                    .format(DateTime.now()),
+                            bannertitle,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               //fontFamily: AppTheme.fontName,
@@ -231,29 +245,13 @@ class _HomeViewState extends State<HomeView>
           addClick: () {},
           changeIndex: (int index) {
             if (index == 0) {
-              setState(() {
-                // Navigator.push(
-                //   context,
-                //   new MaterialPageRoute(
-                //       builder: (context) => new CustomSliverHeaderDemo()),
-                // );
-                // tabBody =
-                //     OverviewScreen(animationController: animationController);
-              });
+              setState(() {});
             } else if (index == 1) {
-              setState(() {
-                // tabBody =
-                //     InvestScreen(animationController: animationController);
-              });
+              setState(() {});
             } else if (index == 2) {
               _navigateAndDisplaySelection1(context);
             } else if (index == 3) {
               _navigateAndDisplaySelection(context);
-              // Navigator.of(context).push(
-              //                   new MaterialPageRoute(
-              //                       builder: (context) =>
-              //                           new FiltersScreen(),
-              //                       ));
             }
           },
         ),
