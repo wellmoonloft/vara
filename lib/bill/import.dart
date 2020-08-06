@@ -399,7 +399,7 @@ class _ImportViewState extends State<ImportView> {
                   'Data import',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
-                    fontSize: 22,
+                    fontSize: 18,
                   ),
                 ),
               ),

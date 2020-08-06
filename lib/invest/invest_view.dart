@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'import/invest_import.dart';
+import 'invest_import.dart';
 import 'invest_summary.dart';
 
 class InvestView extends StatefulWidget {

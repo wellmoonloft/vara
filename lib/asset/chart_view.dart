@@ -76,23 +76,35 @@ class ChartView extends StatelessWidget {
   }
 
   List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData() {
-    List<TimeSeriesSales> data = [];
+    List<TimeSeriesSales> assetdata = [];
+    List<TimeSeriesSales> debtdata = [];
     for (var i = 0; i < asset.length; i++) {
-      Map<String, dynamic> data1 = asset[asset.length - i - 1];
+      Map<String, dynamic> temp = asset[asset.length - i - 1];
       //print(asset[i]);
-      data.add(new TimeSeriesSales(
+      assetdata.add(new TimeSeriesSales(
           DateTime.now().subtract(new Duration(days: i)),
-          data1['asset'].toDouble()));
+          temp['asset'].toDouble()));
+      debtdata.add(new TimeSeriesSales(
+          DateTime.now().subtract(new Duration(days: i)),
+          temp['asset'].toDouble()));
     }
 
     return [
       new charts.Series<TimeSeriesSales, DateTime>(
-        id: 'Sales',
+        id: 'asset',
         //colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
         colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
-        domainFn: (TimeSeriesSales sales, _) => sales.time,
-        measureFn: (TimeSeriesSales sales, _) => sales.sales,
-        data: data,
+        domainFn: (TimeSeriesSales asset, _) => asset.time,
+        measureFn: (TimeSeriesSales asset, _) => asset.numbers,
+        data: assetdata,
+      ),
+      new charts.Series<TimeSeriesSales, DateTime>(
+        id: 'debt',
+        //colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        colorFn: (_, __) => charts.Color.fromHex(code: '#ff6a4e'),
+        domainFn: (TimeSeriesSales debt, _) => debt.time,
+        measureFn: (TimeSeriesSales debt, _) => debt.numbers,
+        data: debtdata,
       )
     ];
   }
@@ -101,7 +113,7 @@ class ChartView extends StatelessWidget {
 /// Sample time series data type.
 class TimeSeriesSales {
   final DateTime time;
-  final double sales;
+  final double numbers;
 
-  TimeSeriesSales(this.time, this.sales);
+  TimeSeriesSales(this.time, this.numbers);
 }

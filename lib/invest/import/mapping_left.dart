@@ -9,7 +9,7 @@ class MappingLeft extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 15),
           child: Text(
             'Invest Code',
             textAlign: TextAlign.center,
@@ -22,7 +22,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Invest Amount',
             textAlign: TextAlign.center,
@@ -35,7 +35,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Invest Time',
             textAlign: TextAlign.center,
@@ -48,7 +48,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Per Time',
             textAlign: TextAlign.center,
@@ -61,7 +61,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Payment Time',
             textAlign: TextAlign.center,
@@ -74,7 +74,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Interest',
             textAlign: TextAlign.center,
@@ -87,7 +87,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Received',
             textAlign: TextAlign.center,
@@ -100,7 +100,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Invest Type',
             textAlign: TextAlign.center,
@@ -113,7 +113,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Status',
             textAlign: TextAlign.center,
@@ -126,7 +126,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Currency',
             textAlign: TextAlign.center,
@@ -139,7 +139,7 @@ class MappingLeft extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
             'Country',
             textAlign: TextAlign.center,
@@ -164,9 +164,9 @@ class MappingMid extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 15),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -177,9 +177,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -190,9 +190,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -203,9 +203,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -216,9 +216,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -229,9 +229,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -242,9 +242,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -255,9 +255,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -268,9 +268,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -281,9 +281,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
@@ -294,9 +294,9 @@ class MappingMid extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 16),
+          padding: const EdgeInsets.only(top: 29),
           child: Text(
-            '<=',
+            '=>',
             textAlign: TextAlign.center,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,

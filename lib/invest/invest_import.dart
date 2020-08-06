@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:vara/utils/app_theme.dart';
-import '../../utils/color_theme.dart';
-import 'import_list.dart';
+import '../utils/color_theme.dart';
+import 'import/import_view.dart';
 
 class InvestImportView extends StatelessWidget {
   @override
@@ -39,8 +39,9 @@ class InvestImportView extends StatelessWidget {
                       child: Text(
                         'IMPORT FROM XLSX',
                         style: TextStyle(
-                          fontSize: 12,
-                          color: ColorTheme.greydoubledarker,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 16,
+                          color: ColorTheme.greydarker,
                         ),
                       ),
                     ),
@@ -65,8 +66,9 @@ class InvestImportView extends StatelessWidget {
                     child: Text(
                       'You can import your bill use XLSX.',
                       style: TextStyle(
-                        fontSize: 14,
-                        color: ColorTheme.greydoubledarker,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: ColorTheme.greydarker,
                       ),
                     ),
                   ),
@@ -76,44 +78,44 @@ class InvestImportView extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: ColorTheme.cassislighter,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30.0),
-                            bottomLeft: Radius.circular(30.0),
-                            bottomRight: Radius.circular(30.0),
-                            topRight: Radius.circular(30.0)),
+                            topLeft: Radius.circular(10.0),
+                            bottomLeft: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0)),
                       ),
                       child: Container(
-                          height: 45,
-                          width: 200,
+                          height: 40,
+                          width: 180,
                           child: Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(8),
                               child: InkWell(
                                   onTap: () {
-                                    //_navigateAndDisplaySelection(context);
-                                    showGeneralDialog(
-                                        context: context,
-                                        barrierColor:
-                                            Colors.black.withOpacity(.5),
-                                        barrierDismissible: true,
-                                        barrierLabel: '',
-                                        transitionDuration:
-                                            Duration(milliseconds: 250),
-                                        transitionBuilder:
-                                            (BuildContext context,
-                                                Animation<double> animation,
-                                                Animation<double>
-                                                    secondaryAnimation,
-                                                Widget child) {
-                                          return ScaleTransition(
-                                              scale: animation, child: child);
-                                        },
-                                        pageBuilder: (BuildContext context,
-                                            Animation<double> animation,
-                                            Animation<double>
-                                                secondaryAnimation) {
-                                          return Center(
-                                            child: InvestImportList(),
-                                          );
-                                        });
+                                    _navigate(context);
+                                    // showGeneralDialog(
+                                    //     context: context,
+                                    //     barrierColor:
+                                    //         Colors.black.withOpacity(.5),
+                                    //     barrierDismissible: true,
+                                    //     barrierLabel: '',
+                                    //     transitionDuration:
+                                    //         Duration(milliseconds: 250),
+                                    //     transitionBuilder:
+                                    //         (BuildContext context,
+                                    //             Animation<double> animation,
+                                    //             Animation<double>
+                                    //                 secondaryAnimation,
+                                    //             Widget child) {
+                                    //       return ScaleTransition(
+                                    //           scale: animation, child: child);
+                                    //     },
+                                    //     pageBuilder: (BuildContext context,
+                                    //         Animation<double> animation,
+                                    //         Animation<double>
+                                    //             secondaryAnimation) {
+                                    //       return Center(
+                                    //         child: InvestImportList(),
+                                    //       );
+                                    //     });
                                   },
                                   child: Container(
                                     alignment: Alignment(0, 0),
@@ -122,7 +124,7 @@ class InvestImportView extends StatelessWidget {
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,
                                         fontWeight: FontWeight.w700,
-                                        fontSize: 20,
+                                        fontSize: 18,
                                         letterSpacing: 1.2,
                                         color: ColorTheme.white,
                                       ),
@@ -133,5 +135,12 @@ class InvestImportView extends StatelessWidget {
                 ],
               ),
             )));
+  }
+
+  _navigate(BuildContext context) async {
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ImportView()),
+    );
   }
 }
