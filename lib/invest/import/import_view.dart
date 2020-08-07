@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/db_helper.dart';
@@ -11,6 +12,9 @@ import 'package:vara/utils/db_helper.dart';
 import 'mapping_left.dart';
 
 class ImportView extends StatefulWidget {
+  final editParentData;
+
+  const ImportView({Key key, this.editParentData}) : super(key: key);
   @override
   _ImportViewState createState() => _ImportViewState();
 }
@@ -43,6 +47,8 @@ class _ImportViewState extends State<ImportView> {
   String dropdownMenu10;
   String dropdownMenu11;
 
+  var bytes;
+  var excel;
   var items = List<DropdownMenuItem<String>>();
   var items1 = List<DropdownMenuItem<String>>();
 
@@ -56,15 +62,10 @@ class _ImportViewState extends State<ImportView> {
 
   void save() async {
     try {
-      _path = await FilePicker.getFilePath(
-          type: _pickingType,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
       if (_path == null) {
       } else {
-        var bytes = File(_path).readAsBytesSync();
-        var excel = Excel.decodeBytes(bytes);
+        // bytes = File(_path).readAsBytesSync();
+        // excel = Excel.decodeBytes(bytes);
 
         Invest invest = new Invest();
         List investlist = await DBHelper().getInvest();
@@ -79,62 +80,53 @@ class _ImportViewState extends State<ImportView> {
           for (int row = 0; row < excel.tables[table].maxRows; row++) {
             excel.tables[table].row(row).forEach((cell) {
               var val = cell.value;
-              if (row == 0) {
-                if (cell.value == dropdownMenu3) {
-                  investtime = cell.colIndex;
-                } else if (cell.value == dropdownMenu4) {
-                  pertime = cell.colIndex;
-                } else if (cell.value == dropdownMenu2) {
-                  investamount = cell.colIndex;
-                } else if (cell.value == dropdownMenu5) {
-                  endtime = cell.colIndex;
-                } else if (cell.value == dropdownMenu7) {
-                  received = cell.colIndex;
-                } else if (cell.value == dropdownMenu1) {
-                  investcode = cell.colIndex;
-                } else if (cell.value == dropdownMenu8) {
-                  investtype = cell.colIndex;
-                } else if (cell.value == dropdownMenu9) {
-                  status = cell.colIndex;
-                } else if (cell.value == dropdownMenu6) {
-                  interest = cell.colIndex;
-                } else if (cell.value == dropdownMenu10) {
-                  currency = cell.colIndex;
-                } else if (cell.value == dropdownMenu11) {
-                  country = cell.colIndex;
-                }
-              } else {
-                print("Cell  |" + row.toString() + "|  $val");
 
-                if (cell.colIndex == investtime) {
-                  invest.investtime = val.toString();
-                } else if (cell.colIndex == pertime) {
-                  invest.pertime = val.toString();
-                } else if (cell.colIndex == investamount) {
-                  invest.investamount = val;
-                } else if (cell.colIndex == endtime) {
-                  invest.endtime = val.toString();
-                } else if (cell.colIndex == received) {
-                  invest.received = val;
-                } else if (cell.colIndex == investcode) {
+              print("Cell  |" + row.toString() + "|  $val");
+              if (row > 0) {
+                if (cell.colIndex == int.parse(dropdownMenu1)) {
                   invest.investcode = val.toString();
-                } else if (cell.colIndex == investtype) {
-                  invest.investtype = val;
-                } else if (cell.colIndex == status) {
-                  invest.status = val.toString();
-                } else if (cell.colIndex == interest) {
+                } else if (cell.colIndex == int.parse(dropdownMenu2)) {
+                  invest.investamount = val;
+                } else if (cell.colIndex == int.parse(dropdownMenu3)) {
+                  invest.investtime = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu4)) {
+                  invest.pertime = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu5)) {
+                  invest.endtime = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu6)) {
                   invest.interest = val;
-                } else if (cell.colIndex == currency) {
-                  invest.currency = 'EUR';
-                } else if (cell.colIndex == country) {
+                } else if (cell.colIndex == int.parse(dropdownMenu7)) {
+                  invest.received = val;
+                } else if (cell.colIndex == int.parse(dropdownMenu8)) {
+                  invest.investtype = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu9)) {
+                  invest.status = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu10)) {
+                  invest.currency = val.toString();
+                } else if (cell.colIndex == int.parse(dropdownMenu11)) {
                   invest.country = val.toString();
                 }
               }
             });
             if (row > 0) {
               print('=========');
-              invest.id = investlist.length + row;
+              if (investlist.length > 0) {
+                invest.id = investlist.last['id'] + row;
+              } else {
+                invest.id = row;
+              }
+
               await DBHelper().addData(invest);
+              // List<Map> asset = await DBHelper().getAsset();
+              // for (var i = 0; i < asset.length; i++) {
+              //   Map<String, dynamic> temp = asset[i];
+              //   if (DateFormat('yyyy-MM').format(temp['date']) ==
+              //       DateFormat('yyyy-MM')
+              //           .format(DateTime.parse(invest.investtime))) {
+              //     temp.update(2, (value) => null);
+              //   }
+              // }
+              //Navigator.pop(context);
             }
           }
         }
@@ -142,6 +134,8 @@ class _ImportViewState extends State<ImportView> {
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }
+
+    widget.editParentData(await DBHelper().getInvest());
     Navigator.pop(context);
   }
 
@@ -155,18 +149,20 @@ class _ImportViewState extends State<ImportView> {
       if (_path == null) {
         Navigator.pop(context);
       } else {
-        var bytes = File(_path).readAsBytesSync();
-        var excel = Excel.decodeBytes(bytes);
+        bytes = File(_path).readAsBytesSync();
+        excel = Excel.decodeBytes(bytes);
 
         for (var table in excel.tables.keys) {
           excel.tables[table].row(0).forEach((cell) {
-            items1.add(DropdownMenuItem(
-                child: Text(
-                  cell.value,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                value: cell.colIndex.toString()));
+            if (cell.value != null) {
+              items1.add(DropdownMenuItem(
+                  child: Text(
+                    cell.value,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
+                  value: cell.colIndex.toString()));
+            }
           });
         }
         setState(() {
@@ -233,7 +229,7 @@ class _ImportViewState extends State<ImportView> {
                   child: Row(
                     children: <Widget>[
                       Expanded(
-                        flex: 2,
+                        flex: 5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -425,7 +421,7 @@ class _ImportViewState extends State<ImportView> {
                         child: MappingMid(),
                       ),
                       Expanded(
-                        flex: 2,
+                        flex: 4,
                         child: MappingLeft(),
                       ),
                     ],

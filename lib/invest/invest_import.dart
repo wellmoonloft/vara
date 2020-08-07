@@ -4,7 +4,26 @@ import 'package:vara/utils/app_theme.dart';
 import '../utils/color_theme.dart';
 import 'import/import_view.dart';
 
-class InvestImportView extends StatelessWidget {
+class InvestImportView extends StatefulWidget {
+  final editParentData;
+  final List<Map> investList;
+
+  const InvestImportView({Key key, this.editParentData, this.investList})
+      : super(key: key);
+  @override
+  _InvestImportState createState() => _InvestImportState();
+}
+
+class _InvestImportState extends State<InvestImportView> {
+  List<Map> _investList;
+
+  @override
+  void initState() {
+    _investList = widget.investList;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -137,10 +156,20 @@ class InvestImportView extends StatelessWidget {
             )));
   }
 
+  _editParentData(investList) {
+    setState(() {
+      _investList = investList;
+      widget.editParentData(_investList);
+    });
+  }
+
   _navigate(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ImportView()),
+      MaterialPageRoute(
+          builder: (context) => ImportView(editParentData: (investList) {
+                _editParentData(investList);
+              })),
     );
   }
 }

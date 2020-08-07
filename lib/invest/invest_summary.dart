@@ -5,7 +5,9 @@ import '../utils/color_theme.dart';
 
 class InvestSummaryView extends StatefulWidget {
   final List<Map> investList;
-  const InvestSummaryView({Key key, this.investList}) : super(key: key);
+  final editParentData;
+  const InvestSummaryView({Key key, this.investList, this.editParentData})
+      : super(key: key);
 
   @override
   _InvestSummaryState createState() {
@@ -25,8 +27,10 @@ class _InvestSummaryState extends State<InvestSummaryView> {
   void initState() {
     widget.investList.forEach((element) {
       //print(element);
-      investIncome = investIncome + element['interest'];
-      totalInvest = totalInvest + element['investamount'];
+      investIncome = investIncome +
+          (element['interest'] != null ? element['interest'] : 0);
+      totalInvest = totalInvest +
+          (element['investamount'] != null ? element['investamount'] : 0);
       if (element['investtype'] == 'SHORT') {
         short = short + element['investamount'];
       }

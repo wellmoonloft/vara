@@ -13,6 +13,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Invest Code',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -26,6 +28,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Invest Amount',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -39,6 +43,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Invest Time',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -52,6 +58,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Per Time',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -65,6 +73,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Payment Time',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -78,6 +88,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Interest',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -91,6 +103,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Received',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -104,6 +118,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Invest Type',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -117,6 +133,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Status',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -130,6 +148,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Currency',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,
@@ -143,6 +163,8 @@ class MappingLeft extends StatelessWidget {
           child: Text(
             'Country',
             textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
             style: TextStyle(
               //fontFamily: AppTheme.fontName,
               fontWeight: FontWeight.w700,

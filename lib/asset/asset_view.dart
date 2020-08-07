@@ -4,7 +4,8 @@ import 'chart_view.dart';
 
 class AssetView extends StatefulWidget {
   final List<Map> asset;
-  const AssetView({Key key, this.asset}) : super(key: key);
+  final editParentData;
+  const AssetView({Key key, this.asset, this.editParentData}) : super(key: key);
 
   @override
   _AssetViewState createState() => _AssetViewState();
@@ -20,21 +21,6 @@ class _AssetViewState extends State<AssetView> with TickerProviderStateMixin {
           children: <Widget>[
             AssetSummaryView(asset: widget.asset),
             ChartView(asset: widget.asset),
-            // new Container(
-            //   width: 160.0,
-            //   color: Colors.green,
-            //   child: Text('3'),
-            // ),
-            // new Container(
-            //   width: 160.0,
-            //   color: Colors.yellow,
-            //   child: Text('4'),
-            // ),
-            // new Container(
-            //   width: 160.0,
-            //   color: Colors.orange,
-            //   child: Text('5'),
-            // ),
           ],
         ));
   }

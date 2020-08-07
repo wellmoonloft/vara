@@ -42,8 +42,21 @@ class _HomeViewState extends State<HomeView>
   Map<String, dynamic> btc;
   String bannertitle;
 
+  List<Map> _asset;
+  List<Map> _investList;
+
+  _editParentData(asset, investList) {
+    setState(() {
+      _asset = asset;
+      _investList = investList;
+    });
+  }
+
   @override
   void initState() {
+    _asset = widget.asset;
+    _investList = widget.investList;
+
     super.initState();
     String from = '';
     String to = '';
@@ -171,18 +184,27 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 1) {
                   postPiece = Container(
-                    child: AssetView(asset: widget.asset),
+                    child: AssetView(
+                      editParentData: (asset, investList) {
+                        _editParentData(asset, investList);
+                      },
+                      asset: _asset,
+                    ),
                   );
                 } else if (index == 2) {
                   postPiece = Container(
                     child: InvestTitleView(
                         titleTxt: 'Invest',
                         subTxt: 'Details',
-                        investList: widget.investList),
+                        investList: _investList),
                   );
                 } else if (index == 3) {
                   postPiece = Container(
-                    child: InvestView(investList: widget.investList),
+                    child: InvestView(
+                        editParentData: (asset, investList) {
+                          _editParentData(asset, investList);
+                        },
+                        investList: _investList),
                   );
                 } else if (index == 4) {
                   postPiece = Container(
@@ -193,7 +215,7 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 5) {
                   postPiece = Container(
-                    child: BillView(billList: widget.asset),
+                    child: BillView(billList: _asset),
                   );
                 } else if (index == 6) {
                   postPiece = Container(
