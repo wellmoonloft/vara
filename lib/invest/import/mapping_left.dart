@@ -1,5 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/color_theme.dart';
+
+class RightPart extends StatelessWidget {
+  final String title;
+  final EdgeInsetsGeometry padding;
+
+  const RightPart({Key key, this.title, this.padding}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+        maxLines: 2,
+        style: titleTextSmall,
+      ),
+    );
+  }
+}
+
+class MidPart extends StatelessWidget {
+  final EdgeInsetsGeometry padding;
+
+  const MidPart({Key key, this.padding}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: Text(
+        '=>',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          //fontFamily: AppTheme.fontName,
+          fontWeight: FontWeight.w700,
+          fontSize: 16,
+          color: ColorTheme.puristbluedarker,
+        ),
+      ),
+    );
+  }
+}
 
 class MappingLeft extends StatelessWidget {
   @override
@@ -8,170 +51,45 @@ class MappingLeft extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Text(
-            'Invest Code',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Invest Code',
+          padding: EdgeInsets.only(top: 15),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Invest Amount',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Invest Amount',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Invest Time',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Invest Time',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Per Time',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Per Time',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Payment Time',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Payment Time',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Interest',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Received',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Received',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Invest Type',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Invest Type',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Status',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Status',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Currency',
+          padding: EdgeInsets.only(top: 29),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Currency',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            'Country',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 2,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.greydoubledarker,
-            ),
-          ),
+        RightPart(
+          title: 'Country',
+          padding: EdgeInsets.only(top: 29),
         ),
       ],
     );
@@ -185,149 +103,16 @@ class MappingMid extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 29),
-          child: Text(
-            '=>',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              //fontFamily: AppTheme.fontName,
-              fontWeight: FontWeight.w700,
-              fontSize: 16,
-              color: ColorTheme.puristbluedarker,
-            ),
-          ),
-        ),
+        MidPart(padding: EdgeInsets.only(top: 15)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29)),
+        MidPart(padding: EdgeInsets.only(top: 29))
       ],
     );
   }

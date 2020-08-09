@@ -5,22 +5,16 @@ import '../utils/color_theme.dart';
 import 'import/import_view.dart';
 
 class InvestImportView extends StatefulWidget {
-  final editParentData;
-  final List<Map> investList;
+  // final List<Map> investList;
 
-  const InvestImportView({Key key, this.editParentData, this.investList})
-      : super(key: key);
+  const InvestImportView({Key key}) : super(key: key);
   @override
   _InvestImportState createState() => _InvestImportState();
 }
 
 class _InvestImportState extends State<InvestImportView> {
-  List<Map> _investList;
-
   @override
   void initState() {
-    _investList = widget.investList;
-
     super.initState();
   }
 
@@ -110,31 +104,6 @@ class _InvestImportState extends State<InvestImportView> {
                               child: InkWell(
                                   onTap: () {
                                     _navigate(context);
-                                    // showGeneralDialog(
-                                    //     context: context,
-                                    //     barrierColor:
-                                    //         Colors.black.withOpacity(.5),
-                                    //     barrierDismissible: true,
-                                    //     barrierLabel: '',
-                                    //     transitionDuration:
-                                    //         Duration(milliseconds: 250),
-                                    //     transitionBuilder:
-                                    //         (BuildContext context,
-                                    //             Animation<double> animation,
-                                    //             Animation<double>
-                                    //                 secondaryAnimation,
-                                    //             Widget child) {
-                                    //       return ScaleTransition(
-                                    //           scale: animation, child: child);
-                                    //     },
-                                    //     pageBuilder: (BuildContext context,
-                                    //         Animation<double> animation,
-                                    //         Animation<double>
-                                    //             secondaryAnimation) {
-                                    //       return Center(
-                                    //         child: InvestImportList(),
-                                    //       );
-                                    //     });
                                   },
                                   child: Container(
                                     alignment: Alignment(0, 0),
@@ -156,20 +125,10 @@ class _InvestImportState extends State<InvestImportView> {
             )));
   }
 
-  _editParentData(investList) {
-    setState(() {
-      _investList = investList;
-      widget.editParentData(_investList);
-    });
-  }
-
   _navigate(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context) => ImportView(editParentData: (investList) {
-                _editParentData(investList);
-              })),
+      MaterialPageRoute(builder: (context) => ImportView()),
     );
   }
 }

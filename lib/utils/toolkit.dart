@@ -90,14 +90,17 @@ class CurvePainter extends CustomPainter {
   }
 }
 
-formatNum(double num, int postion) {
-  if ((num.toString().length - num.toString().lastIndexOf(".") - 1) < postion) {
-    return (num.toStringAsFixed(postion)
-        .substring(0, num.toString().lastIndexOf(".") + postion + 1)
+formatNum(num num1, int postion) {
+  if ((num1.toString().length - num1.toString().lastIndexOf(".") - 1) <
+      postion) {
+    return (num1
+        .toStringAsFixed(postion)
+        .substring(0, num1.toString().lastIndexOf(".") + postion + 1)
         .toString());
   } else {
-    return (num.toString()
-        .substring(0, num.toString().lastIndexOf(".") + postion + 1)
+    return (num1
+        .toString()
+        .substring(0, num1.toString().lastIndexOf(".") + postion + 1)
         .toString());
   }
 }

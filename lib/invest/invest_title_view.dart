@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:vara/invest/list/invest_list.dart';
 import 'package:vara/utils/color_theme.dart';
+import 'package:vara/utils/app_theme.dart';
 
 class InvestTitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
-  final List<Map> investList;
+  //final List<Map> investList;
 
   const InvestTitleView({
     Key key,
     this.titleTxt: "",
     this.subTxt: "",
-    this.investList,
+    //this.investList,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 15, bottom: 12),
+        padding: boxpadding,
         child: Row(
           children: <Widget>[
             Container(
@@ -37,13 +37,7 @@ class InvestTitleView extends StatelessWidget {
               child: Text(
                 titleTxt,
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                  //fontFamily: AppTheme.fontName,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  //letterSpacing: 0,
-                  color: ColorTheme.greytripledarker,
-                ),
+                style: titleText,
               ),
             ),
             InkWell(
@@ -53,8 +47,7 @@ class InvestTitleView extends StatelessWidget {
                 Navigator.push(
                   context,
                   new MaterialPageRoute(
-                      builder: (context) =>
-                          new InvestListView(investList: investList)),
+                      builder: (context) => new InvestListView()),
                 );
               },
               child: Padding(
@@ -64,13 +57,7 @@ class InvestTitleView extends StatelessWidget {
                     Text(
                       subTxt,
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        //fontFamily: AppTheme.fontName,
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.cassislighter,
-                      ),
+                      style: subtitleText,
                     ),
                     SizedBox(
                       height: 38,

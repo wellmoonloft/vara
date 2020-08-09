@@ -4,17 +4,14 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:vara/models/db_models.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
-import 'package:vara/utils/db_helper.dart';
-
 import 'mapping_left.dart';
 
 class ImportView extends StatefulWidget {
-  final editParentData;
-
-  const ImportView({Key key, this.editParentData}) : super(key: key);
+  const ImportView({Key key}) : super(key: key);
   @override
   _ImportViewState createState() => _ImportViewState();
 }
@@ -45,7 +42,6 @@ class _ImportViewState extends State<ImportView> {
   String dropdownMenu8;
   String dropdownMenu9;
   String dropdownMenu10;
-  String dropdownMenu11;
 
   var bytes;
   var excel;
@@ -64,11 +60,8 @@ class _ImportViewState extends State<ImportView> {
     try {
       if (_path == null) {
       } else {
-        // bytes = File(_path).readAsBytesSync();
-        // excel = Excel.decodeBytes(bytes);
-
-        Invest invest = new Invest();
-        List investlist = await DBHelper().getInvest();
+        var assetandinvestlist =
+            Provider.of<InvestData>(context, listen: false);
 
         for (var table in excel.tables.keys) {
           print('table   ' + table);
@@ -78,6 +71,10 @@ class _ImportViewState extends State<ImportView> {
               excel.tables[table].maxRows.toString());
 
           for (int row = 0; row < excel.tables[table].maxRows; row++) {
+            Invest invest = new Invest();
+            Asset asset = new Asset();
+            asset.debt = 0;
+
             excel.tables[table].row(row).forEach((cell) {
               var val = cell.value;
 
@@ -94,39 +91,38 @@ class _ImportViewState extends State<ImportView> {
                 } else if (cell.colIndex == int.parse(dropdownMenu5)) {
                   invest.endtime = val.toString();
                 } else if (cell.colIndex == int.parse(dropdownMenu6)) {
-                  invest.interest = val;
-                } else if (cell.colIndex == int.parse(dropdownMenu7)) {
                   invest.received = val;
-                } else if (cell.colIndex == int.parse(dropdownMenu8)) {
+                } else if (cell.colIndex == int.parse(dropdownMenu7)) {
                   invest.investtype = val.toString();
-                } else if (cell.colIndex == int.parse(dropdownMenu9)) {
+                } else if (cell.colIndex == int.parse(dropdownMenu8)) {
                   invest.status = val.toString();
-                } else if (cell.colIndex == int.parse(dropdownMenu10)) {
+                } else if (cell.colIndex == int.parse(dropdownMenu9)) {
                   invest.currency = val.toString();
-                } else if (cell.colIndex == int.parse(dropdownMenu11)) {
+                } else if (cell.colIndex == int.parse(dropdownMenu10)) {
                   invest.country = val.toString();
                 }
               }
             });
             if (row > 0) {
-              print('=========');
-              if (investlist.length > 0) {
-                invest.id = investlist.last['id'] + row;
+              if (invest.received == 0) {
+                asset.asset = invest.investamount;
+                asset.date = invest.investtime;
+                invest.interest = 0;
+                invest.totalyield = 0;
               } else {
-                invest.id = row;
-              }
+                var daydifree = DateTime.parse(invest.endtime)
+                    .difference(DateTime.parse(invest.investtime));
 
-              await DBHelper().addData(invest);
-              // List<Map> asset = await DBHelper().getAsset();
-              // for (var i = 0; i < asset.length; i++) {
-              //   Map<String, dynamic> temp = asset[i];
-              //   if (DateFormat('yyyy-MM').format(temp['date']) ==
-              //       DateFormat('yyyy-MM')
-              //           .format(DateTime.parse(invest.investtime))) {
-              //     temp.update(2, (value) => null);
-              //   }
-              // }
-              //Navigator.pop(context);
+                asset.asset = invest.received - invest.investamount;
+                asset.date = invest.endtime;
+                invest.interest = invest.received - invest.investamount;
+                invest.totalyield = invest.interest /
+                    invest.investamount /
+                    daydifree.inDays *
+                    365;
+              }
+              await assetandinvestlist.updateInvestList(invest);
+              await assetandinvestlist.updateAsset(asset);
             }
           }
         }
@@ -134,8 +130,6 @@ class _ImportViewState extends State<ImportView> {
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }
-
-    widget.editParentData(await DBHelper().getInvest());
     Navigator.pop(context);
   }
 
@@ -392,22 +386,6 @@ class _ImportViewState extends State<ImportView> {
                                 onChanged: (String newValue) {
                                   setState(() {
                                     dropdownMenu10 = newValue;
-                                  });
-                                },
-                                items: items,
-                              ),
-                            ),
-                            DropdownButtonHideUnderline(
-                              child: DropdownButton<String>(
-                                dropdownColor: ColorTheme.white,
-                                hint: Text(hintText),
-                                iconSize: 18,
-                                value: dropdownMenu11,
-                                isExpanded: true,
-                                isDense: false,
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    dropdownMenu11 = newValue;
                                   });
                                 },
                                 items: items,

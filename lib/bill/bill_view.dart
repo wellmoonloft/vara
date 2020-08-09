@@ -4,9 +4,7 @@ import 'bill_import.dart';
 import 'bill_summary.dart';
 
 class BillView extends StatefulWidget {
-  final List<Map> billList;
-  const BillView({Key key, this.billList}) : super(key: key);
-
+  const BillView({Key key}) : super(key: key);
   @override
   _AssetViewState createState() => _AssetViewState();
 }
@@ -19,7 +17,7 @@ class _AssetViewState extends State<BillView> with TickerProviderStateMixin {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[
-            BillSummaryView(billList: widget.billList),
+            BillSummaryView(),
             BillImportView(),
           ],
         ));

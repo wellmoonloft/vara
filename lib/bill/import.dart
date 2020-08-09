@@ -114,7 +114,7 @@ class _ImportViewState extends State<ImportView> {
             if (row > 0) {
               print('=========');
               invest.id = investlist.length + row;
-              await DBHelper().addData(invest);
+              await DBHelper().addInvest(invest);
             }
           }
         }

@@ -18,17 +18,13 @@ class HomeView extends StatefulWidget {
   final Map<String, dynamic> btcdaily;
   final Map<String, dynamic> usdcnydaily;
   final Map<String, dynamic> eurcnydaily;
-  final List<Map> asset;
-  final List<Map> investList;
-  HomeView(
-      {Key key,
-      this.btc,
-      this.btcdaily,
-      this.usdcnydaily,
-      this.eurcnydaily,
-      this.asset,
-      this.investList})
-      : super(key: key);
+  HomeView({
+    Key key,
+    this.btc,
+    this.btcdaily,
+    this.usdcnydaily,
+    this.eurcnydaily,
+  }) : super(key: key);
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -42,21 +38,8 @@ class _HomeViewState extends State<HomeView>
   Map<String, dynamic> btc;
   String bannertitle;
 
-  List<Map> _asset;
-  List<Map> _investList;
-
-  _editParentData(asset, investList) {
-    setState(() {
-      _asset = asset;
-      _investList = investList;
-    });
-  }
-
   @override
   void initState() {
-    _asset = widget.asset;
-    _investList = widget.investList;
-
     super.initState();
     String from = '';
     String to = '';
@@ -82,29 +65,26 @@ class _HomeViewState extends State<HomeView>
     tabIconsList.forEach((TabIconData tab) {
       tab.isSelected = false;
     });
+  }
 
+  @override
+  Widget build(BuildContext context) {
     _controller.addListener(() {
       //print(_controller.offset);
       //print(_controller.position.userScrollDirection.index);
       if (_controller.offset > 115 &&
           _controller.position.userScrollDirection.index == 2) {
-        //_offstage = true;
         setState(() {
           _offstage = false;
         });
       }
       if (_controller.offset < 400 &&
           _controller.position.userScrollDirection.index == 1) {
-        //_offstage = false;
         setState(() {
           _offstage = true;
         });
       }
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
         controller: _controller,
@@ -184,27 +164,16 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 1) {
                   postPiece = Container(
-                    child: AssetView(
-                      editParentData: (asset, investList) {
-                        _editParentData(asset, investList);
-                      },
-                      asset: _asset,
-                    ),
+                    child: AssetView(), //
                   );
                 } else if (index == 2) {
                   postPiece = Container(
                     child: InvestTitleView(
-                        titleTxt: 'Invest',
-                        subTxt: 'Details',
-                        investList: _investList),
+                        titleTxt: 'Invest', subTxt: 'Details'), //
                   );
                 } else if (index == 3) {
                   postPiece = Container(
-                    child: InvestView(
-                        editParentData: (asset, investList) {
-                          _editParentData(asset, investList);
-                        },
-                        investList: _investList),
+                    child: InvestView(), //
                   );
                 } else if (index == 4) {
                   postPiece = Container(
@@ -215,7 +184,7 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 5) {
                   postPiece = Container(
-                    child: BillView(billList: _asset),
+                    child: BillView(), //
                   );
                 } else if (index == 6) {
                   postPiece = Container(
@@ -285,7 +254,6 @@ class _HomeViewState extends State<HomeView>
 class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
   final Widget child;
   StickyTabBarDelegate({@required this.child});
-
   @override
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -297,10 +265,8 @@ class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   double get maxExtent => 70;
-
   @override
   double get minExtent => 70;
-
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return true;

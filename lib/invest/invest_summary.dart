@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
 class InvestSummaryView extends StatefulWidget {
-  final List<Map> investList;
-  final editParentData;
-  const InvestSummaryView({Key key, this.investList, this.editParentData})
-      : super(key: key);
-
+  const InvestSummaryView({Key key}) : super(key: key);
   @override
   _InvestSummaryState createState() {
     return _InvestSummaryState();
@@ -16,39 +14,42 @@ class InvestSummaryView extends StatefulWidget {
 }
 
 class _InvestSummaryState extends State<InvestSummaryView> {
-  double investIncome = 0.0;
-  double totalYield = 0.0;
-  double totalInvest = 0.0;
-  double short = 0.0;
-  double mid = 0.0;
-  double long = 0.0;
-
   @override
   void initState() {
-    widget.investList.forEach((element) {
-      //print(element);
-      investIncome = investIncome +
-          (element['interest'] != null ? element['interest'] : 0);
-      totalInvest = totalInvest +
-          (element['investamount'] != null ? element['investamount'] : 0);
-      if (element['investtype'] == 'SHORT') {
-        short = short + element['investamount'];
-      }
-      if (element['investtype'] == 'MID') {
-        mid = mid + element['investamount'];
-      }
-      if (element['investtype'] == 'LONG') {
-        long = long + element['investamount'];
-      }
-    });
-
-    totalYield = investIncome / totalInvest;
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    double investIncome = 0.0;
+    double totalYield = 0.0;
+    double totalInvest = 0.0;
+    double short = 0.0;
+    double mid = 0.0;
+    double long = 0.0;
+    Provider.of<InvestData>(context).investList.forEach((element) {
+      //print(element);
+      if (element['status'] == 'FINISHED') {
+        investIncome = investIncome +
+            (element['interest'] != null ? element['interest'] : 0);
+
+        totalYield = investIncome *
+            (element['totalyield'] != null ? element['totalyield'] : 0) /
+            (element['interest'] != null ? element['interest'] : 0);
+      } else {
+        totalInvest = totalInvest +
+            (element['investamount'] != null ? element['investamount'] : 0);
+        if (element['investtype'] == 'SHORT') {
+          short = short + element['investamount'];
+        }
+        if (element['investtype'] == 'MID') {
+          mid = mid + element['investamount'];
+        }
+        if (element['investtype'] == 'LONG') {
+          long = long + element['investamount'];
+        }
+      }
+    });
     return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(

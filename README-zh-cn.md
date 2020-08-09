@@ -40,19 +40,22 @@
 ## 依赖
 
 - [charts_flutter: ^0.9.0](https://pub.dev/packages/charts_flutter) 用Dart原生编写的Material Design数据可视化库。
-- [fl_chart: ^0.10.1](https://pub.dev/packages/charts_flutter) 在Flutter中绘制梦幻的图表模版。
 - [font_awesome_flutter: ^8.8.1](https://pub.dev/packages/font_awesome_flutter) Font Awesome Icon 的字体图标包，可以用于flutter的图标。
-- [intl: ^0.16.0](https://pub.dev/packages/intl) 提供国际化和本地化功能，包括消息翻译，复数形式和性别，日期/数字格式和解析以及双向文本。
+- [intl: ^0.16.1](https://pub.dev/packages/intl) 提供国际化和本地化功能，包括消息翻译，复数形式和性别，日期/数字格式和解析以及双向文本。
 - [sqflite: ^1.3.1](https://pub.dev/packages/sqflite) SQLite用于flutter的插件。
-- [path: ^1.6.4](https://pub.dev/packages/path) 适用于Dart的全面的跨平台路径处理库。
+- [path: ^1.7.0](https://pub.dev/packages/path) 适用于Dart的全面的跨平台路径处理库。
 - [path_provider: ^1.6.11](https://pub.dev/packages/path_provider) Flutter插件，用于查找文件系统上的常用位置。
-- [file_picker: ^1.12.0](https://pub.dev/packages/file_picker) 用于本机文件浏览器来选择单个或多个绝对文件路径，并具有扩展名过滤支持。
-- [excel: ^1.1.0](https://pub.dev/packages/excel) 用于创建和更新XLSX文件的excel-sheets的Flutter Dart库。
+- [file_picker: ^1.13.2](https://pub.dev/packages/file_picker) 用于本机文件浏览器来选择单个或多个绝对文件路径，并具有扩展名过滤支持。
+- [excel: ^1.1.4](https://pub.dev/packages/excel) 用于创建和更新XLSX文件的excel-sheets的Flutter Dart库。
 - [flutter_swiper: ^1.1.6](https://pub.dev/packages/flutter_swiper) flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配。
+- [http: ^0.12.2](https://pub.dev/packages/http) 一个可组合的，基于Future的库，用于发出HTTP请求。
+- [provider: ^4.3.2](https://pub.dev/packages/provider) InheritedWidget的包装 ，使它们更易于使用和可重复使用。
 
 ## 进度
 
 目前还未完成，上传到git只是因为我办公室和家里面有两台电脑，嗯。
+![](https://gitee.com/wellmoonloft/images/raw/master/20200809224602.jpg)
+![](https://gitee.com/wellmoonloft/images/raw/master/20200809224409.png)
 
 ## Todo List 
 
@@ -76,6 +79,6 @@
 ### 基础  
 - [x] 数据库
 - [ ] 多语言
-
+- [x] 引入provider，让数据调用变得更加灵活
 
 

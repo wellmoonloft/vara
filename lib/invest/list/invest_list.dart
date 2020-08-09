@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'choice_bar.dart';
 
 class InvestListView extends StatefulWidget {
-  final List<Map> investList;
+  //final List<Map> investList;
 
-  const InvestListView({Key key, this.investList}) : super(key: key);
+  const InvestListView({Key key}) : super(key: key);
   @override
   InvestListState createState() => InvestListState();
 }
@@ -17,23 +19,17 @@ class InvestListState extends State<InvestListView> {
   @override
   void initState() {
     super.initState();
-    _refresh();
-  }
-
-  _refresh() {
-    setState(() {
-      widget.investList.forEach((element) {
-        if (element['status'] != 'FINISHED') {
-          current.add(element);
-        } else {
-          finished.add(element);
-        }
-      });
-    });
   }
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<InvestData>(context).investList.forEach((element) {
+      if (element['status'] != 'FINISHED') {
+        current.add(element);
+      } else {
+        finished.add(element);
+      }
+    });
     return DefaultTabController(
       length: 2,
       child: Scaffold(

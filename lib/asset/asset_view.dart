@@ -3,9 +3,7 @@ import 'package:vara/asset/asset_summary.dart';
 import 'chart_view.dart';
 
 class AssetView extends StatefulWidget {
-  final List<Map> asset;
-  final editParentData;
-  const AssetView({Key key, this.asset, this.editParentData}) : super(key: key);
+  const AssetView({Key key}) : super(key: key);
 
   @override
   _AssetViewState createState() => _AssetViewState();
@@ -19,8 +17,8 @@ class _AssetViewState extends State<AssetView> with TickerProviderStateMixin {
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[
-            AssetSummaryView(asset: widget.asset),
-            ChartView(asset: widget.asset),
+            AssetSummaryView(),
+            ChartView(),
           ],
         ));
   }

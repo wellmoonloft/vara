@@ -75,10 +75,10 @@ class BillImportView extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: ColorTheme.cantaloupe,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(30.0),
-                            bottomLeft: Radius.circular(30.0),
-                            bottomRight: Radius.circular(30.0),
-                            topRight: Radius.circular(30.0)),
+                            topLeft: Radius.circular(10.0),
+                            bottomLeft: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0),
+                            topRight: Radius.circular(10.0)),
                       ),
                       child: Container(
                           height: 45,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/utils/color_theme.dart';
-
+import 'package:vara/utils/app_theme.dart';
 import 'list/bill_list.dart';
 
 class BillTitleView extends StatelessWidget {
@@ -17,8 +17,7 @@ class BillTitleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 15, bottom: 12),
+        padding: boxpadding,
         child: Row(
           children: <Widget>[
             Container(
@@ -36,11 +35,7 @@ class BillTitleView extends StatelessWidget {
               child: Text(
                 titleTxt,
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: ColorTheme.greytripledarker,
-                ),
+                style: titleText,
               ),
             ),
             InkWell(
@@ -60,12 +55,7 @@ class BillTitleView extends StatelessWidget {
                     Text(
                       subTxt,
                       textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 16,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.cantaloupe,
-                      ),
+                      style: subtitleText,
                     ),
                     SizedBox(
                       height: 38,

@@ -38,9 +38,16 @@ class TopBarView extends StatelessWidget {
         break;
       }
     }
-
-    // print(usd);
-    // print(eur);
+    String btcPrice = 'BTC/USD: ' +
+        double.parse(
+                btc['4b. close (USD)'] != null ? btc['4b. close (USD)'] : 0.0)
+            .toStringAsFixed(2);
+    String usdPrice = 'USD/CNY: ' +
+        double.parse(usd['4. close'] != null ? usd['4. close'] : 0.0)
+            .toStringAsFixed(2);
+    String eurPrice = 'EUR/CNY: ' +
+        double.parse(eur['4. close'] != null ? eur['4. close'] : 0.0)
+            .toStringAsFixed(2);
 
     return Column(
       children: <Widget>[
@@ -184,9 +191,7 @@ class TopBarView extends StatelessWidget {
                                   children: <Widget>[
                                     BtcChartView(btcdaily: btcdaily),
                                     Text(
-                                      'BTC/USD: ' +
-                                          double.parse(btc['4b. close (USD)'])
-                                              .toStringAsFixed(2),
+                                      btcPrice,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,
@@ -215,9 +220,7 @@ class TopBarView extends StatelessWidget {
                                   children: <Widget>[
                                     USDChartView(usdcnydaily: usdcnydaily),
                                     Text(
-                                      'USD/CNY: ' +
-                                          double.parse(usd['4. close'])
-                                              .toStringAsFixed(2),
+                                      usdPrice,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,
@@ -246,9 +249,7 @@ class TopBarView extends StatelessWidget {
                                   children: <Widget>[
                                     EURChartView(eurcnydaily: eurcnydaily),
                                     Text(
-                                      'EUR/CNY: ' +
-                                          double.parse(eur['4. close'])
-                                              .toStringAsFixed(2),
+                                      eurPrice,
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         //fontFamily: AppTheme.fontName,

@@ -4,8 +4,7 @@ import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
-  final List<Map> billList;
-  const BillSummaryView({Key key, this.billList}) : super(key: key);
+  const BillSummaryView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,14 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/color_theme.dart';
 
 class ChartView extends StatelessWidget {
-  final List<Map> asset;
   final bool animate;
 
-  ChartView({Key key, this.asset, this.animate}) : super(key: key);
+  ChartView({Key key, this.animate}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class ChartView extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               top: 10, bottom: 5, left: 15),
                           child: charts.TimeSeriesChart(
-                            _createSampleData(),
+                            _createSampleData(context),
                             primaryMeasureAxis: charts.NumericAxisSpec(
                               renderSpec: charts.GridlineRendererSpec(
                                   axisLineStyle: charts.LineStyleSpec(
@@ -75,9 +76,10 @@ class ChartView extends StatelessWidget {
                 ))));
   }
 
-  List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData() {
+  List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData(context) {
     List<TimeSeriesSales> assetdata = [];
     List<TimeSeriesSales> debtdata = [];
+    List<Map> asset = Provider.of<InvestData>(context).assetList;
     for (var i = 0; i < asset.length; i++) {
       Map<String, dynamic> temp = asset[asset.length - i - 1];
       //print(asset[i]);

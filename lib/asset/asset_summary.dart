@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
 class AssetSummaryView extends StatelessWidget {
-  final List<Map> asset;
-  const AssetSummaryView({Key key, this.asset}) : super(key: key);
+  //final List<Map> asset;
+  const AssetSummaryView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,22 +98,50 @@ class AssetSummaryView extends StatelessWidget {
                                                     left: 4,
                                                     top: 10,
                                                     bottom: 3),
-                                                child: Text(
-                                                  '€ ' +
-                                                      (asset.last['asset'] -
-                                                              asset
-                                                                  .last['debt'])
-                                                          .toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    // fontFamily:
-                                                    //     AppTheme.fontName,
-                                                    fontWeight: FontWeight.w700,
-                                                    fontSize: 24,
-                                                    color: ColorTheme
-                                                        .puristbluedarker,
-                                                  ),
-                                                ),
+                                                child: Consumer<InvestData>(
+                                                    builder:
+                                                        (context, cart,
+                                                                child) =>
+                                                            Text(
+                                                              '€ ' +
+                                                                  formatNum(
+                                                                          (cart.assetList.last['asset'] -
+                                                                              cart.assetList.last['debt']),
+                                                                          2)
+                                                                      .toString(),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                // fontFamily:
+                                                                //     AppTheme.fontName,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                                fontSize: 24,
+                                                                color: ColorTheme
+                                                                    .puristbluedarker,
+                                                              ),
+                                                            )),
+                                                // Text(
+                                                //   '€ ' +
+                                                //       formatNum(
+                                                //               (asset.last[
+                                                //                       'asset'] -
+                                                //                   asset.last[
+                                                //                       'debt']),
+                                                //               2)
+                                                //           .toString(),
+                                                //   textAlign: TextAlign.center,
+                                                //   style: TextStyle(
+                                                //     // fontFamily:
+                                                //     //     AppTheme.fontName,
+                                                //     fontWeight: FontWeight.w700,
+                                                //     fontSize: 24,
+                                                //     color: ColorTheme
+                                                //         .puristbluedarker,
+                                                //   ),
+                                                // ),
                                               ),
                                             ],
                                           )
@@ -152,23 +182,30 @@ class AssetSummaryView extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: <Widget>[
-                                        Text(
-                                          formatNum(
-                                                      (asset.last['debt'] /
-                                                          asset.last['asset'] *
-                                                          100),
-                                                      2)
-                                                  .toString() +
-                                              '%',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            //fontFamily: AppTheme.fontName,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18,
-                                            letterSpacing: 0.0,
-                                            color: ColorTheme.puristbluedarker,
-                                          ),
-                                        ),
+                                        Consumer<InvestData>(
+                                            builder: (context, cart, child) =>
+                                                Text(
+                                                  formatNum(
+                                                              (cart.assetList
+                                                                          .last[
+                                                                      'debt'] /
+                                                                  cart.assetList
+                                                                          .last[
+                                                                      'asset'] *
+                                                                  100),
+                                                              2)
+                                                          .toString() +
+                                                      '%',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    //fontFamily: AppTheme.fontName,
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 18,
+                                                    letterSpacing: 0.0,
+                                                    color: ColorTheme
+                                                        .puristbluedarker,
+                                                  ),
+                                                )),
                                         Text(
                                           'Debt service',
                                           textAlign: TextAlign.center,
@@ -187,21 +224,25 @@ class AssetSummaryView extends StatelessWidget {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(4.0),
-                                  child: CustomPaint(
-                                    painter: CurvePainter(
-                                        colors: [
-                                          ColorTheme.puristbluedarker,
-                                          ColorTheme.puristbluelighter,
-                                          ColorTheme.puristbluelighter
-                                        ],
-                                        angle: (360 - 10) *
-                                            (asset.last['debt'] /
-                                                asset.last['asset'])),
-                                    child: SizedBox(
-                                      width: 108,
-                                      height: 108,
-                                    ),
-                                  ),
+                                  child: Consumer<InvestData>(
+                                      builder: (context, cart, child) =>
+                                          CustomPaint(
+                                            painter: CurvePainter(
+                                                colors: [
+                                                  ColorTheme.puristbluedarker,
+                                                  ColorTheme.puristbluelighter,
+                                                  ColorTheme.puristbluelighter
+                                                ],
+                                                angle: (360 - 10) *
+                                                    (cart.assetList
+                                                            .last['debt'] /
+                                                        cart.assetList
+                                                            .last['asset'])),
+                                            child: SizedBox(
+                                              width: 108,
+                                              height: 108,
+                                            ),
+                                          )),
                                 )
                               ],
                             ),
@@ -273,15 +314,20 @@ class AssetSummaryView extends StatelessWidget {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(top: 10),
-                                child: Text(
-                                  '€ ' + asset.last['asset'].toString(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    //fontFamily: AppTheme.fontName,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    color: ColorTheme.puristbluedarker,
-                                  ),
+                                child: Consumer<InvestData>(
+                                  builder: (context, cart, child) => Text(
+                                      '€ ' +
+                                          formatNum(
+                                                  cart.assetList.last['asset'],
+                                                  2)
+                                              .toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        //fontFamily: AppTheme.fontName,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16,
+                                        color: ColorTheme.puristbluedarker,
+                                      )),
                                 ),
                               ),
                             ],
@@ -339,16 +385,22 @@ class AssetSummaryView extends StatelessWidget {
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
-                                    child: Text(
-                                      '€ ' + asset.last['debt'].toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: ColorTheme.cantaloupe,
-                                      ),
-                                    ),
+                                    child: Consumer<InvestData>(
+                                        builder: (context, cart, child) => Text(
+                                              '€ ' +
+                                                  formatNum(
+                                                          cart.assetList
+                                                              .last['debt'],
+                                                          2)
+                                                      .toString(),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                //fontFamily: AppTheme.fontName,
+                                                fontWeight: FontWeight.w700,
+                                                fontSize: 16,
+                                                color: ColorTheme.cantaloupe,
+                                              ),
+                                            )),
                                   ),
                                 ],
                               ),

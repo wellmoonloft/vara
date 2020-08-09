@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/utils/color_theme.dart';
+import 'package:vara/utils/app_theme.dart';
 
 class AssetTitleView extends StatelessWidget {
   final String titleTxt;
@@ -15,8 +16,7 @@ class AssetTitleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 15, bottom: 12),
+        padding: boxpadding,
         child: Row(
           children: <Widget>[
             Container(
@@ -34,13 +34,7 @@ class AssetTitleView extends StatelessWidget {
               child: Text(
                 titleTxt,
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                  //fontFamily: AppTheme.fontName,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  //letterSpacing: 0,
-                  color: ColorTheme.greytripledarker,
-                ),
+                style: titleText,
               ),
             ),
           ],

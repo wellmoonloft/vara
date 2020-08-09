@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'dart:io';
+import 'home/home_view.dart';
+import 'models/provider_data.dart';
 import 'utils/color_theme.dart';
 import 'utils/db_helper.dart';
 
 class SplashPage extends StatefulWidget {
-  final editParentText;
-  SplashPage({Key key, this.editParentText}) : super(key: key);
+  SplashPage({Key key}) : super(key: key);
 
   @override
   _SplashPageState createState() {
@@ -19,11 +21,8 @@ class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> btcdaily;
   Map<String, dynamic> usdcnydaily;
   Map<String, dynamic> eurcnydaily;
-  List<Map> asset;
   String etext = '';
   double progressValue = 0.0;
-  List<Map> investList;
-  //List investlist = await DBHelper().getInvest();
 
   @override
   void initState() {
@@ -59,40 +58,46 @@ class _SplashPageState extends State<SplashPage> {
   _navigatorAfterGetData() async {
     print("----get data start------");
     setState(() {
-      etext = 'GET PERSONAL DATA FROM DATABASE ...';
+      etext = 'GET PERSONAL DATA ...';
       progressValue = 0.1;
     });
     await _doDatabase();
     setState(() {
-      etext = 'GET BTC DATA FROM alphavantage.co ...';
+      etext = 'GET BTC DATA ...';
       progressValue = 0.2;
     });
     btc = await _getBtcCurrency();
     setState(() {
-      etext = 'GET BTC DAILY FROM alphavantage.co ...';
+      etext = 'GET BTC DAILY ...';
       progressValue = 0.4;
     });
     btcdaily = await _getBTCWeekly();
     setState(() {
-      etext = 'GET USD DAILY FROM alphavantage.co ...';
+      etext = 'GET USD DAILY ...';
       progressValue = 0.6;
     });
     usdcnydaily = await _getUSDCNYWeekly();
     setState(() {
-      etext = 'GET EUR DAILY FROM alphavantage.co ...';
+      etext = 'GET EUR DAILY ...';
       progressValue = 0.8;
     });
     eurcnydaily = await _getEURCNYWeekly();
     print("----get data done------");
-    widget.editParentText(
-        false, btc, btcdaily, usdcnydaily, eurcnydaily, asset, investList);
+    Navigator.of(context).pushReplacement(new MaterialPageRoute(
+        builder: (context) => HomeView(
+              btc: btc,
+              btcdaily: btcdaily,
+              usdcnydaily: usdcnydaily,
+              eurcnydaily: eurcnydaily,
+            )));
   }
 
   _doDatabase() async {
     DBHelper dbHelper = DBHelper();
     await dbHelper.initDatabase();
-    asset = await dbHelper.getAsset();
-    investList = await DBHelper().getInvest();
+    var assetandinvestlist = Provider.of<InvestData>(context, listen: false);
+    assetandinvestlist.getAssetList();
+    assetandinvestlist.getinvestList();
   }
 
   _getBtcCurrency() async {
