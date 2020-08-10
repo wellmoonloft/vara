@@ -30,7 +30,6 @@ class InvestData extends ChangeNotifier {
 
   Future updateAsset(Asset asset) async {
     await DBHelper().updateAsset(asset);
-    await getAssetList();
     notifyListeners();
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_summary.dart';
-import 'chart_view.dart';
+import 'asset_chart.dart';
 
 class AssetView extends StatefulWidget {
   const AssetView({Key key}) : super(key: key);
@@ -18,7 +18,7 @@ class _AssetViewState extends State<AssetView> with TickerProviderStateMixin {
           scrollDirection: Axis.horizontal,
           children: <Widget>[
             AssetSummaryView(),
-            ChartView(),
+            AssetChartView(),
           ],
         ));
   }

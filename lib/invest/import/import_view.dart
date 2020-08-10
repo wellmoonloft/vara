@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/utils/progressDialog.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
@@ -104,32 +105,36 @@ class _ImportViewState extends State<ImportView> {
               }
             });
             if (row > 0) {
-              if (invest.received == 0) {
-                asset.asset = invest.investamount;
-                asset.date = invest.investtime;
-                invest.interest = 0;
-                invest.totalyield = 0;
-              } else {
-                var daydifree = DateTime.parse(invest.endtime)
-                    .difference(DateTime.parse(invest.investtime));
+              if (invest.status == 'FINISHED') {
+                var starttime = DateTime.parse(invest.investtime);
+                var endtime = DateTime.parse(invest.endtime);
+                var daydifree = endtime.difference(starttime);
 
-                asset.asset = invest.received - invest.investamount;
+                asset.asset = invest.received;
                 asset.date = invest.endtime;
                 invest.interest = invest.received - invest.investamount;
                 invest.totalyield = invest.interest /
                     invest.investamount /
                     daydifree.inDays *
                     365;
+              } else {
+                asset.asset = invest.investamount;
+                asset.date = invest.investtime;
+                invest.interest = 0;
+                invest.totalyield = 0;
               }
               await assetandinvestlist.updateInvestList(invest);
               await assetandinvestlist.updateAsset(asset);
             }
           }
         }
+        await assetandinvestlist.getAssetList();
+        await assetandinvestlist.getinvestList();
       }
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());
     }
+    ProgressDialog.dismiss(context);
     Navigator.pop(context);
   }
 
@@ -423,7 +428,7 @@ class _ImportViewState extends State<ImportView> {
                             padding: EdgeInsets.all(10),
                             child: InkWell(
                                 onTap: () {
-                                  //_navigateAndDisplaySelection(context);
+                                  ProgressDialog.showProgress(context);
                                   save();
                                 },
                                 child: Container(
