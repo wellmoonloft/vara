@@ -15,7 +15,8 @@ class ChoiceBarState extends State<ChoiceBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+        color: ColorTheme.white,
         padding: EdgeInsets.only(top: 10),
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

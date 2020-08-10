@@ -1,11 +1,15 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/color_theme.dart';
 
+import 'package:vara/utils/toolTipMgr.dart';
+
 class AssetChartView extends StatelessWidget {
+  static String pointerValue;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,6 +50,32 @@ class AssetChartView extends StatelessWidget {
                               new charts.PointRendererConfig(
                                   // ID used to link series to this renderer.
                                   customRendererId: 'customPoint')
+                            ],
+                            behaviors: [
+                              new charts.LinePointHighlighter(
+                                  symbolRenderer: CustomCircleSymbolRenderer()),
+                              new charts.SelectNearest(
+                                  eventTrigger:
+                                      charts.SelectionTrigger.tapAndDrag)
+                            ],
+                            selectionModels: [
+                              charts.SelectionModelConfig(changedListener:
+                                  (charts.SelectionModel model) {
+                                if (model.hasDatumSelection) {
+                                  ToolTipMgr.setTitle({
+                                    'title':
+                                        //'${model.selectedSeries[0].measureFn(model.selectedDatum[0].datum.sales)}',
+                                        '${model.selectedDatum[0].datum.sales}',
+                                    'subTitle':
+                                        '${model.selectedDatum[1].datum.sales}'
+                                  });
+                                  print({
+                                    //model.selectedSeries[0].measureFn(
+                                    model.selectedDatum[0].datum.sales
+                                    //)
+                                  });
+                                }
+                              })
                             ],
                             dateTimeFactory:
                                 const charts.LocalDateTimeFactory(),
@@ -98,8 +128,8 @@ class AssetChartView extends StatelessWidget {
           domainFn: (TimeSeriesSales sales, _) => sales.time,
           measureFn: (TimeSeriesSales sales, _) => sales.sales,
           data: netAssetSalesData)
-        // Configure our custom point renderer for this series.
-        ..setAttribute(charts.rendererIdKey, 'customPoint'),
+      // Configure our custom point renderer for this series.
+      //..setAttribute(charts.rendererIdKey, 'customPoint'),
     ];
   }
 }

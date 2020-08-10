@@ -4,6 +4,7 @@ import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import 'choice_bar.dart';
+import 'invest_detail.dart';
 
 class InvestListView extends StatefulWidget {
   //final List<Map> investList;
@@ -37,6 +38,7 @@ class InvestListState extends State<InvestListView> {
         appBar: AppBar(
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
+          elevation: 0,
           title: Text('Invest List',
               style: TextStyle(
                 fontWeight: FontWeight.w700,
@@ -51,7 +53,7 @@ class InvestListState extends State<InvestListView> {
           bottom: TabBar(
             isScrollable: true,
             labelColor: ColorTheme.greytripledarker,
-            indicatorColor: ColorTheme.background,
+            indicatorColor: ColorTheme.white,
             labelStyle: TextStyle(
               fontWeight: FontWeight.w700,
               fontSize: 18,
@@ -84,93 +86,43 @@ class InvestListState extends State<InvestListView> {
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 6, right: 6, top: 6),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: ColorTheme.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8.0),
-                                        bottomLeft: Radius.circular(8.0),
-                                        bottomRight: Radius.circular(8.0),
-                                        topRight: Radius.circular(8.0)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color:
-                                              ColorTheme.grey.withOpacity(0.2),
-                                          offset: Offset(1.1, 1.1),
-                                          blurRadius: 10.0),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 24,
-                                            right: 24,
-                                            top: 10,
-                                            bottom: 4),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'amount:  ' +
-                                                        formatNum(
-                                                                invest[
-                                                                    'investamount'],
-                                                                2)
-                                                            .toString() +
-                                                        ' ' +
-                                                        invest['currency'],
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      //fontFamily: AppTheme.fontName,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                      letterSpacing: -0.2,
-                                                      color:
-                                                          ColorTheme.greydarker,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                child: InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => InvestDetail(
+                                                investdetail: invest),
+                                          ));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: ColorTheme.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8.0),
+                                            bottomLeft: Radius.circular(8.0),
+                                            bottomRight: Radius.circular(8.0),
+                                            topRight: Radius.circular(8.0)),
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                              color: ColorTheme.grey
+                                                  .withOpacity(0.2),
+                                              offset: Offset(1.1, 1.1),
+                                              blurRadius: 10.0),
+                                        ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16,
-                                            right: 16,
-                                            top: 5,
-                                            bottom: 8),
-                                        child: Container(
-                                          height: 2,
-                                          decoration: BoxDecoration(
-                                            color: ColorTheme.background,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(4.0)),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 24, right: 24, bottom: 10),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Column(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24,
+                                                right: 24,
+                                                top: 10,
+                                                bottom: 4),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
@@ -178,11 +130,135 @@ class InvestListState extends State<InvestListView> {
                                                             .start,
                                                     children: <Widget>[
                                                       Text(
-                                                        'interest',
+                                                        'amount:  ' +
+                                                            formatNum(
+                                                                    invest[
+                                                                        'investamount'],
+                                                                    2)
+                                                                .toString() +
+                                                            ' ' +
+                                                            invest['currency'],
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: TextStyle(
-                                                          // fontFamily: AppTheme.fontName,
+                                                          //fontFamily: AppTheme.fontName,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                          letterSpacing: -0.2,
+                                                          color: ColorTheme
+                                                              .greydarker,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 5,
+                                                bottom: 8),
+                                            child: Container(
+                                              height: 2,
+                                              decoration: BoxDecoration(
+                                                color: ColorTheme.background,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(4.0)),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24,
+                                                right: 24,
+                                                bottom: 10),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'interest',
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            style: TextStyle(
+                                                              // fontFamily: AppTheme.fontName,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16,
+                                                              letterSpacing:
+                                                                  -0.2,
+                                                              color: ColorTheme
+                                                                  .greydarker,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 6),
+                                                            child: Text(
+                                                              formatNum(
+                                                                          invest[
+                                                                              'interest'],
+                                                                          2)
+                                                                      .toString() +
+                                                                  invest[
+                                                                      'currency'],
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: TextStyle(
+                                                                //fontFamily: AppTheme.fontName,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 12,
+                                                                color: ColorTheme
+                                                                    .grey
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        'start-time',
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: TextStyle(
+                                                          //fontFamily: AppTheme.fontName,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontSize: 16,
@@ -196,13 +272,7 @@ class InvestListState extends State<InvestListView> {
                                                             const EdgeInsets
                                                                 .only(top: 6),
                                                         child: Text(
-                                                          formatNum(
-                                                                      invest[
-                                                                          'interest'],
-                                                                      2)
-                                                                  .toString() +
-                                                              invest[
-                                                                  'currency'],
+                                                          invest['investtime'],
                                                           textAlign:
                                                               TextAlign.start,
                                                           style: TextStyle(
@@ -219,115 +289,78 @@ class InvestListState extends State<InvestListView> {
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'start-time',
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      //fontFamily: AppTheme.fontName,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                      letterSpacing: -0.2,
-                                                      color:
-                                                          ColorTheme.greydarker,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6),
-                                                    child: Text(
-                                                      invest['investtime'],
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                        //fontFamily: AppTheme.fontName,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12,
-                                                        color: ColorTheme.grey
-                                                            .withOpacity(0.5),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: <Widget>[
-                                                  Column(
+                                                ),
+                                                Expanded(
+                                                  child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                        MainAxisAlignment.end,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                        CrossAxisAlignment.end,
                                                     children: <Widget>[
-                                                      Text(
-                                                        'status',
-                                                        style: TextStyle(
-                                                          //fontFamily: AppTheme.fontName,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 16,
-                                                          letterSpacing: -0.2,
-                                                          color: (invest[
-                                                                      'status'] ==
-                                                                  'CURRENT')
-                                                              ? ColorTheme
-                                                                  .neogreendarker
-                                                              : ColorTheme
-                                                                  .cantaloupedarker,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 6),
-                                                        child: Text(
-                                                          invest['status'],
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: TextStyle(
-                                                            //fontFamily: AppTheme.fontName,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 12,
-                                                            color: (invest[
-                                                                        'status'] ==
-                                                                    'CURRENT')
-                                                                ? ColorTheme
-                                                                    .neogreendarker
-                                                                : ColorTheme
-                                                                    .cantaloupedarker,
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'status',
+                                                            style: TextStyle(
+                                                              //fontFamily: AppTheme.fontName,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16,
+                                                              letterSpacing:
+                                                                  -0.2,
+                                                              color: (invest[
+                                                                          'status'] ==
+                                                                      'CURRENT')
+                                                                  ? ColorTheme
+                                                                      .neogreendarker
+                                                                  : ColorTheme
+                                                                      .cantaloupedarker,
+                                                            ),
                                                           ),
-                                                        ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 6),
+                                                            child: Text(
+                                                              invest['status'],
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: TextStyle(
+                                                                //fontFamily: AppTheme.fontName,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 12,
+                                                                color: (invest[
+                                                                            'status'] ==
+                                                                        'CURRENT')
+                                                                    ? ColorTheme
+                                                                        .neogreendarker
+                                                                    : ColorTheme
+                                                                        .cantaloupedarker,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                )));
+                                    ))));
                       }),
                 )
               ],
@@ -345,93 +378,38 @@ class InvestListState extends State<InvestListView> {
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     left: 6, right: 6, top: 6),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: ColorTheme.white,
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(8.0),
-                                        bottomLeft: Radius.circular(8.0),
-                                        bottomRight: Radius.circular(8.0),
-                                        topRight: Radius.circular(8.0)),
-                                    boxShadow: <BoxShadow>[
-                                      BoxShadow(
-                                          color:
-                                              ColorTheme.grey.withOpacity(0.2),
-                                          offset: Offset(1.1, 1.1),
-                                          blurRadius: 10.0),
-                                    ],
-                                  ),
-                                  child: Column(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 24,
-                                            right: 24,
-                                            top: 10,
-                                            bottom: 4),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'amount:  ' +
-                                                        formatNum(
-                                                                invest[
-                                                                    'investamount'],
-                                                                2)
-                                                            .toString() +
-                                                        ' ' +
-                                                        invest['currency'],
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      //fontFamily: AppTheme.fontName,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                      letterSpacing: -0.2,
-                                                      color:
-                                                          ColorTheme.greydarker,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                child: InkWell(
+                                    onTap: () {
+                                      print("tapped on container" + '$index');
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: ColorTheme.white,
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(8.0),
+                                            bottomLeft: Radius.circular(8.0),
+                                            bottomRight: Radius.circular(8.0),
+                                            topRight: Radius.circular(8.0)),
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                              color: ColorTheme.grey
+                                                  .withOpacity(0.2),
+                                              offset: Offset(1.1, 1.1),
+                                              blurRadius: 10.0),
+                                        ],
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 16,
-                                            right: 16,
-                                            top: 5,
-                                            bottom: 8),
-                                        child: Container(
-                                          height: 2,
-                                          decoration: BoxDecoration(
-                                            color: ColorTheme.background,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(4.0)),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 24, right: 24, bottom: 10),
-                                        child: Row(
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Column(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24,
+                                                right: 24,
+                                                top: 10,
+                                                bottom: 4),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment.start,
                                                     crossAxisAlignment:
@@ -439,11 +417,135 @@ class InvestListState extends State<InvestListView> {
                                                             .start,
                                                     children: <Widget>[
                                                       Text(
-                                                        'interest',
+                                                        'amount:  ' +
+                                                            formatNum(
+                                                                    invest[
+                                                                        'investamount'],
+                                                                    2)
+                                                                .toString() +
+                                                            ' ' +
+                                                            invest['currency'],
                                                         textAlign:
                                                             TextAlign.start,
                                                         style: TextStyle(
-                                                          // fontFamily: AppTheme.fontName,
+                                                          //fontFamily: AppTheme.fontName,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 16,
+                                                          letterSpacing: -0.2,
+                                                          color: ColorTheme
+                                                              .greydarker,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 5,
+                                                bottom: 8),
+                                            child: Container(
+                                              height: 2,
+                                              decoration: BoxDecoration(
+                                                color: ColorTheme.background,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(4.0)),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 24,
+                                                right: 24,
+                                                bottom: 10),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'interest',
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            style: TextStyle(
+                                                              // fontFamily: AppTheme.fontName,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              fontSize: 16,
+                                                              letterSpacing:
+                                                                  -0.2,
+                                                              color: ColorTheme
+                                                                  .greydarker,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 6),
+                                                            child: Text(
+                                                              formatNum(
+                                                                          invest[
+                                                                              'interest'],
+                                                                          2)
+                                                                      .toString() +
+                                                                  invest[
+                                                                      'currency'],
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: TextStyle(
+                                                                //fontFamily: AppTheme.fontName,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontSize: 12,
+                                                                color: ColorTheme
+                                                                    .grey
+                                                                    .withOpacity(
+                                                                        0.5),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        'start-time',
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        style: TextStyle(
+                                                          //fontFamily: AppTheme.fontName,
                                                           fontWeight:
                                                               FontWeight.w500,
                                                           fontSize: 16,
@@ -457,13 +559,7 @@ class InvestListState extends State<InvestListView> {
                                                             const EdgeInsets
                                                                 .only(top: 6),
                                                         child: Text(
-                                                          formatNum(
-                                                                      invest[
-                                                                          'interest'],
-                                                                      2)
-                                                                  .toString() +
-                                                              invest[
-                                                                  'currency'],
+                                                          invest['investtime'],
                                                           textAlign:
                                                               TextAlign.start,
                                                           style: TextStyle(
@@ -480,105 +576,69 @@ class InvestListState extends State<InvestListView> {
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    'start-time',
-                                                    textAlign: TextAlign.start,
-                                                    style: TextStyle(
-                                                      //fontFamily: AppTheme.fontName,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                      letterSpacing: -0.2,
-                                                      color:
-                                                          ColorTheme.greydarker,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6),
-                                                    child: Text(
-                                                      invest['investtime'],
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                        //fontFamily: AppTheme.fontName,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12,
-                                                        color: ColorTheme.grey
-                                                            .withOpacity(0.5),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: <Widget>[
-                                                  Column(
+                                                ),
+                                                Expanded(
+                                                  child: Row(
                                                     mainAxisAlignment:
-                                                        MainAxisAlignment.start,
+                                                        MainAxisAlignment.end,
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
+                                                        CrossAxisAlignment.end,
                                                     children: <Widget>[
-                                                      Text(
-                                                        'status',
-                                                        style: TextStyle(
-                                                          //fontFamily: AppTheme.fontName,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 16,
-                                                          letterSpacing: -0.2,
-                                                          color: ColorTheme
-                                                              .greydarker,
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 6),
-                                                        child: Text(
-                                                          invest['status'],
-                                                          textAlign:
-                                                              TextAlign.start,
-                                                          style: TextStyle(
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .start,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            'status',
+                                                            style: TextStyle(
                                                               //fontFamily: AppTheme.fontName,
                                                               fontWeight:
                                                                   FontWeight
-                                                                      .w600,
-                                                              fontSize: 12,
+                                                                      .w500,
+                                                              fontSize: 16,
+                                                              letterSpacing:
+                                                                  -0.2,
                                                               color: ColorTheme
-                                                                  .neogreendarker),
-                                                        ),
+                                                                  .greydarker,
+                                                            ),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 6),
+                                                            child: Text(
+                                                              invest['status'],
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              style: TextStyle(
+                                                                  //fontFamily: AppTheme.fontName,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 12,
+                                                                  color: ColorTheme
+                                                                      .grey
+                                                                      .withOpacity(
+                                                                          0.5)),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ],
                                                   ),
-                                                ],
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                )));
+                                    ))));
                       }),
                 )
               ],
