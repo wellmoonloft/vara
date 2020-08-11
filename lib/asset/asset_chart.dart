@@ -75,19 +75,20 @@ class AssetChartView extends StatelessWidget {
     double assetValue = 0.0;
     double debtValue = 0.0;
     double netAssetValue = 0.0;
-    for (var i = 0; i < asset.length; i++) {
-      Map<String, dynamic> temp = asset[asset.length - i - 1];
-      assetValue = assetValue + temp['asset'].toDouble();
-      debtValue = debtValue + temp['debt'].toDouble();
-      netAssetValue = assetValue - debtValue;
-      assetSalesData.insert(
-          i, TimeSeriesSales(DateTime.parse(temp['date']), assetValue));
-      investSalesData.insert(
-          i, TimeSeriesSales(DateTime.parse(temp['date']), debtValue));
-      netAssetSalesData.insert(
-          i, TimeSeriesSales(DateTime.parse(temp['date']), netAssetValue));
+    if (asset != null) {
+      for (var i = 0; i < asset.length; i++) {
+        Map<String, dynamic> temp = asset[asset.length - i - 1];
+        assetValue = assetValue + temp['asset'].toDouble();
+        debtValue = debtValue + temp['debt'].toDouble();
+        netAssetValue = assetValue - debtValue;
+        assetSalesData.insert(
+            i, TimeSeriesSales(DateTime.parse(temp['date']), assetValue));
+        investSalesData.insert(
+            i, TimeSeriesSales(DateTime.parse(temp['date']), debtValue));
+        netAssetSalesData.insert(
+            i, TimeSeriesSales(DateTime.parse(temp['date']), netAssetValue));
+      }
     }
-
     return [
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Asset',

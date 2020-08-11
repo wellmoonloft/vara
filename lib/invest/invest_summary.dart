@@ -6,12 +6,7 @@ import 'package:vara/utils/app_ui.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
-class InvestSummaryView extends StatefulWidget {
-  @override
-  _InvestSummaryState createState() => _InvestSummaryState();
-}
-
-class _InvestSummaryState extends State<InvestSummaryView> {
+class InvestSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double investIncome = 0.0;
@@ -21,29 +16,31 @@ class _InvestSummaryState extends State<InvestSummaryView> {
     double mid = 0.0;
     double long = 0.0;
 
-    Provider.of<InvestData>(context).investList.forEach((element) {
-      //print(element);
-      if (element['status'] == 'FINISHED') {
-        investIncome = investIncome +
-            (element['interest'] != null ? element['interest'] : 0);
+    if (Provider.of<InvestData>(context).investList != null) {
+      Provider.of<InvestData>(context).investList.forEach((element) {
+        //print(element);
+        if (element['status'] == 'FINISHED') {
+          investIncome = investIncome +
+              (element['interest'] != null ? element['interest'] : 0);
 
-        totalYield = investIncome *
-            (element['totalyield'] != null ? element['totalyield'] : 0) /
-            (element['interest'] != null ? element['interest'] : 0);
-      } else {
-        totalInvest = totalInvest +
-            (element['investamount'] != null ? element['investamount'] : 0);
-        if (element['investtype'] == 'SHORT') {
-          short = short + element['investamount'];
+          totalYield = investIncome *
+              (element['totalyield'] != null ? element['totalyield'] : 0) /
+              (element['interest'] != null ? element['interest'] : 0);
+        } else {
+          totalInvest = totalInvest +
+              (element['investamount'] != null ? element['investamount'] : 0);
+          if (element['investtype'] == 'SHORT') {
+            short = short + element['investamount'];
+          }
+          if (element['investtype'] == 'MID') {
+            mid = mid + element['investamount'];
+          }
+          if (element['investtype'] == 'LONG') {
+            long = long + element['investamount'];
+          }
         }
-        if (element['investtype'] == 'MID') {
-          mid = mid + element['investamount'];
-        }
-        if (element['investtype'] == 'LONG') {
-          long = long + element['investamount'];
-        }
-      }
-    });
+      });
+    }
     return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(

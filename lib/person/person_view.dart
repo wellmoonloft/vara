@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vara/asset/asset_view.dart';
-import 'package:vara/bill/bill_view.dart';
 import 'package:vara/invest/invest_view.dart';
 import 'package:vara/person/top_bar_view.dart';
 import 'package:vara/utils/title_view.dart';
-import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
-import '../utils/app_theme.dart';
 
 class PersonView extends StatefulWidget {
   final Map<String, dynamic> btc;

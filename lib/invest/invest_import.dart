@@ -51,7 +51,7 @@ class InvestImportView extends StatelessWidget {
                     padding: EdgeInsets.only(top: 30),
                     child: CustomButtom(
                         title: 'IMPORT',
-                        color: ColorTheme.cassislighter,
+                        color: ColorTheme.cassis,
                         navigator: 'invest'),
                   )
                 ],

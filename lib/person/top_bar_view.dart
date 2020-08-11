@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/home/top/btc_chart_view.dart';
 import 'package:vara/utils/app_theme.dart';
@@ -15,17 +14,6 @@ class TopBarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String btcPrice = '';
-
-    if (btcdaily != null) {
-      Map<String, dynamic> btc =
-          btcdaily[DateFormat('yyyy-MM-dd').format(DateTime.now())];
-      btcPrice = 'BTC/USD: ' +
-          double.parse(
-                  btc['4b. close (USD)'] != null ? btc['4b. close (USD)'] : 0.0)
-              .toStringAsFixed(2);
-    }
-
     return Column(
       children: <Widget>[
         SizedBox(
