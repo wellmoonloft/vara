@@ -1,23 +1,23 @@
 import 'dart:io';
 import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/progressDialog.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'mapping_left.dart';
 
-class ImportView extends StatefulWidget {
-  const ImportView({Key key}) : super(key: key);
+class InvestImportView extends StatefulWidget {
+  const InvestImportView({Key key}) : super(key: key);
   @override
   _ImportViewState createState() => _ImportViewState();
 }
 
-class _ImportViewState extends State<ImportView> {
+class _ImportViewState extends State<InvestImportView> {
   String _path;
   String _extension;
   FileType _pickingType = FileType.any;
@@ -181,12 +181,7 @@ class _ImportViewState extends State<ImportView> {
             appBar: AppBar(
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
-              title: Text('Import',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 20,
-                    color: ColorTheme.greytripledarker,
-                  )),
+              title: Text('Import', style: AppTheme.titleText),
               leading: BackButton(
                   color: ColorTheme.greytripledarker,
                   onPressed: () {
@@ -216,11 +211,7 @@ class _ImportViewState extends State<ImportView> {
                   padding: EdgeInsets.only(top: 20),
                   child: Text(
                     'Determine data mapping.',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      color: ColorTheme.greydoubledarker,
-                    ),
+                    style: AppTheme.titleTextSmallLighter,
                   ),
                 ),
                 Padding(
@@ -415,11 +406,7 @@ class _ImportViewState extends State<ImportView> {
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       color: ColorTheme.pale,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30.0),
-                          bottomLeft: Radius.circular(30.0),
-                          bottomRight: Radius.circular(30.0),
-                          topRight: Radius.circular(30.0)),
+                      borderRadius: AppTheme.normalBorderRadius,
                     ),
                     child: Container(
                         height: 45,

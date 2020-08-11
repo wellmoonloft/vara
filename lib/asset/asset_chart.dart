@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/color_theme.dart';
-
 import 'package:vara/utils/toolTipMgr.dart';
 
 class AssetChartView extends StatelessWidget {
@@ -15,26 +13,9 @@ class AssetChartView extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-            padding: const EdgeInsets.only(
-                left: AppTheme.leftRightPadding,
-                right: AppTheme.leftRightPadding,
-                top: 18,
-                bottom: 20),
+            padding: AppTheme.outboxpadding,
             child: Container(
-                decoration: BoxDecoration(
-                  color: ColorTheme.white,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      bottomLeft: Radius.circular(8.0),
-                      bottomRight: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: ColorTheme.grey.withOpacity(0.2),
-                        offset: Offset(1.1, 1.1),
-                        blurRadius: 10.0),
-                  ],
-                ),
+                decoration: boxDecoration,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[

@@ -41,10 +41,6 @@ class _BottomBarViewState extends State<BottomBarView>
               children: <Widget>[
                 Container(
                   height: 70,
-                  // decoration: BoxDecoration(
-                  //     border: Border(
-                  //         bottom: BorderSide(
-                  //             width: 1, color: ColorTheme.background))),
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 35, right: 35, top: 0, bottom: 10),
@@ -86,9 +82,6 @@ class _BottomBarViewState extends State<BottomBarView>
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   height: MediaQuery.of(context).padding.bottom,
-                // )
               ],
             );
           },

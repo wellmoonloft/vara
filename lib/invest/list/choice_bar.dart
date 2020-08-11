@@ -111,6 +111,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                         dropdownColor: ColorTheme.white,
                         value: moneyValue,
                         iconSize: 18,
+                        underline: Container(),
                         onChanged: (String newValue) {
                           setState(() {
                             moneyValue = newValue;
@@ -132,7 +133,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                       alignment: Alignment(0, 0),
                       child: DropdownButton<String>(
                         dropdownColor: ColorTheme.white,
-                        //focusColor: ColorTheme.black,
+                        underline: Container(),
                         value: termValue,
                         iconSize: 18,
                         onChanged: (String newValue) {
@@ -156,7 +157,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                       alignment: Alignment(0, 0),
                       child: DropdownButton<String>(
                         dropdownColor: ColorTheme.white,
-                        //focusColor: ColorTheme.black,
+                        underline: Container(),
                         value: countryValue,
                         iconSize: 18,
                         onChanged: (String newValue) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vara/bill/import.dart';
 import 'package:vara/utils/app_theme.dart';
+import 'package:vara/utils/app_ui.dart';
 import '../utils/color_theme.dart';
 
 class BillImportView extends StatelessWidget {
@@ -9,26 +9,9 @@ class BillImportView extends StatelessWidget {
     return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
-            padding: const EdgeInsets.only(
-                left: AppTheme.leftRightPadding,
-                right: AppTheme.leftRightPadding,
-                top: 18,
-                bottom: 20),
+            padding: AppTheme.outboxpadding,
             child: Container(
-              decoration: BoxDecoration(
-                color: ColorTheme.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                      color: ColorTheme.grey.withOpacity(0.2),
-                      offset: Offset(1.1, 1.1),
-                      blurRadius: 10.0),
-                ],
-              ),
+              decoration: boxDecoration,
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -37,15 +20,12 @@ class BillImportView extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: Text(
                         'IMPORT FROM XLSX',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: ColorTheme.greydoubledarker,
-                        ),
+                        style: AppTheme.titleTextSmallLighter,
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: EdgeInsets.only(top: 15),
                     child: DecoratedBox(
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -60,59 +40,21 @@ class BillImportView extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 15),
+                    padding: EdgeInsets.only(top: 20),
                     child: Text(
                       'You can import your bill use XLSX.',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: ColorTheme.greydoubledarker,
-                      ),
+                      style: AppTheme.titleTextSmallLighter,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.only(top: 20),
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
+                    child: CustomButtom(
+                        title: 'IMPORT',
                         color: ColorTheme.cantaloupe,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            bottomLeft: Radius.circular(10.0),
-                            bottomRight: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0)),
-                      ),
-                      child: Container(
-                          height: 45,
-                          width: 200,
-                          child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: InkWell(
-                                  onTap: () {
-                                    _navigateAndDisplaySelection(context);
-                                  },
-                                  child: Container(
-                                    alignment: Alignment(0, 0),
-                                    child: Text(
-                                      'IMPORT',
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 20,
-                                        letterSpacing: 1.2,
-                                        color: ColorTheme.white,
-                                      ),
-                                    ),
-                                  )))),
-                    ),
+                        navigator: 'bill'),
                   )
                 ],
               ),
             )));
-  }
-
-  _navigateAndDisplaySelection(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ImportView()),
-    );
   }
 }

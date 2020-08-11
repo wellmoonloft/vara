@@ -13,7 +13,7 @@ class _AssetViewState extends State<AssetView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 268,
+        height: 255,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[

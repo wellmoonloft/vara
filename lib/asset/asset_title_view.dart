@@ -16,7 +16,7 @@ class AssetTitleView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding: boxpadding,
+        padding: AppTheme.outboxpadding,
         child: Row(
           children: <Widget>[
             Container(
@@ -34,7 +34,7 @@ class AssetTitleView extends StatelessWidget {
               child: Text(
                 titleTxt,
                 textAlign: TextAlign.left,
-                style: titleText,
+                style: AppTheme.titleText,
               ),
             ),
           ],

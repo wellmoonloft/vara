@@ -16,7 +16,7 @@ class RightPart extends StatelessWidget {
         textAlign: TextAlign.center,
         overflow: TextOverflow.ellipsis,
         maxLines: 2,
-        style: titleTextSmall,
+        style: AppTheme.titleTextSmall,
       ),
     );
   }

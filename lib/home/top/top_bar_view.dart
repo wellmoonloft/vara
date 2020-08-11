@@ -5,6 +5,7 @@ import 'package:vara/utils/color_theme.dart';
 import 'package:vara/home/top/btc_chart_view.dart';
 import 'eur_chart_view.dart';
 import 'usd_chart_view.dart';
+import '../../utils/app_theme.dart';
 
 class TopBarView extends StatelessWidget {
   final String title;
@@ -65,16 +66,9 @@ class TopBarView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.3 - 38,
                     decoration: BoxDecoration(
                       color: ColorTheme.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0)),
+                      borderRadius: AppTheme.normalBorderRadius,
                       boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            color: ColorTheme.grey.withOpacity(0.2),
-                            offset: Offset(1.1, 1.1),
-                            blurRadius: 10.0),
+                        normalBoxShadow,
                       ],
                       image: DecorationImage(
                           fit: BoxFit.fill,
@@ -86,13 +80,7 @@ class TopBarView extends StatelessWidget {
                         child: Text(
                           DateFormat('MMMM').format(DateTime.now()),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            //fontFamily: AppTheme.fontName,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                            letterSpacing: 0,
-                            color: ColorTheme.white,
-                          ),
+                          style: AppTheme.buttomTitle,
                         ),
                       ),
                       Padding(
@@ -101,7 +89,6 @@ class TopBarView extends StatelessWidget {
                           DateFormat('dd').format(DateTime.now()),
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            //fontFamily: AppTheme.fontName,
                             fontWeight: FontWeight.w700,
                             fontSize: 28,
                             letterSpacing: 1.2,
@@ -120,16 +107,9 @@ class TopBarView extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.3 - 38,
                       decoration: BoxDecoration(
                         color: ColorTheme.cassisdarker,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8.0),
-                            bottomLeft: Radius.circular(8.0),
-                            bottomRight: Radius.circular(8.0),
-                            topRight: Radius.circular(8.0)),
+                        borderRadius: AppTheme.normalBorderRadius,
                         boxShadow: <BoxShadow>[
-                          BoxShadow(
-                              color: ColorTheme.grey.withOpacity(0.2),
-                              offset: Offset(1.1, 1.1),
-                              blurRadius: 10.0),
+                          normalBoxShadow,
                         ],
                       ),
                       child: Align(
@@ -139,12 +119,7 @@ class TopBarView extends StatelessWidget {
                         child: Text(
                           DateFormat('EEEE').format(DateTime.now()),
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            //fontFamily: AppTheme.fontName,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: ColorTheme.white,
-                          ),
+                          style: AppTheme.toptitleText,
                         ),
                         //new Icon(Icons.search, color: ColorTheme.white)
                       )),
@@ -157,20 +132,7 @@ class TopBarView extends StatelessWidget {
                 height:
                     (MediaQuery.of(context).size.width * 0.3 - 32) * 1.5 + 10,
                 width: MediaQuery.of(context).size.width * 0.7 - 8,
-                decoration: BoxDecoration(
-                  color: ColorTheme.greytripledarker,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.0),
-                      bottomLeft: Radius.circular(8.0),
-                      bottomRight: Radius.circular(8.0),
-                      topRight: Radius.circular(8.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: ColorTheme.grey.withOpacity(0.2),
-                        offset: Offset(1.1, 1.1),
-                        blurRadius: 10.0),
-                  ],
-                ),
+                decoration: boxDecoration,
                 child: Swiper(
                   itemBuilder: (BuildContext context, int index) {
                     if (index == 0) {
@@ -193,13 +155,7 @@ class TopBarView extends StatelessWidget {
                                     Text(
                                       btcPrice,
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        letterSpacing: 0,
-                                        color: ColorTheme.white,
-                                      ),
+                                      style: AppTheme.toptitleBigText,
                                     ),
                                   ])));
                     } else if (index == 1) {
@@ -222,13 +178,7 @@ class TopBarView extends StatelessWidget {
                                     Text(
                                       usdPrice,
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        letterSpacing: 0,
-                                        color: ColorTheme.white,
-                                      ),
+                                      style: AppTheme.toptitleBigText,
                                     ),
                                   ])));
                     } else if (index == 2) {
@@ -251,13 +201,7 @@ class TopBarView extends StatelessWidget {
                                     Text(
                                       eurPrice,
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        //fontFamily: AppTheme.fontName,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 16,
-                                        letterSpacing: 0,
-                                        color: ColorTheme.white,
-                                      ),
+                                      style: AppTheme.toptitleBigText,
                                     ),
                                   ])));
                     } else {

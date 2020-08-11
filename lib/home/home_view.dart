@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:vara/asset/asset_title_view.dart';
 import 'package:vara/asset/asset_view.dart';
-import 'package:vara/bill/bill_title_view.dart';
 import 'package:vara/bill/bill_view.dart';
-import 'package:vara/invest/invest_title_view.dart';
 import 'package:vara/invest/invest_view.dart';
+import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
+import '../utils/app_theme.dart';
 import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
-import '../bill/import.dart';
 import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -102,24 +100,14 @@ class _HomeViewState extends State<HomeView>
               title: Offstage(
                 offstage: _offstage,
                 child: Container(
-                    height: 30,
+                    height: 40,
                     width: MediaQuery.of(context).size.width - 32,
                     decoration: BoxDecoration(
                       color: ColorTheme.palelighter,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8.0),
-                          bottomLeft: Radius.circular(8.0),
-                          bottomRight: Radius.circular(8.0),
-                          topRight: Radius.circular(8.0)),
+                      borderRadius: AppTheme.smallBorderRadius,
                       boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            color: ColorTheme.grey.withOpacity(0.2),
-                            offset: Offset(1.1, 1.1),
-                            blurRadius: 10.0),
+                        normalBoxShadow,
                       ],
-                      // image: DecorationImage(
-                      //     fit: BoxFit.fill,
-                      //     image: AssetImage('assets/Images/datebg.jpg')),
                     ),
                     child: Stack(
                         alignment: AlignmentDirectional.center,
@@ -127,13 +115,7 @@ class _HomeViewState extends State<HomeView>
                           Text(
                             bannertitle,
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              //fontFamily: AppTheme.fontName,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14,
-                              letterSpacing: 0,
-                              color: ColorTheme.white,
-                            ),
+                            style: AppTheme.toptitleText,
                           ),
                         ])),
               ),
@@ -158,9 +140,13 @@ class _HomeViewState extends State<HomeView>
                 Container postPiece;
                 if (index == 0) {
                   postPiece = Container(
-                    child: AssetTitleView(
+                    child: TitleView(
                       titleTxt: 'Asset',
+                      subTxt: '',
+                      navigator: '',
+                      color: ColorTheme.cassislighter,
                     ),
+                    //AssetTitleView(titleTxt: 'Asset'),
                   );
                 } else if (index == 1) {
                   postPiece = Container(
@@ -168,8 +154,12 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 2) {
                   postPiece = Container(
-                    child: InvestTitleView(
-                        titleTxt: 'Invest', subTxt: 'Details'), //
+                    child: TitleView(
+                      titleTxt: 'Invest',
+                      subTxt: 'Invest List',
+                      navigator: 'invest',
+                      color: ColorTheme.cassislighter,
+                    ), //
                   );
                 } else if (index == 3) {
                   postPiece = Container(
@@ -177,9 +167,11 @@ class _HomeViewState extends State<HomeView>
                   );
                 } else if (index == 4) {
                   postPiece = Container(
-                    child: BillTitleView(
+                    child: TitleView(
                       titleTxt: 'Bill',
                       subTxt: 'Details',
+                      navigator: 'bill',
+                      color: ColorTheme.cantaloupe,
                     ),
                   );
                 } else if (index == 5) {
@@ -206,7 +198,7 @@ class _HomeViewState extends State<HomeView>
   _navigateAndDisplaySelection(BuildContext context) async {
     await Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ImportView()),
+      MaterialPageRoute(builder: (context) => FilePickerDemo()),
     );
 
     tabIconsList.forEach((TabIconData tab) {

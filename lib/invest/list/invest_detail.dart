@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/utils/color_theme.dart';
+import 'package:vara/utils/app_theme.dart';
 
 class InvestDetail extends StatelessWidget {
   final Map<dynamic, dynamic> investdetail;
@@ -13,12 +14,7 @@ class InvestDetail extends StatelessWidget {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text('Invest Detail',
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
-              color: ColorTheme.greytripledarker,
-            )),
+        title: Text('Invest Detail', style: AppTheme.titleText),
         leading: BackButton(
             color: ColorTheme.greytripledarker,
             onPressed: () {

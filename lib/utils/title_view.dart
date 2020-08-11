@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:vara/invest/list/invest_list.dart';
 
+import 'app_theme.dart';
 import 'color_theme.dart';
 
 class TitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
+  final Color color;
+  final String navigator;
 
-  const TitleView({
-    Key key,
-    this.titleTxt: "",
-    this.subTxt: "",
-  }) : super(key: key);
+  const TitleView(
+      {Key key, this.titleTxt: "", this.subTxt: "", this.color, this.navigator})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Padding(
-        padding:
-            const EdgeInsets.only(left: 16, right: 16, top: 15, bottom: 12),
+        padding: AppTheme.outboxpadding,
         child: Row(
           children: <Widget>[
             Container(
               height: 28,
               width: 4,
               decoration: BoxDecoration(
-                color: ColorTheme.pale.withOpacity(0.8),
+                color: color.withOpacity(0.8),
                 borderRadius: BorderRadius.all(Radius.circular(4.0)),
               ),
             ),
@@ -35,19 +36,15 @@ class TitleView extends StatelessWidget {
               child: Text(
                 titleTxt,
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                  //fontFamily: AppTheme.fontName,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  //letterSpacing: 0,
-                  color: ColorTheme.greytripledarker,
-                ),
+                style: AppTheme.titleText,
               ),
             ),
             InkWell(
               highlightColor: Colors.transparent,
               borderRadius: BorderRadius.all(Radius.circular(4.0)),
-              onTap: () {},
+              onTap: () {
+                _navigator(context, navigator);
+              },
               child: Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: Row(
@@ -56,22 +53,22 @@ class TitleView extends StatelessWidget {
                       subTxt,
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        //fontFamily: AppTheme.fontName,
                         fontWeight: FontWeight.normal,
                         fontSize: 18,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.paledarker,
+                        color: color,
                       ),
                     ),
-                    SizedBox(
-                      height: 38,
-                      width: 26,
-                      child: Icon(
-                        Icons.arrow_forward,
-                        color: ColorTheme.greydarker,
-                        size: 18,
-                      ),
-                    ),
+                    subTxt == ''
+                        ? SizedBox()
+                        : SizedBox(
+                            height: 38,
+                            width: 26,
+                            child: Icon(
+                              Icons.arrow_forward,
+                              color: ColorTheme.greydarker,
+                              size: 18,
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -81,4 +78,18 @@ class TitleView extends StatelessWidget {
       ),
     );
   }
+}
+
+_navigator(context, navigator) {
+  if (navigator == 'invest') {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => new InvestListView()),
+    );
+  } else if (navigator == 'bill') {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => new InvestListView()),
+    );
+  } else {}
 }

@@ -5,6 +5,7 @@ import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import 'choice_bar.dart';
 import 'invest_detail.dart';
+import 'package:vara/utils/app_theme.dart';
 
 class InvestListView extends StatefulWidget {
   //final List<Map> investList;
@@ -39,12 +40,7 @@ class InvestListState extends State<InvestListView> {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text('Invest List',
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 20,
-                color: ColorTheme.greytripledarker,
-              )),
+          title: Text('Invest List', style: AppTheme.titleText),
           leading: BackButton(
               color: ColorTheme.greytripledarker,
               onPressed: () {
@@ -54,11 +50,7 @@ class InvestListState extends State<InvestListView> {
             isScrollable: true,
             labelColor: ColorTheme.greytripledarker,
             indicatorColor: ColorTheme.white,
-            labelStyle: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-              color: ColorTheme.greytripledarker,
-            ),
+            labelStyle: AppTheme.titleTextSmall,
             labelPadding: EdgeInsets.only(left: 20, right: 20),
             tabs: <Widget>[
               Tab(
@@ -96,29 +88,11 @@ class InvestListState extends State<InvestListView> {
                                           ));
                                     },
                                     child: Container(
-                                      decoration: BoxDecoration(
-                                        color: ColorTheme.white,
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(8.0),
-                                            bottomLeft: Radius.circular(8.0),
-                                            bottomRight: Radius.circular(8.0),
-                                            topRight: Radius.circular(8.0)),
-                                        boxShadow: <BoxShadow>[
-                                          BoxShadow(
-                                              color: ColorTheme.grey
-                                                  .withOpacity(0.2),
-                                              offset: Offset(1.1, 1.1),
-                                              blurRadius: 10.0),
-                                        ],
-                                      ),
+                                      decoration: boxDecoration,
                                       child: Column(
                                         children: <Widget>[
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 24,
-                                                right: 24,
-                                                top: 10,
-                                                bottom: 4),
+                                            padding: AppTheme.inboxpadding,
                                             child: Row(
                                               children: <Widget>[
                                                 Expanded(
@@ -140,15 +114,8 @@ class InvestListState extends State<InvestListView> {
                                                             invest['currency'],
                                                         textAlign:
                                                             TextAlign.start,
-                                                        style: TextStyle(
-                                                          //fontFamily: AppTheme.fontName,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 16,
-                                                          letterSpacing: -0.2,
-                                                          color: ColorTheme
-                                                              .greydarker,
-                                                        ),
+                                                        style: AppTheme
+                                                            .titleTextSmallLighter,
                                                       ),
                                                     ],
                                                   ),
@@ -157,11 +124,7 @@ class InvestListState extends State<InvestListView> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16,
-                                                right: 16,
-                                                top: 5,
-                                                bottom: 8),
+                                            padding: AppTheme.inboxpadding,
                                             child: Container(
                                               height: 2,
                                               decoration: BoxDecoration(
@@ -172,10 +135,7 @@ class InvestListState extends State<InvestListView> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 24,
-                                                right: 24,
-                                                bottom: 10),
+                                            padding: AppTheme.inboxpadding,
                                             child: Row(
                                               children: <Widget>[
                                                 Expanded(
@@ -198,17 +158,8 @@ class InvestListState extends State<InvestListView> {
                                                             'interest',
                                                             textAlign:
                                                                 TextAlign.start,
-                                                            style: TextStyle(
-                                                              // fontFamily: AppTheme.fontName,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 16,
-                                                              letterSpacing:
-                                                                  -0.2,
-                                                              color: ColorTheme
-                                                                  .greydarker,
-                                                            ),
+                                                            style: AppTheme
+                                                                .titleTextSmallLighter,
                                                           ),
                                                           Padding(
                                                             padding:
