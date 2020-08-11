@@ -66,22 +66,22 @@ class _SplashPageState extends State<SplashPage> {
       etext = 'GET BTC DATA ...';
       progressValue = 0.2;
     });
-    btc = await _getBtcCurrency();
+    //btc = await _getBtcCurrency();
     setState(() {
       etext = 'GET BTC DAILY ...';
       progressValue = 0.4;
     });
-    btcdaily = await _getBTCWeekly();
+    //btcdaily = await _getBTCWeekly();
     setState(() {
       etext = 'GET USD DAILY ...';
       progressValue = 0.6;
     });
-    usdcnydaily = await _getUSDCNYWeekly();
+    //usdcnydaily = await _getUSDCNYWeekly();
     setState(() {
       etext = 'GET EUR DAILY ...';
       progressValue = 0.8;
     });
-    eurcnydaily = await _getEURCNYWeekly();
+    //eurcnydaily = await _getEURCNYWeekly();
     print("----get data done------");
     Navigator.of(context).pushReplacement(new MaterialPageRoute(
         builder: (context) => HomeView(

@@ -159,6 +159,12 @@ class SummaryTopGraph extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
+    double temp = 0.0;
+    if (value > 1) {
+      temp = value / 100;
+    } else {
+      temp = value;
+    }
     return Stack(
       overflow: Overflow.visible,
       children: <Widget>[
@@ -179,7 +185,7 @@ class SummaryTopGraph extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  value.toString() + '%',
+                  formatNum(value, 2).toString() + '%',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -205,7 +211,7 @@ class SummaryTopGraph extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: CustomPaint(
             painter: CurvePainter(
-                colors: [color, subcolor, subcolor], angle: (360 - 10) * value),
+                colors: [color, subcolor, subcolor], angle: (360 - 10) * temp),
             child: SizedBox(
               width: 108,
               height: 108,

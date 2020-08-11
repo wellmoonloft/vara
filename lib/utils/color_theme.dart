@@ -27,8 +27,8 @@ class ColorTheme {
   static const Color puristbluelighter = Color(0xFFd9eaed);
   static const Color puristbluedarker = Color(0xFF6baeb7);
 
-  static const Color cassis = Color(0xFFAD6E7D);
-  static const Color cassislighter = Color(0xFFc79ba6);
+  static const Color cassis = Color(0xFFc79ba6);
+  static const Color cassislighter = Color(0xFFe7d4d8);
   static const Color cassisdarker = Color(0xFF915261);
 
   static const Color cantaloupe = Color(0xFFff6a4e);

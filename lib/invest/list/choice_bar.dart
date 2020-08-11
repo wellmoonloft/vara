@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/utils/color_theme.dart';
+import 'package:vara/utils/app_theme.dart';
 
 class ChoiceBar extends StatefulWidget {
   @override
@@ -27,11 +28,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                     child: Text(
                       'Date',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.grey,
-                      ),
+                      style: AppTheme.subtitleText,
                     ),
                     flex: 1,
                   ),
@@ -39,11 +36,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                     child: Text(
                       'Money',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.grey,
-                      ),
+                      style: AppTheme.subtitleText,
                     ),
                     flex: 1,
                   ),
@@ -51,11 +44,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                     child: Text(
                       'Term',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.grey,
-                      ),
+                      style: AppTheme.subtitleText,
                     ),
                     flex: 1,
                   ),
@@ -63,11 +52,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                     child: Text(
                       'Country',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.grey,
-                      ),
+                      style: AppTheme.subtitleText,
                     ),
                     flex: 1,
                   ),
@@ -97,9 +82,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                           alignment: Alignment(0, 0),
                           child: Text(
                             date,
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: ColorTheme.greytripledarker),
+                            style: AppTheme.titleTextSmallLighter,
                           ),
                         )),
                     flex: 1,

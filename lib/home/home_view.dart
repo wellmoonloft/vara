@@ -3,13 +3,12 @@ import 'package:intl/intl.dart';
 import 'package:vara/asset/asset_view.dart';
 import 'package:vara/bill/bill_view.dart';
 import 'package:vara/invest/invest_view.dart';
+import 'package:vara/person/person_view.dart';
 import 'package:vara/utils/title_view.dart';
 import '../models/tab_icon_data.dart';
 import '../utils/color_theme.dart';
 import '../utils/app_theme.dart';
-import 'file_picker_demo.dart';
 import 'top/top_bar_view.dart';
-import 'bottom_bar_view.dart';
 
 class HomeView extends StatefulWidget {
   final Map<String, dynamic> btc;
@@ -128,12 +127,13 @@ class _HomeViewState extends State<HomeView>
               ),
             ),
           ),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: StickyTabBarDelegate(
-              child: bottomBar(),
-            ),
-          ),
+          // SliverPersistentHeader(
+          //   pinned: true,
+          //   delegate: StickyTabBarDelegate(
+          //     child: bottomBar(),
+          //   ),
+          // ),
+
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, int index) {
@@ -144,7 +144,7 @@ class _HomeViewState extends State<HomeView>
                       titleTxt: 'Asset',
                       subTxt: '',
                       navigator: '',
-                      color: ColorTheme.cassislighter,
+                      color: ColorTheme.puristbluedarker,
                     ),
                     //AssetTitleView(titleTxt: 'Asset'),
                   );
@@ -158,7 +158,7 @@ class _HomeViewState extends State<HomeView>
                       titleTxt: 'Invest',
                       subTxt: 'Invest List',
                       navigator: 'invest',
-                      color: ColorTheme.cassislighter,
+                      color: ColorTheme.cassis,
                     ), //
                   );
                 } else if (index == 3) {
@@ -192,75 +192,41 @@ class _HomeViewState extends State<HomeView>
           ),
         ],
       ),
-    );
-  }
-
-  _navigateAndDisplaySelection(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => FilePickerDemo()),
-    );
-
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
-  }
-
-  _navigateAndDisplaySelection1(BuildContext context) async {
-    await Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => FilePickerDemo()),
-    );
-
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
-  }
-
-  Widget bottomBar() {
-    return Column(
-      children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
+      floatingActionButton:
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width * 0.22,
+          height: MediaQuery.of(context).size.width * 0.22,
+          padding: EdgeInsets.only(left: 16, right: 16, top: 30),
+          child: FloatingActionButton(
+              heroTag: "home",
+              child: Icon(
+                Icons.home,
+                color: Colors.white,
+                size: 40,
+              ),
+              onPressed: () {},
+              backgroundColor: ColorTheme.pale),
         ),
-        BottomBarView(
-          tabIconsList: tabIconsList,
-          addClick: () {},
-          changeIndex: (int index) {
-            if (index == 0) {
-              setState(() {});
-            } else if (index == 1) {
-              setState(() {});
-            } else if (index == 2) {
-              _navigateAndDisplaySelection1(context);
-            } else if (index == 3) {
-              _navigateAndDisplaySelection(context);
-            }
-          },
-        ),
-      ],
+        Container(
+          width: MediaQuery.of(context).size.width * 0.2,
+          height: MediaQuery.of(context).size.width * 0.2,
+          padding: EdgeInsets.only(left: 16, right: 16, top: 30),
+          child: FloatingActionButton(
+              heroTag: "person",
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 40,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PersonView()));
+              },
+              backgroundColor: ColorTheme.palelighter),
+        )
+      ]),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
-  }
-}
-
-class StickyTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-  StickyTabBarDelegate({@required this.child});
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new Container(
-      color: ColorTheme.background,
-      child: this.child,
-    );
-  }
-
-  @override
-  double get maxExtent => 70;
-  @override
-  double get minExtent => 70;
-  @override
-  bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return true;
   }
 }

@@ -22,9 +22,7 @@
 
 有了这五个需求，我决定自己撸一个APP给自己用。
 
-
-![](https://gitee.com/wellmoonloft/images/raw/master/20200729235557.png)
-
+![](https://gitee.com/wellmoonloft/images/raw/master/20200811223018.png)
 
 ------------------------------
 
@@ -55,7 +53,7 @@
 
 目前还未完成，上传到git只是因为我办公室和家里面有两台电脑，嗯。
 ![](https://gitee.com/wellmoonloft/images/raw/master/20200811072657.png)
-![](https://gitee.com/wellmoonloft/images/raw/master/20200809224409.png)
+![](https://gitee.com/wellmoonloft/images/raw/master/20200811182320.png)
 
 ## Todo List 
 
@@ -83,7 +81,9 @@
   - [ ] 数据导入：添加刷新资产和负债数据库 
   - [ ] 动态列表：消费和收入的列表    
   - [ ] 动态列表：表头选项联动      
-  - [ ] 手动添加   
+  - [ ] 手动添加  
+- [ ] 我的页面  
+  - [ ] 仿唯物做一个底部的悬浮按钮   
   
 ### 基础  
 - [x] 数据库：sqlite

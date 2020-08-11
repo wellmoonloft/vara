@@ -23,32 +23,47 @@ class TopBarView extends StatelessWidget {
       'assets/Images/banner_tab2.jpg',
       'assets/Images/banner_tab3.jpg'
     ];
-    Map<String, dynamic> btc =
-        btcdaily[DateFormat('yyyy-MM-dd').format(DateTime.now())];
-
-    Map<String, dynamic> usd;
-    Map<String, dynamic> eur;
-    for (var i = 0; i < 10; i++) {
-      if (usdcnydaily[DateFormat('yyyy-MM-dd')
-              .format(DateTime.now().subtract(new Duration(days: i)))] !=
-          null) {
-        usd = usdcnydaily[DateFormat('yyyy-MM-dd')
-            .format(DateTime.now().subtract(new Duration(days: i)))];
-        eur = eurcnydaily[DateFormat('yyyy-MM-dd')
-            .format(DateTime.now().subtract(new Duration(days: i)))];
-        break;
+    String btcPrice = '';
+    String usdPrice = '';
+    String eurPrice = '';
+    if (btcdaily != null) {
+      Map<String, dynamic> btc =
+          btcdaily[DateFormat('yyyy-MM-dd').format(DateTime.now())];
+      btcPrice = 'BTC/USD: ' +
+          double.parse(
+                  btc['4b. close (USD)'] != null ? btc['4b. close (USD)'] : 0.0)
+              .toStringAsFixed(2);
+    }
+    if (usdcnydaily != null) {
+      Map<String, dynamic> usd;
+      for (var i = 0; i < 10; i++) {
+        if (usdcnydaily[DateFormat('yyyy-MM-dd')
+                .format(DateTime.now().subtract(new Duration(days: i)))] !=
+            null) {
+          usd = usdcnydaily[DateFormat('yyyy-MM-dd')
+              .format(DateTime.now().subtract(new Duration(days: i)))];
+          usdPrice = 'USD/CNY: ' +
+              double.parse(usd['4. close'] != null ? usd['4. close'] : 0.0)
+                  .toStringAsFixed(2);
+          break;
+        }
       }
     }
-    String btcPrice = 'BTC/USD: ' +
-        double.parse(
-                btc['4b. close (USD)'] != null ? btc['4b. close (USD)'] : 0.0)
-            .toStringAsFixed(2);
-    String usdPrice = 'USD/CNY: ' +
-        double.parse(usd['4. close'] != null ? usd['4. close'] : 0.0)
-            .toStringAsFixed(2);
-    String eurPrice = 'EUR/CNY: ' +
-        double.parse(eur['4. close'] != null ? eur['4. close'] : 0.0)
-            .toStringAsFixed(2);
+    if (eurcnydaily != null) {
+      Map<String, dynamic> eur;
+      for (var i = 0; i < 10; i++) {
+        if (eurcnydaily[DateFormat('yyyy-MM-dd')
+                .format(DateTime.now().subtract(new Duration(days: i)))] !=
+            null) {
+          eur = eurcnydaily[DateFormat('yyyy-MM-dd')
+              .format(DateTime.now().subtract(new Duration(days: i)))];
+          eurPrice = 'EUR/CNY: ' +
+              double.parse(eur['4. close'] != null ? eur['4. close'] : 0.0)
+                  .toStringAsFixed(2);
+          break;
+        }
+      }
+    }
 
     return Column(
       children: <Widget>[

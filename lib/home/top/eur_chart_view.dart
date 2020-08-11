@@ -14,36 +14,39 @@ class EURChartView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
-          child: Padding(
-              padding: const EdgeInsets.only(top: 15, bottom: 5, left: 15),
-              child: charts.TimeSeriesChart(
-                _createSampleData(),
-                primaryMeasureAxis: charts.NumericAxisSpec(
-                  renderSpec: charts.GridlineRendererSpec(
-                      axisLineStyle: charts.LineStyleSpec(
-                        color: charts.MaterialPalette.white,
-                      ),
-                      labelStyle: new charts.TextStyleSpec(
-                        fontSize: 10,
-                        color: charts.MaterialPalette.white,
-                      ),
-                      lineStyle: charts.LineStyleSpec(
-                        thickness: 0,
-                        color: charts.MaterialPalette.white,
-                      )),
-                ),
-                domainAxis: charts.DateTimeAxisSpec(
-                    renderSpec: charts.GridlineRendererSpec(
-                        axisLineStyle: charts.LineStyleSpec(
-                          color: charts.MaterialPalette.white,
-                        ),
-                        labelStyle: charts.TextStyleSpec(
-                            fontSize: 10, color: charts.MaterialPalette.white),
-                        lineStyle: charts.LineStyleSpec(
+          child: _createSampleData() == null
+              ? Container()
+              : Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 5, left: 15),
+                  child: charts.TimeSeriesChart(
+                    _createSampleData(),
+                    primaryMeasureAxis: charts.NumericAxisSpec(
+                      renderSpec: charts.GridlineRendererSpec(
+                          axisLineStyle: charts.LineStyleSpec(
+                            color: charts.MaterialPalette.white,
+                          ),
+                          labelStyle: new charts.TextStyleSpec(
+                            fontSize: 10,
+                            color: charts.MaterialPalette.white,
+                          ),
+                          lineStyle: charts.LineStyleSpec(
                             thickness: 0,
-                            color: charts.MaterialPalette.white))),
-                animate: false,
-              )),
+                            color: charts.MaterialPalette.white,
+                          )),
+                    ),
+                    domainAxis: charts.DateTimeAxisSpec(
+                        renderSpec: charts.GridlineRendererSpec(
+                            axisLineStyle: charts.LineStyleSpec(
+                              color: charts.MaterialPalette.white,
+                            ),
+                            labelStyle: charts.TextStyleSpec(
+                                fontSize: 10,
+                                color: charts.MaterialPalette.white),
+                            lineStyle: charts.LineStyleSpec(
+                                thickness: 0,
+                                color: charts.MaterialPalette.white))),
+                    animate: false,
+                  )),
         ),
       ],
     );
@@ -51,27 +54,30 @@ class EURChartView extends StatelessWidget {
 
   List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData() {
     List<TimeSeriesSales> data = [];
-    for (var i = 0; i < eurcnydaily.length; i++) {
-      if (eurcnydaily[DateFormat('yyyy-MM-dd')
-              .format(DateTime.now().subtract(new Duration(days: i)))] !=
-          null) {
-        Map<String, dynamic> data1 = eurcnydaily[DateFormat('yyyy-MM-dd')
-            .format(DateTime.now().subtract(new Duration(days: i)))];
-        data.add(new TimeSeriesSales(
-            DateTime.now().subtract(new Duration(days: i)),
-            double.parse(data1['4. close'])));
+    if (eurcnydaily != null) {
+      for (var i = 0; i < eurcnydaily.length; i++) {
+        if (eurcnydaily[DateFormat('yyyy-MM-dd')
+                .format(DateTime.now().subtract(new Duration(days: i)))] !=
+            null) {
+          Map<String, dynamic> data1 = eurcnydaily[DateFormat('yyyy-MM-dd')
+              .format(DateTime.now().subtract(new Duration(days: i)))];
+          data.add(new TimeSeriesSales(
+              DateTime.now().subtract(new Duration(days: i)),
+              double.parse(data1['4. close'])));
+        }
       }
-    }
 
-    return [
-      new charts.Series<TimeSeriesSales, DateTime>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (TimeSeriesSales sales, _) => sales.time,
-        measureFn: (TimeSeriesSales sales, _) => sales.sales,
-        data: data,
-      )
-    ];
+      return [
+        new charts.Series<TimeSeriesSales, DateTime>(
+          id: 'Sales',
+          colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+          domainFn: (TimeSeriesSales sales, _) => sales.time,
+          measureFn: (TimeSeriesSales sales, _) => sales.sales,
+          data: data,
+        )
+      ];
+    }
+    return null;
   }
 }
 

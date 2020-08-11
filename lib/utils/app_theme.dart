@@ -52,9 +52,9 @@ class AppTheme {
   );
 
   static const subtitleText = TextStyle(
-    fontWeight: FontWeight.normal,
-    fontSize: 16,
-    color: ColorTheme.cassislighter,
+    fontSize: 12,
+    letterSpacing: 0.0,
+    color: ColorTheme.grey,
   );
 
   //------BorderRadiusStyle-----

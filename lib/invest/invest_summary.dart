@@ -6,7 +6,12 @@ import 'package:vara/utils/app_ui.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
-class InvestSummaryView extends StatelessWidget {
+class InvestSummaryView extends StatefulWidget {
+  @override
+  _InvestSummaryState createState() => _InvestSummaryState();
+}
+
+class _InvestSummaryState extends State<InvestSummaryView> {
   @override
   Widget build(BuildContext context) {
     double investIncome = 0.0;
@@ -15,6 +20,7 @@ class InvestSummaryView extends StatelessWidget {
     double short = 0.0;
     double mid = 0.0;
     double long = 0.0;
+
     Provider.of<InvestData>(context).investList.forEach((element) {
       //print(element);
       if (element['status'] == 'FINISHED') {
@@ -59,28 +65,28 @@ class InvestSummaryView extends StatelessWidget {
                                 Row(
                                   children: <Widget>[
                                     BeforeTitle(
-                                        color: ColorTheme.cassislighter,
+                                        color: ColorTheme.cassis,
                                         width: 3,
                                         height: 50),
                                     SummaryTopTitile(
                                       title: 'Invest Income',
                                       value: '€ ' +
                                           formatNum(investIncome, 2).toString(),
-                                      color: ColorTheme.cassislighter,
+                                      color: ColorTheme.cassis,
                                     )
                                   ],
                                 ),
                                 Row(
                                   children: <Widget>[
                                     BeforeTitle(
-                                        color: ColorTheme.cassislighter,
+                                        color: ColorTheme.cassis,
                                         width: 3,
                                         height: 50),
                                     SummaryTopTitile(
                                       title: 'Total Invest',
                                       value: '€ ' +
                                           formatNum(totalInvest, 2).toString(),
-                                      color: ColorTheme.cassislighter,
+                                      color: ColorTheme.cassis,
                                     )
                                   ],
                                 )
@@ -95,8 +101,8 @@ class InvestSummaryView extends StatelessWidget {
                             child: SummaryTopGraph(
                               title: 'Total Yield year',
                               value: totalYield,
-                              color: ColorTheme.cassislighter,
-                              subcolor: ColorTheme.neogreenlighter,
+                              color: ColorTheme.cassis,
+                              subcolor: ColorTheme.cassislighter,
                             ),
                           ),
                         )

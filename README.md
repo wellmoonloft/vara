@@ -19,8 +19,7 @@ Therefore I need an APP like this:
 4. Support the investment list and daily consumption list, and have multiple reports and charts for viewing. Open the App every day with coffee and view your own rate of return, when you can achieve the most basic financial freedom (not working or starving)
 5. It is best to be able to write import scripts by yourself. After all, there are so many investment channels and payment channels for daily consumption. It seems impossible to update the App every time.
 
-![](https://gitee.com/wellmoonloft/images/raw/master/20200729235557.png)
-
+![](https://gitee.com/wellmoonloft/images/raw/master/20200811223018.png)
 ------------------------------
 
 ## Quick start
@@ -50,4 +49,4 @@ Therefore I need an APP like this:
 It's not finished yet. I uploaded it to git just because there are two computers in my office and home, umm.
 
 ![](https://gitee.com/wellmoonloft/images/raw/master/20200811072657.png)
-![](https://gitee.com/wellmoonloft/images/raw/master/20200809224409.png)
+![](https://gitee.com/wellmoonloft/images/raw/master/20200811182320.png)
