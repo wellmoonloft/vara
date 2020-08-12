@@ -137,7 +137,7 @@ class SummaryTopTitile extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
                     letterSpacing: -1.0,
-                    fontSize: 28,
+                    fontSize: 26,
                     color: color,
                   ),
                 ),
@@ -485,13 +485,6 @@ class InvestList extends StatelessWidget {
                   ),
                 )
               ],
-            ),
-          ),
-          Container(
-            height: 2,
-            decoration: BoxDecoration(
-              color: ColorTheme.background,
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
             ),
           ),
         ],
