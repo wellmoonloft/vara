@@ -22,13 +22,5 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             home: SplashPage()));
-    // return MaterialApp(
-    //     debugShowCheckedModeBanner: false,
-    //     theme: ThemeData(
-    //       primarySwatch: Colors.blue,
-    //       scaffoldBackgroundColor: ColorTheme.background,
-    //       visualDensity: VisualDensity.adaptivePlatformDensity,
-    //     ),
-    //     home: SplashPage());
   }
 }

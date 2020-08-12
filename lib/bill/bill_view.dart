@@ -6,7 +6,7 @@ class BillView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 258,
+        height: 270,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[

@@ -6,9 +6,9 @@ class AppTheme {
   //-----Padding-----
   static const double leftRightPadding = 16;
   static const outboxpadding =
-      EdgeInsets.only(left: 16, right: 16, top: 10, bottom: 10);
+      EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 10);
   static const inboxpadding =
-      EdgeInsets.only(left: 24, right: 24, top: 5, bottom: 5);
+      EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 5);
 
   //------TextStyle-----
 
@@ -29,7 +29,7 @@ class AppTheme {
   static const buttomTitle = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 18,
-    letterSpacing: 1.2,
+    letterSpacing: 1,
     color: ColorTheme.white,
   );
 
@@ -70,24 +70,22 @@ class AppTheme {
       bottomLeft: Radius.circular(6.0),
       bottomRight: Radius.circular(6.0),
       topRight: Radius.circular(6.0));
+
+  static const normalBoxShadow = BoxShadow(
+      color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 5.0);
+
+  static const boxDecoration = BoxDecoration(
+    color: ColorTheme.boxbackground,
+    borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(8.0),
+        bottomLeft: Radius.circular(8.0),
+        bottomRight: Radius.circular(8.0),
+        topRight: Radius.circular(8.0)),
+    boxShadow: <BoxShadow>[
+      BoxShadow(
+          color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 8.0),
+      BoxShadow(
+          color: ColorTheme.white, offset: Offset(-1.1, -1.1), blurRadius: 8.0),
+    ],
+  );
 }
-
-final normalBoxShadow = BoxShadow(
-    color: ColorTheme.grey.withOpacity(0.2),
-    offset: Offset(1.1, 1.1),
-    blurRadius: 10.0);
-
-final boxDecoration = BoxDecoration(
-  color: ColorTheme.white,
-  borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(8.0),
-      bottomLeft: Radius.circular(8.0),
-      bottomRight: Radius.circular(8.0),
-      topRight: Radius.circular(8.0)),
-  boxShadow: <BoxShadow>[
-    BoxShadow(
-        color: ColorTheme.grey.withOpacity(0.2),
-        offset: Offset(1.1, 1.1),
-        blurRadius: 10.0),
-  ],
-);

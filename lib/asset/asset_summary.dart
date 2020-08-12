@@ -26,7 +26,7 @@ class AssetSummaryView extends StatelessWidget {
         child: Padding(
             padding: AppTheme.outboxpadding,
             child: Container(
-              decoration: boxDecoration,
+              decoration: AppTheme.boxDecoration,
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -73,7 +73,7 @@ class AssetSummaryView extends StatelessWidget {
                     child: Container(
                       height: 2,
                       decoration: BoxDecoration(
-                        color: ColorTheme.background,
+                        color: ColorTheme.pantone,
                         borderRadius: BorderRadius.all(Radius.circular(4.0)),
                       ),
                     ),

@@ -46,7 +46,7 @@ class InvestSummaryView extends StatelessWidget {
         child: Padding(
             padding: AppTheme.outboxpadding,
             child: Container(
-              decoration: boxDecoration,
+              decoration: AppTheme.boxDecoration,
               child: Column(
                 children: <Widget>[
                   Padding(
@@ -111,7 +111,7 @@ class InvestSummaryView extends StatelessWidget {
                     child: Container(
                       height: 2,
                       decoration: BoxDecoration(
-                        color: ColorTheme.background,
+                        color: ColorTheme.pantone,
                         borderRadius: BorderRadius.all(Radius.circular(4.0)),
                       ),
                     ),
@@ -138,7 +138,7 @@ class InvestSummaryView extends StatelessWidget {
                                 title: 'Mid',
                                 subtitle: 'less 365 days',
                                 value: '€ ' + formatNum(mid, 2).toString(),
-                                color: ColorTheme.cassislighter,
+                                color: ColorTheme.cassis,
                                 subcolor: '#F56E98',
                               ),
                             ],

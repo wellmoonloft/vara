@@ -11,7 +11,7 @@ class BillImportView extends StatelessWidget {
         child: Padding(
             padding: AppTheme.outboxpadding,
             child: Container(
-              decoration: boxDecoration,
+              decoration: AppTheme.boxDecoration,
               child: Column(
                 children: <Widget>[
                   Padding(

@@ -15,7 +15,7 @@ class AssetChartView extends StatelessWidget {
         child: Padding(
             padding: AppTheme.outboxpadding,
             child: Container(
-                decoration: boxDecoration,
+                decoration: AppTheme.boxDecoration,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
@@ -48,13 +48,14 @@ class AssetChartView extends StatelessWidget {
                                         //'${model.selectedSeries[0].measureFn(model.selectedDatum[0].datum.sales)}',
                                         '${model.selectedDatum[0].datum.sales}',
                                     'subTitle':
-                                        '${model.selectedDatum[1].datum.sales}'
+                                        '${model.selectedDatum[0].datum.time}'
                                   });
-                                  print({
-                                    //model.selectedSeries[0].measureFn(
-                                    model.selectedDatum[0].datum.sales
-                                    //)
-                                  });
+                                  // print({
+                                  //   //model.selectedSeries[0].measureFn(
+                                  //   model.selectedDatum[0].datum.sales,
+                                  //   model.selectedDatum[0].datum.time
+                                  //   //)
+                                  // });
                                 }
                               })
                             ],

@@ -6,7 +6,7 @@ class AssetView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 255,
+        height: 270,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[

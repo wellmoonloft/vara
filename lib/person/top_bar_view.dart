@@ -27,7 +27,7 @@ class TopBarView extends StatelessWidget {
                 height:
                     (MediaQuery.of(context).size.width * 0.3 - 32) * 1.5 + 10,
                 width: MediaQuery.of(context).size.width * 0.7 - 8,
-                decoration: boxDecoration,
+                decoration: AppTheme.boxDecoration,
                 child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -63,7 +63,7 @@ class TopBarView extends StatelessWidget {
                       color: ColorTheme.puristbluedarker,
                       borderRadius: AppTheme.normalBorderRadius,
                       boxShadow: <BoxShadow>[
-                        normalBoxShadow,
+                        AppTheme.normalBoxShadow,
                       ],
                       // image: DecorationImage(
                       //     fit: BoxFit.fill,
@@ -98,7 +98,7 @@ class TopBarView extends StatelessWidget {
                         color: ColorTheme.cassisdarker,
                         borderRadius: AppTheme.normalBorderRadius,
                         boxShadow: <BoxShadow>[
-                          normalBoxShadow,
+                          AppTheme.normalBoxShadow,
                         ],
                       ),
                       child: Align(

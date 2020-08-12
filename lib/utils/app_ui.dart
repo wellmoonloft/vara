@@ -83,6 +83,7 @@ class SummaryBottom extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontWeight: FontWeight.w600,
+              letterSpacing: -0.5,
               fontSize: 14,
               color: color,
             ),
@@ -119,7 +120,7 @@ class SummaryTopTitile extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 18,
+                fontSize: 16,
                 color: ColorTheme.greydarker,
               ),
             ),
@@ -134,8 +135,9 @@ class SummaryTopTitile extends StatelessWidget {
                   value,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -1.0,
+                    fontSize: 28,
                     color: color,
                   ),
                 ),
@@ -199,7 +201,7 @@ class SummaryTopGraph extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
-                    letterSpacing: 0.0,
+                    letterSpacing: -0.5,
                     color: ColorTheme.grey.withOpacity(0.5),
                   ),
                 ),
@@ -273,6 +275,227 @@ class CustomButtom extends StatelessWidget {
                       style: AppTheme.buttomTitle,
                     ),
                   )))),
+    );
+  }
+}
+
+class ListDetail extends StatelessWidget {
+  final String title;
+  final String value;
+
+  const ListDetail({Key key, this.title, this.value}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(top: 20, left: 20),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: ColorTheme.greydarker,
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(top: 20, right: 20),
+              child: Text(
+                value,
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: ColorTheme.greydarker,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      Padding(
+        padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+        child: Container(
+          height: 1,
+          decoration: BoxDecoration(
+            color: ColorTheme.pantone,
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          ),
+        ),
+      ),
+    ]);
+  }
+}
+
+class InvestList extends StatelessWidget {
+  final String title1;
+  final String title2;
+  final String title3;
+  final String title4;
+  final String title5;
+  final String title6;
+  final String title7;
+  final String title8;
+
+  const InvestList(
+      {Key key,
+      this.title1,
+      this.title2,
+      this.title3,
+      this.title4,
+      this.title5,
+      this.title6,
+      this.title7,
+      this.title8})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: ColorTheme.white,
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 5,
+          ),
+          Padding(
+            padding: AppTheme.inboxpadding,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            title8,
+                            textAlign: TextAlign.start,
+                            style: AppTheme.subtitleText,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6, bottom: 6),
+                            child: Text(
+                              title1,
+                              textAlign: TextAlign.start,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Text(
+                        title7,
+                        textAlign: TextAlign.start,
+                        style: AppTheme.subtitleText,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 6, bottom: 6),
+                        child: Text(
+                          title3,
+                          textAlign: TextAlign.start,
+                          style: AppTheme.titleTextSmallLighter,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: AppTheme.inboxpadding,
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            title6,
+                            textAlign: TextAlign.start,
+                            style: AppTheme.subtitleText,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6, bottom: 6),
+                            child: Text(
+                              title2,
+                              textAlign: TextAlign.start,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            title5,
+                            textAlign: TextAlign.end,
+                            style: AppTheme.subtitleText,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 6, bottom: 6),
+                            child: Text(
+                              title4,
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16,
+                                color: (title4 == 'CURRENT')
+                                    ? ColorTheme.neogreendarker
+                                    : ColorTheme.cantaloupedarker,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            height: 2,
+            decoration: BoxDecoration(
+              color: ColorTheme.background,
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -42,15 +42,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                   ),
                   Expanded(
                     child: Text(
-                      'Term',
-                      textAlign: TextAlign.center,
-                      style: AppTheme.subtitleText,
-                    ),
-                    flex: 1,
-                  ),
-                  Expanded(
-                    child: Text(
-                      'Country',
+                      'Status',
                       textAlign: TextAlign.center,
                       style: AppTheme.subtitleText,
                     ),
@@ -117,30 +109,6 @@ class ChoiceBarState extends State<ChoiceBar> {
                       child: DropdownButton<String>(
                         dropdownColor: ColorTheme.white,
                         underline: Container(),
-                        value: termValue,
-                        iconSize: 18,
-                        onChanged: (String newValue) {
-                          setState(() {
-                            termValue = newValue;
-                          });
-                        },
-                        items: <String>['ALL', 'SHORT', 'MID', 'LONG']
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                      ),
-                    ),
-                    flex: 1,
-                  ),
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment(0, 0),
-                      child: DropdownButton<String>(
-                        dropdownColor: ColorTheme.white,
-                        underline: Container(),
                         value: countryValue,
                         iconSize: 18,
                         onChanged: (String newValue) {
@@ -148,7 +116,7 @@ class ChoiceBarState extends State<ChoiceBar> {
                             countryValue = newValue;
                           });
                         },
-                        items: <String>['ALL', 'SHORT', 'MID', 'LONG']
+                        items: <String>['ALL', 'CURRENT', 'LATE']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,

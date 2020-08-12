@@ -8,7 +8,9 @@ class ColorTheme {
   static const Color background = Color(0xFFF2F3F8);
   static const Color transparent = Colors.transparent;
 
+  static const Color boxbackground = Color(0xFFfcfcfc);
   static const Color grey = Color(0xFF808080);
+  static const Color pantone = Color(0xFFE5E1E6);
   static const Color greydarker = Color(0xFF666666);
   static const Color greydoubledarker = Color(0xFF545454);
   static const Color greytripledarker = Color(0xFF2c2c2c);

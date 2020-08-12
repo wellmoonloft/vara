@@ -101,20 +101,14 @@ class _HomeViewState extends State<HomeView>
                 child: Container(
                     height: 40,
                     width: MediaQuery.of(context).size.width - 32,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.palelighter,
-                      borderRadius: AppTheme.smallBorderRadius,
-                      boxShadow: <BoxShadow>[
-                        normalBoxShadow,
-                      ],
-                    ),
+                    decoration: AppTheme.boxDecoration,
                     child: Stack(
                         alignment: AlignmentDirectional.center,
                         children: <Widget>[
                           Text(
                             bannertitle,
                             textAlign: TextAlign.center,
-                            style: AppTheme.toptitleText,
+                            style: AppTheme.titleTextSmallLighter,
                           ),
                         ])),
               ),

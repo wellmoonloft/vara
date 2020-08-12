@@ -4,6 +4,7 @@ import 'package:vara/invest/invest_view.dart';
 import 'package:vara/person/top_bar_view.dart';
 import 'package:vara/utils/title_view.dart';
 import '../utils/color_theme.dart';
+import 'person_import.dart';
 
 class PersonView extends StatefulWidget {
   final Map<String, dynamic> btc;
@@ -70,7 +71,7 @@ class _HomeViewState extends State<PersonView>
                   );
                 } else if (index == 4) {
                   postPiece = Container(
-                    child: InvestView(), //
+                    child: PersonImportView(), //
                   );
                 }
                 return postPiece;

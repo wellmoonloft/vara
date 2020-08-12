@@ -6,7 +6,7 @@ class InvestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 300,
+        height: 322,
         child: ListView(
           scrollDirection: Axis.horizontal,
           children: <Widget>[
