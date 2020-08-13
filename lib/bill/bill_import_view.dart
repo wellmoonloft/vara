@@ -4,20 +4,20 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/invest/import/mapping_left.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/progress_dialog.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/color_theme.dart';
-import 'mapping_left.dart';
 
-class InvestImportView extends StatefulWidget {
-  const InvestImportView({Key key}) : super(key: key);
+class BillImportView extends StatefulWidget {
+  const BillImportView({Key key}) : super(key: key);
   @override
   _ImportViewState createState() => _ImportViewState();
 }
 
-class _ImportViewState extends State<InvestImportView> {
+class _ImportViewState extends State<BillImportView> {
   String _path;
   String _extension;
   FileType _pickingType = FileType.any;

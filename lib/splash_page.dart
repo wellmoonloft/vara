@@ -66,22 +66,30 @@ class _SplashPageState extends State<SplashPage> {
       etext = 'GET BTC DATA ...';
       progressValue = 0.2;
     });
-    //btc = await _getBtcCurrency();
+    // btc = await _getNetData(
+    //     'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV',
+    //     1);
     setState(() {
       etext = 'GET BTC DAILY ...';
       progressValue = 0.4;
     });
-    //btcdaily = await _getBTCWeekly();
+    // btcdaily = await _getNetData(
+    //     'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=9AAGEESEANSVTYTV',
+    //     2);
     setState(() {
       etext = 'GET USD DAILY ...';
       progressValue = 0.6;
     });
-    //usdcnydaily = await _getUSDCNYWeekly();
+    // usdcnydaily = await _getNetData(
+    //     'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=CNY&apikey=9AAGEESEANSVTYTV',
+    //     3);
     setState(() {
       etext = 'GET EUR DAILY ...';
       progressValue = 0.8;
     });
-    //eurcnydaily = await _getEURCNYWeekly();
+    // eurcnydaily = await _getNetData(
+    //     'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=CNY&apikey=9AAGEESEANSVTYTV',
+    //     4);
     print("----get data done------");
     Navigator.of(context).pushReplacement(new MaterialPageRoute(
         builder: (context) => HomeView(
@@ -100,9 +108,7 @@ class _SplashPageState extends State<SplashPage> {
     assetandinvestlist.getinvestList();
   }
 
-  _getBtcCurrency() async {
-    var url =
-        'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV';
+  _getNetData(url, mark) async {
     var httpClient = new HttpClient();
 
     try {
@@ -111,78 +117,18 @@ class _SplashPageState extends State<SplashPage> {
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        //btc = data['Realtime Currency Exchange Rate'];
-        return data['Realtime Currency Exchange Rate'];
-      } else {
-        print('Error getting data:\nHttp status ${response.statusCode}');
-      }
-    } catch (exception) {
-      print('Failed getting data');
-    }
-    httpClient.close();
-  }
-
-  _getBTCWeekly() async {
-    var url =
-        'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=9AAGEESEANSVTYTV';
-    var httpClient = new HttpClient();
-
-    try {
-      var request = await httpClient.getUrl(Uri.parse(url));
-      var response = await request.close();
-      print('start btc');
-      if (response.statusCode == HttpStatus.ok) {
-        var json = await response.transform(utf8.decoder).join();
-        var data = jsonDecode(json);
-        //btcdaily = data['Time Series (Digital Currency Daily)'];
-        return data['Time Series (Digital Currency Daily)'];
-      } else {
-        print('Error getting data:\nHttp status ${response.statusCode}');
-      }
-    } catch (exception) {
-      print('Failed getting data');
-    }
-    httpClient.close();
-  }
-
-  _getUSDCNYWeekly() async {
-    var url =
-        'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=CNY&apikey=9AAGEESEANSVTYTV';
-    var httpClient = new HttpClient();
-
-    try {
-      var request = await httpClient.getUrl(Uri.parse(url));
-      var response = await request.close();
-      print('start usd');
-      if (response.statusCode == HttpStatus.ok) {
-        var json = await response.transform(utf8.decoder).join();
-        var data = jsonDecode(json);
-        //usdcnydaily = data['Time Series FX (Daily)'];
-        return data['Time Series FX (Daily)'];
-      } else {
-        print('Error getting data:\nHttp status ${response.statusCode}');
-      }
-    } catch (exception) {
-      print('Failed getting data');
-    }
-    httpClient.close();
-  }
-
-  _getEURCNYWeekly() async {
-    var url =
-        'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=CNY&apikey=9AAGEESEANSVTYTV';
-    var httpClient = new HttpClient();
-
-    try {
-      var request = await httpClient.getUrl(Uri.parse(url));
-      var response = await request.close();
-      print('start eur');
-      if (response.statusCode == HttpStatus.ok) {
-        var json = await response.transform(utf8.decoder).join();
-        var data = jsonDecode(json);
-        //eurcnydaily = data['Time Series FX (Daily)'];
-        return data['Time Series FX (Daily)'];
-        //print(eurcnydaily.length);
+        if (mark == 1) {
+          return data['Realtime Currency Exchange Rate'];
+        }
+        if (mark == 2) {
+          return data['Time Series (Digital Currency Daily)'];
+        }
+        if (mark == 3) {
+          return data['Time Series FX (Daily)'];
+        }
+        if (mark == 4) {
+          return data['Time Series FX (Daily)'];
+        }
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }

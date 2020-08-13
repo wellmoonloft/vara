@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:vara/asset/asset_view.dart';
-import 'package:vara/invest/invest_view.dart';
 import 'package:vara/person/top_bar_view.dart';
 import 'package:vara/utils/title_view.dart';
 import '../utils/color_theme.dart';
-import 'person_import.dart';
+import 'import_view.dart';
 
 class PersonView extends StatefulWidget {
   final Map<String, dynamic> btc;
@@ -50,7 +48,7 @@ class _HomeViewState extends State<PersonView>
                 if (index == 1) {
                   postPiece = Container(
                     child: TitleView(
-                      titleTxt: 'Asset',
+                      titleTxt: 'Import',
                       subTxt: '',
                       navigator: '',
                       color: ColorTheme.puristbluedarker,
@@ -58,7 +56,7 @@ class _HomeViewState extends State<PersonView>
                   );
                 } else if (index == 2) {
                   postPiece = Container(
-                    child: AssetView(), //
+                    child: ImportView(), //
                   );
                 } else if (index == 3) {
                   postPiece = Container(
@@ -69,14 +67,10 @@ class _HomeViewState extends State<PersonView>
                       color: ColorTheme.cassis,
                     ), //
                   );
-                } else if (index == 4) {
-                  postPiece = Container(
-                    child: PersonImportView(), //
-                  );
                 }
                 return postPiece;
               },
-              childCount: 5,
+              childCount: 4,
             ),
           ),
         ],

@@ -1,11 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/app_ui.dart';
+import 'package:vara/utils/toolkit.dart';
 import '../utils/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double netIncome = 0.0;
+    double income = 0.0;
+    double expenses = 0.0;
+    double freedomService = 0.0;
+    if (Provider.of<InvestData>(context).billList != null) {
+      Provider.of<InvestData>(context).billList.forEach((element) {
+        if (element['mark']) {
+          income = income + element['amount'];
+        } else {
+          expenses = expenses + element['amount'];
+        }
+      });
+      netIncome = income - expenses;
+      freedomService = expenses / income;
+    }
     return Container(
         width: MediaQuery.of(context).size.width,
         child: Padding(
@@ -32,7 +50,8 @@ class BillSummaryView extends StatelessWidget {
                                         height: 50),
                                     SummaryTopTitile(
                                       title: 'Net Income',
-                                      value: '€ ',
+                                      value: '€ ' +
+                                          formatNum(netIncome, 2).toString(),
                                       color: ColorTheme.cantaloupe,
                                     )
                                   ],
@@ -47,7 +66,7 @@ class BillSummaryView extends StatelessWidget {
                           child: Center(
                             child: SummaryTopGraph(
                               title: 'Financial Freedom',
-                              value: 0.59,
+                              value: freedomService,
                               color: ColorTheme.cantaloupe,
                               subcolor: ColorTheme.cantaloupelighter,
                             ),
@@ -74,7 +93,7 @@ class BillSummaryView extends StatelessWidget {
                           child: SummaryBottom(
                             title: 'Income',
                             subtitle: '',
-                            value: '€ ',
+                            value: '€ ' + formatNum(income, 2).toString(),
                             color: ColorTheme.puristbluedarker,
                             subcolor: '#87A0E5',
                           ),
@@ -87,7 +106,7 @@ class BillSummaryView extends StatelessWidget {
                             SummaryBottom(
                               title: 'Expenses',
                               subtitle: '',
-                              value: '€ ',
+                              value: '€ ' + formatNum(expenses, 2).toString(),
                               color: ColorTheme.cantaloupe,
                               subcolor: '#F1B440',
                             )

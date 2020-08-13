@@ -75,7 +75,7 @@ class AppTheme {
       color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 5.0);
 
   static const boxDecoration = BoxDecoration(
-    color: ColorTheme.boxbackground,
+    color: ColorTheme.white,
     borderRadius: BorderRadius.only(
         topLeft: Radius.circular(8.0),
         bottomLeft: Radius.circular(8.0),

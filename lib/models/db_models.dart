@@ -37,28 +37,28 @@ class Person {
 
 class Invest {
   int id;
-  String investtime;
-  String pertime;
-  String endtime;
-  num investamount;
+  String date;
+  String perDate;
+  String endDate;
+  num amount;
   num received;
   String status;
   num interest;
-  String investcode;
-  String investtype;
+  String code;
+  String type;
   String currency;
   String country;
   num totalyield;
 
   Invest(
       {this.id,
-      this.investtime,
-      this.pertime,
-      this.investamount,
-      this.endtime,
+      this.date,
+      this.perDate,
+      this.amount,
+      this.endDate,
       this.received,
-      this.investcode,
-      this.investtype,
+      this.code,
+      this.type,
       this.status,
       this.currency,
       this.country,
@@ -68,13 +68,13 @@ class Invest {
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'id': id,
-      'investtime': investtime,
-      'pertime': pertime,
-      'investamount': investamount,
-      'endtime': endtime,
+      'date': date,
+      'perDate': perDate,
+      'amount': amount,
+      'endDate': endDate,
       'received': received,
-      'investcode': investcode,
-      'investtype': investtype,
+      'code': code,
+      'type': type,
       'status': status,
       'interest': interest,
       'currency': currency,
@@ -86,13 +86,13 @@ class Invest {
 
   Invest.fromMap(Map<String, dynamic> map) {
     id = map['id'];
-    investtime = map['investtime'];
-    pertime = map['pertime'];
-    investamount = map['investamount'];
-    endtime = map['endtime'];
+    date = map['date'];
+    perDate = map['perDate'];
+    amount = map['amount'];
+    endDate = map['endDate'];
     received = map['received'];
-    investcode = map['investcode'];
-    investtype = map['investtype'];
+    code = map['code'];
+    type = map['type'];
     status = map['status'];
     interest = map['interest'];
     currency = map['currency'];
@@ -125,21 +125,22 @@ class Asset {
   }
 }
 
-class IncomeDetail {
+class Bill {
   int id;
-  String addtime;
-  int currency;
+  String date;
+  String currency;
   String use;
-  String detailamount;
-  IncomeDetail(
-      this.id, this.addtime, this.currency, this.detailamount, this.use);
+  String amount;
+  bool mark;
+  Bill({this.id, this.date, this.currency, this.amount, this.use, this.mark});
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'id': id,
-      'addtime': addtime,
+      'date': date,
       'currency': currency,
+      'mark': mark,
       'use': use,
-      'detailamount': detailamount
+      'amount': amount
     };
     return map;
   }

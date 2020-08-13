@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vara/bill/bill_list.dart';
 import 'package:vara/invest/list/invest_list.dart';
 
 import 'app_theme.dart';
@@ -89,7 +90,7 @@ _navigator(context, navigator) {
   } else if (navigator == 'bill') {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => new InvestListView()),
+      MaterialPageRoute(builder: (context) => new BillListView()),
     );
   } else {}
 }

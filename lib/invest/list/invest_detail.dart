@@ -28,18 +28,16 @@ class InvestDetail extends StatelessWidget {
         body: Container(
             color: ColorTheme.white,
             child: ListView(children: [
+              ListDetail(title: 'Invest Code:', value: investdetail['code']),
+              ListDetail(title: 'Invest Time:', value: investdetail['date']),
               ListDetail(
-                  title: 'Invest Code:', value: investdetail['investcode']),
+                  title: 'Plan payment time:', value: investdetail['perDate']),
               ListDetail(
-                  title: 'Invest Time:', value: investdetail['investtime']),
-              ListDetail(
-                  title: 'Plan payment time:', value: investdetail['pertime']),
-              ListDetail(
-                  title: 'Final Payment Time:', value: investdetail['endtime']),
+                  title: 'Final Payment Time:', value: investdetail['endDate']),
               ListDetail(
                   title: 'Invest Amount:',
-                  value: '€ ' +
-                      formatNum(investdetail['investamount'], 2).toString()),
+                  value:
+                      '€ ' + formatNum(investdetail['amount'], 2).toString()),
               ListDetail(
                   title: 'Received:',
                   value:

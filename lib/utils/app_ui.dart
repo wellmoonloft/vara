@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vara/home/file_picker_demo.dart';
+import 'package:vara/bill/bill_import_view.dart';
 import 'package:vara/invest/import/import_view.dart';
-
 import 'app_theme.dart';
 import 'color_theme.dart';
 import 'toolkit.dart';
@@ -379,14 +378,14 @@ class InvestList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            title8,
+                            title1,
                             textAlign: TextAlign.start,
                             style: AppTheme.subtitleText,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                              title1,
+                              title2,
                               textAlign: TextAlign.start,
                               style: AppTheme.titleTextSmallLighter,
                             ),
@@ -402,14 +401,14 @@ class InvestList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
-                        title7,
+                        title3,
                         textAlign: TextAlign.start,
                         style: AppTheme.subtitleText,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 6, bottom: 6),
                         child: Text(
-                          title3,
+                          title4,
                           textAlign: TextAlign.start,
                           style: AppTheme.titleTextSmallLighter,
                         ),
@@ -434,14 +433,14 @@ class InvestList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            title6,
+                            title5,
                             textAlign: TextAlign.start,
                             style: AppTheme.subtitleText,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                              title2,
+                              title6,
                               textAlign: TextAlign.start,
                               style: AppTheme.titleTextSmallLighter,
                             ),
@@ -461,19 +460,19 @@ class InvestList extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Text(
-                            title5,
+                            title7,
                             textAlign: TextAlign.end,
                             style: AppTheme.subtitleText,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                              title4,
+                              title8,
                               textAlign: TextAlign.end,
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: (title4 == 'CURRENT')
+                                color: (title8 == 'CURRENT')
                                     ? ColorTheme.neogreendarker
                                     : ColorTheme.cantaloupedarker,
                               ),
@@ -502,7 +501,7 @@ _navigateAndDisplaySelection(context, navigator) {
   } else if (navigator == 'bill') {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => new FilePickerDemo()),
+      MaterialPageRoute(builder: (context) => new BillImportView()),
     );
   } else {}
 }

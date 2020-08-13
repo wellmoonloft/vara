@@ -5,22 +5,21 @@ import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/app_ui.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
-import 'invest_detail.dart';
 import 'package:vara/utils/app_theme.dart';
 
-class InvestListView extends StatefulWidget {
+class BillListView extends StatefulWidget {
   //final List<Map> investList;
 
-  const InvestListView({Key key}) : super(key: key);
+  const BillListView({Key key}) : super(key: key);
   @override
-  InvestListState createState() => InvestListState();
+  BillListState createState() => BillListState();
 }
 
-class InvestListState extends State<InvestListView> {
+class BillListState extends State<BillListView> {
   List<Map> current = List<Map>();
   List<Map> later = List<Map>();
   List<Map> finished = List<Map>();
-  List<Map> investList;
+  List<Map> billList;
   String date = DateFormat('yyyy-MM').format(DateTime.now()).toString();
   String moneyValue = 'ALL';
   String termValue = 'ALL';
@@ -33,9 +32,9 @@ class InvestListState extends State<InvestListView> {
 
   @override
   Widget build(BuildContext context) {
-    investList = Provider.of<InvestData>(context).investList;
-    if (investList != null) {
-      investList.forEach((element) {
+    billList = Provider.of<InvestData>(context).billList;
+    if (billList != null) {
+      billList.forEach((element) {
         current.add(element);
       });
     }
@@ -44,7 +43,7 @@ class InvestListState extends State<InvestListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text('Invest List', style: AppTheme.titleText),
+        title: Text('Bill List', style: AppTheme.titleText),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -73,7 +72,7 @@ class InvestListState extends State<InvestListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Money',
+                            'Mark',
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -81,7 +80,7 @@ class InvestListState extends State<InvestListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Status',
+                            'Use',
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -161,8 +160,8 @@ class InvestListState extends State<InvestListView> {
                                     current.clear();
                                     print(current.length);
                                     countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
+                                    if (billList != null) {
+                                      billList.forEach((element) {
                                         current.add(element);
                                       });
                                     }
@@ -172,8 +171,8 @@ class InvestListState extends State<InvestListView> {
                                     current.clear();
                                     print(current.length);
                                     countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
+                                    if (billList != null) {
+                                      billList.forEach((element) {
                                         if (element['status'] == 'CURRENT') {
                                           current.add(element);
                                         }
@@ -185,8 +184,8 @@ class InvestListState extends State<InvestListView> {
                                     current.clear();
                                     print(current.length);
                                     countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
+                                    if (billList != null) {
+                                      billList.forEach((element) {
                                         if (element['status'] == 'LATE') {
                                           current.add(element);
                                         }
@@ -217,35 +216,23 @@ class InvestListState extends State<InvestListView> {
             child: ListView.separated(
               itemCount: current.length,
               itemBuilder: (BuildContext context, int index) {
-                var invest = current[index];
+                var bill = current[index];
                 return Container(
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                         padding: const EdgeInsets.only(top: 0),
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        InvestDetail(investdetail: invest),
-                                  ));
-                            },
-                            child: InvestList(
-                              title1: 'Invest Amount',
-                              title2:
-                                  formatNum(invest['amount'], 2).toString() +
-                                      ' ' +
-                                      invest['currency'],
-                              title3: 'Invest Time',
-                              title4: invest['date'],
-                              title5: 'Interest',
-                              title6:
-                                  formatNum(invest['interest'], 2).toString() +
-                                      invest['currency'],
-                              title7: 'Status',
-                              title8: invest['status'],
-                            ))));
+                        child: InvestList(
+                          title1: 'Bill Amount',
+                          title2: formatNum(bill['amount'], 2).toString() +
+                              ' ' +
+                              bill['currency'],
+                          title3: 'Bill Time',
+                          title4: bill['date'],
+                          title5: 'use',
+                          title6: bill['use'],
+                          title7: 'Mark',
+                          title8: bill['mark'],
+                        )));
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(

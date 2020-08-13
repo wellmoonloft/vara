@@ -27,16 +27,16 @@ class InvestSummaryView extends StatelessWidget {
               (element['totalyield'] != null ? element['totalyield'] : 0) /
               (element['interest'] != null ? element['interest'] : 0);
         } else {
-          totalInvest = totalInvest +
-              (element['investamount'] != null ? element['investamount'] : 0);
-          if (element['investtype'] == 'SHORT') {
-            short = short + element['investamount'];
+          totalInvest =
+              totalInvest + (element['amount'] != null ? element['amount'] : 0);
+          if (element['type'] == 'SHORT') {
+            short = short + element['amount'];
           }
-          if (element['investtype'] == 'MID') {
-            mid = mid + element['investamount'];
+          if (element['type'] == 'MID') {
+            mid = mid + element['amount'];
           }
-          if (element['investtype'] == 'LONG') {
-            long = long + element['investamount'];
+          if (element['type'] == 'LONG') {
+            long = long + element['amount'];
           }
         }
       });

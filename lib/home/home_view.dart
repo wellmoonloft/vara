@@ -5,7 +5,7 @@ import 'package:vara/bill/bill_view.dart';
 import 'package:vara/invest/invest_view.dart';
 import 'package:vara/person/person_view.dart';
 import 'package:vara/utils/title_view.dart';
-import '../models/tab_icon_data.dart';
+
 import '../utils/color_theme.dart';
 import '../utils/app_theme.dart';
 import 'top/top_bar_view.dart';
@@ -30,7 +30,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView>
     with SingleTickerProviderStateMixin {
   ScrollController _controller = new ScrollController();
-  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+
   bool _offstage = true;
   Map<String, dynamic> btc;
   String bannertitle;
@@ -59,9 +59,6 @@ class _HomeViewState extends State<HomeView>
         double.parse(rate).toStringAsFixed(2) +
         '  ' +
         DateFormat('yyyy-MM-dd HH:MM').format(DateTime.now());
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
   }
 
   @override
@@ -163,7 +160,7 @@ class _HomeViewState extends State<HomeView>
                   postPiece = Container(
                     child: TitleView(
                       titleTxt: 'Bill',
-                      subTxt: 'Details',
+                      subTxt: 'Bill List',
                       navigator: 'bill',
                       color: ColorTheme.cantaloupe,
                     ),

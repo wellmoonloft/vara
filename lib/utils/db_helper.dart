@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io' as io;
 import 'package:path/path.dart';
@@ -30,17 +29,11 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE person (id INTEGER PRIMARY KEY, firstname TEXT, midname TEXT, lastname TEXT, age INTEGER, sex INTEGER)');
     await db.execute(
-        'CREATE TABLE invest (id INTEGER PRIMARY KEY, investtime TEXT, pertime TEXT, investamount INTEGER, endtime TEXT,  received INTEGER,investcode TEXT, investtype TEXT, status TEXT,interest INTEGER,currency TEXT,country TEXT,totalyield INTEGER)');
+        'CREATE TABLE invest (id INTEGER PRIMARY KEY, date TEXT, perDate TEXT, amount INTEGER, endDate TEXT,  received INTEGER,code TEXT, type TEXT, status TEXT,interest INTEGER,currency TEXT,country TEXT,totalyield INTEGER)');
     await db.execute(
         'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
-        'CREATE TABLE incomedetail (id INTEGER PRIMARY KEY, addtime TEXT, currency INTEGER, use TEXT, detailamount TEXT)');
-
-    Asset asset = Asset();
-    asset.date = DateFormat('yyyy-MM-dd').format(DateTime.now());
-    asset.asset = 0.0;
-    asset.debt = 0.0;
-    await db.insert('asset', asset.toMap());
+        'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT,amount INTEGER, mark BOOLEAN)');
   }
 
   Future<List<Map>> getAsset() async {
@@ -67,36 +60,17 @@ class DBHelper {
     }
   }
 
-  Future<int> addInvest(Invest invest) async {
-    var dbClient = await db;
-    return await dbClient.insert('invest', invest.toMap());
-  }
-
-  Future<int> updateInvest(Invest invest) async {
-    var dbClient = await db;
-    List maps = await dbClient
-        .query('invest', where: 'investcode=?', whereArgs: [invest.investcode]);
-    if (maps.length > 0) {
-      Map temp = maps.last;
-      invest.id = temp['id'];
-      return await dbClient.update('invest', invest.toMap(),
-          where: 'investcode=?', whereArgs: [invest.investcode]);
-    } else {
-      return await dbClient.insert('invest', invest.toMap());
-    }
-  }
-
   Future<List<Map>> getInvest() async {
     var dbClient = await db;
     List<Map> maps = await dbClient.query('invest', columns: [
       'id',
-      'investtime',
-      'pertime',
-      'investamount',
-      'endtime',
+      'date',
+      'perDate',
+      'amount',
+      'endDate',
       'received',
-      'investcode',
-      'investtype',
+      'code',
+      'type',
       'status',
       'interest',
       'currency',
@@ -107,13 +81,51 @@ class DBHelper {
     return maps;
   }
 
-  Future<int> deleteInvest(String investcode) async {
+  Future<int> updateInvest(Invest invest) async {
+    var dbClient = await db;
+    List maps = await dbClient
+        .query('invest', where: 'code=?', whereArgs: [invest.code]);
+    if (maps.length > 0) {
+      Map temp = maps.last;
+      invest.id = temp['id'];
+      return await dbClient.update('invest', invest.toMap(),
+          where: 'code=?', whereArgs: [invest.code]);
+    } else {
+      return await dbClient.insert('invest', invest.toMap());
+    }
+  }
+
+  Future<int> deleteInvest(String code) async {
     var dbClient = await db;
     return await dbClient.delete(
       'invest',
-      where: 'investcode = ?',
-      whereArgs: [investcode],
+      where: 'code = ?',
+      whereArgs: [code],
     );
+  }
+
+  Future<List<Map>> getBill() async {
+    var dbClient = await db;
+    List<Map> maps = await dbClient.query('bill',
+        columns: ['id', 'date', 'currency', 'use', 'amount', 'mark']);
+
+    return maps;
+  }
+
+  Future<int> updateBill(Bill bill) async {
+    var dbClient = await db;
+    List<Map> maps =
+        await dbClient.query('asset', where: 'date=?', whereArgs: [bill.date]);
+    if (maps.length > 0) {
+      Map temp = maps.last;
+      bill.id = temp['id'];
+      // bill.asset = temp['asset'] + asset.asset;
+      // bill.debt = temp['debt'] + asset.debt;
+      return await dbClient.update('bill', bill.toMap(),
+          where: 'date=?', whereArgs: [bill.date]);
+    } else {
+      return await dbClient.insert('bill', bill.toMap());
+    }
   }
 
   Future<int> delete(int id) async {
