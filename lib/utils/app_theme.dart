@@ -59,28 +59,16 @@ class AppTheme {
 
   //------BorderRadiusStyle-----
 
-  static const normalBorderRadius = BorderRadius.only(
-      topLeft: Radius.circular(8.0),
-      bottomLeft: Radius.circular(8.0),
-      bottomRight: Radius.circular(8.0),
-      topRight: Radius.circular(8.0));
+  static const normalBorderRadius = BorderRadius.all(Radius.circular(8.0));
 
-  static const smallBorderRadius = BorderRadius.only(
-      topLeft: Radius.circular(6.0),
-      bottomLeft: Radius.circular(6.0),
-      bottomRight: Radius.circular(6.0),
-      topRight: Radius.circular(6.0));
+  static const smallBorderRadius = BorderRadius.all(Radius.circular(8.0));
 
   static const normalBoxShadow = BoxShadow(
       color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 5.0);
 
   static const boxDecoration = BoxDecoration(
     color: ColorTheme.white,
-    borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(8.0),
-        bottomLeft: Radius.circular(8.0),
-        bottomRight: Radius.circular(8.0),
-        topRight: Radius.circular(8.0)),
+    borderRadius: BorderRadius.all(Radius.circular(8.0)),
     boxShadow: <BoxShadow>[
       BoxShadow(
           color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 8.0),

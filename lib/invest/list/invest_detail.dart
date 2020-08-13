@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/app_ui.dart';
+import 'package:vara/utils/app_common.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/toolkit.dart';

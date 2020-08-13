@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/app_ui.dart';
+import 'package:vara/utils/app_common.dart';
 import 'package:vara/utils/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import 'invest_detail.dart';

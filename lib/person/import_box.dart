@@ -35,7 +35,7 @@ class ImportBoxView extends StatelessWidget {
               child: Card(
                 elevation: 10,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(20),
