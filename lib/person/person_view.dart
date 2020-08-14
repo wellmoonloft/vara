@@ -61,16 +61,20 @@ class _HomeViewState extends State<PersonView>
                 } else if (index == 3) {
                   postPiece = Container(
                     child: TitleView(
-                      titleTxt: 'Invest',
-                      subTxt: 'Invest List',
-                      navigator: 'invest',
+                      titleTxt: 'Bookkeeping',
+                      subTxt: '',
+                      navigator: '',
                       color: ColorTheme.cassis,
                     ), //
+                  );
+                } else if (index == 4) {
+                  postPiece = Container(
+                    child: BookkeepingView(), //
                   );
                 }
                 return postPiece;
               },
-              childCount: 4,
+              childCount: 5,
             ),
           ),
         ],

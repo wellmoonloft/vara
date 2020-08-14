@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vara/invest/import/import_view.dart';
 
 import 'package:vara/utils/app_theme.dart';
 import 'package:vara/utils/color_theme.dart';
@@ -7,8 +8,10 @@ class ImportBoxView extends StatelessWidget {
   final String title;
   final String navigator;
   final Color color;
+  final IconData icon;
 
-  const ImportBoxView({Key key, this.title, this.navigator, this.color})
+  const ImportBoxView(
+      {Key key, this.title, this.navigator, this.color, this.icon})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,12 @@ class ImportBoxView extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(bottom: 10),
-            child: Text(
-              title,
-              style: AppTheme.titleTextSmall,
-            ),
+            child: Text(title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
+                  color: color,
+                )),
           ),
           DecoratedBox(
             decoration: BoxDecoration(
@@ -58,7 +63,7 @@ class ImportBoxView extends StatelessWidget {
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: Icon(
-                              Icons.home,
+                              icon,
                               color: Colors.white,
                             ),
                           ),
@@ -79,10 +84,10 @@ class ImportBoxView extends StatelessWidget {
 _navigateAndDisplaySelection(context, navigator) {
   print('object');
   if (navigator == 'invest') {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => InvestImportView()),
-    // );
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => InvestImportView()),
+    );
   } else if (navigator == 'bill') {
     // Navigator.push(
     //   context,

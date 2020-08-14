@@ -121,7 +121,7 @@ class TopBarView extends StatelessWidget {
                           (MediaQuery.of(context).size.width * 0.3 - 40) / 2,
                       width: MediaQuery.of(context).size.width * 0.3 - 38,
                       decoration: BoxDecoration(
-                        color: ColorTheme.cassisdarker,
+                        color: ColorTheme.cassis,
                         borderRadius: AppTheme.normalBorderRadius,
                         boxShadow: <BoxShadow>[
                           AppTheme.normalBoxShadow,
