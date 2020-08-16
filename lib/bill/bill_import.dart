@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/app_common.dart';
-import '../utils/color_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
+import '../theme_ui/color_theme.dart';
 
 class BillImportView extends StatelessWidget {
   @override

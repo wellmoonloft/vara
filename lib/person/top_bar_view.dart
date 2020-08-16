@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/color_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/home/top/btc_chart_view.dart';
-import 'package:vara/utils/app_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class TopBarView extends StatelessWidget {
   final String title;

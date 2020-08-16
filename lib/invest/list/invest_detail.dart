@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/app_common.dart';
-import 'package:vara/utils/color_theme.dart';
-import 'package:vara/utils/app_theme.dart';
+import 'package:vara/models/db_models.dart';
+
+import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/utils/toolkit.dart';
 
 class InvestDetail extends StatelessWidget {
-  final Map<dynamic, dynamic> investdetail;
+  final Invest investdetail;
 
   const InvestDetail({Key key, this.investdetail}) : super(key: key);
 
@@ -28,31 +30,28 @@ class InvestDetail extends StatelessWidget {
         body: Container(
             color: ColorTheme.white,
             child: ListView(children: [
-              ListDetail(title: 'Invest Code:', value: investdetail['code']),
-              ListDetail(title: 'Invest Time:', value: investdetail['date']),
+              ListDetail(title: 'Invest Code:', value: investdetail.code),
+              ListDetail(title: 'Invest Time:', value: investdetail.date),
               ListDetail(
-                  title: 'Plan payment time:', value: investdetail['perDate']),
+                  title: 'Plan payment time:', value: investdetail.perDate),
               ListDetail(
-                  title: 'Final Payment Time:', value: investdetail['endDate']),
+                  title: 'Final Payment Time:', value: investdetail.endDate),
               ListDetail(
                   title: 'Invest Amount:',
-                  value:
-                      '€ ' + formatNum(investdetail['amount'], 2).toString()),
+                  value: '€ ' + formatNum(investdetail.amount, 2).toString()),
               ListDetail(
                   title: 'Received:',
-                  value:
-                      '€ ' + formatNum(investdetail['received'], 2).toString()),
+                  value: '€ ' + formatNum(investdetail.received, 2).toString()),
               ListDetail(
                   title: 'Interest:',
-                  value:
-                      '€ ' + formatNum(investdetail['interest'], 2).toString()),
+                  value: '€ ' + formatNum(investdetail.interest, 2).toString()),
               ListDetail(
                   title: 'totalyield:',
-                  value: formatNum(investdetail['totalyield'], 2).toString() +
-                      '%'),
-              ListDetail(title: 'Status:', value: investdetail['status']),
-              ListDetail(title: 'Currency:', value: investdetail['currency']),
-              ListDetail(title: 'Country:', value: investdetail['country']),
+                  value:
+                      formatNum(investdetail.totalyield, 2).toString() + '%'),
+              ListDetail(title: 'Status:', value: investdetail.status),
+              ListDetail(title: 'Currency:', value: investdetail.currency),
+              ListDetail(title: 'Country:', value: investdetail.country),
             ])));
   }
 }

@@ -1,75 +1,92 @@
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:charts_flutter/flutter.dart';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/toolTipMgr.dart';
+import 'package:vara/theme_ui/app_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
 
 class AssetChartView extends StatelessWidget {
-  static String pointerValue;
+  final AnimationController animationController;
+  final Animation animation;
+
+  const AssetChartView({Key key, this.animationController, this.animation})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: MediaQuery.of(context).size.width,
-        child: Padding(
-            padding: AppTheme.outboxpadding,
-            child: Container(
-                decoration: AppTheme.boxDecoration,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, bottom: 5, left: 15),
-                          child: charts.TimeSeriesChart(
-                            _createSampleData(context),
-                            animate: false,
-                            defaultRenderer: new charts.LineRendererConfig(),
-                            customSeriesRenderers: [
-                              new charts.PointRendererConfig(
-                                  // ID used to link series to this renderer.
-                                  customRendererId: 'customPoint')
+    return ChangeNotifierProvider(
+        create: (context) => ChartData(),
+        child: AnimatedBuilder(
+            animation: animationController,
+            builder: (BuildContext context, Widget child) {
+              return FadeTransition(
+                  opacity: animation,
+                  child: Transform(
+                      transform: new Matrix4.translationValues(
+                          0.0, 30 * (1.0 - animation.value), 0.0),
+                      child: Container(
+                          height: 300,
+                          child: Container(
+                              child: Stack(
+                            overflow: Overflow.visible,
+                            children: <Widget>[
+                              charts.TimeSeriesChart(
+                                _createSampleData(context),
+                                animate: true,
+
+                                primaryMeasureAxis: charts.NumericAxisSpec(
+                                    renderSpec: charts.NoneRenderSpec()),
+                                // primaryMeasureAxis: charts.NumericAxisSpec(
+                                //   tickFormatterSpec:
+                                //       new charts.BasicNumericTickFormatterSpec(
+                                //           (value) => '${value / 1000}M'),
+                                defaultRenderer: charts.LineRendererConfig(
+                                    includeArea: true,
+                                    includePoints: false,
+                                    includeLine: true,
+                                    stacked: false,
+                                    strokeWidthPx: 3),
+                                selectionModels: [
+                                  charts.SelectionModelConfig(
+                                      type: charts.SelectionModelType.info,
+                                      changedListener: (SelectionModel model) {
+                                        if (model.hasDatumSelection) {
+                                          var chartData =
+                                              Provider.of<ChartData>(context,
+                                                  listen: false);
+                                          final measures = <String, num>{};
+                                          String time = '';
+                                          model.selectedDatum.forEach(
+                                              (charts.SeriesDatum datumPair) {
+                                            measures[datumPair
+                                                    .series.displayName] =
+                                                datumPair.datum.sales;
+                                          });
+                                          time = DateFormat('yyyy-MM-dd')
+                                              .format(model.selectedDatum.first
+                                                  .datum.time)
+                                              .toString();
+                                          chartData.setDate(time);
+                                          chartData.setNumber(measures);
+                                        }
+                                      })
+                                ],
+                                dateTimeFactory:
+                                    const charts.LocalDateTimeFactory(),
+                              ),
+                              ShowDetail()
                             ],
-                            behaviors: [
-                              new charts.LinePointHighlighter(
-                                  symbolRenderer: CustomCircleSymbolRenderer()),
-                              new charts.SelectNearest(
-                                  eventTrigger:
-                                      charts.SelectionTrigger.tapAndDrag)
-                            ],
-                            selectionModels: [
-                              charts.SelectionModelConfig(changedListener:
-                                  (charts.SelectionModel model) {
-                                if (model.hasDatumSelection) {
-                                  ToolTipMgr.setTitle({
-                                    'title':
-                                        //'${model.selectedSeries[0].measureFn(model.selectedDatum[0].datum.sales)}',
-                                        '${model.selectedDatum[0].datum.sales}',
-                                    'subTitle':
-                                        '${model.selectedDatum[0].datum.time}'
-                                  });
-                                  // print({
-                                  //   //model.selectedSeries[0].measureFn(
-                                  //   model.selectedDatum[0].datum.sales,
-                                  //   model.selectedDatum[0].datum.time
-                                  //   //)
-                                  // });
-                                }
-                              })
-                            ],
-                            dateTimeFactory:
-                                const charts.LocalDateTimeFactory(),
-                          )),
-                    ),
-                  ],
-                ))));
+                          )))));
+            }));
   }
 
   static List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData(
       context) {
-    List<Map> asset = Provider.of<InvestData>(context).assetList;
+    List<Asset> asset = Provider.of<ProviderData>(context).assetList;
     List<TimeSeriesSales> assetSalesData = [];
     List<TimeSeriesSales> investSalesData = [];
     List<TimeSeriesSales> netAssetSalesData = [];
@@ -78,41 +95,39 @@ class AssetChartView extends StatelessWidget {
     double netAssetValue = 0.0;
     if (asset != null) {
       for (var i = 0; i < asset.length; i++) {
-        Map<String, dynamic> temp = asset[asset.length - i - 1];
-        assetValue = assetValue + temp['asset'].toDouble();
-        debtValue = debtValue + temp['debt'].toDouble();
+        Asset temp = asset[i];
+        assetValue = assetValue + temp.asset.toDouble();
+        debtValue = debtValue + temp.debt.toDouble();
         netAssetValue = assetValue - debtValue;
         assetSalesData.insert(
-            i, TimeSeriesSales(DateTime.parse(temp['date']), assetValue));
+            i, TimeSeriesSales(DateTime.parse(temp.date), assetValue));
         investSalesData.insert(
-            i, TimeSeriesSales(DateTime.parse(temp['date']), debtValue));
+            i, TimeSeriesSales(DateTime.parse(temp.date), debtValue));
         netAssetSalesData.insert(
-            i, TimeSeriesSales(DateTime.parse(temp['date']), netAssetValue));
+            i, TimeSeriesSales(DateTime.parse(temp.date), netAssetValue));
       }
     }
     return [
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Asset',
-        colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#c79ba6'),
         domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: assetSalesData,
       ),
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Debt',
-        colorFn: (_, __) => charts.Color.fromHex(code: '#AD6E7D'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#ff6a4e'),
         domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: investSalesData,
       ),
       new charts.Series<TimeSeriesSales, DateTime>(
           id: 'NetAsset',
-          colorFn: (_, __) => charts.Color.fromHex(code: '#ff320b'),
+          colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
           domainFn: (TimeSeriesSales sales, _) => sales.time,
           measureFn: (TimeSeriesSales sales, _) => sales.sales,
           data: netAssetSalesData)
-      // Configure our custom point renderer for this series.
-      //..setAttribute(charts.rendererIdKey, 'customPoint'),
     ];
   }
 }
@@ -122,4 +137,78 @@ class TimeSeriesSales {
   final double sales;
 
   TimeSeriesSales(this.time, this.sales);
+}
+
+class ShowDetail extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+        left: 24,
+        top: 24,
+        width: 150,
+        child: Consumer<ChartData>(builder: (context, providerdata, child) {
+          return providerdata.date == null
+              ? Container()
+              : Container(
+                  decoration: BoxDecoration(
+                    color: ColorTheme.puristbluedarker.withOpacity(0.7),
+                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  ),
+                  child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Consumer<ChartData>(
+                          builder: (context, providerdata, child) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              providerdata.date == null
+                                  ? 'Date'
+                                  : providerdata.date,
+                              style: AppTheme.chartText,
+                            ),
+                            Text(
+                              providerdata.number == null
+                                  ? 'Asset: 0'
+                                  : 'Asset: ' +
+                                      providerdata.number['Asset']
+                                          .toStringAsFixed(2),
+                              style: AppTheme.chartText,
+                            ),
+                            Text(
+                              providerdata.number == null
+                                  ? 'Debt: 0'
+                                  : 'Debt: ' +
+                                      providerdata.number['Debt']
+                                          .toStringAsFixed(2),
+                              style: AppTheme.chartText,
+                            ),
+                            Text(
+                              providerdata.number == null
+                                  ? 'NetAsset: 0'
+                                  : 'NetAsset: ' +
+                                      providerdata.number['NetAsset']
+                                          .toStringAsFixed(2),
+                              style: AppTheme.chartText,
+                            )
+                          ],
+                        );
+                      })));
+        }));
+  }
+}
+
+class ChartData extends ChangeNotifier {
+  String date;
+  Map<String, num> number;
+
+  setDate(time) {
+    date = time;
+    notifyListeners();
+  }
+
+  setNumber(measures) {
+    number = measures;
+    notifyListeners();
+  }
 }

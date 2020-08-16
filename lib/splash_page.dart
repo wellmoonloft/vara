@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'home/home_view.dart';
+import 'home/home_page.dart';
 import 'models/provider_data.dart';
-import 'utils/color_theme.dart';
+import 'theme_ui/color_theme.dart';
 import 'utils/db_helper.dart';
 
 class SplashPage extends StatefulWidget {
@@ -92,20 +92,20 @@ class _SplashPageState extends State<SplashPage> {
     //     4);
     print("----get data done------");
     Navigator.of(context).pushReplacement(new MaterialPageRoute(
-        builder: (context) => HomeView(
-              btc: btc,
-              btcdaily: btcdaily,
-              usdcnydaily: usdcnydaily,
-              eurcnydaily: eurcnydaily,
+        builder: (context) => HomeScreen1(
+            // btc: btc,
+            // btcdaily: btcdaily,
+            // usdcnydaily: usdcnydaily,
+            // eurcnydaily: eurcnydaily,
             )));
   }
 
   _doDatabase() async {
     DBHelper dbHelper = DBHelper();
     await dbHelper.initDatabase();
-    var assetandinvestlist = Provider.of<InvestData>(context, listen: false);
-    assetandinvestlist.getAssetList();
-    assetandinvestlist.getinvestList();
+    var providerData = Provider.of<ProviderData>(context, listen: false);
+    providerData.getAssetList();
+    providerData.getinvestList();
   }
 
   _getNetData(url, mark) async {

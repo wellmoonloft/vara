@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vara/bill/bill_import_view.dart';
 import 'package:vara/invest/import/import_view.dart';
-import 'app_theme.dart';
-import 'color_theme.dart';
-import 'toolkit.dart';
+import 'package:vara/utils/toolkit.dart';
+
+import '../app_theme.dart';
+import '../color_theme.dart';
 
 class SummaryBottom extends StatelessWidget {
   final String title;
@@ -135,7 +136,6 @@ class SummaryTopTitile extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w800,
-                    letterSpacing: -1.0,
                     fontSize: 26,
                     color: color,
                   ),
@@ -186,7 +186,7 @@ class SummaryTopGraph extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  formatNum(value, 2).toString() + '%',
+                  value.toStringAsFixed(2) + '%',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
@@ -274,6 +274,88 @@ class CustomButtom extends StatelessWidget {
                       style: AppTheme.buttomTitle,
                     ),
                   )))),
+    );
+  }
+}
+
+class AppBarUI extends StatelessWidget {
+  final String title;
+  final String navigator;
+  final AnimationController animationController;
+  final Animation animation;
+  final double opacity;
+
+  const AppBarUI(
+      {Key key,
+      this.title,
+      this.navigator,
+      this.animationController,
+      this.animation,
+      this.opacity})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        AnimatedBuilder(
+          animation: animation,
+          builder: (BuildContext context, Widget child) {
+            return FadeTransition(
+              opacity: animation,
+              child: Transform(
+                transform: Matrix4.translationValues(
+                    0.0, 30 * (1.0 - animation.value), 0.0),
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   color: ColorTheme.white.withOpacity(opacity),
+                  //   borderRadius: const BorderRadius.only(
+                  //     bottomLeft: Radius.circular(32.0),
+                  //   ),
+                  //   boxShadow: <BoxShadow>[
+                  //     BoxShadow(
+                  //         color: ColorTheme.grey.withOpacity(0.4 * opacity),
+                  //         offset: const Offset(1.1, 1.1),
+                  //         blurRadius: 10.0),
+                  //   ],
+                  // ),
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: MediaQuery.of(context).padding.top,
+                      ),
+                      Padding(
+                        padding: AppTheme.outboxpadding,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Expanded(
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  title,
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    //fontFamily: AppTheme.fontName,
+                                    fontWeight: FontWeight.w700,
+                                    //fontSize: 22 + 6 - 6 * opacity,
+                                    fontSize: 32,
+                                    letterSpacing: 0,
+                                    color: ColorTheme.greytripledarker,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        )
+      ],
     );
   }
 }
@@ -369,36 +451,9 @@ class InvestList extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            title1,
-                            textAlign: TextAlign.start,
-                            style: AppTheme.subtitleText,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 6, bottom: 6),
-                            child: Text(
-                              title2,
-                              textAlign: TextAlign.start,
-                              style: AppTheme.titleTextSmallLighter,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text(
                         title3,
@@ -416,31 +471,24 @@ class InvestList extends StatelessWidget {
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: AppTheme.inboxpadding,
-            child: Row(
-              children: <Widget>[
                 Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            title5,
+                            title1,
                             textAlign: TextAlign.start,
                             style: AppTheme.subtitleText,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 6, bottom: 6),
                             child: Text(
-                              title6,
+                              title2,
                               textAlign: TextAlign.start,
                               style: AppTheme.titleTextSmallLighter,
                             ),
@@ -472,9 +520,9 @@ class InvestList extends StatelessWidget {
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: (title8 == 'CURRENT')
-                                    ? ColorTheme.neogreendarker
-                                    : ColorTheme.cantaloupedarker,
+                                color: (title8 == 'LATE')
+                                    ? ColorTheme.cantaloupedarker
+                                    : ColorTheme.neogreendarker,
                               ),
                             ),
                           ),

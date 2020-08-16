@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/app_common.dart';
-import 'package:vara/utils/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
+import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
-import 'package:vara/utils/app_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class BillListView extends StatefulWidget {
   //final List<Map> investList;
@@ -32,7 +32,7 @@ class BillListState extends State<BillListView> {
 
   @override
   Widget build(BuildContext context) {
-    billList = Provider.of<InvestData>(context).billList;
+    billList = Provider.of<ProviderData>(context).billList;
     if (billList != null) {
       billList.forEach((element) {
         current.add(element);

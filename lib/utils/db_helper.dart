@@ -5,6 +5,8 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
 
+import 'num_utils.dart';
+
 Database _db;
 
 class DBHelper {
@@ -36,33 +38,34 @@ class DBHelper {
         'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT,amount INTEGER, mark BOOLEAN)');
   }
 
-  Future<List<Map>> getAsset() async {
+  Future<List<Asset>> getAsset() async {
     var dbClient = await db;
-    List<Map> maps =
-        await dbClient.query('asset', columns: ['id', 'date', 'asset', 'debt']);
-
-    return maps;
+    var result = await dbClient.query('asset',
+        columns: ['id', 'date', 'asset', 'debt'], orderBy: 'date');
+    List<Asset> asset = [];
+    result.forEach((element) => asset.add(Asset.fromJson(element)));
+    return asset;
   }
 
   Future<int> updateAsset(Asset asset) async {
     var dbClient = await db;
-    List<Map> maps =
+    var result =
         await dbClient.query('asset', where: 'date=?', whereArgs: [asset.date]);
-    if (maps.length > 0) {
-      Map temp = maps.last;
-      asset.id = temp['id'];
-      asset.asset = temp['asset'] + asset.asset;
-      asset.debt = temp['debt'] + asset.debt;
-      return await dbClient.update('asset', asset.toMap(),
+    if (result.length > 0) {
+      Asset temp = Asset.fromJson(result.last);
+      asset.id = temp.id;
+      asset.asset = temp.asset + asset.asset;
+      asset.debt = temp.debt + asset.debt;
+      return await dbClient.update('asset', asset.toJson(),
           where: 'date=?', whereArgs: [asset.date]);
     } else {
-      return await dbClient.insert('asset', asset.toMap());
+      return await dbClient.insert('asset', asset.toJson());
     }
   }
 
-  Future<List<Map>> getInvest() async {
+  Future<List<Invest>> getInvest() async {
     var dbClient = await db;
-    List<Map> maps = await dbClient.query('invest', columns: [
+    var result = await dbClient.query('invest', columns: [
       'id',
       'date',
       'perDate',
@@ -78,29 +81,76 @@ class DBHelper {
       'totalyield'
     ]);
 
-    return maps;
+    List<Invest> invest = [];
+    result.forEach((element) => invest.add(Invest.fromJson(element)));
+    return invest;
   }
 
   Future<int> updateInvest(Invest invest) async {
     var dbClient = await db;
-    List maps = await dbClient
+    var result = await dbClient
         .query('invest', where: 'code=?', whereArgs: [invest.code]);
-    if (maps.length > 0) {
-      Map temp = maps.last;
-      invest.id = temp['id'];
-      return await dbClient.update('invest', invest.toMap(),
+    if (result.length > 0) {
+      Invest temp = Invest.fromJson(result.last);
+      invest.id = temp.id;
+      return await dbClient.update('invest', invest.toJson(),
           where: 'code=?', whereArgs: [invest.code]);
     } else {
-      return await dbClient.insert('invest', invest.toMap());
+      return await dbClient.insert('invest', invest.toJson());
     }
   }
 
-  Future<int> deleteInvest(String code) async {
+  Future updateInvestandAseet(Invest invest) async {
+    var dbClient = await db;
+    var result = await dbClient
+        .query('invest', where: 'code=?', whereArgs: [invest.code]);
+
+    Asset asset = new Asset();
+    asset.debt = 0;
+    if (invest.status == 'FINISHED') {
+      var starttime = DateTime.parse(invest.date);
+      var endDate = DateTime.parse(invest.endDate);
+      var daydifree = endDate.difference(starttime);
+
+      asset.asset = NumUtil.subtract(invest.received, invest.amount);
+      asset.date = invest.endDate;
+      invest.interest = NumUtil.subtract(invest.received, invest.amount);
+      double temp = NumUtil.divide(invest.interest, invest.amount);
+      if (temp == 0) {
+        invest.totalyield = 0;
+      } else {
+        temp = NumUtil.divide(temp, daydifree.inDays);
+        invest.totalyield = NumUtil.multiply(temp, 365);
+      }
+    } else {
+      asset.asset = invest.amount;
+      asset.date = invest.date;
+      invest.interest = 0;
+      invest.totalyield = 0;
+    }
+
+    if (result.length > 0) {
+      if (invest.status == 'FINISHED') {
+        Invest temp = Invest.fromJson(result.last);
+        if (temp.status != 'FINISHED') {
+          invest.id = temp.id;
+          await dbClient.update('invest', invest.toJson(),
+              where: 'code=?', whereArgs: [invest.code]);
+          await updateAsset(asset);
+        }
+      }
+    } else {
+      await dbClient.insert('invest', invest.toJson());
+      await updateAsset(asset);
+    }
+  }
+
+  Future<int> deleteInvest(Invest invest) async {
     var dbClient = await db;
     return await dbClient.delete(
       'invest',
       where: 'code = ?',
-      whereArgs: [code],
+      whereArgs: [invest.code],
     );
   }
 
@@ -121,10 +171,10 @@ class DBHelper {
       bill.id = temp['id'];
       // bill.asset = temp['asset'] + asset.asset;
       // bill.debt = temp['debt'] + asset.debt;
-      return await dbClient.update('bill', bill.toMap(),
+      return await dbClient.update('bill', bill.toJson(),
           where: 'date=?', whereArgs: [bill.date]);
     } else {
-      return await dbClient.insert('bill', bill.toMap());
+      return await dbClient.insert('bill', bill.toJson());
     }
   }
 
@@ -141,10 +191,19 @@ class DBHelper {
     var dbClient = await db;
     return await dbClient.update(
       'person',
-      person.toMap(),
+      person.toJson(),
       where: 'id = ?',
       whereArgs: [person.id],
     );
+  }
+
+  Future<List<Person>> getPerson() async {
+    var dbClient = await db;
+    var result = await dbClient.query('asset',
+        columns: ['id', 'firstname', 'midname', 'lastname', 'age', 'sex']);
+    List<Person> person = [];
+    result.forEach((element) => person.add(Person.fromJson(element)));
+    return person;
   }
 
   Future close() async {

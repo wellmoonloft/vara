@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/color_theme.dart';
-import 'package:vara/utils/app_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class AssetTitleView extends StatelessWidget {
   final String titleTxt;

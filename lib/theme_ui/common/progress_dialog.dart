@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'color_theme.dart';
+import '../color_theme.dart';
 
 class ProgressDialog {
   static bool _isShowing = false;

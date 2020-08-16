@@ -3,9 +3,9 @@ import 'package:vara/utils/db_helper.dart';
 
 import 'db_models.dart';
 
-class InvestData extends ChangeNotifier {
-  List<Map> investList;
-  List<Map> assetList;
+class ProviderData extends ChangeNotifier {
+  List<Invest> investList;
+  List<Asset> assetList;
   List<Map> billList;
 
   Future getinvestList() async {
@@ -13,20 +13,24 @@ class InvestData extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateInvestList(Invest invest) async {
+  Future updateInvest(Invest invest) async {
     await DBHelper().updateInvest(invest);
     await getinvestList();
     notifyListeners();
   }
 
-  Future deleteInvest(String code) async {
-    await DBHelper().deleteInvest(code);
+  Future updateInvestandAseet(Invest invest) async {
+    await DBHelper().updateInvestandAseet(invest);
+  }
+
+  Future deleteInvest(Invest invest) async {
+    await DBHelper().deleteInvest(invest);
     notifyListeners();
   }
 
   Future getAssetList() async {
     assetList = await DBHelper().getAsset();
-    notifyListeners();
+    return assetList;
   }
 
   Future updateAsset(Asset asset) async {

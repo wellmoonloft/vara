@@ -12,26 +12,23 @@ class Person {
       this.lastname,
       this.age,
       this.sex});
-
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'id': id,
-      'firstname': firstname,
-      'midname': midname,
-      'lastname': lastname,
-      'age': age,
-      'sex': sex
-    };
-    return map;
+  Person.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    firstname = json['firstname'];
+    midname = json['midname'];
+    lastname = json['lastname'];
+    age = json['age'];
+    sex = json['sex'];
   }
-
-  Person.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    firstname = map['firstname'];
-    midname = map['midname'];
-    lastname = map['lastname'];
-    age = map['age'];
-    sex = map['sex'];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['firstname'] = this.firstname;
+    map['midname'] = this.midname;
+    map['lastname'] = this.lastname;
+    map['age'] = this.age;
+    map['sex'] = this.sex;
+    return map;
   }
 }
 
@@ -49,7 +46,6 @@ class Invest {
   String currency;
   String country;
   num totalyield;
-
   Invest(
       {this.id,
       this.date,
@@ -64,40 +60,37 @@ class Invest {
       this.country,
       this.interest,
       this.totalyield});
-
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'id': id,
-      'date': date,
-      'perDate': perDate,
-      'amount': amount,
-      'endDate': endDate,
-      'received': received,
-      'code': code,
-      'type': type,
-      'status': status,
-      'interest': interest,
-      'currency': currency,
-      'country': country,
-      'totalyield': totalyield
-    };
-    return map;
+  Invest.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'];
+    perDate = json['perDate'];
+    amount = json['amount'];
+    endDate = json['endDate'];
+    received = json['received'];
+    code = json['code'];
+    type = json['type'];
+    status = json['status'];
+    interest = json['interest'];
+    currency = json['currency'];
+    country = json['country'];
+    totalyield = json['totalyield'];
   }
-
-  Invest.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    date = map['date'];
-    perDate = map['perDate'];
-    amount = map['amount'];
-    endDate = map['endDate'];
-    received = map['received'];
-    code = map['code'];
-    type = map['type'];
-    status = map['status'];
-    interest = map['interest'];
-    currency = map['currency'];
-    country = map['country'];
-    totalyield = map['totalyield'];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['date'] = this.date;
+    map['perDate'] = this.perDate;
+    map['amount'] = this.amount;
+    map['endDate'] = this.endDate;
+    map['received'] = this.received;
+    map['code'] = this.code;
+    map['type'] = this.type;
+    map['status'] = this.status;
+    map['interest'] = this.interest;
+    map['currency'] = this.currency;
+    map['country'] = this.country;
+    map['totalyield'] = this.totalyield;
+    return map;
   }
 }
 
@@ -107,21 +100,19 @@ class Asset {
   num asset;
   num debt;
   Asset({this.id, this.date, this.asset, this.debt});
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'id': id,
-      'date': date,
-      'asset': asset,
-      'debt': debt,
-    };
-    return map;
+  Asset.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'];
+    asset = json['asset'];
+    debt = json['debt'];
   }
-
-  Asset.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    date = map['date'];
-    asset = map['asset'];
-    debt = map['debt'];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['date'] = this.date;
+    map['asset'] = this.asset;
+    map['debt'] = this.debt;
+    return map;
   }
 }
 
@@ -133,15 +124,22 @@ class Bill {
   String amount;
   bool mark;
   Bill({this.id, this.date, this.currency, this.amount, this.use, this.mark});
-  Map<String, dynamic> toMap() {
-    var map = <String, dynamic>{
-      'id': id,
-      'date': date,
-      'currency': currency,
-      'mark': mark,
-      'use': use,
-      'amount': amount
-    };
+  Bill.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'];
+    currency = json['currency'];
+    use = json['use'];
+    amount = json['amount'];
+    mark = json['mark'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['date'] = this.date;
+    map['currency'] = this.currency;
+    map['use'] = this.use;
+    map['amount'] = this.amount;
+    map['mark'] = this.mark;
     return map;
   }
 }

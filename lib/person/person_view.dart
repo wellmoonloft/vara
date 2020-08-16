@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vara/person/top_bar_view.dart';
-import 'package:vara/utils/title_view.dart';
-import '../utils/color_theme.dart';
+import 'package:vara/theme_ui/common/title_view.dart';
+import '../theme_ui/color_theme.dart';
 import 'import_view.dart';
 
 class PersonView extends StatefulWidget {
@@ -104,7 +104,7 @@ class _HomeViewState extends State<PersonView>
           child: FloatingActionButton(
               heroTag: "person",
               child: Icon(
-                Icons.person,
+                Icons.note_add,
                 color: Colors.white,
                 size: 40,
               ),

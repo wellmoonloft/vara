@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/utils/color_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
 
 import 'import_box.dart';
 

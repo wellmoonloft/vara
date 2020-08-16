@@ -4,11 +4,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/progress_dialog.dart';
+import 'package:vara/theme_ui/app_theme.dart';
+
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/color_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/progress_dialog.dart';
 import 'mapping_left.dart';
 
 class InvestImportView extends StatefulWidget {
@@ -22,17 +23,17 @@ class _ImportViewState extends State<InvestImportView> {
   String _extension;
   FileType _pickingType = FileType.any;
 
-  int date = 0;
-  int perDate = 0;
-  int amount = 0;
-  int endDate = 0;
-  int received = 0;
-  int code = 0;
-  int type = 0;
-  int status = 0;
-  int interest = 0;
-  int currency = 0;
-  int country = 0;
+  // int date = 0;
+  // int perDate = 0;
+  // int amount = 0;
+  // int endDate = 0;
+  // int received = 0;
+  // int code = 0;
+  // int type = 0;
+  // int status = 0;
+  // int interest = 0;
+  // int currency = 0;
+  // int country = 0;
   String dropdownMenu1;
   String dropdownMenu2;
   String dropdownMenu3;
@@ -61,8 +62,7 @@ class _ImportViewState extends State<InvestImportView> {
     try {
       if (_path == null) {
       } else {
-        var assetandinvestlist =
-            Provider.of<InvestData>(context, listen: false);
+        var providerData = Provider.of<ProviderData>(context, listen: false);
 
         for (var table in excel.tables.keys) {
           print('table   ' + table);
@@ -73,14 +73,13 @@ class _ImportViewState extends State<InvestImportView> {
 
           for (int row = 0; row < excel.tables[table].maxRows; row++) {
             Invest invest = new Invest();
-            Asset asset = new Asset();
-            asset.debt = 0;
 
-            excel.tables[table].row(row).forEach((cell) {
-              var val = cell.value;
+            if (row > 0) {
+              excel.tables[table].row(row).forEach((cell) {
+                var val = cell.value;
 
-              print("Cell  |" + row.toString() + "|  $val");
-              if (row > 0) {
+                print("Cell  |" + row.toString() + "|  $val");
+
                 if (cell.colIndex == int.parse(dropdownMenu1)) {
                   invest.code = val.toString();
                 } else if (cell.colIndex == int.parse(dropdownMenu2)) {
@@ -102,32 +101,17 @@ class _ImportViewState extends State<InvestImportView> {
                 } else if (cell.colIndex == int.parse(dropdownMenu10)) {
                   invest.country = val.toString();
                 }
-              }
-            });
-            if (row > 0) {
-              if (invest.status == 'FINISHED') {
-                var starttime = DateTime.parse(invest.date);
-                var endDate = DateTime.parse(invest.endDate);
-                var daydifree = endDate.difference(starttime);
+              });
 
-                asset.asset = invest.received;
-                asset.date = invest.endDate;
-                invest.interest = invest.received - invest.amount;
-                invest.totalyield =
-                    invest.interest / invest.amount / daydifree.inDays * 365;
-              } else {
-                asset.asset = invest.amount;
-                asset.date = invest.date;
-                invest.interest = 0;
-                invest.totalyield = 0;
-              }
-              await assetandinvestlist.updateInvestList(invest);
-              await assetandinvestlist.updateAsset(asset);
+              await providerData.updateInvestandAseet(invest);
             }
+            // if (row > 0) {
+
+            // }
           }
         }
-        await assetandinvestlist.getAssetList();
-        await assetandinvestlist.getinvestList();
+        await providerData.getAssetList();
+        await providerData.getinvestList();
       }
     } on PlatformException catch (e) {
       print("Unsupported operation" + e.toString());

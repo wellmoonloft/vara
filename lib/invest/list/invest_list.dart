@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/app_common.dart';
-import 'package:vara/utils/color_theme.dart';
+
+import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/utils/toolkit.dart';
 import 'invest_detail.dart';
-import 'package:vara/utils/app_theme.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class InvestListView extends StatefulWidget {
   //final List<Map> investList;
@@ -17,10 +19,10 @@ class InvestListView extends StatefulWidget {
 }
 
 class InvestListState extends State<InvestListView> {
-  List<Map> current = List<Map>();
-  List<Map> later = List<Map>();
-  List<Map> finished = List<Map>();
-  List<Map> investList;
+  List<Invest> current = List<Invest>();
+  List<Invest> later = List<Invest>();
+  List<Invest> finished = List<Invest>();
+  List<Invest> investList;
   String date = DateFormat('yyyy-MM').format(DateTime.now()).toString();
   String moneyValue = 'ALL';
   String termValue = 'ALL';
@@ -33,7 +35,7 @@ class InvestListState extends State<InvestListView> {
 
   @override
   Widget build(BuildContext context) {
-    investList = Provider.of<InvestData>(context).investList;
+    investList = Provider.of<ProviderData>(context).investList;
     if (investList != null) {
       investList.forEach((element) {
         current.add(element);
@@ -174,7 +176,7 @@ class InvestListState extends State<InvestListView> {
                                     countryValue = newValue;
                                     if (investList != null) {
                                       investList.forEach((element) {
-                                        if (element['status'] == 'CURRENT') {
+                                        if (element.status == 'CURRENT') {
                                           current.add(element);
                                         }
                                       });
@@ -187,7 +189,7 @@ class InvestListState extends State<InvestListView> {
                                     countryValue = newValue;
                                     if (investList != null) {
                                       investList.forEach((element) {
-                                        if (element['status'] == 'LATE') {
+                                        if (element.status == 'LATE') {
                                           current.add(element);
                                         }
                                       });
@@ -233,18 +235,16 @@ class InvestListState extends State<InvestListView> {
                             },
                             child: InvestList(
                               title1: 'Invest Amount',
-                              title2:
-                                  formatNum(invest['amount'], 2).toString() +
-                                      ' ' +
-                                      invest['currency'],
+                              title2: formatNum(invest.amount, 2).toString() +
+                                  ' ' +
+                                  invest.currency,
                               title3: 'Invest Time',
-                              title4: invest['date'],
+                              title4: invest.date,
                               title5: 'Interest',
-                              title6:
-                                  formatNum(invest['interest'], 2).toString() +
-                                      invest['currency'],
+                              title6: formatNum(invest.interest, 2).toString() +
+                                  invest.currency,
                               title7: 'Status',
-                              title8: invest['status'],
+                              title8: invest.status,
                             ))));
               },
               separatorBuilder: (BuildContext context, int index) {

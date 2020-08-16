@@ -9,12 +9,20 @@ class AppTheme {
       EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 10);
   static const inboxpadding =
       EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 5);
-
+  static const chartTitlepadding =
+      EdgeInsets.only(left: 24, right: 8, top: 8, bottom: 8);
   //------TextStyle-----
 
   static const toptitleText = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 14,
+    letterSpacing: 0,
+    color: ColorTheme.white,
+  );
+
+  static const chartText = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
     letterSpacing: 0,
     color: ColorTheme.white,
   );
@@ -61,7 +69,7 @@ class AppTheme {
 
   static const normalBorderRadius = BorderRadius.all(Radius.circular(8.0));
 
-  static const smallBorderRadius = BorderRadius.all(Radius.circular(8.0));
+  static const smallBorderRadius = BorderRadius.all(Radius.circular(6.0));
 
   static const normalBoxShadow = BoxShadow(
       color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 5.0);

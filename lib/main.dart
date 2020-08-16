@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/provider_data.dart';
 import 'splash_page.dart';
-import 'utils/color_theme.dart';
+import 'theme_ui/color_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-        create: (context) => InvestData(),
+        create: (context) => ProviderData(),
         child: MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: ThemeData(

@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/invest/import/mapping_left.dart';
-import 'package:vara/utils/app_theme.dart';
-import 'package:vara/utils/progress_dialog.dart';
+import 'package:vara/theme_ui/app_theme.dart';
+
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/utils/color_theme.dart';
+import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/progress_dialog.dart';
 
 class BillImportView extends StatefulWidget {
   const BillImportView({Key key}) : super(key: key);
@@ -62,7 +63,7 @@ class _ImportViewState extends State<BillImportView> {
       if (_path == null) {
       } else {
         var assetandinvestlist =
-            Provider.of<InvestData>(context, listen: false);
+            Provider.of<ProviderData>(context, listen: false);
 
         for (var table in excel.tables.keys) {
           print('table   ' + table);
@@ -121,7 +122,7 @@ class _ImportViewState extends State<BillImportView> {
                 invest.interest = 0;
                 invest.totalyield = 0;
               }
-              await assetandinvestlist.updateInvestList(invest);
+              await assetandinvestlist.updateInvest(invest);
               await assetandinvestlist.updateAsset(asset);
             }
           }
