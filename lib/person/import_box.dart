@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/invest/import/import_view.dart';
+import 'package:vara/invest/import/invest_import_view.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
 class ImportBoxView extends StatelessWidget {

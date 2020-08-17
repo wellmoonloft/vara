@@ -30,10 +30,12 @@ class AccountView extends StatelessWidget {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               padding: AppTheme.outboxpadding,
-                              decoration: AppTheme.boxDecoration,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              decoration: BoxDecoration(
+                                color: ColorTheme.cassis.withOpacity(0.6),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                              child: Stack(
                                 children: <Widget>[
                                   Container(
                                     width:
@@ -46,14 +48,20 @@ class AccountView extends StatelessWidget {
                                       children: <Widget>[
                                         Text(
                                           "Invest Account",
-                                          style: AppTheme.titleTextSmallLighter,
+                                          style: AppTheme.toptitleBigText,
                                         ),
                                         SizedBox(
                                           height: 15,
                                         ),
                                         Text(
-                                          'card.cardNo',
-                                          style: AppTheme.subtitleText,
+                                          '444',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            letterSpacing: -1.0,
+                                            fontSize: 26,
+                                            color: ColorTheme.white,
+                                          ),
                                         ),
                                         SizedBox(height: 20),
                                         Row(
@@ -61,19 +69,15 @@ class AccountView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              "Expires",
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.grey.shade400,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                              "Date:",
+                                              style: AppTheme.toptitleText,
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
                                             Text(
-                                              'card.expiryDate',
-                                              style: AppTheme.subtitleText,
+                                              '2020-10-10',
+                                              style: AppTheme.toptitleText,
                                             )
                                           ],
                                         )
@@ -81,33 +85,10 @@ class AccountView extends StatelessWidget {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 15,
-                                    right: 0,
-                                    child: Container(
-                                      height: 25,
-                                      width: 50,
-                                      color: Colors.pink,
-                                      padding: EdgeInsets.all(7),
-                                      // child: Image.network(
-                                      //   card.logo,
-                                      //   width: 50,
-                                      //   color: Colors.white,
-                                      // ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 6, bottom: 6),
-                                    child: Text(
-                                      '444',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        letterSpacing: -1.0,
-                                        fontSize: 26,
-                                        color: ColorTheme.cassis,
-                                      ),
-                                    ),
+                                    top: -14,
+                                    right: -10,
+                                    child: IconButton(
+                                        icon: Icon(Icons.add), onPressed: null),
                                   ),
                                 ],
                               ),
@@ -118,10 +99,12 @@ class AccountView extends StatelessWidget {
                             Container(
                               width: MediaQuery.of(context).size.width,
                               padding: AppTheme.outboxpadding,
-                              decoration: AppTheme.boxDecoration,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              decoration: BoxDecoration(
+                                color: ColorTheme.cantaloupelighter,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                              child: Stack(
                                 children: <Widget>[
                                   Container(
                                     width:
@@ -134,14 +117,20 @@ class AccountView extends StatelessWidget {
                                       children: <Widget>[
                                         Text(
                                           "Cash Account",
-                                          style: AppTheme.titleTextSmallLighter,
+                                          style: AppTheme.toptitleBigText,
                                         ),
                                         SizedBox(
                                           height: 15,
                                         ),
                                         Text(
-                                          'card.cardNo',
-                                          style: AppTheme.subtitleText,
+                                          '444',
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            letterSpacing: -1.0,
+                                            fontSize: 26,
+                                            color: ColorTheme.white,
+                                          ),
                                         ),
                                         SizedBox(height: 20),
                                         Row(
@@ -149,19 +138,15 @@ class AccountView extends StatelessWidget {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              "Expires",
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                color: Colors.grey.shade400,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                              "Date:",
+                                              style: AppTheme.toptitleText,
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
                                             Text(
-                                              'card.expiryDate',
-                                              style: AppTheme.subtitleText,
+                                              '2020-10-10',
+                                              style: AppTheme.toptitleText,
                                             )
                                           ],
                                         )
@@ -169,33 +154,10 @@ class AccountView extends StatelessWidget {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 15,
-                                    right: 0,
-                                    child: Container(
-                                      height: 25,
-                                      width: 50,
-                                      color: Colors.pink,
-                                      padding: EdgeInsets.all(7),
-                                      // child: Image.network(
-                                      //   card.logo,
-                                      //   width: 50,
-                                      //   color: Colors.white,
-                                      // ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 6, bottom: 6),
-                                    child: Text(
-                                      '444',
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w800,
-                                        letterSpacing: -1.0,
-                                        fontSize: 26,
-                                        color: ColorTheme.cassis,
-                                      ),
-                                    ),
+                                    top: -14,
+                                    right: -10,
+                                    child: IconButton(
+                                        icon: Icon(Icons.add), onPressed: null),
                                   ),
                                 ],
                               ),

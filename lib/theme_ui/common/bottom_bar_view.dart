@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:vara/invest/import/invest_import_view.dart';
 import 'package:vara/models/tabIcon_data.dart';
-import 'package:vara/person/person_view.dart';
 
 import '../color_theme.dart';
 
@@ -141,20 +141,13 @@ class _BottomBarViewState extends State<BottomBarView>
                     child: Container(
                       // alignment: Alignment.center,s
                       decoration: BoxDecoration(
-                        color: ColorTheme.paledarker,
-                        gradient: LinearGradient(
-                            colors: [
-                              ColorTheme.paledarker,
-                              HexColor('#6A88E5'),
-                            ],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight),
+                        color: ColorTheme.pale,
                         shape: BoxShape.circle,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
                               color: ColorTheme.paledarker.withOpacity(0.4),
-                              offset: const Offset(8.0, 16.0),
-                              blurRadius: 16.0),
+                              offset: const Offset(2.2, 2.2),
+                              blurRadius: 10.0),
                         ],
                       ),
                       child: Material(
@@ -167,7 +160,7 @@ class _BottomBarViewState extends State<BottomBarView>
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PersonView()));
+                                    builder: (context) => InvestImportView()));
                           },
                           child: Icon(
                             Icons.add,

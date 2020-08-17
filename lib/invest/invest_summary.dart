@@ -75,7 +75,7 @@ class InvestSummaryView extends StatelessWidget {
                                                 width: 3,
                                                 height: 50),
                                             SummaryTopTitile(
-                                              title: 'Invest Income',
+                                              title: 'Invested Profit',
                                               value: NumberFormat(
                                                       "€ ###,###.0#", "en_US")
                                                   .format(investIncome *
@@ -91,7 +91,7 @@ class InvestSummaryView extends StatelessWidget {
                                                 width: 3,
                                                 height: 50),
                                             SummaryTopTitile(
-                                              title: 'Total Invest',
+                                              title: 'Invested Funds',
                                               value: NumberFormat(
                                                       "€ ###,###.0#", "en_US")
                                                   .format(totalInvest *
@@ -138,7 +138,8 @@ class InvestSummaryView extends StatelessWidget {
                                   child: SummaryBottom(
                                     title: 'Short',
                                     subtitle: 'less 90days',
-                                    value: '€ ' + short.toStringAsFixed(2),
+                                    value: NumberFormat("€ ###,###.0#", "en_US")
+                                        .format(short * animation.value),
                                     color: ColorTheme.puristbluedarker,
                                     subcolor: '#87A0E5',
                                   ),
@@ -152,7 +153,9 @@ class InvestSummaryView extends StatelessWidget {
                                       SummaryBottom(
                                         title: 'Mid',
                                         subtitle: 'less 365 days',
-                                        value: '€ ' + mid.toStringAsFixed(2),
+                                        value: NumberFormat(
+                                                "€ ###,###.0#", "en_US")
+                                            .format(mid * animation.value),
                                         color: ColorTheme.cassis,
                                         subcolor: '#F56E98',
                                       ),
@@ -168,7 +171,9 @@ class InvestSummaryView extends StatelessWidget {
                                       SummaryBottom(
                                         title: 'Long',
                                         subtitle: 'over 365 days',
-                                        value: '€ ' + long.toStringAsFixed(2),
+                                        value: NumberFormat(
+                                                "€ ###,###.0#", "en_US")
+                                            .format(long * animation.value),
                                         color: ColorTheme.cantaloupe,
                                         subcolor: '#F1B440',
                                       ),
@@ -177,6 +182,9 @@ class InvestSummaryView extends StatelessWidget {
                                 )
                               ],
                             ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           )
                         ],
                       ))));

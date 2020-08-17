@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/bill/bill_import_view.dart';
-import 'package:vara/invest/import/import_view.dart';
+import 'package:vara/invest/import/invest_import_view.dart';
 import 'package:vara/utils/toolkit.dart';
 
 import '../app_theme.dart';
@@ -115,15 +115,9 @@ class SummaryTopTitile extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: 4, bottom: 2),
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: ColorTheme.greydarker,
-              ),
-            ),
+            child: Text(title,
+                textAlign: TextAlign.center,
+                style: AppTheme.titleTextSmallLighter),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/bill/bill_list.dart';
-import 'package:vara/invest/list/invest_list.dart';
+import 'package:vara/invest/invest_list.dart';
 
 import '../app_theme.dart';
 import '../color_theme.dart';
@@ -35,7 +35,8 @@ class TitleView extends StatelessWidget {
                 0.0, 30 * (1.0 - animation.value), 0.0),
             child: Container(
               child: Padding(
-                padding: AppTheme.outboxpadding,
+                padding:
+                    EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
                 child: Row(
                   children: <Widget>[
                     Container(

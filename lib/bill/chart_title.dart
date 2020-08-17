@@ -24,13 +24,16 @@ class ChartTitle extends StatelessWidget {
                       0.0, 30 * (1.0 - animation.value), 0.0),
                   child: Consumer<ProviderData>(
                       builder: (context, providerdata, child) {
-                    double asset = 0.0;
-                    double debt = 0.0;
+                    double income = 0.0;
+                    double expenses = 0.0;
 
-                    if (providerdata.assetList != null) {
-                      providerdata.assetList.forEach((element) {
-                        asset = asset + element.asset;
-                        debt = debt + element.debt;
+                    if (providerdata.billList != null) {
+                      providerdata.billList.forEach((element) {
+                        if (element['mark']) {
+                          income = income + element['amount'];
+                        } else {
+                          expenses = expenses + element['amount'];
+                        }
                       });
                     }
                     return Container(
@@ -54,7 +57,7 @@ class ChartTitle extends StatelessWidget {
                                           top: 6, bottom: 6),
                                       child: Text(
                                         NumberFormat("€ ###,###.0#", "en_US")
-                                            .format(asset * animation.value),
+                                            .format(income * animation.value),
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,
@@ -83,7 +86,7 @@ class ChartTitle extends StatelessWidget {
                                           top: 6, bottom: 6),
                                       child: Text(
                                         NumberFormat("€ ###,###.0#", "en_US")
-                                            .format(debt * animation.value),
+                                            .format(expenses * animation.value),
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,

@@ -15,21 +15,6 @@ class BillSummaryView extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    double netIncome = 0.0;
-    double income = 0.0;
-    double expenses = 0.0;
-    double freedomService = 0.0;
-    if (Provider.of<ProviderData>(context).billList != null) {
-      Provider.of<ProviderData>(context).billList.forEach((element) {
-        if (element['mark']) {
-          income = income + element['amount'];
-        } else {
-          expenses = expenses + element['amount'];
-        }
-      });
-      netIncome = income - expenses;
-      freedomService = expenses / income;
-    }
     return AnimatedBuilder(
         animation: animationController,
         builder: (BuildContext context, Widget child) {
@@ -38,110 +23,80 @@ class BillSummaryView extends StatelessWidget {
               child: Transform(
                   transform: new Matrix4.translationValues(
                       0.0, 30 * (1.0 - animation.value), 0.0),
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                          padding: AppTheme.outboxpadding,
-                          child: Container(
-                            decoration: AppTheme.boxDecoration,
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: AppTheme.outboxpadding,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 8, right: 8, top: 4),
-                                          child: Column(
-                                            children: <Widget>[
-                                              Row(
-                                                children: <Widget>[
-                                                  BeforeTitle(
-                                                      color:
-                                                          ColorTheme.cantaloupe,
-                                                      width: 3,
-                                                      height: 50),
-                                                  SummaryTopTitile(
-                                                    title: 'Net Income',
-                                                    value: '€ ' +
-                                                        formatNum(netIncome, 2)
-                                                            .toString(),
+                  child: Consumer<ProviderData>(
+                      builder: (context, providerdata, child) {
+                    double netIncome = 0.0;
+                    double income = 0.0;
+                    double expenses = 0.0;
+                    double freedomService = 0.0;
+                    if (providerdata.billList != null) {
+                      providerdata.billList.forEach((element) {
+                        if (element['mark']) {
+                          income = income + element['amount'];
+                        } else {
+                          expenses = expenses + element['amount'];
+                        }
+                      });
+                      netIncome = income - expenses;
+                      freedomService = expenses / income;
+                    }
+
+                    return Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Container(
+                          //decoration: AppTheme.boxDecoration,
+                          child: Column(
+                            children: <Widget>[
+                              Padding(
+                                padding: AppTheme.outboxpadding,
+                                child: Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8, right: 8, top: 4),
+                                        child: Column(
+                                          children: <Widget>[
+                                            Row(
+                                              children: <Widget>[
+                                                BeforeTitle(
                                                     color:
                                                         ColorTheme.cantaloupe,
-                                                  )
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                                                    width: 3,
+                                                    height: 50),
+                                                SummaryTopTitile(
+                                                  title: 'Net Income',
+                                                  value: '€ ' +
+                                                      formatNum(netIncome, 2)
+                                                          .toString(),
+                                                  color: ColorTheme.cantaloupe,
+                                                )
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            right: AppTheme.leftRightPadding),
-                                        child: Center(
-                                          child: SummaryTopGraph(
-                                            title: 'Financial Freedom',
-                                            value: freedomService,
-                                            color: ColorTheme.cantaloupe,
-                                            subcolor:
-                                                ColorTheme.cantaloupelighter,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: AppTheme.inboxpadding,
-                                  child: Container(
-                                    height: 2,
-                                    decoration: BoxDecoration(
-                                      color: ColorTheme.background,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(4.0)),
                                     ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: AppTheme.inboxpadding,
-                                  child: Row(
-                                    children: <Widget>[
-                                      Expanded(
-                                        child: SummaryBottom(
-                                          title: 'Income',
-                                          subtitle: '',
-                                          value: '€ ' +
-                                              formatNum(income, 2).toString(),
-                                          color: ColorTheme.puristbluedarker,
-                                          subcolor: '#87A0E5',
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: AppTheme.leftRightPadding),
+                                      child: Center(
+                                        child: SummaryTopGraph(
+                                          title: 'Financial Freedom',
+                                          value: freedomService,
+                                          color: ColorTheme.cantaloupe,
+                                          subcolor:
+                                              ColorTheme.cantaloupelighter,
                                         ),
                                       ),
-                                      Expanded(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: <Widget>[
-                                          SummaryBottom(
-                                            title: 'Expenses',
-                                            subtitle: '',
-                                            value: '€ ' +
-                                                formatNum(expenses, 2)
-                                                    .toString(),
-                                            color: ColorTheme.cantaloupe,
-                                            subcolor: '#F1B440',
-                                          )
-                                        ],
-                                      ))
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          )))));
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ));
+                  })));
         });
   }
 }

@@ -8,32 +8,23 @@ import 'chart_title.dart';
 
 class AssetHome extends StatefulWidget {
   const AssetHome({Key key, this.animationController}) : super(key: key);
-
   final AnimationController animationController;
   @override
   _AssetHomeState createState() => _AssetHomeState();
 }
 
 class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
-  Animation<double> topBarAnimation;
-
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
-  double topBarOpacity = 0.0;
 
   @override
   void initState() {
-    topBarAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(
-            parent: widget.animationController,
-            curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
     addAllListData();
-
     super.initState();
   }
 
   void addAllListData() {
-    const int count = 6;
+    const int count = 5;
 
     listViews.add(
       AppBarUI(
@@ -73,19 +64,6 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
       ),
     );
 
-    // listViews.add(
-    //   TitleView(
-    //     titleTxt: 'Account',
-    //     subTxt: '',
-    //     color: ColorTheme.puristbluedarker,
-    //     navigator: '',
-    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-    //         parent: widget.animationController,
-    //         curve:
-    //             Interval((1 / count) * 4, 1.0, curve: Curves.fastOutSlowIn))),
-    //     animationController: widget.animationController,
-    //   ),
-    // );
     listViews.add(
       AccountView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -95,11 +73,6 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
         animationController: widget.animationController,
       ),
     );
-  }
-
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
   }
 
   @override
@@ -121,26 +94,17 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
   }
 
   Widget getMainListViewUI() {
-    return FutureBuilder<bool>(
-      future: getData(),
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-        if (!snapshot.hasData) {
-          return const SizedBox();
-        } else {
-          return ListView.builder(
-            controller: scrollController,
-            padding: EdgeInsets.only(
-              top: 0,
-              bottom: 92 + MediaQuery.of(context).padding.bottom,
-            ),
-            itemCount: listViews.length,
-            scrollDirection: Axis.vertical,
-            itemBuilder: (BuildContext context, int index) {
-              widget.animationController.forward();
-              return listViews[index];
-            },
-          );
-        }
+    return ListView.builder(
+      controller: scrollController,
+      padding: EdgeInsets.only(
+        top: 0,
+        bottom: 92 + MediaQuery.of(context).padding.bottom,
+      ),
+      itemCount: listViews.length,
+      scrollDirection: Axis.vertical,
+      itemBuilder: (BuildContext context, int index) {
+        widget.animationController.forward();
+        return listViews[index];
       },
     );
   }
