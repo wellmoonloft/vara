@@ -1,9 +1,7 @@
 import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
-import 'package:vara/invest/import/invest_import_view.dart';
+import 'package:vara/input/input_home.dart';
 import 'package:vara/models/tabIcon_data.dart';
-
 import '../color_theme.dart';
 
 class BottomBarView extends StatefulWidget {
@@ -157,10 +155,22 @@ class _BottomBarViewState extends State<BottomBarView>
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => InvestImportView()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => InvestImportView()));
+                            showGeneralDialog(
+                                context: context,
+                                barrierColor: Colors.black.withOpacity(.5),
+                                barrierDismissible: true,
+                                barrierLabel: '33',
+                                transitionDuration: Duration(milliseconds: 200),
+                                pageBuilder: (BuildContext context,
+                                    Animation<double> animation,
+                                    Animation<double> secondaryAnimation) {
+                                  return InputHome(
+                                      animationController: animationController);
+                                });
                           },
                           child: Icon(
                             Icons.add,

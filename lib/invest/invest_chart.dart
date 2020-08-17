@@ -1,5 +1,4 @@
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/db_models.dart';
@@ -28,7 +27,7 @@ class InvestChart extends StatelessWidget {
                               left: 24, right: 10, top: 10, bottom: 15),
                           child: charts.ScatterPlotChart(
                             _createSampleData(context),
-                            animate: true,
+                            animate: false,
                             // selectionModels: [
                             //   charts.SelectionModelConfig(
                             //       type: charts.SelectionModelType.info,
