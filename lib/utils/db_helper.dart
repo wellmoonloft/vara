@@ -65,21 +65,23 @@ class DBHelper {
 
   Future<List<Invest>> getInvest() async {
     var dbClient = await db;
-    var result = await dbClient.query('invest', columns: [
-      'id',
-      'date',
-      'perDate',
-      'amount',
-      'endDate',
-      'received',
-      'code',
-      'type',
-      'status',
-      'interest',
-      'currency',
-      'country',
-      'totalyield'
-    ]);
+    var result = await dbClient.query('invest',
+        columns: [
+          'id',
+          'date',
+          'perDate',
+          'amount',
+          'endDate',
+          'received',
+          'code',
+          'type',
+          'status',
+          'interest',
+          'currency',
+          'country',
+          'totalyield'
+        ],
+        orderBy: 'date');
 
     List<Invest> invest = [];
     result.forEach((element) => invest.add(Invest.fromJson(element)));
@@ -123,8 +125,8 @@ class DBHelper {
         invest.totalyield = NumUtil.multiply(temp, 365);
       }
     } else {
-      asset.asset = invest.amount;
-      asset.date = invest.date;
+      // asset.asset = invest.amount;
+      // asset.date = invest.date;
       invest.interest = 0;
       invest.totalyield = 0;
     }
@@ -138,10 +140,17 @@ class DBHelper {
               where: 'code=?', whereArgs: [invest.code]);
           await updateAsset(asset);
         }
+      } else {
+        Invest temp = Invest.fromJson(result.last);
+        invest.id = temp.id;
+        await dbClient.update('invest', invest.toJson(),
+            where: 'code=?', whereArgs: [invest.code]);
       }
     } else {
       await dbClient.insert('invest', invest.toJson());
-      await updateAsset(asset);
+      if (invest.status == 'FINISHED') {
+        await updateAsset(asset);
+      }
     }
   }
 

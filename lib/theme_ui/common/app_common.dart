@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vara/bill/bill_import_view.dart';
-import 'package:vara/invest/import/invest_import_view.dart';
+import 'package:vara/input/import/transaction_import_view.dart';
+import 'package:vara/input/import/invest_import_view.dart';
+
 import 'package:vara/utils/toolkit.dart';
 
 import '../app_theme.dart';

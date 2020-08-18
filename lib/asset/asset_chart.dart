@@ -29,7 +29,7 @@ class AssetChartView extends StatelessWidget {
                       transform: new Matrix4.translationValues(
                           0.0, 30 * (1.0 - animation.value), 0.0),
                       child: Container(
-                          height: 300,
+                          height: 330,
                           child: Container(
                               child: Stack(
                             overflow: Overflow.visible,

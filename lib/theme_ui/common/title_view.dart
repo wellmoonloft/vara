@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vara/bill/bill_list.dart';
 import 'package:vara/invest/invest_list.dart';
-
+import 'package:vara/transaction/transaction_list.dart';
 import '../app_theme.dart';
 import '../color_theme.dart';
 

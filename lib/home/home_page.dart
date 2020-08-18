@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_home.dart';
-import 'package:vara/bill/bill_home.dart';
 import 'package:vara/invest/invest_home.dart';
 import 'package:vara/models/tabIcon_data.dart';
-
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/bottom_bar_view.dart';
+import 'package:vara/transaction/transaction_home.dart';
 
 class HomeScreen1 extends StatefulWidget {
   @override

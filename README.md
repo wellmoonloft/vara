@@ -49,4 +49,4 @@ Therefore I need an APP like this:
 It's not finished yet. I uploaded it to git just because there are two computers in my office and home, umm.
 
 ![](https://gitee.com/wellmoonloft/images/raw/master/20200811072657.png)
-![](https://gitee.com/wellmoonloft/images/raw/master/20200811182320.png)
+![](https://gitee.com/wellmoonloft/images/raw/master/20200818220058.jpg)

@@ -7,6 +7,13 @@ class ProviderData extends ChangeNotifier {
   List<Invest> investList;
   List<Asset> assetList;
   List<Map> billList;
+  String eur;
+
+  setEur(eurData) {
+    eur = eurData['5. Exchange Rate'];
+    notifyListeners();
+    print(eur);
+  }
 
   Future getinvestList() async {
     investList = await DBHelper().getInvest();

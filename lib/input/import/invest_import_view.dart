@@ -78,7 +78,7 @@ class _ImportViewState extends State<InvestImportView> {
               excel.tables[table].row(row).forEach((cell) {
                 var val = cell.value;
 
-                print("Cell  |" + row.toString() + "|  $val");
+                //print("Cell  |" + row.toString() + "|  $val");
 
                 if (cell.colIndex == int.parse(dropdownMenu1)) {
                   invest.code = val.toString();
@@ -102,12 +102,8 @@ class _ImportViewState extends State<InvestImportView> {
                   invest.country = val.toString();
                 }
               });
-
               await providerData.updateInvestandAseet(invest);
             }
-            // if (row > 0) {
-
-            // }
           }
         }
         await providerData.getAssetList();
@@ -172,30 +168,34 @@ class _ImportViewState extends State<InvestImportView> {
               elevation: 0.0,
             ),
             backgroundColor: Colors.transparent,
-            body: Column(
+            body: ListView(
               children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(top: 15),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage('assets/Icons/xlsx.png'),
-                      ),
-                    ),
-                    child: SizedBox(
-                      height: 65,
-                      width: 65,
-                    ),
-                  ),
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: AssetImage('assets/Icons/xlsx.png'),
+                          ),
+                        ),
+                        child: SizedBox(
+                          height: 65,
+                          width: 65,
+                        ),
+                      )),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Determine data mapping.',
-                    style: AppTheme.titleTextSmallLighter,
-                  ),
-                ),
+                    padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Determine data mapping.',
+                        style: AppTheme.titleTextSmallLighter,
+                      ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Row(
@@ -384,36 +384,38 @@ class _ImportViewState extends State<InvestImportView> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: ColorTheme.pale,
-                      borderRadius: AppTheme.normalBorderRadius,
-                    ),
-                    child: Container(
-                        height: 45,
-                        width: 200,
-                        child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: InkWell(
-                                onTap: () {
-                                  ProgressDialog.showProgress(context);
-                                  save();
-                                },
-                                child: Container(
-                                  alignment: Alignment(0, 0),
-                                  child: Text(
-                                    'IMPORT',
-                                    style: TextStyle(
-                                      //fontFamily: AppTheme.fontName,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 20,
-                                      letterSpacing: 1.2,
-                                      color: ColorTheme.white,
-                                    ),
-                                  ),
-                                )))),
-                  ),
+                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(
+                          color: ColorTheme.pale,
+                          borderRadius: AppTheme.normalBorderRadius,
+                        ),
+                        child: Container(
+                            height: 45,
+                            width: 200,
+                            child: Padding(
+                                padding: EdgeInsets.all(10),
+                                child: InkWell(
+                                    onTap: () {
+                                      ProgressDialog.showProgress(context);
+                                      save();
+                                    },
+                                    child: Container(
+                                      alignment: Alignment(0, 0),
+                                      child: Text(
+                                        'IMPORT',
+                                        style: TextStyle(
+                                          //fontFamily: AppTheme.fontName,
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 20,
+                                          letterSpacing: 1.2,
+                                          color: ColorTheme.white,
+                                        ),
+                                      ),
+                                    )))),
+                      )),
                 )
               ],
             )));

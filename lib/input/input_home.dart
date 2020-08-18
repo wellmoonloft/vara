@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vara/invest/import/invest_import_view.dart';
+import 'package:intl/intl.dart';
+import 'package:vara/input/import/invest_import_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
@@ -14,7 +15,7 @@ class InputHome extends StatefulWidget {
 class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
-
+  String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
   @override
   void initState() {
     super.initState();
@@ -40,7 +41,19 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
               }),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.import_export),
+              icon: Icon(Icons.account_balance),
+              iconSize: 20,
+              color: ColorTheme.greytripledarker,
+              tooltip: 'Search',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InvestImportView()));
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.account_balance_wallet),
               iconSize: 20,
               color: ColorTheme.greytripledarker,
               tooltip: 'Search',
@@ -53,7 +66,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
             ),
           ],
         ),
-        body: Container(
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
           child: Column(children: [
             Padding(
               padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -77,29 +94,115 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
             ),
             TransactionDetail(title: 'Category', icon: Icons.ac_unit),
             Padding(
+                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                child: Column(children: [
+                  TextField(
+                    autofocus: true,
+                    //style: TextStyle(fontSize: 16),
+                    cursorColor: Colors.red,
+                    decoration: new InputDecoration(
+                      icon: Icon(
+                        Icons.assessment,
+                        color: ColorTheme.greydoubledarker,
+                      ),
+                      hintText: "Note",
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.multiline,
+                    keyboardAppearance: Brightness.light,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.pantone,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                    ),
+                  ),
+                ])),
+            Padding(
               padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: TextField(
-                autofocus: true,
-                //style: TextStyle(fontSize: 16),
-                cursorColor: Colors.red,
-
-                decoration: new InputDecoration(
-                  icon: Icon(Icons.assessment),
-                  hintText: "Note",
-                  border: InputBorder.none,
-                  // border: InputBorder(
-                  //   borderSide:   BorderSide(
-                  //      color: Colors.grey,
-                  //      width: 2,),
-                  // ),),
+              child: Column(children: [
+                InkWell(
+                    onTap: () async {
+                      var result = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          initialDatePickerMode: DatePickerMode.day,
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030));
+                      if (result != null) {
+                        setState(() {
+                          date = DateFormat('yyyy-MM-dd')
+                              .format(result)
+                              .toString();
+                        });
+                      }
+                      print('$result');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.date_range,
+                            color: ColorTheme.greydoubledarker),
+                        Padding(
+                          padding: EdgeInsets.only(left: 15),
+                          child: Container(
+                            alignment: Alignment(0, 0),
+                            child: Text(
+                              date,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 1,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.pantone,
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                  ),
                 ),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                keyboardAppearance: Brightness.light,
-                //inputFormatters: [UsNumberTextInputFormatter()]
-              ),
+              ]),
             ),
-            TransactionDetail(title: 'Today', icon: Icons.date_range),
             TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
+            Padding(
+                padding: EdgeInsets.only(top: 60, left: 50, right: 50),
+                child: InkWell(
+                  onTap: () {
+                    print('object');
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 200,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.pale,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: ColorTheme.grey,
+                            offset: Offset(1.1, 1.1),
+                            blurRadius: 8.0),
+                        BoxShadow(
+                            color: ColorTheme.white,
+                            offset: Offset(-1.1, -1.1),
+                            blurRadius: 8.0),
+                      ],
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: ColorTheme.white, fontSize: 16),
+                    ),
+                  ),
+                )),
           ]),
         ),
       ),

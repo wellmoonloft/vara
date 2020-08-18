@@ -18,6 +18,7 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> btc;
+  Map<String, dynamic> eur;
   Map<String, dynamic> btcdaily;
   Map<String, dynamic> usdcnydaily;
   Map<String, dynamic> eurcnydaily;
@@ -69,6 +70,11 @@ class _SplashPageState extends State<SplashPage> {
     // btc = await _getNetData(
     //     'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV',
     //     1);
+    eur = await _getNetData(
+        'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=CNY&apikey=9AAGEESEANSVTYTV',
+        5);
+    var providerData = Provider.of<ProviderData>(context, listen: false);
+    providerData.setEur(eur);
     setState(() {
       etext = 'GET BTC DAILY ...';
       progressValue = 0.4;
@@ -128,6 +134,9 @@ class _SplashPageState extends State<SplashPage> {
         }
         if (mark == 4) {
           return data['Time Series FX (Daily)'];
+        }
+        if (mark == 5) {
+          return data['Realtime Currency Exchange Rate'];
         }
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');

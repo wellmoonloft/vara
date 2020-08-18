@@ -3,7 +3,7 @@ import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/title_view.dart';
 
-import 'bill_summary.dart';
+import 'transaction_summary.dart';
 import 'chart_title.dart';
 
 class BillHome extends StatefulWidget {
