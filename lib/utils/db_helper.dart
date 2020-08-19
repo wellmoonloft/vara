@@ -63,7 +63,7 @@ class DBHelper {
     }
   }
 
-  Future<List<Invest>> getInvest() async {
+  Future<List<Invest>> getInvestList() async {
     var dbClient = await db;
     var result = await dbClient.query('invest',
         columns: [
@@ -102,53 +102,77 @@ class DBHelper {
     }
   }
 
-  Future updateInvestandAseet(Invest invest) async {
+  Future updateInvestandData(Invest invest) async {
     var dbClient = await db;
     var result = await dbClient
         .query('invest', where: 'code=?', whereArgs: [invest.code]);
 
-    Asset asset = new Asset();
-    asset.debt = 0;
-    if (invest.status == 'FINISHED') {
-      var starttime = DateTime.parse(invest.date);
-      var endDate = DateTime.parse(invest.endDate);
-      var daydifree = endDate.difference(starttime);
-
-      asset.asset = NumUtil.subtract(invest.received, invest.amount);
-      asset.date = invest.endDate;
-      invest.interest = NumUtil.subtract(invest.received, invest.amount);
-      double temp = NumUtil.divide(invest.interest, invest.amount);
-      if (temp == 0) {
-        invest.totalyield = 0;
-      } else {
-        temp = NumUtil.divide(temp, daydifree.inDays);
-        invest.totalyield = NumUtil.multiply(temp, 365);
-      }
-    } else {
-      // asset.asset = invest.amount;
-      // asset.date = invest.date;
-      invest.interest = 0;
-      invest.totalyield = 0;
-    }
-
     if (result.length > 0) {
-      if (invest.status == 'FINISHED') {
-        Invest temp = Invest.fromJson(result.last);
-        if (temp.status != 'FINISHED') {
+      Invest temp = Invest.fromJson(result.last);
+      if (temp.status != 'FINISHED') {
+        if (invest.status == 'LATE') {
           invest.id = temp.id;
           await dbClient.update('invest', invest.toJson(),
               where: 'code=?', whereArgs: [invest.code]);
+        } else if (invest.status == 'FINISHED') {
+          Asset asset = new Asset();
+          asset.debt = 0;
+          asset.asset = NumUtil.subtract(invest.received, invest.amount);
+          asset.asset = NumUtil.subtract(asset.asset, invest.amount);
+          asset.date = invest.endDate;
           await updateAsset(asset);
+
+          // InvestAccount investAccount = new InvestAccount();
+          // investAccount.balance = 0.0 - invest.amount;
+          // investAccount.date = invest.endDate;
+          // await updateInvestAccount(investAccount);
+
+          invest.interest = NumUtil.subtract(invest.received, invest.amount);
+          double temp = NumUtil.divide(invest.interest, invest.amount);
+          if (temp == 0) {
+            invest.totalyield = 0;
+          } else {
+            var starttime = DateTime.parse(invest.date);
+            var endDate = DateTime.parse(invest.endDate);
+            var daydifree = endDate.difference(starttime);
+            temp = NumUtil.divide(temp, daydifree.inDays);
+            invest.totalyield = NumUtil.multiply(temp, 365);
+          }
+          await dbClient.insert('invest', invest.toJson());
         }
-      } else {
-        Invest temp = Invest.fromJson(result.last);
-        invest.id = temp.id;
-        await dbClient.update('invest', invest.toJson(),
-            where: 'code=?', whereArgs: [invest.code]);
       }
     } else {
-      await dbClient.insert('invest', invest.toJson());
       if (invest.status == 'FINISHED') {
+        Asset asset = new Asset();
+        asset.debt = 0;
+        var starttime = DateTime.parse(invest.date);
+        var endDate = DateTime.parse(invest.endDate);
+        var daydifree = endDate.difference(starttime);
+
+        asset.asset = NumUtil.subtract(invest.received, invest.amount);
+        asset.date = invest.endDate;
+        invest.interest = NumUtil.subtract(invest.received, invest.amount);
+        double temp = NumUtil.divide(invest.interest, invest.amount);
+        if (temp == 0) {
+          invest.totalyield = 0;
+        } else {
+          temp = NumUtil.divide(temp, daydifree.inDays);
+          invest.totalyield = NumUtil.multiply(temp, 365);
+        }
+        await dbClient.insert('invest', invest.toJson());
+        await updateAsset(asset);
+      } else {
+        // InvestAccount investAccount = new InvestAccount();
+        // investAccount.balance = invest.amount;
+        // investAccount.date = invest.date;
+        Asset asset = new Asset();
+        asset.debt = 0;
+        asset.asset = invest.amount;
+        asset.date = invest.date;
+
+        invest.interest = 0;
+        invest.totalyield = 0;
+        await dbClient.insert('invest', invest.toJson());
         await updateAsset(asset);
       }
     }

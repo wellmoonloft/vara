@@ -22,18 +22,6 @@ class _ImportViewState extends State<InvestImportView> {
   String _path;
   String _extension;
   FileType _pickingType = FileType.any;
-
-  // int date = 0;
-  // int perDate = 0;
-  // int amount = 0;
-  // int endDate = 0;
-  // int received = 0;
-  // int code = 0;
-  // int type = 0;
-  // int status = 0;
-  // int interest = 0;
-  // int currency = 0;
-  // int country = 0;
   String dropdownMenu1;
   String dropdownMenu2;
   String dropdownMenu3;
@@ -77,7 +65,6 @@ class _ImportViewState extends State<InvestImportView> {
             if (row > 0) {
               excel.tables[table].row(row).forEach((cell) {
                 var val = cell.value;
-
                 //print("Cell  |" + row.toString() + "|  $val");
 
                 if (cell.colIndex == int.parse(dropdownMenu1)) {
@@ -102,7 +89,7 @@ class _ImportViewState extends State<InvestImportView> {
                   invest.country = val.toString();
                 }
               });
-              await providerData.updateInvestandAseet(invest);
+              await providerData.updateInvestandData(invest);
             }
           }
         }

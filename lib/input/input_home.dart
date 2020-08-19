@@ -5,6 +5,8 @@ import 'package:vara/input/import/invest_import_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
+import 'categroy.dart';
+
 class InputHome extends StatefulWidget {
   const InputHome({Key key, this.animationController}) : super(key: key);
   final AnimationController animationController;
@@ -16,6 +18,8 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
   String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+  final moneyController = TextEditingController();
+  final noteController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -23,6 +27,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    String moneyValue = 'EUR';
     return Container(
       color: ColorTheme.white,
       child: Scaffold(
@@ -40,20 +45,20 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                 Navigator.pop(context);
               }),
           actions: <Widget>[
+            // IconButton(
+            //   icon: Icon(Icons.account_balance),
+            //   iconSize: 20,
+            //   color: ColorTheme.greytripledarker,
+            //   tooltip: 'Search',
+            //   onPressed: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => InvestImportView()));
+            //   },
+            // ),
             IconButton(
-              icon: Icon(Icons.account_balance),
-              iconSize: 20,
-              color: ColorTheme.greytripledarker,
-              tooltip: 'Search',
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => InvestImportView()));
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.account_balance_wallet),
+              icon: Icon(Icons.import_export),
               iconSize: 20,
               color: ColorTheme.greytripledarker,
               tooltip: 'Search',
@@ -71,10 +76,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
           onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
-          child: Column(children: [
+          child: ListView(children: [
             Padding(
               padding: EdgeInsets.only(top: 20, left: 20, right: 20),
               child: TextField(
+                  controller: moneyController,
                   autofocus: true,
                   style: TextStyle(fontSize: 40),
                   cursorColor: Colors.red,
@@ -82,23 +88,33 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     icon: Icon(Icons.attach_money),
                     hintText: "0.00",
                     border: InputBorder.none,
-                    // focusedBorder: OutlineInputBorder(
-                    //     borderSide: BorderSide(
-                    //   color: Colors.grey,
-                    //   width: 2,
-                    // )),
                   ),
                   keyboardType: TextInputType.numberWithOptions(decimal: true),
                   keyboardAppearance: Brightness.light,
                   inputFormatters: [UsNumberTextInputFormatter()]),
             ),
-            TransactionDetail(title: 'Category', icon: Icons.ac_unit),
+            InkWell(
+                onTap: () {
+                  showGeneralDialog(
+                      context: context,
+                      barrierColor: Colors.black.withOpacity(.5),
+                      barrierDismissible: true,
+                      barrierLabel: '33',
+                      transitionDuration: Duration(milliseconds: 200),
+                      pageBuilder: (BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation) {
+                        return CategroyView();
+                      });
+                },
+                child:
+                    TransactionDetail(title: 'Category', icon: Icons.category)),
             Padding(
                 padding: EdgeInsets.only(top: 8, left: 20, right: 20),
                 child: Column(children: [
                   TextField(
+                    controller: noteController,
                     autofocus: true,
-                    //style: TextStyle(fontSize: 16),
                     cursorColor: Colors.red,
                     decoration: new InputDecoration(
                       icon: Icon(
@@ -111,6 +127,44 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     keyboardType: TextInputType.multiline,
                     keyboardAppearance: Brightness.light,
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.pantone,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                    ),
+                  ),
+                ])),
+            Padding(
+                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                child: Column(children: [
+                  Row(children: [
+                    Icon(Icons.account_balance_wallet,
+                        color: ColorTheme.greydoubledarker),
+                    Padding(
+                        padding: EdgeInsets.only(left: 15),
+                        child: DropdownButton<String>(
+                          dropdownColor: ColorTheme.white,
+                          value: moneyValue,
+                          iconSize: 18,
+                          underline: Container(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              moneyValue = newValue;
+                            });
+                          },
+                          items: <String>['EUR', 'CNY']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ))
+                  ]),
                   Padding(
                     padding: EdgeInsets.only(top: 4),
                     child: Container(
@@ -172,12 +226,16 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                 ),
               ]),
             ),
-            TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
+            //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
             Padding(
                 padding: EdgeInsets.only(top: 60, left: 50, right: 50),
                 child: InkWell(
                   onTap: () {
-                    print('object');
+                    print(moneyController.text);
+                    print('Category');
+                    print(noteController.text);
+                    print(moneyValue);
+                    print(date);
                   },
                   child: Container(
                     height: 40,
@@ -227,7 +285,7 @@ class TransactionDetail extends StatelessWidget {
             child: Icon(icon, color: ColorTheme.greydoubledarker),
           ),
           Padding(
-            padding: EdgeInsets.only(top: 20, left: 20),
+            padding: EdgeInsets.only(top: 20, left: 15),
             child: Text(
               title,
               style: TextStyle(

@@ -16,18 +16,16 @@ class ProviderData extends ChangeNotifier {
   }
 
   Future getinvestList() async {
-    investList = await DBHelper().getInvest();
+    investList = await DBHelper().getInvestList();
     notifyListeners();
   }
 
   Future updateInvest(Invest invest) async {
     await DBHelper().updateInvest(invest);
-    await getinvestList();
-    notifyListeners();
   }
 
-  Future updateInvestandAseet(Invest invest) async {
-    await DBHelper().updateInvestandAseet(invest);
+  Future updateInvestandData(Invest invest) async {
+    await DBHelper().updateInvestandData(invest);
   }
 
   Future deleteInvest(Invest invest) async {
@@ -37,12 +35,11 @@ class ProviderData extends ChangeNotifier {
 
   Future getAssetList() async {
     assetList = await DBHelper().getAsset();
-    return assetList;
+    notifyListeners();
   }
 
   Future updateAsset(Asset asset) async {
     await DBHelper().updateAsset(asset);
-    notifyListeners();
   }
 
   Future getBillList() async {
@@ -52,6 +49,5 @@ class ProviderData extends ChangeNotifier {
 
   Future updateBill(Bill bill) async {
     await DBHelper().updateBill(bill);
-    notifyListeners();
   }
 }
