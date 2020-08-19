@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
@@ -32,16 +33,17 @@ class _CategroyViewState extends State<CategroyView>
             elevation: 0,
             title: Text('Categories', style: AppTheme.buttomTitle),
             leading: IconButton(
-                icon: Icon(Icons.close),
-                iconSize: 20,
+                icon: FaIcon(FontAwesomeIcons.times),
                 color: ColorTheme.white,
                 onPressed: () {
                   Navigator.pop(context);
                 }),
             actions: <Widget>[
               IconButton(
-                icon: Icon(Icons.add_to_queue),
-                iconSize: 20,
+                icon: FaIcon(
+                  FontAwesomeIcons.edit,
+                  size: 20,
+                ),
                 color: ColorTheme.white,
                 onPressed: () {
                   // Navigator.push(
@@ -51,8 +53,10 @@ class _CategroyViewState extends State<CategroyView>
                 },
               ),
               IconButton(
-                icon: Icon(Icons.add),
-                iconSize: 20,
+                icon: FaIcon(
+                  FontAwesomeIcons.plus,
+                  size: 20,
+                ),
                 color: ColorTheme.white,
                 onPressed: () {
                   // Navigator.push(
@@ -84,8 +88,8 @@ class _CategroyViewState extends State<CategroyView>
               controller: _tabController,
               children: <Widget>[
                 Expenses(),
-                Container(child: new Text('船')),
-                Container(child: new Text('巴士')),
+                Income(),
+                Savings(),
               ],
             ),
           )),
@@ -96,6 +100,87 @@ class _CategroyViewState extends State<CategroyView>
 class Expenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<IconData> _icons = [
+      Icons.ac_unit,
+      Icons.airport_shuttle,
+      Icons.all_inclusive,
+      Icons.beach_access,
+      Icons.cake,
+      Icons.free_breakfast
+    ];
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: [
+        Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Miscellaneous',
+                    textAlign: TextAlign.left,
+                    style: AppTheme.toptitleBigText,
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.eyeSlash,
+                    size: 16,
+                    color: ColorTheme.white,
+                  ),
+                ])),
+        Padding(
+          padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
+          child: Container(
+            height: 1,
+            decoration: BoxDecoration(
+              color: ColorTheme.pantone,
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            ),
+          ),
+        ),
+        GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, childAspectRatio: 1.2),
+            itemCount: _icons.length,
+            physics: new NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      height: 50,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.greylighter,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        _icons[index],
+                        color: ColorTheme.white,
+                      )),
+                  Container(
+                    padding: EdgeInsets.only(top: 5),
+                    child: Text('data'),
+                  )
+                ],
+              );
+            })
+      ],
+    );
+  }
+}
+
+class Income extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<IconData> _icons = [
+      Icons.ac_unit,
+      Icons.airport_shuttle,
+      Icons.all_inclusive,
+      Icons.beach_access,
+      Icons.cake,
+      Icons.free_breakfast
+    ];
     return ListView(
       padding: const EdgeInsets.only(top: 20.0),
       children: [
@@ -104,9 +189,58 @@ class Expenses extends StatelessWidget {
             child: Row(children: [
               Text(
                 'Miscellaneous',
+                textAlign: TextAlign.left,
                 style: AppTheme.toptitleBigText,
               ),
-              Icon(Icons.ac_unit)
+              FaIcon(
+                FontAwesomeIcons.eyeSlash,
+                size: 20,
+                color: ColorTheme.white,
+              ),
+            ])),
+        Padding(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          child: Container(
+            height: 1,
+            decoration: BoxDecoration(
+              color: ColorTheme.pantone,
+              borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            ),
+          ),
+        ),
+        GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, childAspectRatio: 1.0),
+            itemCount: _icons.length,
+            physics: new NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Icon(_icons[index]);
+            })
+      ],
+    );
+  }
+}
+
+class Savings extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: [
+        Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+            child: Row(children: [
+              Text(
+                'Miscellaneous',
+                textAlign: TextAlign.left,
+                style: AppTheme.toptitleBigText,
+              ),
+              FaIcon(
+                FontAwesomeIcons.eyeSlash,
+                size: 20,
+                color: ColorTheme.white,
+              ),
             ])),
         Padding(
           padding: EdgeInsets.only(left: 20, right: 20),

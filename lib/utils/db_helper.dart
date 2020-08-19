@@ -122,11 +122,6 @@ class DBHelper {
           asset.date = invest.endDate;
           await updateAsset(asset);
 
-          // InvestAccount investAccount = new InvestAccount();
-          // investAccount.balance = 0.0 - invest.amount;
-          // investAccount.date = invest.endDate;
-          // await updateInvestAccount(investAccount);
-
           invest.interest = NumUtil.subtract(invest.received, invest.amount);
           double temp = NumUtil.divide(invest.interest, invest.amount);
           if (temp == 0) {

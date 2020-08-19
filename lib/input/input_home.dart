@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/input/import/invest_import_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
@@ -38,7 +39,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
           elevation: 0,
           title: Text('New Transaction', style: AppTheme.titleText),
           leading: IconButton(
-              icon: Icon(Icons.close),
+              icon: FaIcon(FontAwesomeIcons.times),
               iconSize: 20,
               color: ColorTheme.greytripledarker,
               onPressed: () {
@@ -58,10 +59,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
             //   },
             // ),
             IconButton(
-              icon: Icon(Icons.import_export),
-              iconSize: 20,
-              color: ColorTheme.greytripledarker,
-              tooltip: 'Search',
+              icon: FaIcon(
+                FontAwesomeIcons.fileUpload,
+                color: ColorTheme.greyquadradarker,
+                size: 20,
+              ),
               onPressed: () {
                 Navigator.push(
                     context,
@@ -85,7 +87,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                   style: TextStyle(fontSize: 40),
                   cursorColor: Colors.red,
                   decoration: new InputDecoration(
-                    icon: Icon(Icons.attach_money),
+                    icon: FaIcon(
+                      FontAwesomeIcons.euroSign,
+                      color: ColorTheme.greyquadradarker,
+                      size: 20,
+                    ),
                     hintText: "0.00",
                     border: InputBorder.none,
                   ),
@@ -117,9 +123,10 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     autofocus: true,
                     cursorColor: Colors.red,
                     decoration: new InputDecoration(
-                      icon: Icon(
-                        Icons.assessment,
-                        color: ColorTheme.greydoubledarker,
+                      icon: FaIcon(
+                        FontAwesomeIcons.poll,
+                        color: ColorTheme.greyquadradarker,
+                        size: 20,
                       ),
                       hintText: "Note",
                       border: InputBorder.none,
@@ -142,8 +149,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                 padding: EdgeInsets.only(top: 8, left: 20, right: 20),
                 child: Column(children: [
                   Row(children: [
-                    Icon(Icons.account_balance_wallet,
-                        color: ColorTheme.greydoubledarker),
+                    FaIcon(
+                      FontAwesomeIcons.coins,
+                      color: ColorTheme.greyquadradarker,
+                      size: 20,
+                    ),
                     Padding(
                         padding: EdgeInsets.only(left: 15),
                         child: DropdownButton<String>(
@@ -200,8 +210,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(Icons.date_range,
-                            color: ColorTheme.greydoubledarker),
+                        FaIcon(
+                          FontAwesomeIcons.solidCalendarAlt,
+                          color: ColorTheme.greyquadradarker,
+                          size: 20,
+                        ),
                         Padding(
                           padding: EdgeInsets.only(left: 15),
                           child: Container(
@@ -282,7 +295,11 @@ class TransactionDetail extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 20, left: 20),
-            child: Icon(icon, color: ColorTheme.greydoubledarker),
+            child: FaIcon(
+              FontAwesomeIcons.layerGroup,
+              color: ColorTheme.greyquadradarker,
+              size: 20,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(top: 20, left: 15),

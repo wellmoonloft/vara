@@ -3,6 +3,7 @@ import 'package:excel/excel.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
@@ -160,19 +161,13 @@ class _ImportViewState extends State<InvestImportView> {
                 Padding(
                   padding: EdgeInsets.only(top: 15),
                   child: Container(
-                      alignment: Alignment.center,
-                      child: DecoratedBox(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: AssetImage('assets/Icons/xlsx.png'),
-                          ),
-                        ),
-                        child: SizedBox(
-                          height: 65,
-                          width: 65,
-                        ),
-                      )),
+                    alignment: Alignment.center,
+                    child: FaIcon(
+                      FontAwesomeIcons.solidFileExcel,
+                      color: ColorTheme.neogreendarker,
+                      size: 60,
+                    ),
+                  ),
                 ),
                 Padding(
                     padding: EdgeInsets.only(top: 20, left: 20, right: 20),

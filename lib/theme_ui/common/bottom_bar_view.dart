@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vara/input/input_home.dart';
 import 'package:vara/models/tabIcon_data.dart';
 import '../color_theme.dart';
@@ -143,7 +144,7 @@ class _BottomBarViewState extends State<BottomBarView>
                         shape: BoxShape.circle,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: ColorTheme.paledarker.withOpacity(0.4),
+                              color: ColorTheme.pale.withOpacity(0.4),
                               offset: const Offset(2.2, 2.2),
                               blurRadius: 10.0),
                         ],
@@ -259,9 +260,21 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                           parent: widget.tabIconData.animationController,
                           curve:
                               Interval(0.1, 1.0, curve: Curves.fastOutSlowIn))),
-                  child: Image.asset(widget.tabIconData.isSelected
-                      ? widget.tabIconData.selectedImagePath
-                      : widget.tabIconData.imagePath),
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: FaIcon(
+                      widget.tabIconData.isSelected
+                          ? widget.tabIconData.selectedImagePath
+                          : widget.tabIconData.imagePath,
+                      color: widget.tabIconData.isSelected
+                          ? ColorTheme.pale
+                          : ColorTheme.grey,
+                      size: 28,
+                    ),
+                  ),
+                  // Image.asset(widget.tabIconData.isSelected
+                  //     ? widget.tabIconData.selectedImagePath
+                  //     : widget.tabIconData.imagePath),
                 ),
                 Positioned(
                   top: 4,
@@ -278,7 +291,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: ColorTheme.paledarker,
+                        color: ColorTheme.pale,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -299,7 +312,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 4,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: ColorTheme.paledarker,
+                        color: ColorTheme.pale,
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -320,7 +333,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 6,
                       height: 6,
                       decoration: BoxDecoration(
-                        color: ColorTheme.paledarker,
+                        color: ColorTheme.pale,
                         shape: BoxShape.circle,
                       ),
                     ),

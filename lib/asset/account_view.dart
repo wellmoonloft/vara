@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
@@ -105,7 +106,11 @@ class AccountView extends StatelessWidget {
                                       top: -14,
                                       right: -10,
                                       child: IconButton(
-                                          icon: Icon(Icons.add),
+                                          icon: FaIcon(
+                                            FontAwesomeIcons.plus,
+                                            size: 16,
+                                            color: ColorTheme.white,
+                                          ),
                                           onPressed: null),
                                     ),
                                   ],
@@ -177,7 +182,11 @@ class AccountView extends StatelessWidget {
                                       top: -14,
                                       right: -10,
                                       child: IconButton(
-                                          icon: Icon(Icons.add),
+                                          icon: FaIcon(
+                                            FontAwesomeIcons.plus,
+                                            size: 16,
+                                            color: ColorTheme.white,
+                                          ),
                                           onPressed: null),
                                     ),
                                   ],

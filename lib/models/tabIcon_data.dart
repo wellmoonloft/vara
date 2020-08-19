@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TabIconData {
   TabIconData({
-    this.imagePath = '',
+    this.imagePath,
     this.index = 0,
-    this.selectedImagePath = '',
+    this.selectedImagePath,
     this.isSelected = false,
     this.animationController,
   });
 
-  String imagePath;
-  String selectedImagePath;
+  IconData imagePath;
+  IconData selectedImagePath;
   bool isSelected;
   int index;
 
@@ -18,29 +19,29 @@ class TabIconData {
 
   static List<TabIconData> tabIconsList = <TabIconData>[
     TabIconData(
-      imagePath: 'assets/Icons/tab_1.png',
-      selectedImagePath: 'assets/Icons/tab_1s.png',
+      imagePath: FontAwesomeIcons.wallet,
+      selectedImagePath: FontAwesomeIcons.wallet,
       index: 0,
       isSelected: true,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/Icons/tab_2.png',
-      selectedImagePath: 'assets/Icons/tab_2s.png',
+      imagePath: FontAwesomeIcons.chartPie,
+      selectedImagePath: FontAwesomeIcons.chartPie,
       index: 1,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/Icons/tab_3.png',
-      selectedImagePath: 'assets/Icons/tab_3s.png',
+      imagePath: FontAwesomeIcons.donate,
+      selectedImagePath: FontAwesomeIcons.donate,
       index: 2,
       isSelected: false,
       animationController: null,
     ),
     TabIconData(
-      imagePath: 'assets/Icons/tab_4.png',
-      selectedImagePath: 'assets/Icons/tab_4s.png',
+      imagePath: FontAwesomeIcons.userFriends,
+      selectedImagePath: FontAwesomeIcons.userFriends,
       index: 3,
       isSelected: false,
       animationController: null,
