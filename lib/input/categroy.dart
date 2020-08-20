@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/tabIcon_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
+
+import 'input_home.dart';
 
 class CategroyView extends StatefulWidget {
   const CategroyView({Key key}) : super(key: key);
@@ -100,22 +104,42 @@ class _CategroyViewState extends State<CategroyView>
 class Expenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<IconData> _icons = [
-      Icons.ac_unit,
-      Icons.airport_shuttle,
-      Icons.all_inclusive,
-      Icons.beach_access,
-      Icons.cake,
-      Icons.free_breakfast
-    ];
+    List<CategroyData> miscellaneousData = CategroyData.miscellaneousData;
+    List<CategroyData> entertainmentData = CategroyData.entertainmentData;
+    List<CategroyData> foodData = CategroyData.foodData;
+    List<CategroyData> housingData = CategroyData.housingData;
+    List<CategroyData> lifestyleData = CategroyData.lifestyleData;
+    List<CategroyData> transportationData = CategroyData.transportationData;
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
       GridTitle(
-        icons: _icons,
-        title: 'Miscellaneous',
+        icons: miscellaneousData.last.iconList,
+        title: miscellaneousData.last.categroyTitle,
+        color: miscellaneousData.last.color,
       ),
       GridTitle(
-        icons: _icons,
-        title: 'Entertainment',
+        icons: entertainmentData.last.iconList,
+        title: entertainmentData.last.categroyTitle,
+        color: entertainmentData.last.color,
+      ),
+      GridTitle(
+        icons: foodData.last.iconList,
+        title: foodData.last.categroyTitle,
+        color: foodData.last.color,
+      ),
+      GridTitle(
+        icons: housingData.last.iconList,
+        title: housingData.last.categroyTitle,
+        color: housingData.last.color,
+      ),
+      GridTitle(
+        icons: lifestyleData.last.iconList,
+        title: lifestyleData.last.categroyTitle,
+        color: lifestyleData.last.color,
+      ),
+      GridTitle(
+        icons: transportationData.last.iconList,
+        title: transportationData.last.categroyTitle,
+        color: transportationData.last.color,
       )
     ]);
   }
@@ -124,18 +148,12 @@ class Expenses extends StatelessWidget {
 class Income extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<IconData> _icons = [
-      Icons.ac_unit,
-      Icons.airport_shuttle,
-      Icons.all_inclusive,
-      Icons.beach_access,
-      Icons.cake,
-      Icons.free_breakfast
-    ];
+    List<CategroyData> incomeData = CategroyData.incomeData;
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
       GridTitle(
-        icons: _icons,
-        title: 'xxxxx',
+        icons: incomeData.last.iconList,
+        title: incomeData.last.categroyTitle,
+        color: incomeData.last.color,
       )
     ]);
   }
@@ -144,27 +162,22 @@ class Income extends StatelessWidget {
 class Savings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<IconData> _icons = [
-      Icons.ac_unit,
-      Icons.airport_shuttle,
-      Icons.all_inclusive,
-      Icons.beach_access,
-      Icons.cake,
-      Icons.free_breakfast
-    ];
+    List<CategroyData> savingsData = CategroyData.savingsData;
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
       GridTitle(
-        icons: _icons,
-        title: 'xxxxx',
+        icons: savingsData.last.iconList,
+        title: savingsData.last.categroyTitle,
+        color: savingsData.last.color,
       )
     ]);
   }
 }
 
 class GridTitle extends StatefulWidget {
-  final List<IconData> icons;
+  final List<CategroyIcon> icons;
   final String title;
-  GridTitle({this.icons, this.title});
+  final Color color;
+  GridTitle({this.icons, this.title, this.color});
 
   _GridTitleState createState() => _GridTitleState();
 }
@@ -193,7 +206,7 @@ class _GridTitleState extends State<GridTitle> {
                     },
                     child: FaIcon(
                       mark ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
-                      size: 20,
+                      size: 16,
                       color: ColorTheme.white,
                     ),
                   )
@@ -210,8 +223,7 @@ class _GridTitleState extends State<GridTitle> {
         ),
         mark
             ? IconGridView(
-                icons: widget.icons,
-              )
+                icons: widget.icons, color: widget.color, title: widget.title)
             : Container()
       ],
     );
@@ -219,9 +231,11 @@ class _GridTitleState extends State<GridTitle> {
 }
 
 class IconGridView extends StatelessWidget {
-  final List<IconData> icons;
+  final List<CategroyIcon> icons;
+  final String title;
+  final Color color;
 
-  IconGridView({this.icons});
+  IconGridView({this.icons, this.color, this.title});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -234,21 +248,31 @@ class IconGridView extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                  height: 50,
-                  width: 50,
-                  decoration: BoxDecoration(
-                    color: ColorTheme.greylighter,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    icons[index],
-                    color: ColorTheme.white,
-                  )),
+              InkWell(
+                onTap: () {
+                  var categroyChoiceData =
+                      Provider.of<CategroyChoiceData>(context, listen: false);
+                  print(icons[index].title);
+                  categroyChoiceData.setDate(icons[index].title, title, color);
+                },
+                child: Container(
+                    height: 50,
+                    width: 50,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                    ),
+                    child: FaIcon(
+                      icons[index].icon,
+                      color: ColorTheme.white,
+                    )),
+              ),
               Container(
                 padding: EdgeInsets.only(top: 6),
                 child: Text(
-                  'data',
+                  icons[index].title,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,

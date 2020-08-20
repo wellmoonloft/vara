@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:vara/input/import/invest_import_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
@@ -29,255 +30,312 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     String moneyValue = 'EUR';
-    return Container(
-      color: ColorTheme.white,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          brightness: Brightness.light,
-          backgroundColor: ColorTheme.white,
-          elevation: 0,
-          title: Text('New Transaction', style: AppTheme.titleText),
-          leading: IconButton(
-              icon: FaIcon(FontAwesomeIcons.times),
-              iconSize: 20,
-              color: ColorTheme.greytripledarker,
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          actions: <Widget>[
-            // IconButton(
-            //   icon: Icon(Icons.account_balance),
-            //   iconSize: 20,
-            //   color: ColorTheme.greytripledarker,
-            //   tooltip: 'Search',
-            //   onPressed: () {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => InvestImportView()));
-            //   },
-            // ),
-            IconButton(
-              icon: FaIcon(
-                FontAwesomeIcons.fileUpload,
-                color: ColorTheme.greyquadradarker,
-                size: 20,
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => InvestImportView()));
+    return ChangeNotifierProvider(
+        create: (context) => CategroyChoiceData(),
+        child: Container(
+          color: ColorTheme.white,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              brightness: Brightness.light,
+              backgroundColor: ColorTheme.white,
+              elevation: 0,
+              title: Text('New Transaction', style: AppTheme.titleText),
+              leading: IconButton(
+                  icon: FaIcon(FontAwesomeIcons.times),
+                  iconSize: 20,
+                  color: ColorTheme.greytripledarker,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  }),
+              actions: <Widget>[
+                // IconButton(
+                //   icon: Icon(Icons.account_balance),
+                //   iconSize: 20,
+                //   color: ColorTheme.greytripledarker,
+                //   tooltip: 'Search',
+                //   onPressed: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => InvestImportView()));
+                //   },
+                // ),
+                IconButton(
+                  icon: FaIcon(
+                    FontAwesomeIcons.fileUpload,
+                    color: ColorTheme.greyquadradarker,
+                    size: 20,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InvestImportView()));
+                  },
+                ),
+              ],
+            ),
+            body: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {
+                FocusScope.of(context).requestFocus(FocusNode());
               },
-            ),
-          ],
-        ),
-        body: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
-          },
-          child: ListView(children: [
-            Padding(
-              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: TextField(
-                  controller: moneyController,
-                  autofocus: true,
-                  style: TextStyle(fontSize: 40),
-                  cursorColor: Colors.red,
-                  decoration: new InputDecoration(
-                    icon: FaIcon(
-                      FontAwesomeIcons.euroSign,
-                      color: ColorTheme.greyquadradarker,
-                      size: 20,
-                    ),
-                    hintText: "0.00",
-                    border: InputBorder.none,
-                  ),
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  keyboardAppearance: Brightness.light,
-                  inputFormatters: [UsNumberTextInputFormatter()]),
-            ),
-            InkWell(
-                onTap: () {
-                  showGeneralDialog(
-                      context: context,
-                      barrierColor: Colors.black.withOpacity(.5),
-                      barrierDismissible: true,
-                      barrierLabel: '33',
-                      transitionDuration: Duration(milliseconds: 200),
-                      pageBuilder: (BuildContext context,
-                          Animation<double> animation,
-                          Animation<double> secondaryAnimation) {
-                        return CategroyView();
-                      });
-                },
-                child:
-                    TransactionDetail(title: 'Category', icon: Icons.category)),
-            Padding(
-                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                child: Column(children: [
-                  TextField(
-                    controller: noteController,
-                    autofocus: true,
-                    cursorColor: Colors.red,
-                    decoration: new InputDecoration(
-                      icon: FaIcon(
-                        FontAwesomeIcons.poll,
-                        color: ColorTheme.greyquadradarker,
-                        size: 20,
+              child: ListView(children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: TextField(
+                      controller: moneyController,
+                      autofocus: true,
+                      style: TextStyle(fontSize: 40),
+                      cursorColor: Colors.red,
+                      decoration: new InputDecoration(
+                        icon: FaIcon(
+                          FontAwesomeIcons.euroSign,
+                          color: ColorTheme.greyquadradarker,
+                          size: 20,
+                        ),
+                        hintText: "0.00",
+                        border: InputBorder.none,
                       ),
-                      hintText: "Note",
-                      border: InputBorder.none,
-                    ),
-                    keyboardType: TextInputType.multiline,
-                    keyboardAppearance: Brightness.light,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.pantone,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                    ),
-                  ),
-                ])),
-            Padding(
-                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                child: Column(children: [
-                  Row(children: [
-                    FaIcon(
-                      FontAwesomeIcons.coins,
-                      color: ColorTheme.greyquadradarker,
-                      size: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: DropdownButton<String>(
-                          dropdownColor: ColorTheme.white,
-                          value: moneyValue,
-                          iconSize: 18,
-                          underline: Container(),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              moneyValue = newValue;
-                            });
-                          },
-                          items: <String>['EUR', 'CNY']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ))
-                  ]),
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.pantone,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                    ),
-                  ),
-                ])),
-            Padding(
-              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-              child: Column(children: [
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      keyboardAppearance: Brightness.light,
+                      inputFormatters: [UsNumberTextInputFormatter()]),
+                ),
                 InkWell(
-                    onTap: () async {
-                      var result = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          initialDatePickerMode: DatePickerMode.day,
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime(2030));
-                      if (result != null) {
-                        setState(() {
-                          date = DateFormat('yyyy-MM-dd')
-                              .format(result)
-                              .toString();
-                        });
-                      }
-                      print('$result');
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => CategroyView()),
+                      );
+                      // showGeneralDialog(
+                      //     context: context,
+                      //     barrierColor: Colors.black.withOpacity(.5),
+                      //     barrierDismissible: true,
+                      //     barrierLabel: '33',
+                      //     transitionDuration: Duration(milliseconds: 200),
+                      //     pageBuilder: (BuildContext context,
+                      //         Animation<double> animation,
+                      //         Animation<double> secondaryAnimation) {
+                      //       return CategroyView();
+                      //     });
                     },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                    child: Column(children: [
+                      Consumer<CategroyChoiceData>(
+                          builder: (context, providerdata, child) {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(top: 20, left: 20),
+                              child: FaIcon(
+                                FontAwesomeIcons.layerGroup,
+                                color: providerdata.color == null
+                                    ? ColorTheme.greyquadradarker
+                                    : providerdata.color,
+                                size: 20,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 20, left: 15),
+                              child: Text(
+                                providerdata.categroyTitle == null
+                                    ? 'Category'
+                                    : providerdata.categroyTitle,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: ColorTheme.greydoubledarker,
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
+                      Padding(
+                        padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.pantone,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                          ),
+                        ),
+                      ),
+                    ])),
+
+                // TransactionDetail(title: 'Category', icon: Icons.category)),
+                Padding(
+                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    child: Column(children: [
+                      TextField(
+                        controller: noteController,
+                        autofocus: true,
+                        cursorColor: Colors.red,
+                        decoration: new InputDecoration(
+                          icon: FaIcon(
+                            FontAwesomeIcons.poll,
+                            color: ColorTheme.greyquadradarker,
+                            size: 20,
+                          ),
+                          hintText: "Note",
+                          border: InputBorder.none,
+                        ),
+                        keyboardType: TextInputType.multiline,
+                        keyboardAppearance: Brightness.light,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.pantone,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                          ),
+                        ),
+                      ),
+                    ])),
+                Padding(
+                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                    child: Column(children: [
+                      Row(children: [
                         FaIcon(
-                          FontAwesomeIcons.solidCalendarAlt,
+                          FontAwesomeIcons.coins,
                           color: ColorTheme.greyquadradarker,
                           size: 20,
                         ),
                         Padding(
-                          padding: EdgeInsets.only(left: 15),
-                          child: Container(
-                            alignment: Alignment(0, 0),
-                            child: Text(
-                              date,
-                              style: AppTheme.titleTextSmallLighter,
-                            ),
+                            padding: EdgeInsets.only(left: 15),
+                            child: DropdownButton<String>(
+                              dropdownColor: ColorTheme.white,
+                              value: moneyValue,
+                              iconSize: 18,
+                              underline: Container(),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  moneyValue = newValue;
+                                });
+                              },
+                              items: <String>[
+                                'EUR',
+                                'CNY'
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                            ))
+                      ]),
+                      Padding(
+                        padding: EdgeInsets.only(top: 4),
+                        child: Container(
+                          height: 1,
+                          decoration: BoxDecoration(
+                            color: ColorTheme.pantone,
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
                           ),
                         ),
-                      ],
-                    )),
+                      ),
+                    ])),
                 Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Container(
-                    height: 1,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.pantone,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  child: Column(children: [
+                    InkWell(
+                        onTap: () async {
+                          var result = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              initialDatePickerMode: DatePickerMode.day,
+                              firstDate: DateTime(2020),
+                              lastDate: DateTime(2030));
+                          if (result != null) {
+                            setState(() {
+                              date = DateFormat('yyyy-MM-dd')
+                                  .format(result)
+                                  .toString();
+                            });
+                          }
+                          print('$result');
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.solidCalendarAlt,
+                              color: ColorTheme.greyquadradarker,
+                              size: 20,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 15),
+                              child: Container(
+                                alignment: Alignment(0, 0),
+                                child: Text(
+                                  date,
+                                  style: AppTheme.titleTextSmallLighter,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
+                    Padding(
+                      padding: EdgeInsets.only(top: 15),
+                      child: Container(
+                        height: 1,
+                        decoration: BoxDecoration(
+                          color: ColorTheme.pantone,
+                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                        ),
+                      ),
                     ),
-                  ),
+                  ]),
                 ),
+                //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
+                Padding(
+                    padding: EdgeInsets.only(top: 60, left: 50, right: 50),
+                    child: InkWell(
+                      onTap: () {
+                        print(moneyController.text);
+                        print('Category');
+                        print(noteController.text);
+                        print(moneyValue);
+                        print(date);
+                      },
+                      child: Container(
+                        height: 40,
+                        width: 200,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: ColorTheme.pale,
+                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                          boxShadow: <BoxShadow>[
+                            BoxShadow(
+                                color: ColorTheme.grey,
+                                offset: Offset(1.1, 1.1),
+                                blurRadius: 8.0),
+                            BoxShadow(
+                                color: ColorTheme.white,
+                                offset: Offset(-1.1, -1.1),
+                                blurRadius: 8.0),
+                          ],
+                        ),
+                        child: Text(
+                          'Save',
+                          style:
+                              TextStyle(color: ColorTheme.white, fontSize: 16),
+                        ),
+                      ),
+                    )),
               ]),
             ),
-            //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
-            Padding(
-                padding: EdgeInsets.only(top: 60, left: 50, right: 50),
-                child: InkWell(
-                  onTap: () {
-                    print(moneyController.text);
-                    print('Category');
-                    print(noteController.text);
-                    print(moneyValue);
-                    print(date);
-                  },
-                  child: Container(
-                    height: 40,
-                    width: 200,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.pale,
-                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                            color: ColorTheme.grey,
-                            offset: Offset(1.1, 1.1),
-                            blurRadius: 8.0),
-                        BoxShadow(
-                            color: ColorTheme.white,
-                            offset: Offset(-1.1, -1.1),
-                            blurRadius: 8.0),
-                      ],
-                    ),
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: ColorTheme.white, fontSize: 16),
-                    ),
-                  ),
-                )),
-          ]),
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 
@@ -356,5 +414,18 @@ class UsNumberTextInputFormatter extends TextInputFormatter {
       text: value,
       selection: new TextSelection.collapsed(offset: selectionIndex),
     );
+  }
+}
+
+class CategroyChoiceData extends ChangeNotifier {
+  String categroyName;
+  String categroyTitle;
+  Color color;
+
+  setDate(name, title, colors) {
+    categroyName = name;
+    categroyTitle = title;
+    color = colors;
+    notifyListeners();
   }
 }
