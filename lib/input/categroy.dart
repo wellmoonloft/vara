@@ -108,65 +108,16 @@ class Expenses extends StatelessWidget {
       Icons.cake,
       Icons.free_breakfast
     ];
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: [
-        Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Miscellaneous',
-                    textAlign: TextAlign.left,
-                    style: AppTheme.toptitleBigText,
-                  ),
-                  FaIcon(
-                    FontAwesomeIcons.eyeSlash,
-                    size: 16,
-                    color: ColorTheme.white,
-                  ),
-                ])),
-        Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: ColorTheme.pantone,
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            ),
-          ),
-        ),
-        GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, childAspectRatio: 1.2),
-            itemCount: _icons.length,
-            physics: new NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.greylighter,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        _icons[index],
-                        color: ColorTheme.white,
-                      )),
-                  Container(
-                    padding: EdgeInsets.only(top: 5),
-                    child: Text('data'),
-                  )
-                ],
-              );
-            })
-      ],
-    );
+    return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      GridTitle(
+        icons: _icons,
+        title: 'Miscellaneous',
+      ),
+      GridTitle(
+        icons: _icons,
+        title: 'Entertainment',
+      )
+    ]);
   }
 }
 
@@ -181,69 +132,74 @@ class Income extends StatelessWidget {
       Icons.cake,
       Icons.free_breakfast
     ];
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: [
-        Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-            child: Row(children: [
-              Text(
-                'Miscellaneous',
-                textAlign: TextAlign.left,
-                style: AppTheme.toptitleBigText,
-              ),
-              FaIcon(
-                FontAwesomeIcons.eyeSlash,
-                size: 20,
-                color: ColorTheme.white,
-              ),
-            ])),
-        Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: ColorTheme.pantone,
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            ),
-          ),
-        ),
-        GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, childAspectRatio: 1.0),
-            itemCount: _icons.length,
-            physics: new NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Icon(_icons[index]);
-            })
-      ],
-    );
+    return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      GridTitle(
+        icons: _icons,
+        title: 'xxxxx',
+      )
+    ]);
   }
 }
 
 class Savings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
+    List<IconData> _icons = [
+      Icons.ac_unit,
+      Icons.airport_shuttle,
+      Icons.all_inclusive,
+      Icons.beach_access,
+      Icons.cake,
+      Icons.free_breakfast
+    ];
+    return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      GridTitle(
+        icons: _icons,
+        title: 'xxxxx',
+      )
+    ]);
+  }
+}
+
+class GridTitle extends StatefulWidget {
+  final List<IconData> icons;
+  final String title;
+  GridTitle({this.icons, this.title});
+
+  _GridTitleState createState() => _GridTitleState();
+}
+
+class _GridTitleState extends State<GridTitle> {
+  bool mark = true;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: [
         Padding(
             padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
-            child: Row(children: [
-              Text(
-                'Miscellaneous',
-                textAlign: TextAlign.left,
-                style: AppTheme.toptitleBigText,
-              ),
-              FaIcon(
-                FontAwesomeIcons.eyeSlash,
-                size: 20,
-                color: ColorTheme.white,
-              ),
-            ])),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.title,
+                    textAlign: TextAlign.left,
+                    style: AppTheme.buttomTitle,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        mark = !mark;
+                      });
+                    },
+                    child: FaIcon(
+                      mark ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
+                      size: 20,
+                      color: ColorTheme.white,
+                    ),
+                  )
+                ])),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
           child: Container(
             height: 1,
             decoration: BoxDecoration(
@@ -252,7 +208,56 @@ class Savings extends StatelessWidget {
             ),
           ),
         ),
+        mark
+            ? IconGridView(
+                icons: widget.icons,
+              )
+            : Container()
       ],
     );
+  }
+}
+
+class IconGridView extends StatelessWidget {
+  final List<IconData> icons;
+
+  IconGridView({this.icons});
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 4, childAspectRatio: 1.0),
+        itemCount: icons.length,
+        physics: new NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (context, index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: 50,
+                  width: 50,
+                  decoration: BoxDecoration(
+                    color: ColorTheme.greylighter,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icons[index],
+                    color: ColorTheme.white,
+                  )),
+              Container(
+                padding: EdgeInsets.only(top: 6),
+                child: Text(
+                  'data',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14,
+                    color: ColorTheme.white,
+                  ),
+                ),
+              )
+            ],
+          );
+        });
   }
 }
