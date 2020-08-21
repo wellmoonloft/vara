@@ -15,7 +15,6 @@ class InvestHome extends StatefulWidget {
 class _InvestHomeState extends State<InvestHome> with TickerProviderStateMixin {
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
-  double topBarOpacity = 0.0;
 
   @override
   void initState() {

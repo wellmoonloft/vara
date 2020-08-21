@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/title_view.dart';
-
-import 'transaction_summary.dart';
 import 'chart_title.dart';
+import 'transaction_summary.dart';
 
 class BillHome extends StatefulWidget {
   const BillHome({Key key, this.animationController}) : super(key: key);
@@ -27,7 +26,7 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
     const int count = 4;
     listViews.add(
       AppBarUI(
-        title: 'Bill',
+        title: 'Transaction',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
@@ -58,8 +57,8 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
 
     listViews.add(
       TitleView(
-        titleTxt: 'Bill Summary',
-        subTxt: 'Bill List',
+        titleTxt: 'Transaction Summary',
+        subTxt: 'Transaction List',
         navigator: 'bill',
         color: ColorTheme.cantaloupe,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(

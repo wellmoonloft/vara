@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:vara/models/tabIcon_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-
-import 'input_home.dart';
 
 class CategroyView extends StatefulWidget {
   const CategroyView({Key key}) : super(key: key);
@@ -115,31 +112,37 @@ class Expenses extends StatelessWidget {
         icons: miscellaneousData.last.iconList,
         title: miscellaneousData.last.categroyTitle,
         color: miscellaneousData.last.color,
+        mark: 0,
       ),
       GridTitle(
         icons: entertainmentData.last.iconList,
         title: entertainmentData.last.categroyTitle,
         color: entertainmentData.last.color,
+        mark: 0,
       ),
       GridTitle(
         icons: foodData.last.iconList,
         title: foodData.last.categroyTitle,
         color: foodData.last.color,
+        mark: 0,
       ),
       GridTitle(
         icons: housingData.last.iconList,
         title: housingData.last.categroyTitle,
         color: housingData.last.color,
+        mark: 0,
       ),
       GridTitle(
         icons: lifestyleData.last.iconList,
         title: lifestyleData.last.categroyTitle,
         color: lifestyleData.last.color,
+        mark: 0,
       ),
       GridTitle(
         icons: transportationData.last.iconList,
         title: transportationData.last.categroyTitle,
         color: transportationData.last.color,
+        mark: 0,
       )
     ]);
   }
@@ -154,6 +157,7 @@ class Income extends StatelessWidget {
         icons: incomeData.last.iconList,
         title: incomeData.last.categroyTitle,
         color: incomeData.last.color,
+        mark: 1,
       )
     ]);
   }
@@ -168,6 +172,7 @@ class Savings extends StatelessWidget {
         icons: savingsData.last.iconList,
         title: savingsData.last.categroyTitle,
         color: savingsData.last.color,
+        mark: 1,
       )
     ]);
   }
@@ -177,7 +182,8 @@ class GridTitle extends StatefulWidget {
   final List<CategroyIcon> icons;
   final String title;
   final Color color;
-  GridTitle({this.icons, this.title, this.color});
+  final int mark;
+  GridTitle({this.icons, this.title, this.color, this.mark});
 
   _GridTitleState createState() => _GridTitleState();
 }
@@ -223,7 +229,11 @@ class _GridTitleState extends State<GridTitle> {
         ),
         mark
             ? IconGridView(
-                icons: widget.icons, color: widget.color, title: widget.title)
+                icons: widget.icons,
+                color: widget.color,
+                title: widget.title,
+                mark: widget.mark,
+              )
             : Container()
       ],
     );
@@ -234,8 +244,9 @@ class IconGridView extends StatelessWidget {
   final List<CategroyIcon> icons;
   final String title;
   final Color color;
+  final int mark;
 
-  IconGridView({this.icons, this.color, this.title});
+  IconGridView({this.icons, this.color, this.title, this.mark});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -250,10 +261,16 @@ class IconGridView extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  var categroyChoiceData =
-                      Provider.of<CategroyChoiceData>(context, listen: false);
-                  print(icons[index].title);
-                  categroyChoiceData.setDate(icons[index].title, title, color);
+                  //print(icons[index].title);
+                  //var data = Map();
+                  var data = {
+                    'title': icons[index].title,
+                    'color': color,
+                    'icon': icons[index].icon,
+                    'categroy': title,
+                    'mark': mark
+                  };
+                  Navigator.of(context).pop(data);
                 },
                 child: Container(
                     height: 50,

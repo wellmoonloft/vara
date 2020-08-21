@@ -24,6 +24,7 @@ class ColorTheme {
   static const Color neogreen = Color(0xFF64e4ab);
   static const Color neogreenlighter = Color(0xFFaaf0d1);
   static const Color neogreendarker = Color(0xFF008024);
+  static const Color darkred = Color(0xFFcc0000);
 
   static const Color puristblue = Color(0xFF9CC9CF);
   static const Color puristbluelighter = Color(0xFFd9eaed);

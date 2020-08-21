@@ -35,7 +35,7 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
-        'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT,amount INTEGER, mark BOOLEAN)');
+        'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT,amount INTEGER, mark INTEGER)');
   }
 
   Future<List<Asset>> getAsset() async {
@@ -182,18 +182,19 @@ class DBHelper {
     );
   }
 
-  Future<List<Map>> getBill() async {
+  Future<List<Bill>> getBill() async {
     var dbClient = await db;
-    List<Map> maps = await dbClient.query('bill',
+    var result = await dbClient.query('bill',
         columns: ['id', 'date', 'currency', 'use', 'amount', 'mark']);
-
-    return maps;
+    List<Bill> bill = [];
+    result.forEach((element) => bill.add(Bill.fromJson(element)));
+    return bill;
   }
 
   Future<int> updateBill(Bill bill) async {
     var dbClient = await db;
     List<Map> maps =
-        await dbClient.query('asset', where: 'date=?', whereArgs: [bill.date]);
+        await dbClient.query('bill', where: 'date=?', whereArgs: [bill.date]);
     if (maps.length > 0) {
       Map temp = maps.last;
       bill.id = temp['id'];
@@ -204,6 +205,11 @@ class DBHelper {
     } else {
       return await dbClient.insert('bill', bill.toJson());
     }
+  }
+
+  Future<int> insertBill(Bill bill) async {
+    var dbClient = await db;
+    return await dbClient.insert('bill', bill.toJson());
   }
 
   Future<int> delete(int id) async {

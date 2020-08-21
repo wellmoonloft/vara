@@ -112,6 +112,7 @@ class _SplashPageState extends State<SplashPage> {
     var providerData = Provider.of<ProviderData>(context, listen: false);
     providerData.getAssetList();
     providerData.getinvestList();
+    providerData.getBillList();
   }
 
   _getNetData(url, mark) async {

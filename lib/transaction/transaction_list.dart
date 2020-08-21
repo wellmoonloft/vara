@@ -6,6 +6,7 @@ import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/utils/toolkit.dart';
 import 'package:vara/theme_ui/app_theme.dart';
+import 'package:vara/models/db_models.dart';
 
 class BillListView extends StatefulWidget {
   //final List<Map> investList;
@@ -19,7 +20,7 @@ class BillListState extends State<BillListView> {
   List<Map> current = List<Map>();
   List<Map> later = List<Map>();
   List<Map> finished = List<Map>();
-  List<Map> billList;
+  List<Bill> billList;
   String date = DateFormat('yyyy-MM').format(DateTime.now()).toString();
   String moneyValue = 'ALL';
   String termValue = 'ALL';
@@ -33,11 +34,11 @@ class BillListState extends State<BillListView> {
   @override
   Widget build(BuildContext context) {
     billList = Provider.of<ProviderData>(context).billList;
-    if (billList != null) {
-      billList.forEach((element) {
-        current.add(element);
-      });
-    }
+    // if (billList != null) {
+    //   billList.forEach((element) {
+    //     current.add(element);
+    //   });
+    // }
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -155,45 +156,45 @@ class BillListState extends State<BillListView> {
                               value: countryValue,
                               iconSize: 18,
                               onChanged: (String newValue) {
-                                if (newValue == 'ALL') {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (billList != null) {
-                                      billList.forEach((element) {
-                                        current.add(element);
-                                      });
-                                    }
-                                  });
-                                } else if (newValue == 'CURRENT') {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (billList != null) {
-                                      billList.forEach((element) {
-                                        if (element['status'] == 'CURRENT') {
-                                          current.add(element);
-                                        }
-                                      });
-                                    }
-                                  });
-                                } else {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (billList != null) {
-                                      billList.forEach((element) {
-                                        if (element['status'] == 'LATE') {
-                                          current.add(element);
-                                        }
-                                      });
-                                      print(current.length);
-                                    }
-                                  });
-                                }
+                                // if (newValue == 'ALL') {
+                                //   setState(() {
+                                //     current.clear();
+                                //     print(current.length);
+                                //     countryValue = newValue;
+                                //     if (billList != null) {
+                                //       billList.forEach((element) {
+                                //         current.add(element);
+                                //       });
+                                //     }
+                                //   });
+                                // } else if (newValue == 'CURRENT') {
+                                //   setState(() {
+                                //     current.clear();
+                                //     print(current.length);
+                                //     countryValue = newValue;
+                                //     if (billList != null) {
+                                //       billList.forEach((element) {
+                                //         if (element['status'] == 'CURRENT') {
+                                //           current.add(element);
+                                //         }
+                                //       });
+                                //     }
+                                //   });
+                                // } else {
+                                //   setState(() {
+                                //     current.clear();
+                                //     print(current.length);
+                                //     countryValue = newValue;
+                                //     if (billList != null) {
+                                //       billList.forEach((element) {
+                                //         if (element['status'] == 'LATE') {
+                                //           current.add(element);
+                                //         }
+                                //       });
+                                //       print(current.length);
+                                //     }
+                                //   });
+                                // }
                               },
                               items: <String>[
                                 'ALL',
@@ -214,25 +215,136 @@ class BillListState extends State<BillListView> {
                   ])),
           Flexible(
             child: ListView.separated(
-              itemCount: current.length,
+              itemCount: billList.length,
               itemBuilder: (BuildContext context, int index) {
-                var bill = current[index];
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                        padding: const EdgeInsets.only(top: 0),
-                        child: InvestList(
-                          title1: 'Bill Amount',
-                          title2: formatNum(bill['amount'], 2).toString() +
-                              ' ' +
-                              bill['currency'],
-                          title3: 'Bill Time',
-                          title4: bill['date'],
-                          title5: 'use',
-                          title6: bill['use'],
-                          title7: 'Mark',
-                          title8: bill['mark'],
-                        )));
+                var bill = billList[index];
+                return Dismissible(
+                    key: Key('key${billList[index]}'),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      setState(() {
+                        billList.removeAt(index);
+                      });
+                    },
+                    background: Container(
+                      width: 50,
+                      color: Colors.red,
+                      child: ListTile(
+                        trailing: Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    child: Container(
+                        color: ColorTheme.white,
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 0),
+                            child: Column(
+                              children: <Widget>[
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Padding(
+                                  padding: AppTheme.inboxpadding,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              'Date',
+                                              style: AppTheme.subtitleText,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 6, bottom: 6),
+                                              child: Text(
+                                                bill.date,
+                                                style: AppTheme
+                                                    .titleTextSmallLighter,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  'Use',
+                                                  style: AppTheme.subtitleText,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 6, bottom: 6),
+                                                  child: Text(
+                                                    bill.use,
+                                                    style: AppTheme
+                                                        .titleTextSmallLighter,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: <Widget>[
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: <Widget>[
+                                                Text(
+                                                  'Amount',
+                                                  style: AppTheme.subtitleText,
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 6, bottom: 6),
+                                                  child: Text(
+                                                    (bill.mark == 0
+                                                            ? '-'
+                                                            : '+') +
+                                                        '€ ' +
+                                                        NumberFormat(
+                                                                "###,###.0#",
+                                                                "en_US")
+                                                            .format(
+                                                                bill.amount),
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 16,
+                                                      color: (bill.mark == 0)
+                                                          ? ColorTheme.darkred
+                                                          : ColorTheme
+                                                              .neogreendarker,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ))));
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(

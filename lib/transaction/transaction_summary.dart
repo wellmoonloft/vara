@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
-
-import 'package:vara/utils/toolkit.dart';
+import 'package:intl/intl.dart';
 import '../theme_ui/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
@@ -29,17 +28,23 @@ class BillSummaryView extends StatelessWidget {
                     double income = 0.0;
                     double expenses = 0.0;
                     double freedomService = 0.0;
-                    if (providerdata.billList != null) {
-                      providerdata.billList.forEach((element) {
-                        if (element['mark']) {
-                          income = income + element['amount'];
-                        } else {
-                          expenses = expenses + element['amount'];
-                        }
-                      });
-                      netIncome = income - expenses;
-                      freedomService = expenses / income;
+                    bool mark = true;
+
+                    providerdata.billList.forEach((element) {
+                      if (element.mark == 0) {
+                        expenses = expenses + element.amount;
+                      } else {
+                        income = income + element.amount;
+                      }
+                    });
+                    netIncome = income - expenses;
+                    if (netIncome > 0) {
+                      mark = true;
+                    } else {
+                      netIncome = netIncome.abs();
+                      mark = false;
                     }
+                    freedomService = income / expenses * 100;
 
                     return Container(
                         width: MediaQuery.of(context).size.width,
@@ -66,10 +71,15 @@ class BillSummaryView extends StatelessWidget {
                                                     height: 50),
                                                 SummaryTopTitile(
                                                   title: 'Net Income',
-                                                  value: '€ ' +
-                                                      formatNum(netIncome, 2)
-                                                          .toString(),
-                                                  color: ColorTheme.cantaloupe,
+                                                  value: NumberFormat(
+                                                          "€ ###,###.0#",
+                                                          "en_US")
+                                                      .format(netIncome *
+                                                          animation.value),
+                                                  color: mark
+                                                      ? ColorTheme
+                                                          .neogreendarker
+                                                      : ColorTheme.darkred,
                                                 )
                                               ],
                                             ),
@@ -83,7 +93,8 @@ class BillSummaryView extends StatelessWidget {
                                       child: Center(
                                         child: SummaryTopGraph(
                                           title: 'Financial Freedom',
-                                          value: freedomService,
+                                          value:
+                                              freedomService * animation.value,
                                           color: ColorTheme.cantaloupe,
                                           subcolor:
                                               ColorTheme.cantaloupelighter,

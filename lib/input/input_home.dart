@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 import 'package:vara/input/import/invest_import_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-
+import 'package:vara/models/provider_data.dart';
 import 'categroy.dart';
+import 'package:vara/models/db_models.dart';
 
 class InputHome extends StatefulWidget {
   const InputHome({Key key, this.animationController}) : super(key: key);
@@ -22,6 +23,13 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
   final moneyController = TextEditingController();
   final noteController = TextEditingController();
+  String categroyTitle = 'Category';
+  String categroy = '';
+  IconData categroyIcon = FontAwesomeIcons.layerGroup;
+  Color categroyColor = ColorTheme.greyquadradarker;
+  String moneyType = 'EUR';
+  int mark = 0;
+
   @override
   void initState() {
     super.initState();
@@ -29,313 +37,306 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    String moneyValue = 'EUR';
-    return ChangeNotifierProvider(
-        create: (context) => CategroyChoiceData(),
-        child: Container(
-          color: ColorTheme.white,
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(
-              brightness: Brightness.light,
-              backgroundColor: ColorTheme.white,
-              elevation: 0,
-              title: Text('New Transaction', style: AppTheme.titleText),
-              leading: IconButton(
-                  icon: FaIcon(FontAwesomeIcons.times),
-                  iconSize: 20,
-                  color: ColorTheme.greytripledarker,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  }),
-              actions: <Widget>[
-                // IconButton(
-                //   icon: Icon(Icons.account_balance),
-                //   iconSize: 20,
-                //   color: ColorTheme.greytripledarker,
-                //   tooltip: 'Search',
-                //   onPressed: () {
-                //     Navigator.push(
-                //         context,
-                //         MaterialPageRoute(
-                //             builder: (context) => InvestImportView()));
-                //   },
-                // ),
-                IconButton(
-                  icon: FaIcon(
-                    FontAwesomeIcons.fileUpload,
-                    color: ColorTheme.greyquadradarker,
-                    size: 20,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => InvestImportView()));
-                  },
-                ),
-              ],
-            ),
-            body: GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () {
-                FocusScope.of(context).requestFocus(FocusNode());
+    return Container(
+      color: ColorTheme.white,
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          brightness: Brightness.light,
+          backgroundColor: ColorTheme.white,
+          elevation: 0,
+          title: Text('New Transaction', style: AppTheme.titleText),
+          leading: IconButton(
+              icon: FaIcon(FontAwesomeIcons.times),
+              iconSize: 20,
+              color: ColorTheme.greytripledarker,
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          actions: <Widget>[
+            // IconButton(
+            //   icon: Icon(Icons.account_balance),
+            //   iconSize: 20,
+            //   color: ColorTheme.greytripledarker,
+            //   tooltip: 'Search',
+            //   onPressed: () {
+            //     Navigator.push(
+            //         context,
+            //         MaterialPageRoute(
+            //             builder: (context) => InvestImportView()));
+            //   },
+            // ),
+            IconButton(
+              icon: FaIcon(
+                FontAwesomeIcons.fileUpload,
+                color: ColorTheme.greyquadradarker,
+                size: 20,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => InvestImportView()));
               },
-              child: ListView(children: [
-                Padding(
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: TextField(
-                      controller: moneyController,
-                      autofocus: true,
-                      style: TextStyle(fontSize: 40),
-                      cursorColor: Colors.red,
-                      decoration: new InputDecoration(
-                        icon: FaIcon(
-                          FontAwesomeIcons.euroSign,
-                          color: ColorTheme.greyquadradarker,
+            ),
+          ],
+        ),
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: ListView(children: [
+            Padding(
+              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: TextField(
+                  controller: moneyController,
+                  autofocus: true,
+                  style: TextStyle(fontSize: 40),
+                  cursorColor: Colors.red,
+                  decoration: new InputDecoration(
+                    icon: FaIcon(
+                      FontAwesomeIcons.euroSign,
+                      color: ColorTheme.greyquadradarker,
+                      size: 20,
+                    ),
+                    hintText: "0.00",
+                    border: InputBorder.none,
+                  ),
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  keyboardAppearance: Brightness.light,
+                  inputFormatters: [UsNumberTextInputFormatter()]),
+            ),
+            InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return CategroyView();
+                  })).then((data) {
+                    setState(() {
+                      categroyTitle = data['title'];
+                      categroyColor = data['color'];
+                      categroyIcon = data['icon'];
+                      categroy = data['categroy'];
+                      mark = data['mark'];
+                    });
+                  });
+                },
+                child: Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 20, left: 20),
+                        child: FaIcon(
+                          categroyIcon,
+                          color: categroyColor,
                           size: 20,
                         ),
-                        hintText: "0.00",
-                        border: InputBorder.none,
                       ),
-                      keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
-                      keyboardAppearance: Brightness.light,
-                      inputFormatters: [UsNumberTextInputFormatter()]),
-                ),
-                InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => CategroyView()),
-                      );
-                      // showGeneralDialog(
-                      //     context: context,
-                      //     barrierColor: Colors.black.withOpacity(.5),
-                      //     barrierDismissible: true,
-                      //     barrierLabel: '33',
-                      //     transitionDuration: Duration(milliseconds: 200),
-                      //     pageBuilder: (BuildContext context,
-                      //         Animation<double> animation,
-                      //         Animation<double> secondaryAnimation) {
-                      //       return CategroyView();
-                      //     });
-                    },
-                    child: Column(children: [
-                      Consumer<CategroyChoiceData>(
-                          builder: (context, providerdata, child) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 20, left: 20),
-                              child: FaIcon(
-                                FontAwesomeIcons.layerGroup,
-                                color: providerdata.color == null
-                                    ? ColorTheme.greyquadradarker
-                                    : providerdata.color,
-                                size: 20,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 20, left: 15),
-                              child: Text(
-                                providerdata.categroyTitle == null
-                                    ? 'Category'
-                                    : providerdata.categroyTitle,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  color: ColorTheme.greydoubledarker,
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      }),
                       Padding(
-                        padding: EdgeInsets.only(top: 15, left: 20, right: 20),
-                        child: Container(
-                          height: 1,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.pantone,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
+                        padding: EdgeInsets.only(top: 20, left: 15),
+                        child: Text(
+                          categroyTitle,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: categroyColor,
                           ),
                         ),
                       ),
-                    ])),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 15, left: 20, right: 20),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.pantone,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                    ),
+                  ),
+                ])),
 
-                // TransactionDetail(title: 'Category', icon: Icons.category)),
-                Padding(
-                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                    child: Column(children: [
-                      TextField(
-                        controller: noteController,
-                        autofocus: true,
-                        cursorColor: Colors.red,
-                        decoration: new InputDecoration(
-                          icon: FaIcon(
-                            FontAwesomeIcons.poll,
-                            color: ColorTheme.greyquadradarker,
-                            size: 20,
-                          ),
-                          hintText: "Note",
-                          border: InputBorder.none,
-                        ),
-                        keyboardType: TextInputType.multiline,
-                        keyboardAppearance: Brightness.light,
+            // TransactionDetail(title: 'Category', icon: Icons.category)),
+            Padding(
+                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                child: Column(children: [
+                  TextField(
+                    controller: noteController,
+                    autofocus: true,
+                    cursorColor: Colors.red,
+                    decoration: new InputDecoration(
+                      icon: FaIcon(
+                        FontAwesomeIcons.poll,
+                        color: ColorTheme.greyquadradarker,
+                        size: 20,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 4),
-                        child: Container(
-                          height: 1,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.pantone,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
-                          ),
-                        ),
+                      hintText: "Note",
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.multiline,
+                    keyboardAppearance: Brightness.light,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.pantone,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
                       ),
-                    ])),
-                Padding(
-                    padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                    child: Column(children: [
-                      Row(children: [
+                    ),
+                  ),
+                ])),
+            Padding(
+                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+                child: Column(children: [
+                  Row(children: [
+                    FaIcon(
+                      FontAwesomeIcons.coins,
+                      color: ColorTheme.greyquadradarker,
+                      size: 20,
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(left: 15),
+                        child: DropdownButton<String>(
+                          dropdownColor: ColorTheme.white,
+                          value: moneyType,
+                          iconSize: 18,
+                          underline: Container(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              moneyType = newValue;
+                            });
+                          },
+                          items: <String>['EUR', 'CNY']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ))
+                  ]),
+                  Padding(
+                    padding: EdgeInsets.only(top: 4),
+                    child: Container(
+                      height: 1,
+                      decoration: BoxDecoration(
+                        color: ColorTheme.pantone,
+                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                      ),
+                    ),
+                  ),
+                ])),
+            Padding(
+              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              child: Column(children: [
+                InkWell(
+                    onTap: () async {
+                      var result = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          initialDatePickerMode: DatePickerMode.day,
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2030));
+                      if (result != null) {
+                        setState(() {
+                          date = DateFormat('yyyy-MM-dd')
+                              .format(result)
+                              .toString();
+                        });
+                      }
+                      print('$result');
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
                         FaIcon(
-                          FontAwesomeIcons.coins,
+                          FontAwesomeIcons.solidCalendarAlt,
                           color: ColorTheme.greyquadradarker,
                           size: 20,
                         ),
                         Padding(
-                            padding: EdgeInsets.only(left: 15),
-                            child: DropdownButton<String>(
-                              dropdownColor: ColorTheme.white,
-                              value: moneyValue,
-                              iconSize: 18,
-                              underline: Container(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  moneyValue = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'EUR',
-                                'CNY'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ))
-                      ]),
-                      Padding(
-                        padding: EdgeInsets.only(top: 4),
-                        child: Container(
-                          height: 1,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.pantone,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
+                          padding: EdgeInsets.only(left: 15),
+                          child: Container(
+                            alignment: Alignment(0, 0),
+                            child: Text(
+                              date,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
                           ),
                         ),
-                      ),
-                    ])),
-                Padding(
-                  padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-                  child: Column(children: [
-                    InkWell(
-                        onTap: () async {
-                          var result = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              initialDatePickerMode: DatePickerMode.day,
-                              firstDate: DateTime(2020),
-                              lastDate: DateTime(2030));
-                          if (result != null) {
-                            setState(() {
-                              date = DateFormat('yyyy-MM-dd')
-                                  .format(result)
-                                  .toString();
-                            });
-                          }
-                          print('$result');
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.solidCalendarAlt,
-                              color: ColorTheme.greyquadradarker,
-                              size: 20,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 15),
-                              child: Container(
-                                alignment: Alignment(0, 0),
-                                child: Text(
-                                  date,
-                                  style: AppTheme.titleTextSmallLighter,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                    Padding(
-                      padding: EdgeInsets.only(top: 15),
-                      child: Container(
-                        height: 1,
-                        decoration: BoxDecoration(
-                          color: ColorTheme.pantone,
-                          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                        ),
-                      ),
-                    ),
-                  ]),
-                ),
-                //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
-                Padding(
-                    padding: EdgeInsets.only(top: 60, left: 50, right: 50),
-                    child: InkWell(
-                      onTap: () {
-                        print(moneyController.text);
-                        print('Category');
-                        print(noteController.text);
-                        print(moneyValue);
-                        print(date);
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 200,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: ColorTheme.pale,
-                          borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                color: ColorTheme.grey,
-                                offset: Offset(1.1, 1.1),
-                                blurRadius: 8.0),
-                            BoxShadow(
-                                color: ColorTheme.white,
-                                offset: Offset(-1.1, -1.1),
-                                blurRadius: 8.0),
-                          ],
-                        ),
-                        child: Text(
-                          'Save',
-                          style:
-                              TextStyle(color: ColorTheme.white, fontSize: 16),
-                        ),
-                      ),
+                      ],
                     )),
+                Padding(
+                  padding: EdgeInsets.only(top: 15),
+                  child: Container(
+                    height: 1,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.pantone,
+                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    ),
+                  ),
+                ),
               ]),
             ),
-          ),
-        ));
+            //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
+            Padding(
+                padding: EdgeInsets.only(top: 60, left: 50, right: 50),
+                child: InkWell(
+                  onTap: () async {
+                    if (moneyController.text == '' ||
+                        categroy == '' ||
+                        noteController.text == '') {
+                      print('some null in');
+                    } else {
+                      var providerData =
+                          Provider.of<ProviderData>(context, listen: false);
+                      Bill bill = new Bill();
+                      bill.amount = double.parse(moneyController.text);
+                      bill.date = date;
+                      bill.currency = moneyType;
+                      bill.mark = mark;
+                      bill.use = categroyTitle;
+
+                      await providerData.insertBill(bill);
+                      await providerData.getBillList();
+                      Navigator.pop(context);
+                    }
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 200,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: ColorTheme.pale,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: ColorTheme.grey,
+                            offset: Offset(1.1, 1.1),
+                            blurRadius: 8.0),
+                        BoxShadow(
+                            color: ColorTheme.white,
+                            offset: Offset(-1.1, -1.1),
+                            blurRadius: 8.0),
+                      ],
+                    ),
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: ColorTheme.white, fontSize: 16),
+                    ),
+                  ),
+                )),
+          ]),
+        ),
+      ),
+    );
   }
 }
 
@@ -417,15 +418,15 @@ class UsNumberTextInputFormatter extends TextInputFormatter {
   }
 }
 
-class CategroyChoiceData extends ChangeNotifier {
-  String categroyName;
-  String categroyTitle;
-  Color color;
+class CategroyChoiceData {
+  IconData categroyIcon = FontAwesomeIcons.layerGroup;
+  String categroyTitle = 'Category';
+  Color color = ColorTheme.greyquadradarker;
+  CategroyChoiceData({this.categroyIcon, this.categroyTitle, this.color});
 
   setDate(name, title, colors) {
-    categroyName = name;
+    categroyIcon = name;
     categroyTitle = title;
     color = colors;
-    notifyListeners();
   }
 }

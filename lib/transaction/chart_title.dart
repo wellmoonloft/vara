@@ -29,10 +29,10 @@ class ChartTitle extends StatelessWidget {
 
                     if (providerdata.billList != null) {
                       providerdata.billList.forEach((element) {
-                        if (element['mark']) {
-                          income = income + element['amount'];
+                        if (element.mark == 0) {
+                          expenses = expenses + element.amount;
                         } else {
-                          expenses = expenses + element['amount'];
+                          income = income + element.amount;
                         }
                       });
                     }
@@ -48,7 +48,7 @@ class ChartTitle extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Asset',
+                                      'Income',
                                       textAlign: TextAlign.start,
                                       style: AppTheme.titleTextSmallLighter,
                                     ),
@@ -63,7 +63,7 @@ class ChartTitle extends StatelessWidget {
                                           fontWeight: FontWeight.w800,
                                           letterSpacing: -1.0,
                                           fontSize: 26,
-                                          color: ColorTheme.cassis,
+                                          color: ColorTheme.neogreendarker,
                                         ),
                                       ),
                                     ),
@@ -77,7 +77,7 @@ class ChartTitle extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Debt',
+                                      'Expenses',
                                       textAlign: TextAlign.end,
                                       style: AppTheme.titleTextSmallLighter,
                                     ),
@@ -92,7 +92,7 @@ class ChartTitle extends StatelessWidget {
                                           fontWeight: FontWeight.w800,
                                           letterSpacing: -1.0,
                                           fontSize: 26,
-                                          color: ColorTheme.cantaloupe,
+                                          color: ColorTheme.darkred,
                                         ),
                                       ),
                                     ),

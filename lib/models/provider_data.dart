@@ -6,7 +6,7 @@ import 'db_models.dart';
 class ProviderData extends ChangeNotifier {
   List<Invest> investList;
   List<Asset> assetList;
-  List<Map> billList;
+  List<Bill> billList;
   String eur;
 
   setEur(eurData) {
@@ -49,5 +49,9 @@ class ProviderData extends ChangeNotifier {
 
   Future updateBill(Bill bill) async {
     await DBHelper().updateBill(bill);
+  }
+
+  Future insertBill(Bill bill) async {
+    await DBHelper().insertBill(bill);
   }
 }

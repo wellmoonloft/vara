@@ -121,8 +121,8 @@ class Bill {
   String date;
   String currency;
   String use;
-  String amount;
-  bool mark;
+  num amount;
+  num mark;
   Bill({this.id, this.date, this.currency, this.amount, this.use, this.mark});
   Bill.fromJson(Map<String, dynamic> json) {
     id = json['id'];
