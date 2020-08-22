@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/db_models.dart';
+import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
@@ -86,18 +87,26 @@ class AssetChartView extends StatelessWidget {
 
   static List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData(
       context) {
-    List<Asset> asset = Provider.of<ProviderData>(context).assetList;
+    List<Asset> assetList = Provider.of<ProviderData>(context).assetList;
+    List<CurrencyData> currencyData =
+        Provider.of<ProviderData>(context).currencyData;
     List<TimeSeriesSales> assetSalesData = [];
     List<TimeSeriesSales> investSalesData = [];
     List<TimeSeriesSales> netAssetSalesData = [];
     double assetValue = 0.0;
     double debtValue = 0.0;
     double netAssetValue = 0.0;
-    if (asset != null) {
-      for (var i = 0; i < asset.length; i++) {
-        Asset temp = asset[i];
-        assetValue = assetValue + temp.asset.toDouble();
-        debtValue = debtValue + temp.debt.toDouble();
+    num rate = Provider.of<ProviderData>(context).currency.rate;
+    if (assetList != null) {
+      for (var i = 0; i < assetList.length; i++) {
+        Asset temp = assetList[i];
+        currencyData.forEach((element) {
+          if (element.short == temp.currency) {
+            rate = rate / element.rate;
+          }
+        });
+        assetValue = assetValue + temp.asset.toDouble() * rate;
+        debtValue = debtValue + temp.debt.toDouble() * rate;
         netAssetValue = assetValue - debtValue;
         assetSalesData.insert(
             i, TimeSeriesSales(DateTime.parse(temp.date), assetValue));
@@ -145,7 +154,7 @@ class ShowDetail extends StatelessWidget {
     return Positioned(
         left: 24,
         top: 24,
-        width: 150,
+        width: 160,
         child: Consumer<ChartData>(builder: (context, providerdata, child) {
           return providerdata.date == null
               ? Container()
@@ -167,30 +176,54 @@ class ShowDetail extends StatelessWidget {
                                   : providerdata.date,
                               style: AppTheme.chartText,
                             ),
-                            Text(
-                              providerdata.number == null
-                                  ? 'Asset: 0'
-                                  : 'Asset: ' +
-                                      providerdata.number['Asset']
-                                          .toStringAsFixed(2),
-                              style: AppTheme.chartText,
-                            ),
-                            Text(
-                              providerdata.number == null
-                                  ? 'Debt: 0'
-                                  : 'Debt: ' +
-                                      providerdata.number['Debt']
-                                          .toStringAsFixed(2),
-                              style: AppTheme.chartText,
-                            ),
-                            Text(
-                              providerdata.number == null
-                                  ? 'NetAsset: 0'
-                                  : 'NetAsset: ' +
-                                      providerdata.number['NetAsset']
-                                          .toStringAsFixed(2),
-                              style: AppTheme.chartText,
-                            )
+                            Consumer<ProviderData>(
+                                builder: (context, providerdata1, child) {
+                              return Text(
+                                providerdata.number == null
+                                    ? 'Asset: 0'
+                                    : 'Asset: ' +
+                                        NumberFormat(
+                                                providerdata1
+                                                        .currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
+                                            .format(
+                                                (providerdata.number['Asset'])),
+                                style: AppTheme.chartText,
+                              );
+                            }),
+                            Consumer<ProviderData>(
+                                builder: (context, providerdata1, child) {
+                              return Text(
+                                providerdata.number == null
+                                    ? 'Debt: 0'
+                                    : 'Debt: ' +
+                                        NumberFormat(
+                                                providerdata1
+                                                        .currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
+                                            .format(
+                                                (providerdata.number['Debt'])),
+                                style: AppTheme.chartText,
+                              );
+                            }),
+                            Consumer<ProviderData>(
+                                builder: (context, providerdata1, child) {
+                              return Text(
+                                providerdata.number == null
+                                    ? 'NetAsset: 0'
+                                    : 'NetAsset: ' +
+                                        NumberFormat(
+                                                providerdata1
+                                                        .currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
+                                            .format((providerdata
+                                                .number['NetAsset'])),
+                                style: AppTheme.chartText,
+                              );
+                            })
                           ],
                         );
                       })));

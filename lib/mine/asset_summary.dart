@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
@@ -6,11 +7,11 @@ import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import '../theme_ui/color_theme.dart';
 
-class AssetSummaryView extends StatelessWidget {
+class PersonalSummaryView extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
 
-  const AssetSummaryView({Key key, this.animationController, this.animation})
+  const PersonalSummaryView({Key key, this.animationController, this.animation})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -28,25 +29,14 @@ class AssetSummaryView extends StatelessWidget {
                     double asset = 0.0;
                     double debt = 0.0;
                     double debtService = 0.0;
-
-                    num rate = 1;
                     if (providerdata.assetList != null) {
                       providerdata.assetList.forEach((element) {
-                        providerdata.currencyData.forEach((element1) {
-                          if (element.currency == element1.short) {
-                            rate = providerdata.currency.rate / element1.rate;
-                            asset = asset + element.asset * rate;
-                            debt = debt + element.debt * rate;
-                          }
-                        });
+                        asset = asset + element.asset;
+                        debt = debt + element.debt;
                       });
                       netAsset = asset - debt;
-
-                      if (asset == 0 || debt == 0) {
-                        debtService = 0;
-                      } else {
-                        debtService = debt / asset;
-                      }
+                      debtService = debt / asset;
+                      //print(debtService);
                     }
                     return Container(
                         width: MediaQuery.of(context).size.width,
@@ -70,14 +60,8 @@ class AssetSummaryView extends StatelessWidget {
                                               width: 3,
                                               height: 50),
                                           SummaryTopTitile(
-                                            title: 'Net Asset',
-                                            value: NumberFormat(
-                                                    providerdata
-                                                            .currency.iconName +
-                                                        " ###,###.0#",
-                                                    "en_US")
-                                                .format(
-                                                    netAsset * animation.value),
+                                            title: 'User Name',
+                                            value: 'Lee Nan',
                                             color: ColorTheme.puristbluedarker,
                                           )
                                         ],
@@ -88,11 +72,25 @@ class AssetSummaryView extends StatelessWidget {
                                     padding: const EdgeInsets.only(
                                         right: AppTheme.leftRightPadding),
                                     child: Center(
-                                      child: SummaryTopGraph(
-                                        title: 'Debt service',
-                                        value: debtService * animation.value,
-                                        color: ColorTheme.puristbluedarker,
-                                        subcolor: ColorTheme.puristbluelighter,
+                                      child: Stack(
+                                        overflow: Overflow.visible,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Container(
+                                                height: 80,
+                                                width: 80,
+                                                alignment: Alignment.center,
+                                                decoration: BoxDecoration(
+                                                  color: ColorTheme.pale,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.userAlt,
+                                                  color: ColorTheme.white,
+                                                )),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   )

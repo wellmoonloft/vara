@@ -26,15 +26,20 @@ class ChartTitle extends StatelessWidget {
                       builder: (context, providerdata, child) {
                     double asset = 0.0;
                     double debt = 0.0;
-
+                    num rate = 1;
                     if (providerdata.assetList != null) {
                       providerdata.assetList.forEach((element) {
-                        asset = asset + element.asset;
-                        debt = debt + element.debt;
+                        providerdata.currencyData.forEach((element1) {
+                          if (element.currency == element1.short) {
+                            rate = providerdata.currency.rate / element1.rate;
+                            asset = asset + element.asset * rate;
+                            debt = debt + element.debt * rate;
+                          }
+                        });
                       });
                     }
                     return Container(
-                        height: 80,
+                        height: 85,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
@@ -53,7 +58,10 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat("€ ###,###.0#", "en_US")
+                                        NumberFormat(
+                                                providerdata.currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
                                             .format(asset * animation.value),
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
@@ -82,7 +90,10 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat("€ ###,###.0#", "en_US")
+                                        NumberFormat(
+                                                providerdata.currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
                                             .format(debt * animation.value),
                                         textAlign: TextAlign.end,
                                         style: TextStyle(

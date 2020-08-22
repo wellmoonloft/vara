@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'package:vara/utils/toolkit.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/models/db_models.dart';
 
@@ -221,10 +219,44 @@ class BillListState extends State<BillListView> {
                 return Dismissible(
                     key: Key('key${billList[index]}'),
                     direction: DismissDirection.endToStart,
-                    onDismissed: (direction) {
+                    onDismissed: (direction) async {
                       setState(() {
                         billList.removeAt(index);
                       });
+                      var providerData =
+                          Provider.of<ProviderData>(context, listen: false);
+                      await providerData.deleteBill(bill);
+                      await providerData.getBillList();
+                      await providerData.getAssetList();
+                    },
+                    confirmDismiss: (direction) async {
+                      var _alertDialog = AlertDialog(
+                        title: Text('Alert'),
+                        content: Text(
+                            'Confirm delete Bill:${bill.amount} ${bill.use}？'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("Cancel"),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                          FlatButton(
+                            child: Text("Delete"),
+                            onPressed: () {
+                              Navigator.of(context).pop(true);
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content:
+                                      Text("${billList[index]} dismissed")));
+                            },
+                          ),
+                        ],
+                      );
+
+                      var isDismiss = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _alertDialog;
+                          });
+                      return isDismiss;
                     },
                     background: Container(
                       width: 50,
@@ -259,7 +291,7 @@ class BillListState extends State<BillListView> {
                                               'Date',
                                               style: AppTheme.subtitleText,
                                             ),
-                                            Padding(
+                                            Container(
                                               padding: const EdgeInsets.only(
                                                   top: 6, bottom: 6),
                                               child: Text(
@@ -282,12 +314,22 @@ class BillListState extends State<BillListView> {
                                                   'Use',
                                                   style: AppTheme.subtitleText,
                                                 ),
-                                                Padding(
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          3 -
+                                                      16,
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 6, bottom: 6),
                                                   child: Text(
                                                     bill.use,
+                                                    softWrap: true,
+                                                    textAlign: TextAlign.left,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    maxLines: 1,
                                                     style: AppTheme
                                                         .titleTextSmallLighter,
                                                   ),
@@ -310,7 +352,12 @@ class BillListState extends State<BillListView> {
                                                   'Amount',
                                                   style: AppTheme.subtitleText,
                                                 ),
-                                                Padding(
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          3 -
+                                                      16,
                                                   padding:
                                                       const EdgeInsets.only(
                                                           top: 6, bottom: 6),
@@ -318,12 +365,12 @@ class BillListState extends State<BillListView> {
                                                     (bill.mark == 0
                                                             ? '-'
                                                             : '+') +
-                                                        '€ ' +
                                                         NumberFormat(
                                                                 "###,###.0#",
                                                                 "en_US")
                                                             .format(
-                                                                bill.amount),
+                                                                bill.amount) +
+                                                        bill.currency,
                                                     style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w500,

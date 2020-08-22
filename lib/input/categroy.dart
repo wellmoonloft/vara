@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vara/models/tabIcon_data.dart';
+import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
@@ -172,7 +172,7 @@ class Savings extends StatelessWidget {
         icons: savingsData.last.iconList,
         title: savingsData.last.categroyTitle,
         color: savingsData.last.color,
-        mark: 1,
+        mark: 2,
       )
     ]);
   }

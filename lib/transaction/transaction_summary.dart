@@ -28,23 +28,26 @@ class BillSummaryView extends StatelessWidget {
                     double income = 0.0;
                     double expenses = 0.0;
                     double freedomService = 0.0;
-                    bool mark = true;
 
+                    num rate = 1;
                     providerdata.billList.forEach((element) {
-                      if (element.mark == 0) {
-                        expenses = expenses + element.amount;
-                      } else {
-                        income = income + element.amount;
-                      }
+                      providerdata.currencyData.forEach((element1) {
+                        if (element.currency == element1.short) {
+                          rate = providerdata.currency.rate / element1.rate;
+                          if (element.mark == 0) {
+                            expenses = expenses + element.amount * rate;
+                          } else {
+                            income = income + element.amount * rate;
+                          }
+                        }
+                      });
                     });
                     netIncome = income - expenses;
-                    if (netIncome > 0) {
-                      mark = true;
+                    if (expenses == 0 || income == 0) {
+                      freedomService = 0;
                     } else {
-                      netIncome = netIncome.abs();
-                      mark = false;
+                      freedomService = income / expenses * 100;
                     }
-                    freedomService = income / expenses * 100;
 
                     return Container(
                         width: MediaQuery.of(context).size.width,
@@ -72,15 +75,15 @@ class BillSummaryView extends StatelessWidget {
                                                 SummaryTopTitile(
                                                   title: 'Net Income',
                                                   value: NumberFormat(
-                                                          "€ ###,###.0#",
+                                                          providerdata.currency
+                                                                  .iconName +
+                                                              " ###,###.0#",
                                                           "en_US")
                                                       .format(netIncome *
                                                           animation.value),
-                                                  color: mark
-                                                      ? ColorTheme
-                                                          .neogreendarker
-                                                      : ColorTheme.darkred,
-                                                )
+                                                  color: ColorTheme
+                                                      .cantaloupedarker,
+                                                ),
                                               ],
                                             ),
                                           ],

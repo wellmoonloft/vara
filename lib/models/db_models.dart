@@ -32,6 +32,23 @@ class Person {
   }
 }
 
+class Settings {
+  int id;
+  String currency;
+
+  Settings({this.id, this.currency});
+  Settings.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    currency = json['currency'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['currency'] = this.currency;
+    return map;
+  }
+}
+
 class Invest {
   int id;
   String date;
@@ -99,12 +116,14 @@ class Asset {
   String date;
   num asset;
   num debt;
-  Asset({this.id, this.date, this.asset, this.debt});
+  String currency;
+  Asset({this.id, this.date, this.asset, this.debt, this.currency});
   Asset.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'];
     asset = json['asset'];
     debt = json['debt'];
+    currency = json['currency'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> map = new Map<String, dynamic>();
@@ -112,6 +131,7 @@ class Asset {
     map['date'] = this.date;
     map['asset'] = this.asset;
     map['debt'] = this.debt;
+    map['currency'] = this.currency;
     return map;
   }
 }
@@ -121,9 +141,17 @@ class Bill {
   String date;
   String currency;
   String use;
+  String categroy;
   num amount;
   num mark;
-  Bill({this.id, this.date, this.currency, this.amount, this.use, this.mark});
+  Bill(
+      {this.id,
+      this.date,
+      this.currency,
+      this.amount,
+      this.use,
+      this.mark,
+      this.categroy});
   Bill.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     date = json['date'];
@@ -131,6 +159,7 @@ class Bill {
     use = json['use'];
     amount = json['amount'];
     mark = json['mark'];
+    categroy = json['categroy'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> map = new Map<String, dynamic>();
@@ -140,6 +169,7 @@ class Bill {
     map['use'] = this.use;
     map['amount'] = this.amount;
     map['mark'] = this.mark;
+    map['categroy'] = this.categroy;
     return map;
   }
 }

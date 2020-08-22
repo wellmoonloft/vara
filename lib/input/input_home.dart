@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/input/import/invest_import_view.dart';
+import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/models/provider_data.dart';
@@ -27,8 +28,10 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   String categroy = '';
   IconData categroyIcon = FontAwesomeIcons.layerGroup;
   Color categroyColor = ColorTheme.greyquadradarker;
-  String moneyType = 'EUR';
+
   int mark = 0;
+  String currencyValue = 'EUR';
+  var items = List<DropdownMenuItem<String>>();
 
   @override
   void initState() {
@@ -37,6 +40,20 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    List<CurrencyData> currencyData =
+        Provider.of<ProviderData>(context).currencyData;
+    // CurrencyData currency = Provider.of<ProviderData>(context).currency;
+    // currencyValue = currency.short;
+    if (currencyData != null && items.length == 0) {
+      for (var i = 0; i < currencyData.length; i++) {
+        items.add(DropdownMenuItem(
+            child: Text(
+              currencyData[i].short,
+            ),
+            value: currencyData[i].short));
+      }
+    }
+
     return Container(
       color: ColorTheme.white,
       child: Scaffold(
@@ -96,9 +113,9 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                   cursorColor: Colors.red,
                   decoration: new InputDecoration(
                     icon: FaIcon(
-                      FontAwesomeIcons.euroSign,
+                      FontAwesomeIcons.creditCard,
                       color: ColorTheme.greyquadradarker,
-                      size: 20,
+                      size: 18,
                     ),
                     hintText: "0.00",
                     border: InputBorder.none,
@@ -113,13 +130,15 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       MaterialPageRoute(builder: (BuildContext context) {
                     return CategroyView();
                   })).then((data) {
-                    setState(() {
-                      categroyTitle = data['title'];
-                      categroyColor = data['color'];
-                      categroyIcon = data['icon'];
-                      categroy = data['categroy'];
-                      mark = data['mark'];
-                    });
+                    if (data != null) {
+                      setState(() {
+                        categroyTitle = data['title'];
+                        categroyColor = data['color'];
+                        categroyIcon = data['icon'];
+                        categroy = data['categroy'];
+                        mark = data['mark'];
+                      });
+                    }
                   });
                 },
                 child: Column(children: [
@@ -204,21 +223,15 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                         padding: EdgeInsets.only(left: 15),
                         child: DropdownButton<String>(
                           dropdownColor: ColorTheme.white,
-                          value: moneyType,
+                          value: currencyValue,
                           iconSize: 18,
                           underline: Container(),
                           onChanged: (String newValue) {
                             setState(() {
-                              moneyType = newValue;
+                              currencyValue = newValue;
                             });
                           },
-                          items: <String>['EUR', 'CNY']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
+                          items: items,
                         ))
                   ]),
                   Padding(
@@ -293,19 +306,38 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     if (moneyController.text == '' ||
                         categroy == '' ||
                         noteController.text == '') {
-                      print('some null in');
+                      var _alertDialog = AlertDialog(
+                        title: Text('Alert'),
+                        content: Text(
+                            'Please choose category and input amount and note.'),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("I know"),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ],
+                      );
+
+                      var isDismiss = await showDialog(
+                          context: context,
+                          builder: (context) {
+                            return _alertDialog;
+                          });
+                      return isDismiss;
                     } else {
                       var providerData =
                           Provider.of<ProviderData>(context, listen: false);
                       Bill bill = new Bill();
                       bill.amount = double.parse(moneyController.text);
                       bill.date = date;
-                      bill.currency = moneyType;
+                      bill.currency = currencyValue;
                       bill.mark = mark;
                       bill.use = categroyTitle;
+                      bill.categroy = categroy;
 
                       await providerData.insertBill(bill);
                       await providerData.getBillList();
+                      await providerData.getAssetList();
                       Navigator.pop(context);
                     }
                   },

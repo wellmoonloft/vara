@@ -2,17 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:vara/utils/db_helper.dart';
 
 import 'db_models.dart';
+import 'default_data.dart';
 
 class ProviderData extends ChangeNotifier {
   List<Invest> investList;
   List<Asset> assetList;
   List<Bill> billList;
-  String eur;
+  List<CurrencyData> currencyData = CurrencyData.currencyList;
+  CurrencyData currency;
 
-  setEur(eurData) {
-    eur = eurData['5. Exchange Rate'];
+  setCurrencyData(eurData, currencyTilte) {
+    currencyData.forEach((element) {
+      if (eurData[element.short] != null) {
+        element.rate = eurData[element.short];
+        // print(element.short);
+        // print(element.rate);
+      }
+      if (element.short == currencyTilte) {
+        currency = element;
+      }
+    });
     notifyListeners();
-    print(eur);
+  }
+
+  setCurrency(String short) {
+    currencyData.forEach((element) {
+      if (element.short == short) {
+        currency = element;
+      }
+    });
+    notifyListeners();
   }
 
   Future getinvestList() async {
@@ -47,11 +66,11 @@ class ProviderData extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future updateBill(Bill bill) async {
-    await DBHelper().updateBill(bill);
-  }
-
   Future insertBill(Bill bill) async {
     await DBHelper().insertBill(bill);
+  }
+
+  Future deleteBill(Bill bill) async {
+    await DBHelper().deleteBill(bill);
   }
 }

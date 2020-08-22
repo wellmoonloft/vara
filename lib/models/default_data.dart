@@ -50,6 +50,56 @@ class TabIconData {
   ];
 }
 
+class CurrencyData {
+  IconData icon;
+  String iconName;
+  String short;
+  num rate;
+
+  CurrencyData({this.icon, this.iconName, this.short, this.rate});
+
+  static List<CurrencyData> currencyList = <CurrencyData>[
+    CurrencyData(
+        icon: FontAwesomeIcons.yenSign, iconName: '¥', short: 'CNY', rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.yenSign, iconName: '¥', short: 'JPY', rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: '\$',
+        short: 'USD',
+        rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.euroSign, iconName: '€', short: 'EUR', rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.poundSign, iconName: '￡', short: 'GBP', rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: 'A\$',
+        short: 'AUD',
+        rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: 'C\$',
+        short: 'CAD',
+        rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: 'NZ\$',
+        short: 'NZD',
+        rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: 'HK\$',
+        short: 'HKD',
+        rate: 1),
+    CurrencyData(
+        icon: FontAwesomeIcons.dollarSign,
+        iconName: 'S\$',
+        short: 'SGD',
+        rate: 1),
+  ];
+}
+
 class CategroyIcon {
   IconData icon;
   String title;

@@ -33,15 +33,38 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE invest (id INTEGER PRIMARY KEY, date TEXT, perDate TEXT, amount INTEGER, endDate TEXT,  received INTEGER,code TEXT, type TEXT, status TEXT,interest INTEGER,currency TEXT,country TEXT,totalyield INTEGER)');
     await db.execute(
-        'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT, asset INTEGER, debt INTEGER)');
+        'CREATE TABLE asset (id INTEGER PRIMARY KEY, date TEXT,currency TEXT, asset INTEGER, debt INTEGER)');
     await db.execute(
-        'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT,amount INTEGER, mark INTEGER)');
+        'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT, categroy TEXT,amount INTEGER, mark INTEGER)');
+    await db.execute(
+        'CREATE TABLE settings (id INTEGER PRIMARY KEY, currency TEXT)');
+
+    Settings settings = Settings();
+    settings.currency = 'EUR';
+    db.insert('settings', settings.toJson());
+  }
+
+  Future<Settings> getSettings() async {
+    var dbClient = await db;
+    var result = await dbClient.query('settings', columns: ['id', 'currency']);
+    Settings settings = Settings.fromJson(result.last);
+
+    return settings;
+  }
+
+  Future<int> updateSettings(Settings settings) async {
+    var dbClient = await db;
+    var result = await dbClient.query('settings', columns: ['id', 'currency']);
+    Settings temp = Settings.fromJson(result.last);
+    temp.currency = settings.currency;
+    return await dbClient
+        .update('settings', temp.toJson(), where: 'id=?', whereArgs: [temp.id]);
   }
 
   Future<List<Asset>> getAsset() async {
     var dbClient = await db;
     var result = await dbClient.query('asset',
-        columns: ['id', 'date', 'asset', 'debt'], orderBy: 'date');
+        columns: ['id', 'date', 'asset', 'debt', 'currency'], orderBy: 'date');
     List<Asset> asset = [];
     result.forEach((element) => asset.add(Asset.fromJson(element)));
     return asset;
@@ -49,15 +72,20 @@ class DBHelper {
 
   Future<int> updateAsset(Asset asset) async {
     var dbClient = await db;
-    var result =
-        await dbClient.query('asset', where: 'date=?', whereArgs: [asset.date]);
+    var result = await dbClient.query('asset',
+        where: 'date=\'' +
+            asset.date +
+            '\' and currency=\'' +
+            asset.currency +
+            '\'');
     if (result.length > 0) {
       Asset temp = Asset.fromJson(result.last);
       asset.id = temp.id;
       asset.asset = temp.asset + asset.asset;
       asset.debt = temp.debt + asset.debt;
+      asset.currency = temp.currency;
       return await dbClient.update('asset', asset.toJson(),
-          where: 'date=?', whereArgs: [asset.date]);
+          where: 'id=?', whereArgs: [asset.id]);
     } else {
       return await dbClient.insert('asset', asset.toJson());
     }
@@ -120,6 +148,7 @@ class DBHelper {
           asset.asset = NumUtil.subtract(invest.received, invest.amount);
           asset.asset = NumUtil.subtract(asset.asset, invest.amount);
           asset.date = invest.endDate;
+          asset.date = invest.currency;
           await updateAsset(asset);
 
           invest.interest = NumUtil.subtract(invest.received, invest.amount);
@@ -146,6 +175,7 @@ class DBHelper {
 
         asset.asset = NumUtil.subtract(invest.received, invest.amount);
         asset.date = invest.endDate;
+        asset.currency = invest.currency;
         invest.interest = NumUtil.subtract(invest.received, invest.amount);
         double temp = NumUtil.divide(invest.interest, invest.amount);
         if (temp == 0) {
@@ -164,7 +194,7 @@ class DBHelper {
         asset.debt = 0;
         asset.asset = invest.amount;
         asset.date = invest.date;
-
+        asset.currency = invest.currency;
         invest.interest = 0;
         invest.totalyield = 0;
         await dbClient.insert('invest', invest.toJson());
@@ -184,8 +214,15 @@ class DBHelper {
 
   Future<List<Bill>> getBill() async {
     var dbClient = await db;
-    var result = await dbClient.query('bill',
-        columns: ['id', 'date', 'currency', 'use', 'amount', 'mark']);
+    var result = await dbClient.query('bill', columns: [
+      'id',
+      'date',
+      'currency',
+      'use',
+      'amount',
+      'mark',
+      'categroy'
+    ]);
     List<Bill> bill = [];
     result.forEach((element) => bill.add(Bill.fromJson(element)));
     return bill;
@@ -209,7 +246,38 @@ class DBHelper {
 
   Future<int> insertBill(Bill bill) async {
     var dbClient = await db;
-    return await dbClient.insert('bill', bill.toJson());
+    await dbClient.insert('bill', bill.toJson());
+    Asset asset = new Asset();
+    if (bill.mark == 0) {
+      asset.debt = bill.amount;
+      asset.asset = 0;
+    } else {
+      asset.asset = bill.amount;
+      asset.debt = 0;
+    }
+    asset.date = bill.date;
+    asset.currency = bill.currency;
+    return await updateAsset(asset);
+  }
+
+  Future<int> deleteBill(Bill bill) async {
+    var dbClient = await db;
+    await dbClient.delete(
+      'bill',
+      where: 'id = ?',
+      whereArgs: [bill.id],
+    );
+    Asset asset = new Asset();
+    if (bill.mark == 0) {
+      asset.debt = 0 - bill.amount;
+      asset.asset = 0;
+    } else {
+      asset.asset = 0 - bill.amount;
+      asset.debt = 0;
+    }
+    asset.date = bill.date;
+    asset.currency = bill.currency;
+    return await updateAsset(asset);
   }
 
   Future<int> delete(int id) async {

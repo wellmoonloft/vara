@@ -32,33 +32,46 @@ class InvestSummaryView extends StatelessWidget {
                     double mid = 0.0;
                     double long = 0.0;
                     int mark = 0;
+                    num rate = 1;
                     providerdata.investList.forEach((element) {
-                      if (element.status == 'FINISHED') {
-                        investIncome = investIncome +
-                            (element.interest != null ? element.interest : 0);
-                        if (element.interest > 0) {
-                          totalYield = totalYield + element.totalyield;
-                          mark++;
+                      providerdata.currencyData.forEach((element1) {
+                        if (element.currency == element1.short) {
+                          rate = providerdata.currency.rate / element1.rate;
+                          if (element.status == 'FINISHED') {
+                            investIncome = investIncome +
+                                (element.interest != null
+                                    ? element.interest * rate
+                                    : 0);
+                            if (element.interest > 0) {
+                              totalYield = totalYield + element.totalyield;
+                              mark++;
+                            }
+                            // totalYield = investIncome *
+                            //     (element.totalyield != null
+                            //         ? element.totalyield
+                            //         : 0) /
+                            //     (element.interest != null ? element.interest : 0);
+                          } else {
+                            totalInvest = totalInvest + element.amount * rate;
+                            if (element.type == 'SHORT') {
+                              short = short + element.amount * rate;
+                            }
+                            if (element.type == 'MID') {
+                              mid = mid + element.amount * rate;
+                            }
+                            if (element.type == 'LONG') {
+                              long = long + element.amount * rate;
+                            }
+                          }
                         }
-                        // totalYield = investIncome *
-                        //     (element.totalyield != null
-                        //         ? element.totalyield
-                        //         : 0) /
-                        //     (element.interest != null ? element.interest : 0);
-                      } else {
-                        totalInvest = totalInvest + element.amount;
-                        if (element.type == 'SHORT') {
-                          short = short + element.amount;
-                        }
-                        if (element.type == 'MID') {
-                          mid = mid + element.amount;
-                        }
-                        if (element.type == 'LONG') {
-                          long = long + element.amount;
-                        }
-                      }
+                      });
                     });
-                    totalYield = totalYield / mark * 100;
+                    if (totalInvest == 0 || mark == 0) {
+                      totalYield = 0.0;
+                    } else {
+                      totalYield = totalYield / mark * 100;
+                    }
+
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         child: Column(
@@ -82,7 +95,10 @@ class InvestSummaryView extends StatelessWidget {
                                               SummaryTopTitile(
                                                 title: 'Invested Profit',
                                                 value: NumberFormat(
-                                                        "€ ###,###.0#", "en_US")
+                                                        providerdata.currency
+                                                                .iconName +
+                                                            " ###,###.0#",
+                                                        "en_US")
                                                     .format(investIncome *
                                                         animation.value),
                                                 color: ColorTheme.cassis,
@@ -98,7 +114,10 @@ class InvestSummaryView extends StatelessWidget {
                                               SummaryTopTitile(
                                                 title: 'Invested Funds',
                                                 value: NumberFormat(
-                                                        "€ ###,###.0#", "en_US")
+                                                        providerdata.currency
+                                                                .iconName +
+                                                            " ###,###.0#",
+                                                        "en_US")
                                                     .format(totalInvest *
                                                         animation.value),
                                                 color: ColorTheme.cassis,
@@ -124,17 +143,6 @@ class InvestSummaryView extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // Padding(
-                            //   padding: AppTheme.inboxpadding,
-                            //   child: Container(
-                            //     height: 2,
-                            //     decoration: BoxDecoration(
-                            //       color: ColorTheme.pantone,
-                            //       borderRadius:
-                            //           BorderRadius.all(Radius.circular(4.0)),
-                            //     ),
-                            //   ),
-                            // ),
                             Padding(
                               padding: AppTheme.inboxpadding,
                               child: Row(
@@ -143,9 +151,11 @@ class InvestSummaryView extends StatelessWidget {
                                     child: SummaryBottom(
                                       title: 'Short',
                                       subtitle: 'less 90days',
-                                      value:
-                                          NumberFormat("€ ###,###.0#", "en_US")
-                                              .format(short * animation.value),
+                                      value: NumberFormat(
+                                              providerdata.currency.iconName +
+                                                  " ###,###.0#",
+                                              "en_US")
+                                          .format(short * animation.value),
                                       color: ColorTheme.puristbluedarker,
                                       subcolor: '#87A0E5',
                                     ),
@@ -161,7 +171,10 @@ class InvestSummaryView extends StatelessWidget {
                                           title: 'Mid',
                                           subtitle: 'less 365 days',
                                           value: NumberFormat(
-                                                  "€ ###,###.0#", "en_US")
+                                                  providerdata
+                                                          .currency.iconName +
+                                                      " ###,###.0#",
+                                                  "en_US")
                                               .format(mid * animation.value),
                                           color: ColorTheme.cassis,
                                           subcolor: '#F56E98',
@@ -179,7 +192,10 @@ class InvestSummaryView extends StatelessWidget {
                                           title: 'Long',
                                           subtitle: 'over 365 days',
                                           value: NumberFormat(
-                                                  "€ ###,###.0#", "en_US")
+                                                  providerdata
+                                                          .currency.iconName +
+                                                      " ###,###.0#",
+                                                  "en_US")
                                               .format(long * animation.value),
                                           color: ColorTheme.cantaloupe,
                                           subcolor: '#F1B440',

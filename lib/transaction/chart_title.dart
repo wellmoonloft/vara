@@ -26,14 +26,20 @@ class ChartTitle extends StatelessWidget {
                       builder: (context, providerdata, child) {
                     double income = 0.0;
                     double expenses = 0.0;
+                    num rate = 1;
 
                     if (providerdata.billList != null) {
                       providerdata.billList.forEach((element) {
-                        if (element.mark == 0) {
-                          expenses = expenses + element.amount;
-                        } else {
-                          income = income + element.amount;
-                        }
+                        providerdata.currencyData.forEach((element1) {
+                          if (element.currency == element1.short) {
+                            rate = providerdata.currency.rate / element1.rate;
+                            if (element.mark == 0) {
+                              expenses = expenses + element.amount * rate;
+                            } else {
+                              income = income + element.amount * rate;
+                            }
+                          }
+                        });
                       });
                     }
                     return Container(
@@ -56,14 +62,16 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat("€ ###,###.0#", "en_US")
+                                        NumberFormat(
+                                                providerdata.currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
                                             .format(income * animation.value),
                                         textAlign: TextAlign.start,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,
-                                          letterSpacing: -1.0,
                                           fontSize: 26,
-                                          color: ColorTheme.neogreendarker,
+                                          color: ColorTheme.puristbluedarker,
                                         ),
                                       ),
                                     ),
@@ -85,14 +93,16 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat("€ ###,###.0#", "en_US")
+                                        NumberFormat(
+                                                providerdata.currency.iconName +
+                                                    " ###,###.0#",
+                                                "en_US")
                                             .format(expenses * animation.value),
                                         textAlign: TextAlign.end,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w800,
-                                          letterSpacing: -1.0,
                                           fontSize: 26,
-                                          color: ColorTheme.darkred,
+                                          color: ColorTheme.cassis,
                                         ),
                                       ),
                                     ),

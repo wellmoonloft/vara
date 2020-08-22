@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'home/home_page.dart';
-import 'models/provider_data.dart';
-import 'theme_ui/color_theme.dart';
-import 'utils/db_helper.dart';
+import 'home_page.dart';
+import '../models/db_models.dart';
+import '../models/provider_data.dart';
+import '../theme_ui/color_theme.dart';
+import '../utils/db_helper.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -18,11 +19,12 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> btc;
-  Map<String, dynamic> eur;
+  Map<String, dynamic> currency;
   Map<String, dynamic> btcdaily;
   Map<String, dynamic> usdcnydaily;
   Map<String, dynamic> eurcnydaily;
   String etext = '';
+  String currencyTilte = 'EUR';
   double progressValue = 0.0;
 
   @override
@@ -70,11 +72,9 @@ class _SplashPageState extends State<SplashPage> {
     // btc = await _getNetData(
     //     'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV',
     //     1);
-    eur = await _getNetData(
-        'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=EUR&to_currency=CNY&apikey=9AAGEESEANSVTYTV',
-        5);
+    currency = await _getNetData('https://api.ratesapi.io/api/latest', 5);
     var providerData = Provider.of<ProviderData>(context, listen: false);
-    providerData.setEur(eur);
+    providerData.setCurrencyData(currency, currencyTilte);
     setState(() {
       etext = 'GET BTC DAILY ...';
       progressValue = 0.4;
@@ -97,22 +97,19 @@ class _SplashPageState extends State<SplashPage> {
     //     'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=CNY&apikey=9AAGEESEANSVTYTV',
     //     4);
     print("----get data done------");
-    Navigator.of(context).pushReplacement(new MaterialPageRoute(
-        builder: (context) => HomeScreen1(
-            // btc: btc,
-            // btcdaily: btcdaily,
-            // usdcnydaily: usdcnydaily,
-            // eurcnydaily: eurcnydaily,
-            )));
+    Navigator.of(context).pushReplacement(
+        new MaterialPageRoute(builder: (context) => HomeScreen1()));
   }
 
   _doDatabase() async {
     DBHelper dbHelper = DBHelper();
     await dbHelper.initDatabase();
     var providerData = Provider.of<ProviderData>(context, listen: false);
-    providerData.getAssetList();
-    providerData.getinvestList();
-    providerData.getBillList();
+    await providerData.getAssetList();
+    await providerData.getinvestList();
+    await providerData.getBillList();
+    Settings settings = await dbHelper.getSettings();
+    currencyTilte = settings.currency;
   }
 
   _getNetData(url, mark) async {
@@ -137,7 +134,7 @@ class _SplashPageState extends State<SplashPage> {
           return data['Time Series FX (Daily)'];
         }
         if (mark == 5) {
-          return data['Realtime Currency Exchange Rate'];
+          return data['rates'];
         }
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
