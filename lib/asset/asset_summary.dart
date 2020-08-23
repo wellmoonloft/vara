@@ -70,13 +70,22 @@ class AssetSummaryView extends StatelessWidget {
                                               height: 50),
                                           SummaryTopTitile(
                                             title: S.current.NetAsset,
-                                            value: NumberFormat(
-                                                    providerdata
-                                                            .currency.iconName +
-                                                        " ###,###.0#",
-                                                    "en_US")
-                                                .format(
-                                                    netAsset * animation.value),
+                                            value: netAsset.abs() > 100000.00
+                                                ? providerdata
+                                                        .currency.iconName +
+                                                    ' ' +
+                                                    NumberFormat.compact(
+                                                            locale: Intl
+                                                                .getCurrentLocale())
+                                                        .format(netAsset *
+                                                            animation.value)
+                                                : NumberFormat(
+                                                        providerdata.currency
+                                                                .iconName +
+                                                            " ###,###.0#",
+                                                        Intl.getCurrentLocale())
+                                                    .format(netAsset *
+                                                        animation.value),
                                             color: ColorTheme.puristbluedarker,
                                           )
                                         ],

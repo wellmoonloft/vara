@@ -35,16 +35,23 @@
     "FinancialFreedom": "Financial Freedom",
     "Income": "Income",
     "Expenses": "Expenses",
+    "Savings": "Savings",
     "NewTransaction": "New Transaction",
     "Category": "Category",
     "Settings": "Settings",
     "AccountInformation": "Account Information",
     "UserName": "User Name",
+    "Language": "Language",
+    "Use": "Use",
 
     "Save": "Save",
     "Alert": "Alert",
     "AlertNote": "Please choose category and input amount and note.",
     "Confirm": "Confirm",
     "Import": "Import",    
-    "ImportNote": "Press the Icon above to import."
+    "ImportNote": "Press the Icon above to import.",
+    "Cancel": "Cancel",
+    "Delete": "Delete",
+    "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
+    "DeleteNote": "This bill: {bill} was deleted."
 }

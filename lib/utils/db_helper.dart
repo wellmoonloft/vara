@@ -58,8 +58,12 @@ class DBHelper {
     var result = await dbClient
         .query('settings', columns: ['id', 'currency', 'language']);
     Settings temp = Settings.fromJson(result.last);
-    temp.currency = settings.currency;
-    temp.language = settings.language;
+    if (settings.currency != null) {
+      temp.currency = settings.currency;
+    }
+    if (settings.language != null) {
+      temp.language = settings.language;
+    }
     return await dbClient
         .update('settings', temp.toJson(), where: 'id=?', whereArgs: [temp.id]);
   }

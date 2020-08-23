@@ -27,7 +27,6 @@ class _CategroyViewState extends State<CategroyView>
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: ColorTheme.black.withOpacity(0.4),
       child: Scaffold(
           backgroundColor: ColorTheme.transparent,
           appBar: AppBar(
@@ -73,13 +72,13 @@ class _CategroyViewState extends State<CategroyView>
               indicatorColor: Colors.white,
               tabs: <Widget>[
                 new Tab(
-                  text: 'Expenses',
+                  text: S.current.Expenses,
                 ),
                 new Tab(
-                  text: 'Income',
+                  text: S.current.Income,
                 ),
                 new Tab(
-                  text: 'Savings',
+                  text: S.current.Savings,
                 ),
               ],
               controller: _tabController,

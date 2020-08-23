@@ -187,7 +187,7 @@ class ShowDetail extends StatelessWidget {
                                                 providerdata1
                                                         .currency.iconName +
                                                     " ###,###.0#",
-                                                "en_US")
+                                                Intl.getCurrentLocale())
                                             .format(
                                                 (providerdata.number['Asset'])),
                                 style: AppTheme.chartText,
@@ -204,7 +204,7 @@ class ShowDetail extends StatelessWidget {
                                                 providerdata1
                                                         .currency.iconName +
                                                     " ###,###.0#",
-                                                "en_US")
+                                                Intl.getCurrentLocale())
                                             .format(
                                                 (providerdata.number['Debt'])),
                                 style: AppTheme.chartText,
@@ -221,7 +221,7 @@ class ShowDetail extends StatelessWidget {
                                                 providerdata1
                                                         .currency.iconName +
                                                     " ###,###.0#",
-                                                "en_US")
+                                                Intl.getCurrentLocale())
                                             .format((providerdata
                                                 .number['NetAsset'])),
                                 style: AppTheme.chartText,

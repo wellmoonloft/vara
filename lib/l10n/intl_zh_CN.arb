@@ -35,16 +35,23 @@
     "FinancialFreedom": "财务自由度",
     "Income": "收入",
     "Expenses": "支出",
+    "Savings": "存款",
     "NewTransaction": "新交易",
     "Category": "类别",
     "Settings": "设定",
     "AccountInformation": "账号信息",
     "UserName": "用户名",
+    "Language": "语言",
+    "Use": "用途",
 
     "Save": "保存",
     "Alert": "提示",
     "AlertNote": "请选择分类并输入金额。",
     "Confirm": "确认",
     "Import": "导入",    
-    "ImportNote": "点击上面的图标进行导入。"
+    "ImportNote": "点击上面的图标进行导入。",
+    "Cancel": "取消",
+    "Delete": "删除",
+    "ConfirmNote": "确认删除这个账单：{amount} {use}？",
+    "DeleteNote": "这个账单： {bill} 已经被删除。"
 }

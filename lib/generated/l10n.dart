@@ -383,6 +383,16 @@ class S {
     );
   }
 
+  /// `Savings`
+  String get Savings {
+    return Intl.message(
+      'Savings',
+      name: 'Savings',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `New Transaction`
   String get NewTransaction {
     return Intl.message(
@@ -428,6 +438,26 @@ class S {
     return Intl.message(
       'User Name',
       name: 'UserName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get Language {
+    return Intl.message(
+      'Language',
+      name: 'Language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use`
+  String get Use {
+    return Intl.message(
+      'Use',
+      name: 'Use',
       desc: '',
       args: [],
     );
@@ -490,6 +520,46 @@ class S {
       name: 'ImportNote',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get Cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'Cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get Delete {
+    return Intl.message(
+      'Delete',
+      name: 'Delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm delete this bill: {amount} {use}?`
+  String ConfirmNote(Object amount, Object use) {
+    return Intl.message(
+      'Confirm delete this bill: $amount $use?',
+      name: 'ConfirmNote',
+      desc: '',
+      args: [amount, use],
+    );
+  }
+
+  /// `This bill: {bill} was deleted.`
+  String DeleteNote(Object bill) {
+    return Intl.message(
+      'This bill: $bill was deleted.',
+      name: 'DeleteNote',
+      desc: '',
+      args: [bill],
     );
   }
 }

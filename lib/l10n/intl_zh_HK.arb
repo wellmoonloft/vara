@@ -35,16 +35,23 @@
     "FinancialFreedom": "財務自由度",
     "Income": "收入",
     "Expenses": "支出",
+    "Savings": "存款",
     "NewTransaction": "新交易",
     "Category": "類別",
     "Settings": "設定",
     "AccountInformation": "賬戶信息",
     "UserName": "用戶名",
+    "Language": "語言",
+    "Use": "用途",
 
     "Save": "保存",
     "Alert": "提示",
     "AlertNote": "請選擇分類並輸入金額",
     "Confirm": "確認",
     "Import": "導入",    
-    "ImportNote": "點擊上面的圖標進行導入。"
+    "ImportNote": "點擊上面的圖標進行導入。",
+    "Cancel": "取消",
+    "Delete": "刪除",
+    "ConfirmNote": "確認刪除這個賬單：{amount} {use}？",
+    "DeleteNote": "這個賬單 {bill} 已經被刪除。"
 }

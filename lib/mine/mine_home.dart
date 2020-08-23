@@ -19,7 +19,6 @@ class MineHome extends StatelessWidget {
           leading: IconButton(
               icon: FaIcon(FontAwesomeIcons.cog),
               iconSize: 20,
-              //color: ColorTheme.greytripledarker,
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {

@@ -44,7 +44,7 @@ class ChartTitle extends StatelessWidget {
                       });
                     }
                     return Container(
-                        height: 85,
+                        height: 90,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
@@ -63,12 +63,21 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                          NumberFormat(
-                                                  providerdata
-                                                          .currency.iconName +
-                                                      " ###,###.0#",
-                                                  "en_US")
-                                              .format(income * animation.value),
+                                          income > 100000.00
+                                              ? providerdata.currency.iconName +
+                                                  ' ' +
+                                                  NumberFormat.compact(
+                                                          locale: Intl
+                                                              .getCurrentLocale())
+                                                      .format(income *
+                                                          animation.value)
+                                              : NumberFormat(
+                                                      providerdata.currency
+                                                              .iconName +
+                                                          " ###,###.0#",
+                                                      Intl.getCurrentLocale())
+                                                  .format(
+                                                      income * animation.value),
                                           textAlign: TextAlign.start,
                                           style: setHomeNumnberText(
                                               ColorTheme.puristbluedarker)),
@@ -91,13 +100,21 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                          NumberFormat(
-                                                  providerdata
-                                                          .currency.iconName +
-                                                      " ###,###.0#",
-                                                  "en_US")
-                                              .format(
-                                                  expenses * animation.value),
+                                          expenses > 100000.00
+                                              ? providerdata.currency.iconName +
+                                                  ' ' +
+                                                  NumberFormat.compact(
+                                                          locale: Intl
+                                                              .getCurrentLocale())
+                                                      .format(expenses *
+                                                          animation.value)
+                                              : NumberFormat(
+                                                      providerdata.currency
+                                                              .iconName +
+                                                          " ###,###.0#",
+                                                      Intl.getCurrentLocale())
+                                                  .format(expenses *
+                                                      animation.value),
                                           textAlign: TextAlign.end,
                                           style: setHomeNumnberText(
                                               ColorTheme.cassis)),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_home.dart';
-import 'package:vara/generated/l10n.dart';
 import 'package:vara/invest/invest_home.dart';
 import 'package:vara/mine/mine_home.dart';
 import 'package:vara/models/default_data.dart';

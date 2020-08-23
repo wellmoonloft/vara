@@ -35,16 +35,23 @@
     "FinancialFreedom": "Finantsvabadus",
     "Income": "Sissetulek",
     "Expenses": "Kulud",
+    "Savings": "Säästud",
     "NewTransaction": "Uus tehing",
     "Category": "Kategooria",
     "Settings": "Seadistused",
     "AccountInformation": "Konto teave",
     "UserName": "Kasutajanimi",
+    "Language": "Keel",
+    "Use": "kasutada",
 
     "Save": "Salvesta",
     "Alert": "Märguanne",
     "AlertNote": "Valige kategooria ja sisestatav summa ning märkus.",
     "Confirm": "Kinnitage",
     "Import": "Import",    
-    "ImportNote": "Vajutage importimiseks ülaltoodud ikooni."
+    "ImportNote": "Vajutage importimiseks ülaltoodud ikooni.",
+    "Cancel": "Cancel",
+    "Delete": "Delete",
+    "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
+    "DeleteNote": "This bill: {bill} was deleted."
 }

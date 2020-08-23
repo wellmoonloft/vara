@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
+import 'package:vara/models/default_data.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
-class LanguageView extends StatelessWidget {
+class CurrencyView extends StatefulWidget {
+  const CurrencyView({Key key}) : super(key: key);
+
+  @override
+  _CurrencyViewState createState() => _CurrencyViewState();
+}
+
+class _CurrencyViewState extends State<CurrencyView> {
+  List<String> currencyList = [];
+  String currencyValue;
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<String> language = ['繁體中文', '简体中文', 'English', '日本語', 'Eestlane'];
+    List<CurrencyData> currencyData =
+        Provider.of<ProviderData>(context).currencyData;
+    CurrencyData currency = Provider.of<ProviderData>(context).currency;
+    currencyValue = currency.short;
+    if (currencyData != null) {
+      currencyData.forEach((element) {
+        currencyList.add(element.short);
+      });
+    }
+
     return Container(
         child: Scaffold(
             backgroundColor: ColorTheme.white,
@@ -16,7 +42,7 @@ class LanguageView extends StatelessWidget {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Language, style: AppTheme.titleText),
+              title: Text(S.current.Currency, style: AppTheme.titleText),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,
@@ -25,47 +51,19 @@ class LanguageView extends StatelessWidget {
                   }),
             ),
             body: ListView.separated(
-              itemCount: language.length,
+              itemCount: currencyList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                     padding: AppTheme.outboxpadding,
                     child: InkWell(
                         onTap: () {
-                          switch (index.toString()) {
-                            case '0':
-                              {
-                                S.load(Locale('zh', 'HK'));
-                              }
-                              break;
-
-                            case '1':
-                              {
-                                S.load(Locale('zh', 'CN'));
-                              }
-                              break;
-                            case '2':
-                              {
-                                S.load(Locale('en'));
-                              }
-                              break;
-                            case '3':
-                              {
-                                S.load(Locale('ja', 'JP'));
-                              }
-                              break;
-                            default:
-                              {
-                                S.load(Locale('et', 'EE'));
-                              }
-                              break;
-                          }
-                          Navigator.of(context).pop(index);
+                          Navigator.of(context).pop(currencyList[index]);
                         },
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                language[index],
+                                currencyList[index],
                                 textAlign: TextAlign.start,
                                 style: AppTheme.titleTextSmallLighter,
                               ),

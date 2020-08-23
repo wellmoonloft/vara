@@ -35,16 +35,23 @@
     "FinancialFreedom": "経済的自由",
     "Income": "所得",
     "Expenses": "経費",
+    "Savings": "貯蓄",
     "NewTransaction": "新規取引",
     "Category": "カテゴリー",
     "Settings": "設定",
     "AccountInformation": "口座情報",
     "UserName": "ユーザー名",
+    "Language": "言語",
+    "Use": "使用する",
 
     "Save": "保存する",
     "Alert": "アラート",
     "AlertNote": "カテゴリを選択し、金額とメモを入力してください。",
     "Confirm": "確認",
     "Import": "インポート",    
-    "ImportNote": "インポートするには上のアイコンを押してください。"
+    "ImportNote": "インポートするには上のアイコンを押してください。",
+    "Cancel": "キャンセル",
+    "Delete": "削除する",
+    "ConfirmNote": "この請求の削除を確認：{amount} {use}？",
+    "DeleteNote": "この請求書：{bill}は削除されました。"
 }

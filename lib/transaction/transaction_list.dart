@@ -80,7 +80,7 @@ class BillListState extends State<BillListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Use',
+                            S.current.Use,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -232,21 +232,21 @@ class BillListState extends State<BillListView> {
                     },
                     confirmDismiss: (direction) async {
                       var _alertDialog = AlertDialog(
-                        title: Text('Alert'),
-                        content: Text(
-                            'Confirm delete Bill:${bill.amount} ${bill.use}？'),
+                        title: Text(S.current.Alert),
+                        content:
+                            Text(S.current.ConfirmNote(bill.amount, bill.use)),
                         actions: <Widget>[
                           FlatButton(
-                            child: Text("Cancel"),
+                            child: Text(S.current.Cancel),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                           FlatButton(
-                            child: Text("Delete"),
+                            child: Text(S.current.Delete),
                             onPressed: () {
                               Navigator.of(context).pop(true);
                               Scaffold.of(context).showSnackBar(SnackBar(
-                                  content:
-                                      Text("${billList[index]} dismissed")));
+                                  content: Text(
+                                      S.current.DeleteNote(billList[index]))));
                             },
                           ),
                         ],
@@ -312,7 +312,7 @@ class BillListState extends State<BillListView> {
                                                   CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
-                                                  'Use',
+                                                  S.current.Use,
                                                   style: AppTheme.subtitleText,
                                                 ),
                                                 Container(
@@ -342,8 +342,8 @@ class BillListState extends State<BillListView> {
                                       ),
                                       Expanded(
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.end,
                                           children: <Widget>[
                                             Column(
                                               crossAxisAlignment:

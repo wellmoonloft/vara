@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ja_JP';
 
+  static m0(amount, use) => "この請求の削除を確認：${amount} ${use}？";
+
+  static m1(bill) => "この請求書：${bill}は削除されました。";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("口座情報"),
@@ -26,13 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlertNote" : MessageLookupByLibrary.simpleMessage("カテゴリを選択し、金額とメモを入力してください。"),
     "Amount" : MessageLookupByLibrary.simpleMessage("量"),
     "Asset" : MessageLookupByLibrary.simpleMessage("資産"),
+    "Cancel" : MessageLookupByLibrary.simpleMessage("キャンセル"),
     "Category" : MessageLookupByLibrary.simpleMessage("カテゴリー"),
     "Confirm" : MessageLookupByLibrary.simpleMessage("確認"),
+    "ConfirmNote" : m0,
     "Country" : MessageLookupByLibrary.simpleMessage("国"),
     "Currency" : MessageLookupByLibrary.simpleMessage("通貨"),
     "Date" : MessageLookupByLibrary.simpleMessage("日付"),
     "Debt" : MessageLookupByLibrary.simpleMessage("債務"),
     "DebtService" : MessageLookupByLibrary.simpleMessage("債務サービス"),
+    "Delete" : MessageLookupByLibrary.simpleMessage("削除する"),
+    "DeleteNote" : m1,
     "Expenses" : MessageLookupByLibrary.simpleMessage("経費"),
     "FinalPaymentDate" : MessageLookupByLibrary.simpleMessage("最終支払日"),
     "FinancialFreedom" : MessageLookupByLibrary.simpleMessage("経済的自由"),
@@ -47,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestList" : MessageLookupByLibrary.simpleMessage("投資リスト"),
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("投資資金"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("投資利益"),
+    "Language" : MessageLookupByLibrary.simpleMessage("言語"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("期限切れ散布図"),
     "Long" : MessageLookupByLibrary.simpleMessage("長期"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("365日以上"),
@@ -58,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("支払い予定日"),
     "Received" : MessageLookupByLibrary.simpleMessage("受け取りました"),
     "Save" : MessageLookupByLibrary.simpleMessage("保存する"),
+    "Savings" : MessageLookupByLibrary.simpleMessage("貯蓄"),
     "Settings" : MessageLookupByLibrary.simpleMessage("設定"),
     "Short" : MessageLookupByLibrary.simpleMessage("短期"),
     "ShortSub" : MessageLookupByLibrary.simpleMessage("90日未満"),
@@ -66,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Transaction" : MessageLookupByLibrary.simpleMessage("トランザクション"),
     "TransactionList" : MessageLookupByLibrary.simpleMessage("取引一覧"),
     "TransactionSummary" : MessageLookupByLibrary.simpleMessage("取引概要"),
+    "Use" : MessageLookupByLibrary.simpleMessage("使用する"),
     "UserName" : MessageLookupByLibrary.simpleMessage("ユーザー名")
   };
 }

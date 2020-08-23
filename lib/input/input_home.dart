@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/input/invest_import_view.dart';
-import 'package:vara/models/default_data.dart';
+import 'package:vara/mine/currency_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/models/provider_data.dart';
@@ -33,7 +33,6 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
 
   int mark = 0;
   String currencyValue = 'EUR';
-  var items = List<DropdownMenuItem<String>>();
 
   @override
   void initState() {
@@ -42,18 +41,6 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<CurrencyData> currencyData =
-        Provider.of<ProviderData>(context).currencyData;
-    if (currencyData != null && items.length == 0) {
-      for (var i = 0; i < currencyData.length; i++) {
-        items.add(DropdownMenuItem(
-            child: Text(
-              currencyData[i].short,
-            ),
-            value: currencyData[i].short));
-      }
-    }
-
     return Container(
       color: ColorTheme.white,
       child: Scaffold(
@@ -187,31 +174,48 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
               ),
               OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0)
             ]),
-            Padding(
-                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
+            InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return CurrencyView();
+                  })).then((data) {
+                    if (data != null) {
+                      print(currencyValue);
+                      setState(() {
+                        currencyValue = data;
+                      });
+                      print(currencyValue);
+                    }
+                  });
+                },
                 child: Column(children: [
-                  Row(children: [
-                    FaIcon(
-                      FontAwesomeIcons.coins,
-                      color: ColorTheme.greyquadradarker,
-                      size: 20,
-                    ),
-                    Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: DropdownButton<String>(
-                          dropdownColor: ColorTheme.white,
-                          value: currencyValue,
-                          iconSize: 18,
-                          underline: Container(),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              currencyValue = newValue;
-                            });
-                          },
-                          items: items,
-                        ))
-                  ]),
-                  OneHeightBorder(top: 4, left: 0, right: 0, bottom: 0)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 20, left: 20),
+                        child: FaIcon(
+                          FontAwesomeIcons.coins,
+                          color: ColorTheme.greyquadradarker,
+                          size: 20,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 20, left: 15),
+                        child: Text(
+                          currencyValue,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            color: ColorTheme.greyquadradarker,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0)
                 ])),
             Padding(
               padding: EdgeInsets.only(

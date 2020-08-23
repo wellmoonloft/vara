@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static m0(amount, use) => "Confirm delete this bill: ${amount} ${use}?";
+
+  static m1(bill) => "This bill: ${bill} was deleted.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("Account Information"),
@@ -26,13 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlertNote" : MessageLookupByLibrary.simpleMessage("Please choose category and input amount and note."),
     "Amount" : MessageLookupByLibrary.simpleMessage("Amount"),
     "Asset" : MessageLookupByLibrary.simpleMessage("Asset"),
+    "Cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "Category" : MessageLookupByLibrary.simpleMessage("Category"),
     "Confirm" : MessageLookupByLibrary.simpleMessage("Confirm"),
+    "ConfirmNote" : m0,
     "Country" : MessageLookupByLibrary.simpleMessage("Country"),
     "Currency" : MessageLookupByLibrary.simpleMessage("Currency"),
     "Date" : MessageLookupByLibrary.simpleMessage("Date"),
     "Debt" : MessageLookupByLibrary.simpleMessage("Debt"),
     "DebtService" : MessageLookupByLibrary.simpleMessage("Debt service"),
+    "Delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "DeleteNote" : m1,
     "Expenses" : MessageLookupByLibrary.simpleMessage("Expenses"),
     "FinalPaymentDate" : MessageLookupByLibrary.simpleMessage("Final Payment Date"),
     "FinancialFreedom" : MessageLookupByLibrary.simpleMessage("Financial Freedom"),
@@ -47,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestList" : MessageLookupByLibrary.simpleMessage("Invest List"),
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("Invested Funds"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("Invested Profit"),
+    "Language" : MessageLookupByLibrary.simpleMessage("Language"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Late Scatter Plot"),
     "Long" : MessageLookupByLibrary.simpleMessage("Long"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("over 365 days"),
@@ -58,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("Plan Payment Date"),
     "Received" : MessageLookupByLibrary.simpleMessage("Received"),
     "Save" : MessageLookupByLibrary.simpleMessage("Save"),
+    "Savings" : MessageLookupByLibrary.simpleMessage("Savings"),
     "Settings" : MessageLookupByLibrary.simpleMessage("Settings"),
     "Short" : MessageLookupByLibrary.simpleMessage("Short"),
     "ShortSub" : MessageLookupByLibrary.simpleMessage("less 90days"),
@@ -66,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Transaction" : MessageLookupByLibrary.simpleMessage("Transaction"),
     "TransactionList" : MessageLookupByLibrary.simpleMessage("Transaction List"),
     "TransactionSummary" : MessageLookupByLibrary.simpleMessage("Transaction Summary"),
+    "Use" : MessageLookupByLibrary.simpleMessage("Use"),
     "UserName" : MessageLookupByLibrary.simpleMessage("User Name")
   };
 }

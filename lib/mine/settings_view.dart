@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
-import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/utils/db_helper.dart';
-
+import 'currency_view.dart';
 import 'language_view.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key key}) : super(key: key);
 
   @override
-  _CurrencyViewState createState() => _CurrencyViewState();
+  _SettingsViewState createState() => _SettingsViewState();
 }
 
-class _CurrencyViewState extends State<SettingsView> {
-  String currencyValue;
-  var items = List<DropdownMenuItem<String>>();
-
+class _SettingsViewState extends State<SettingsView> {
   @override
   void initState() {
     super.initState();
@@ -31,22 +28,7 @@ class _CurrencyViewState extends State<SettingsView> {
 
   @override
   Widget build(BuildContext context) {
-    List<CurrencyData> currencyData =
-        Provider.of<ProviderData>(context).currencyData;
-    CurrencyData currency = Provider.of<ProviderData>(context).currency;
-    currencyValue = currency.short;
-    if (currencyData != null && items.length == 0) {
-      for (var i = 0; i < currencyData.length; i++) {
-        items.add(DropdownMenuItem(
-            child: Text(
-              currencyData[i].iconName + ' ' + currencyData[i].short,
-            ),
-            value: currencyData[i].short));
-      }
-    }
-
     return Container(
-      //color: ColorTheme.black.withOpacity(0.4),
       child: Scaffold(
           backgroundColor: ColorTheme.white,
           appBar: AppBar(
@@ -66,7 +48,6 @@ class _CurrencyViewState extends State<SettingsView> {
               Padding(
                   padding: AppTheme.outboxpadding,
                   child: Container(
-                    // alignment: Alignment.centerLeft,
                     child: Text(
                       S.current.AccountInformation,
                       textAlign: TextAlign.start,
@@ -101,64 +82,59 @@ class _CurrencyViewState extends State<SettingsView> {
                           )
                         ]),
                   )),
-              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 0),
+              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
               Padding(
-                  padding: EdgeInsets.only(left: 16, right: 16, top: 5),
+                  padding: AppTheme.inboxpadding,
                   child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                Consumer<ProviderData>(
-                                    builder: (context, providerdata, child) {
-                                  return FaIcon(
-                                    providerdata.currency.icon,
-                                    color: ColorTheme.greydarker,
-                                  );
-                                }),
-                                SizedBox(
-                                  width: 14,
-                                ),
-                                Text(
-                                  S.current.Currency,
-                                  style: AppTheme.titleTextSmallLighter,
-                                ),
-                              ],
-                            ),
-                            flex: 3,
-                          ),
-                          Expanded(
-                            child: Container(
-                                child: DropdownButton<String>(
-                              dropdownColor: ColorTheme.white,
-                              iconSize: 16,
-                              underline: Container(),
-                              value: currencyValue,
-                              onChanged: (String newValue) async {
-                                setState(() {
-                                  currencyValue = newValue;
-                                });
-
-                                var providerData = Provider.of<ProviderData>(
-                                    context,
-                                    listen: false);
-                                await providerData.setCurrency(newValue);
-                                Settings settings = Settings();
-                                settings.currency = newValue;
-                                await DBHelper().updateSettings(settings);
-                              },
-                              items: items,
-                            )),
-                            flex: 1,
-                          )
-                        ]),
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return CurrencyView();
+                          })).then((data) async {
+                            if (data != null) {
+                              var providerData = Provider.of<ProviderData>(
+                                  context,
+                                  listen: false);
+                              await providerData.setCurrency(data);
+                              Settings settings = Settings();
+                              settings.currency = data;
+                              await DBHelper().updateSettings(settings);
+                            }
+                          });
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  Consumer<ProviderData>(
+                                      builder: (context, providerdata, child) {
+                                    return FaIcon(
+                                      providerdata.currency.icon,
+                                      color: ColorTheme.greydarker,
+                                    );
+                                  }),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    S.current.Currency,
+                                    style: AppTheme.titleTextSmallLighter,
+                                  ),
+                                ],
+                              ),
+                              FaIcon(
+                                FontAwesomeIcons.chevronRight,
+                                size: 18,
+                                color: ColorTheme.greydarker,
+                              )
+                            ])),
                   )),
-              OneHeightBorder(top: 5, left: 16, right: 16, bottom: 10),
+              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,
                   child: Container(
@@ -167,16 +143,43 @@ class _CurrencyViewState extends State<SettingsView> {
                           Navigator.push(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return LanguageView();
-                          })).then((data) {
+                          })).then((data) async {
                             if (data != null) {
-                              // setState(() {
-                              //   categroyTitle = data['title'];
-                              //   categroyTitleColor = data['color'];
-                              //   categroyColor = data['color'];
-                              //   categroyIcon = data['icon'];
-                              //   categroy = data['categroy'];
-                              //   mark = data['mark'];
-                              // });
+                              Settings settings = Settings();
+                              switch (data.toString()) {
+                                case '0':
+                                  {
+                                    settings.language = 'HK';
+                                  }
+                                  break;
+
+                                case '1':
+                                  {
+                                    settings.language = 'CN';
+                                  }
+                                  break;
+                                case '2':
+                                  {
+                                    settings.language = 'EN';
+                                  }
+                                  break;
+                                case '3':
+                                  {
+                                    settings.language = 'JP';
+                                  }
+                                  break;
+                                default:
+                                  {
+                                    settings.language = 'EE';
+                                  }
+                                  break;
+                              }
+
+                              await DBHelper().updateSettings(settings);
+                              setState(() {
+                                print(Intl.getCurrentLocale());
+                                // update language data;
+                              });
                             }
                           });
                         },
@@ -193,7 +196,7 @@ class _CurrencyViewState extends State<SettingsView> {
                                     width: 10,
                                   ),
                                   Text(
-                                    'Language',
+                                    S.current.Language,
                                     style: AppTheme.titleTextSmallLighter,
                                   ),
                                 ],

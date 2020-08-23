@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'zh_HK';
 
+  static m0(amount, use) => "確認刪除這個賬單：${amount} ${use}？";
+
+  static m1(bill) => "這個賬單 ${bill} 已經被刪除。";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("賬戶信息"),
@@ -26,13 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlertNote" : MessageLookupByLibrary.simpleMessage("請選擇分類並輸入金額"),
     "Amount" : MessageLookupByLibrary.simpleMessage("金額"),
     "Asset" : MessageLookupByLibrary.simpleMessage("資產"),
+    "Cancel" : MessageLookupByLibrary.simpleMessage("取消"),
     "Category" : MessageLookupByLibrary.simpleMessage("類別"),
     "Confirm" : MessageLookupByLibrary.simpleMessage("確認"),
+    "ConfirmNote" : m0,
     "Country" : MessageLookupByLibrary.simpleMessage("國家"),
     "Currency" : MessageLookupByLibrary.simpleMessage("貨幣"),
     "Date" : MessageLookupByLibrary.simpleMessage("日期"),
     "Debt" : MessageLookupByLibrary.simpleMessage("負債"),
     "DebtService" : MessageLookupByLibrary.simpleMessage("負債率"),
+    "Delete" : MessageLookupByLibrary.simpleMessage("刪除"),
+    "DeleteNote" : m1,
     "Expenses" : MessageLookupByLibrary.simpleMessage("支出"),
     "FinalPaymentDate" : MessageLookupByLibrary.simpleMessage("實際付款日"),
     "FinancialFreedom" : MessageLookupByLibrary.simpleMessage("財務自由度"),
@@ -47,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestList" : MessageLookupByLibrary.simpleMessage("投資列表"),
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("投資金額"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("投資利潤"),
+    "Language" : MessageLookupByLibrary.simpleMessage("語言"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("逾期投資散點圖"),
     "Long" : MessageLookupByLibrary.simpleMessage("長期"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("超過365天"),
@@ -58,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("計畫付款日"),
     "Received" : MessageLookupByLibrary.simpleMessage("已收款"),
     "Save" : MessageLookupByLibrary.simpleMessage("保存"),
+    "Savings" : MessageLookupByLibrary.simpleMessage("存款"),
     "Settings" : MessageLookupByLibrary.simpleMessage("設定"),
     "Short" : MessageLookupByLibrary.simpleMessage("短期"),
     "ShortSub" : MessageLookupByLibrary.simpleMessage("少於90天"),
@@ -66,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Transaction" : MessageLookupByLibrary.simpleMessage("交易"),
     "TransactionList" : MessageLookupByLibrary.simpleMessage("交易列表"),
     "TransactionSummary" : MessageLookupByLibrary.simpleMessage("交易概覽"),
+    "Use" : MessageLookupByLibrary.simpleMessage("用途"),
     "UserName" : MessageLookupByLibrary.simpleMessage("用戶名")
   };
 }

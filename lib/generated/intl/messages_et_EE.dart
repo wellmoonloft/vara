@@ -19,6 +19,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'et_EE';
 
+  static m0(amount, use) => "Confirm delete this bill: ${amount} ${use}?";
+
+  static m1(bill) => "This bill: ${bill} was deleted.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("Konto teave"),
@@ -26,13 +30,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlertNote" : MessageLookupByLibrary.simpleMessage("Valige kategooria ja sisestatav summa ning märkus."),
     "Amount" : MessageLookupByLibrary.simpleMessage("Summa"),
     "Asset" : MessageLookupByLibrary.simpleMessage("Vara"),
+    "Cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "Category" : MessageLookupByLibrary.simpleMessage("Kategooria"),
     "Confirm" : MessageLookupByLibrary.simpleMessage("Kinnitage"),
+    "ConfirmNote" : m0,
     "Country" : MessageLookupByLibrary.simpleMessage("Riik"),
     "Currency" : MessageLookupByLibrary.simpleMessage("Valuuta"),
     "Date" : MessageLookupByLibrary.simpleMessage("Kuupäev"),
     "Debt" : MessageLookupByLibrary.simpleMessage("Võlg"),
     "DebtService" : MessageLookupByLibrary.simpleMessage("Võla teenus"),
+    "Delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "DeleteNote" : m1,
     "Expenses" : MessageLookupByLibrary.simpleMessage("Kulud"),
     "FinalPaymentDate" : MessageLookupByLibrary.simpleMessage("Lõpliku makse kuupäev"),
     "FinancialFreedom" : MessageLookupByLibrary.simpleMessage("Finantsvabadus"),
@@ -47,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestList" : MessageLookupByLibrary.simpleMessage("Investeerimisloend"),
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("Investeeritud fondid"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("Investeeritud kasum"),
+    "Language" : MessageLookupByLibrary.simpleMessage("Keel"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Hiline hajumine"),
     "Long" : MessageLookupByLibrary.simpleMessage("Pikk"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("üle 365 päeva"),
@@ -58,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("Plaani maksmise kuupäev"),
     "Received" : MessageLookupByLibrary.simpleMessage("Vastu võetud"),
     "Save" : MessageLookupByLibrary.simpleMessage("Salvesta"),
+    "Savings" : MessageLookupByLibrary.simpleMessage("Säästud"),
     "Settings" : MessageLookupByLibrary.simpleMessage("Seadistused"),
     "Short" : MessageLookupByLibrary.simpleMessage("Lühike"),
     "ShortSub" : MessageLookupByLibrary.simpleMessage("vähem 90 päeva"),
@@ -66,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Transaction" : MessageLookupByLibrary.simpleMessage("Tehing"),
     "TransactionList" : MessageLookupByLibrary.simpleMessage("Tehingute nimekiri"),
     "TransactionSummary" : MessageLookupByLibrary.simpleMessage("Tehingute kokkuvõte"),
+    "Use" : MessageLookupByLibrary.simpleMessage("kasutada"),
     "UserName" : MessageLookupByLibrary.simpleMessage("Kasutajanimi")
   };
 }
