@@ -2,21 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/utils/db_helper.dart';
 
-class CurrencyView extends StatefulWidget {
-  const CurrencyView({Key key}) : super(key: key);
+import 'language_view.dart';
+
+class SettingsView extends StatefulWidget {
+  const SettingsView({Key key}) : super(key: key);
 
   @override
   _CurrencyViewState createState() => _CurrencyViewState();
 }
 
-class _CurrencyViewState extends State<CurrencyView> {
+class _CurrencyViewState extends State<SettingsView> {
   String currencyValue;
   var items = List<DropdownMenuItem<String>>();
 
@@ -49,7 +53,7 @@ class _CurrencyViewState extends State<CurrencyView> {
             brightness: Brightness.light,
             backgroundColor: ColorTheme.white,
             elevation: 0,
-            title: Text('Profile Settings', style: AppTheme.titleText),
+            title: Text(S.current.Settings, style: AppTheme.titleText),
             leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.times),
                 color: ColorTheme.greyquadradarker,
@@ -64,23 +68,14 @@ class _CurrencyViewState extends State<CurrencyView> {
                   child: Container(
                     // alignment: Alignment.centerLeft,
                     child: Text(
-                      'Account information',
+                      S.current.AccountInformation,
                       textAlign: TextAlign.start,
                       style: AppTheme.titleTextSmallLighter,
                     ),
                   )),
+              OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
               Padding(
-                padding: EdgeInsets.only(left: 16, right: 16),
-                child: Container(
-                  height: 1,
-                  decoration: BoxDecoration(
-                    color: ColorTheme.pantone,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-              ),
-              Padding(
-                  padding: AppTheme.outboxpadding,
+                  padding: AppTheme.inboxpadding,
                   child: Container(
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,13 +84,13 @@ class _CurrencyViewState extends State<CurrencyView> {
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.userAlt,
-                                color: ColorTheme.cassis,
+                                color: ColorTheme.greydarker,
                               ),
                               SizedBox(
                                 width: 10,
                               ),
                               Text(
-                                'Name',
+                                S.current.UserName,
                                 style: AppTheme.titleTextSmallLighter,
                               ),
                             ],
@@ -106,16 +101,7 @@ class _CurrencyViewState extends State<CurrencyView> {
                           )
                         ]),
                   )),
-              Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 5),
-                child: Container(
-                  height: 1,
-                  decoration: BoxDecoration(
-                    color: ColorTheme.pantone,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-              ),
+              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 0),
               Padding(
                   padding: EdgeInsets.only(left: 16, right: 16, top: 5),
                   child: Container(
@@ -132,14 +118,14 @@ class _CurrencyViewState extends State<CurrencyView> {
                                     builder: (context, providerdata, child) {
                                   return FaIcon(
                                     providerdata.currency.icon,
-                                    color: ColorTheme.cassis,
+                                    color: ColorTheme.greydarker,
                                   );
                                 }),
                                 SizedBox(
                                   width: 14,
                                 ),
                                 Text(
-                                  'Currency',
+                                  S.current.Currency,
                                   style: AppTheme.titleTextSmallLighter,
                                 ),
                               ],
@@ -172,16 +158,53 @@ class _CurrencyViewState extends State<CurrencyView> {
                           )
                         ]),
                   )),
+              OneHeightBorder(top: 5, left: 16, right: 16, bottom: 10),
               Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 5),
-                child: Container(
-                  height: 1,
-                  decoration: BoxDecoration(
-                    color: ColorTheme.pantone,
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-              ),
+                  padding: AppTheme.inboxpadding,
+                  child: Container(
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return LanguageView();
+                          })).then((data) {
+                            if (data != null) {
+                              // setState(() {
+                              //   categroyTitle = data['title'];
+                              //   categroyTitleColor = data['color'];
+                              //   categroyColor = data['color'];
+                              //   categroyIcon = data['icon'];
+                              //   categroy = data['categroy'];
+                              //   mark = data['mark'];
+                              // });
+                            }
+                          });
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.globeAsia,
+                                    color: ColorTheme.greydarker,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Language',
+                                    style: AppTheme.titleTextSmallLighter,
+                                  ),
+                                ],
+                              ),
+                              FaIcon(
+                                FontAwesomeIcons.chevronRight,
+                                size: 18,
+                                color: ColorTheme.greydarker,
+                              )
+                            ])),
+                  ))
             ],
           )),
     );

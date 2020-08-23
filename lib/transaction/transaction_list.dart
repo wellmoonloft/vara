@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
@@ -42,7 +43,7 @@ class BillListState extends State<BillListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text('Bill List', style: AppTheme.titleText),
+        title: Text(S.current.TransactionList, style: AppTheme.titleText),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -63,7 +64,7 @@ class BillListState extends State<BillListView> {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            'Date',
+                            S.current.Date,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -288,7 +289,7 @@ class BillListState extends State<BillListView> {
                                               CrossAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              'Date',
+                                              S.current.Date,
                                               style: AppTheme.subtitleText,
                                             ),
                                             Container(
@@ -349,7 +350,7 @@ class BillListState extends State<BillListView> {
                                                   CrossAxisAlignment.end,
                                               children: <Widget>[
                                                 Text(
-                                                  'Amount',
+                                                  S.current.Amount,
                                                   style: AppTheme.subtitleText,
                                                 ),
                                                 Container(

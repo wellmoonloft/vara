@@ -3,13 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
-import 'currency_view.dart';
+import 'settings_view.dart';
 import 'import_view.dart';
 
-class PersonalHome extends StatelessWidget {
+class MineHome extends StatelessWidget {
   final AnimationController animationController;
 
-  const PersonalHome({Key key, this.animationController}) : super(key: key);
+  const MineHome({Key key, this.animationController}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -23,7 +23,7 @@ class PersonalHome extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (BuildContext context) {
-                  return CurrencyView();
+                  return SettingsView();
                 })).then((data) {
                   if (data != null) {
                     // setState(() {

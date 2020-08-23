@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
-
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
-import 'package:vara/utils/toolkit.dart';
 import 'invest_detail.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
 class InvestListView extends StatefulWidget {
-  //final List<Map> investList;
-
   const InvestListView({Key key}) : super(key: key);
   @override
   InvestListState createState() => InvestListState();
@@ -46,7 +43,7 @@ class InvestListState extends State<InvestListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text('Invest List', style: AppTheme.titleText),
+        title: Text(S.current.InvestList, style: AppTheme.titleText),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -67,7 +64,7 @@ class InvestListState extends State<InvestListView> {
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            'Date',
+                            S.current.Date,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -75,7 +72,7 @@ class InvestListState extends State<InvestListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Money',
+                            S.current.Currency,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -83,7 +80,7 @@ class InvestListState extends State<InvestListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Status',
+                            S.current.Status,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -234,16 +231,17 @@ class InvestListState extends State<InvestListView> {
                                   ));
                             },
                             child: InvestList(
-                              title1: 'Invest Amount',
-                              title2: formatNum(invest.amount, 2).toString() +
-                                  ' ' +
+                              title1: S.current.Amount,
+                              title2: NumberFormat(" ###,###.0#", "en_US")
+                                      .format(invest.amount) +
                                   invest.currency,
-                              title3: 'Invest Time',
+                              title3: S.current.Date,
                               title4: invest.date,
-                              title5: 'Interest',
-                              title6: formatNum(invest.interest, 2).toString() +
+                              title5: S.current.Interest,
+                              title6: NumberFormat(" ###,###.0#", "en_US")
+                                      .format(invest.interest) +
                                   invest.currency,
-                              title7: 'Status',
+                              title7: S.current.Status,
                               title8: invest.status,
                             ))));
               },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_chart.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'account_view.dart';
@@ -28,7 +29,7 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
 
     listViews.add(
       AppBarUI(
-        title: 'Asset',
+        title: S.current.Asset,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
@@ -28,7 +29,6 @@ class BillSummaryView extends StatelessWidget {
                     double income = 0.0;
                     double expenses = 0.0;
                     double freedomService = 0.0;
-
                     num rate = 1;
                     providerdata.billList.forEach((element) {
                       providerdata.currencyData.forEach((element1) {
@@ -52,7 +52,6 @@ class BillSummaryView extends StatelessWidget {
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
-                          //decoration: AppTheme.boxDecoration,
                           child: Column(
                             children: <Widget>[
                               Padding(
@@ -73,7 +72,7 @@ class BillSummaryView extends StatelessWidget {
                                                     width: 3,
                                                     height: 50),
                                                 SummaryTopTitile(
-                                                  title: 'Net Income',
+                                                  title: S.current.NetIncome,
                                                   value: NumberFormat(
                                                           providerdata.currency
                                                                   .iconName +
@@ -95,7 +94,7 @@ class BillSummaryView extends StatelessWidget {
                                           right: AppTheme.leftRightPadding),
                                       child: Center(
                                         child: SummaryTopGraph(
-                                          title: 'Financial Freedom',
+                                          title: S.current.FinancialFreedom,
                                           value:
                                               freedomService * animation.value,
                                           color: ColorTheme.cantaloupe,

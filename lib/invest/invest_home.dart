@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/invest/invest_summary.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
@@ -18,15 +19,15 @@ class _InvestHomeState extends State<InvestHome> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    addAllListData();
     super.initState();
+    addAllListData();
   }
 
   void addAllListData() {
     const int count = 6;
     listViews.add(
       AppBarUI(
-        title: 'Invest',
+        title: S.current.Invest,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
@@ -46,8 +47,8 @@ class _InvestHomeState extends State<InvestHome> with TickerProviderStateMixin {
     );
     listViews.add(
       TitleView(
-        titleTxt: 'Late Scatter Plot',
-        subTxt: 'Invest List',
+        titleTxt: S.current.LateScatterPlot,
+        subTxt: S.current.InvestList,
         navigator: 'invest',
         color: ColorTheme.cassis,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
@@ -57,15 +58,6 @@ class _InvestHomeState extends State<InvestHome> with TickerProviderStateMixin {
         animationController: widget.animationController,
       ),
     );
-    // listViews.add(
-    //   InvestListView(
-    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-    //         parent: widget.animationController,
-    //         curve:
-    //             Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-    //     animationController: widget.animationController,
-    //   ),
-    // );
 
     listViews.add(
       InvestChart(

@@ -35,16 +35,19 @@ class Person {
 class Settings {
   int id;
   String currency;
+  String language;
 
-  Settings({this.id, this.currency});
+  Settings({this.id, this.currency, this.language});
   Settings.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     currency = json['currency'];
+    language = json['language'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> map = new Map<String, dynamic>();
     map['id'] = this.id;
     map['currency'] = this.currency;
+    map['language'] = this.language;
     return map;
   }
 }

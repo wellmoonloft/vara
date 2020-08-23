@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/title_view.dart';
@@ -18,15 +19,15 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    addAllListData();
     super.initState();
+    addAllListData();
   }
 
   void addAllListData() {
     const int count = 4;
     listViews.add(
       AppBarUI(
-        title: 'Transaction',
+        title: S.current.Transaction,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
@@ -57,8 +58,8 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
 
     listViews.add(
       TitleView(
-        titleTxt: 'Transaction Summary',
-        subTxt: 'Transaction List',
+        titleTxt: S.current.TransactionSummary,
+        subTxt: S.current.TransactionList,
         navigator: 'bill',
         color: ColorTheme.cantaloupe,
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(

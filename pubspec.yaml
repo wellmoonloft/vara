@@ -11,9 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter    
   font_awesome_flutter: ^8.8.1
   intl: ^0.16.1
-  charts_flutter: ^0.9.0  
+  charts_flutter: ^0.9.0
   sqflite: ^1.3.1
   path: ^1.7.0
   path_provider: ^1.6.11
@@ -22,8 +24,7 @@ dependencies:
   http: ^0.12.2
   provider: ^4.3.2
   decimal: ^0.3.5
- 
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -33,3 +34,5 @@ flutter:
 
   assets:
     - assets/Images/
+flutter_intl:
+  enabled: true

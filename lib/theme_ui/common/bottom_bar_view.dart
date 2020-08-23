@@ -156,10 +156,6 @@ class _BottomBarViewState extends State<BottomBarView>
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => InvestImportView()));
                             showGeneralDialog(
                                 context: context,
                                 barrierColor: Colors.black.withOpacity(.5),
@@ -272,9 +268,6 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       size: 28,
                     ),
                   ),
-                  // Image.asset(widget.tabIconData.isSelected
-                  //     ? widget.tabIconData.selectedImagePath
-                  //     : widget.tabIconData.imagePath),
                 ),
                 Positioned(
                   top: 4,
@@ -350,7 +343,6 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
 
 class TabClipper extends CustomClipper<Path> {
   TabClipper({this.radius = 38.0});
-
   final double radius;
 
   @override

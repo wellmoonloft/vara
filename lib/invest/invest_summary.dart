@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
@@ -46,11 +47,6 @@ class InvestSummaryView extends StatelessWidget {
                               totalYield = totalYield + element.totalyield;
                               mark++;
                             }
-                            // totalYield = investIncome *
-                            //     (element.totalyield != null
-                            //         ? element.totalyield
-                            //         : 0) /
-                            //     (element.interest != null ? element.interest : 0);
                           } else {
                             totalInvest = totalInvest + element.amount * rate;
                             if (element.type == 'SHORT') {
@@ -93,7 +89,7 @@ class InvestSummaryView extends StatelessWidget {
                                                   width: 3,
                                                   height: 50),
                                               SummaryTopTitile(
-                                                title: 'Invested Profit',
+                                                title: S.current.InvestedProfit,
                                                 value: NumberFormat(
                                                         providerdata.currency
                                                                 .iconName +
@@ -112,7 +108,7 @@ class InvestSummaryView extends StatelessWidget {
                                                   width: 3,
                                                   height: 50),
                                               SummaryTopTitile(
-                                                title: 'Invested Funds',
+                                                title: S.current.InvestedFunds,
                                                 value: NumberFormat(
                                                         providerdata.currency
                                                                 .iconName +
@@ -133,7 +129,7 @@ class InvestSummaryView extends StatelessWidget {
                                         right: AppTheme.leftRightPadding),
                                     child: Center(
                                       child: SummaryTopGraph(
-                                        title: 'Total Yield year',
+                                        title: S.current.TotalYieldYear,
                                         value: totalYield * animation.value,
                                         color: ColorTheme.cassis,
                                         subcolor: ColorTheme.cassislighter,
@@ -149,8 +145,8 @@ class InvestSummaryView extends StatelessWidget {
                                 children: <Widget>[
                                   Expanded(
                                     child: SummaryBottom(
-                                      title: 'Short',
-                                      subtitle: 'less 90days',
+                                      title: S.current.Short,
+                                      subtitle: S.current.ShortSub,
                                       value: NumberFormat(
                                               providerdata.currency.iconName +
                                                   " ###,###.0#",
@@ -168,8 +164,8 @@ class InvestSummaryView extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: <Widget>[
                                         SummaryBottom(
-                                          title: 'Mid',
-                                          subtitle: 'less 365 days',
+                                          title: S.current.Mid,
+                                          subtitle: S.current.MidSub,
                                           value: NumberFormat(
                                                   providerdata
                                                           .currency.iconName +
@@ -189,8 +185,8 @@ class InvestSummaryView extends StatelessWidget {
                                           CrossAxisAlignment.center,
                                       children: <Widget>[
                                         SummaryBottom(
-                                          title: 'Long',
-                                          subtitle: 'over 365 days',
+                                          title: S.current.Long,
+                                          subtitle: S.current.LongSub,
                                           value: NumberFormat(
                                                   providerdata
                                                           .currency.iconName +

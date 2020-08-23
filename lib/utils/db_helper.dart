@@ -4,7 +4,6 @@ import 'dart:io' as io;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
-
 import 'num_utils.dart';
 
 Database _db;
@@ -13,9 +12,10 @@ class DBHelper {
   Future<Database> get db async {
     if (_db != null) {
       return _db;
+    } else {
+      _db = await initDatabase();
+      return _db;
     }
-    _db = await initDatabase();
-    return _db;
   }
 
   initDatabase() async {
@@ -37,26 +37,29 @@ class DBHelper {
     await db.execute(
         'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT, categroy TEXT,amount INTEGER, mark INTEGER)');
     await db.execute(
-        'CREATE TABLE settings (id INTEGER PRIMARY KEY, currency TEXT)');
+        'CREATE TABLE settings (id INTEGER PRIMARY KEY, currency TEXT,language TEXT)');
 
     Settings settings = Settings();
     settings.currency = 'EUR';
+    settings.language = 'EN';
     db.insert('settings', settings.toJson());
   }
 
   Future<Settings> getSettings() async {
     var dbClient = await db;
-    var result = await dbClient.query('settings', columns: ['id', 'currency']);
+    var result = await dbClient
+        .query('settings', columns: ['id', 'currency', 'language']);
     Settings settings = Settings.fromJson(result.last);
-
     return settings;
   }
 
   Future<int> updateSettings(Settings settings) async {
     var dbClient = await db;
-    var result = await dbClient.query('settings', columns: ['id', 'currency']);
+    var result = await dbClient
+        .query('settings', columns: ['id', 'currency', 'language']);
     Settings temp = Settings.fromJson(result.last);
     temp.currency = settings.currency;
+    temp.language = settings.language;
     return await dbClient
         .update('settings', temp.toJson(), where: 'id=?', whereArgs: [temp.id]);
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'home_page.dart';
@@ -20,10 +21,6 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   Map<String, dynamic> btc;
   Map<String, dynamic> currency;
-  Map<String, dynamic> btcdaily;
-  Map<String, dynamic> usdcnydaily;
-  Map<String, dynamic> eurcnydaily;
-  String etext = '';
   String currencyTilte = 'EUR';
   double progressValue = 0.0;
 
@@ -38,104 +35,78 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
         backgroundColor: ColorTheme.white,
         body: Container(
-            padding: EdgeInsets.only(top: 50),
+            //padding: EdgeInsets.only(top: 50),
             // color: ColorTheme.white,
             alignment: Alignment.center,
-            child: Column(children: <Widget>[
-              Image(
-                image: AssetImage('assets/Images/logo.png'),
-                fit: BoxFit.fill,
-              ),
-              LinearProgressIndicator(
-                backgroundColor: Colors.grey[200],
-                valueColor: AlwaysStoppedAnimation(Colors.blue),
-                value: progressValue,
-              ),
-              Container(
-                padding: EdgeInsets.all(8),
-                child: Text(etext),
-              )
-            ])));
+            child: Container(
+                child: Image(
+              image: AssetImage('assets/Images/logo.png'),
+              fit: BoxFit.fill,
+            ))));
   }
 
   _navigatorAfterGetData() async {
     print("----get data start------");
-    setState(() {
-      etext = 'GET PERSONAL DATA ...';
-      progressValue = 0.1;
-    });
     await _doDatabase();
-    setState(() {
-      etext = 'GET BTC DATA ...';
-      progressValue = 0.2;
-    });
-    // btc = await _getNetData(
-    //     'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=BTC&to_currency=USD&apikey=9AAGEESEANSVTYTV',
-    //     1);
-    currency = await _getNetData('https://api.ratesapi.io/api/latest', 5);
+
+    currency = await _getNetData('https://api.ratesapi.io/api/latest');
     var providerData = Provider.of<ProviderData>(context, listen: false);
     providerData.setCurrencyData(currency, currencyTilte);
-    setState(() {
-      etext = 'GET BTC DAILY ...';
-      progressValue = 0.4;
-    });
-    // btcdaily = await _getNetData(
-    //     'https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=BTC&market=USD&apikey=9AAGEESEANSVTYTV',
-    //     2);
-    setState(() {
-      etext = 'GET USD DAILY ...';
-      progressValue = 0.6;
-    });
-    // usdcnydaily = await _getNetData(
-    //     'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=CNY&apikey=9AAGEESEANSVTYTV',
-    //     3);
-    setState(() {
-      etext = 'GET EUR DAILY ...';
-      progressValue = 0.8;
-    });
-    // eurcnydaily = await _getNetData(
-    //     'https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=CNY&apikey=9AAGEESEANSVTYTV',
-    //     4);
+
     print("----get data done------");
     Navigator.of(context).pushReplacement(
-        new MaterialPageRoute(builder: (context) => HomeScreen1()));
+        new MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   _doDatabase() async {
     DBHelper dbHelper = DBHelper();
-    await dbHelper.initDatabase();
     var providerData = Provider.of<ProviderData>(context, listen: false);
     await providerData.getAssetList();
     await providerData.getinvestList();
     await providerData.getBillList();
     Settings settings = await dbHelper.getSettings();
     currencyTilte = settings.currency;
+    String language = settings.language;
+
+    switch (language) {
+      case 'CN':
+        {
+          S.load(Locale('zh', 'CN'));
+        }
+        break;
+
+      case 'HK':
+        {
+          S.load(Locale('zh', 'HK'));
+        }
+        break;
+      case 'JP':
+        {
+          S.load(Locale('ja', 'JP'));
+        }
+        break;
+      case 'EE':
+        {
+          S.load(Locale('et', 'EE'));
+        }
+        break;
+      default:
+        {
+          S.load(Locale('en'));
+        }
+        break;
+    }
   }
 
-  _getNetData(url, mark) async {
+  _getNetData(url) async {
     var httpClient = new HttpClient();
-
     try {
       var request = await httpClient.getUrl(Uri.parse(url));
       var response = await request.close();
       if (response.statusCode == HttpStatus.ok) {
         var json = await response.transform(utf8.decoder).join();
         var data = jsonDecode(json);
-        if (mark == 1) {
-          return data['Realtime Currency Exchange Rate'];
-        }
-        if (mark == 2) {
-          return data['Time Series (Digital Currency Daily)'];
-        }
-        if (mark == 3) {
-          return data['Time Series FX (Daily)'];
-        }
-        if (mark == 4) {
-          return data['Time Series FX (Daily)'];
-        }
-        if (mark == 5) {
-          return data['rates'];
-        }
+        return data['rates'];
       } else {
         print('Error getting data:\nHttp status ${response.statusCode}');
       }

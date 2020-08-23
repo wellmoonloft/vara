@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
@@ -28,7 +29,6 @@ class AssetSummaryView extends StatelessWidget {
                     double asset = 0.0;
                     double debt = 0.0;
                     double debtService = 0.0;
-
                     num rate = 1;
                     if (providerdata.assetList != null) {
                       providerdata.assetList.forEach((element) {
@@ -51,7 +51,6 @@ class AssetSummaryView extends StatelessWidget {
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
-                            //decoration: AppTheme.boxDecoration,
                             child: Column(
                           children: <Widget>[
                             Padding(
@@ -70,7 +69,7 @@ class AssetSummaryView extends StatelessWidget {
                                               width: 3,
                                               height: 50),
                                           SummaryTopTitile(
-                                            title: 'Net Asset',
+                                            title: S.current.NetAsset,
                                             value: NumberFormat(
                                                     providerdata
                                                             .currency.iconName +
@@ -89,7 +88,7 @@ class AssetSummaryView extends StatelessWidget {
                                         right: AppTheme.leftRightPadding),
                                     child: Center(
                                       child: SummaryTopGraph(
-                                        title: 'Debt service',
+                                        title: S.current.DebtService,
                                         value: debtService * animation.value,
                                         color: ColorTheme.puristbluedarker,
                                         subcolor: ColorTheme.puristbluelighter,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../color_theme.dart';
 
 class ProgressDialog {
   static bool _isShowing = false;
-
   static void showProgress(BuildContext context,
       {Widget child = const CircularProgressIndicator(
         valueColor: AlwaysStoppedAnimation(ColorTheme.white),
@@ -48,7 +46,6 @@ class _Progress extends StatelessWidget {
   }
 }
 
-///Route
 class _PopRoute extends PopupRoute {
   final Duration _duration = Duration(milliseconds: 300);
   Widget child;

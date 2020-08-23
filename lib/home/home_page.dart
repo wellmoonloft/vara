@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_home.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/invest/invest_home.dart';
-import 'package:vara/mine/personal_home.dart';
+import 'package:vara/mine/mine_home.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/bottom_bar_view.dart';
 import 'package:vara/transaction/transaction_home.dart';
 
-class HomeScreen1 extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen1>
-    with TickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   AnimationController animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -46,29 +46,14 @@ class _HomeScreenState extends State<HomeScreen1>
     return Container(
       color: ColorTheme.background,
       child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: FutureBuilder<bool>(
-          future: getData(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (!snapshot.hasData) {
-              return const SizedBox();
-            } else {
-              return Stack(
-                children: <Widget>[
-                  tabBody,
-                  bottomBar(),
-                ],
-              );
-            }
-          },
-        ),
-      ),
+          backgroundColor: Colors.transparent,
+          body: Stack(
+            children: <Widget>[
+              tabBody,
+              bottomBar(),
+            ],
+          )),
     );
-  }
-
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
   }
 
   Widget bottomBar() {
@@ -115,8 +100,7 @@ class _HomeScreenState extends State<HomeScreen1>
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      PersonalHome(animationController: animationController);
+                  tabBody = MineHome(animationController: animationController);
                 });
               });
             }

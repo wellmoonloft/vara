@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
@@ -50,7 +51,7 @@ class ChartTitle extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Asset',
+                                      S.current.Asset,
                                       textAlign: TextAlign.start,
                                       style: AppTheme.titleTextSmallLighter,
                                     ),
@@ -58,19 +59,15 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat(
-                                                providerdata.currency.iconName +
-                                                    " ###,###.0#",
-                                                "en_US")
-                                            .format(asset * animation.value),
-                                        textAlign: TextAlign.start,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          letterSpacing: -1.0,
-                                          fontSize: 26,
-                                          color: ColorTheme.cassis,
-                                        ),
-                                      ),
+                                          NumberFormat(
+                                                  providerdata
+                                                          .currency.iconName +
+                                                      " ###,###.0#",
+                                                  "en_US")
+                                              .format(asset * animation.value),
+                                          textAlign: TextAlign.start,
+                                          style: setHomeNumnberText(
+                                              ColorTheme.cassis)),
                                     ),
                                   ],
                                 ),
@@ -82,7 +79,7 @@ class ChartTitle extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
                                     Text(
-                                      'Debt',
+                                      S.current.Debt,
                                       textAlign: TextAlign.end,
                                       style: AppTheme.titleTextSmallLighter,
                                     ),
@@ -90,19 +87,15 @@ class ChartTitle extends StatelessWidget {
                                       padding: const EdgeInsets.only(
                                           top: 6, bottom: 6),
                                       child: Text(
-                                        NumberFormat(
-                                                providerdata.currency.iconName +
-                                                    " ###,###.0#",
-                                                "en_US")
-                                            .format(debt * animation.value),
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          letterSpacing: -1.0,
-                                          fontSize: 26,
-                                          color: ColorTheme.cantaloupe,
-                                        ),
-                                      ),
+                                          NumberFormat(
+                                                  providerdata
+                                                          .currency.iconName +
+                                                      " ###,###.0#",
+                                                  "en_US")
+                                              .format(debt * animation.value),
+                                          textAlign: TextAlign.end,
+                                          style: setHomeNumnberText(
+                                              ColorTheme.cantaloupe)),
                                     ),
                                   ],
                                 ),

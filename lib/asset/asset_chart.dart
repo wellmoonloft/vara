@@ -1,9 +1,9 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:charts_flutter/flutter.dart';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
@@ -172,16 +172,17 @@ class ShowDetail extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               providerdata.date == null
-                                  ? 'Date'
-                                  : providerdata.date,
+                                  ? S.current.Date
+                                  : S.current.Date + ': ' + providerdata.date,
                               style: AppTheme.chartText,
                             ),
                             Consumer<ProviderData>(
                                 builder: (context, providerdata1, child) {
                               return Text(
                                 providerdata.number == null
-                                    ? 'Asset: 0'
-                                    : 'Asset: ' +
+                                    ? S.current.Asset + ': 0'
+                                    : S.current.Asset +
+                                        ': ' +
                                         NumberFormat(
                                                 providerdata1
                                                         .currency.iconName +
@@ -196,8 +197,9 @@ class ShowDetail extends StatelessWidget {
                                 builder: (context, providerdata1, child) {
                               return Text(
                                 providerdata.number == null
-                                    ? 'Debt: 0'
-                                    : 'Debt: ' +
+                                    ? S.current.Debt + ': 0'
+                                    : S.current.Debt +
+                                        ': ' +
                                         NumberFormat(
                                                 providerdata1
                                                         .currency.iconName +
@@ -212,8 +214,9 @@ class ShowDetail extends StatelessWidget {
                                 builder: (context, providerdata1, child) {
                               return Text(
                                 providerdata.number == null
-                                    ? 'NetAsset: 0'
-                                    : 'NetAsset: ' +
+                                    ? S.current.NetAsset + ': 0'
+                                    : S.current.NetAsset +
+                                        ': ' +
                                         NumberFormat(
                                                 providerdata1
                                                         .currency.iconName +

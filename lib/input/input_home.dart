@@ -3,11 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:vara/input/import/invest_import_view.dart';
+import 'package:vara/generated/l10n.dart';
+import 'package:vara/input/invest_import_view.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/models/provider_data.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import 'categroy.dart';
 import 'package:vara/models/db_models.dart';
 
@@ -23,11 +25,11 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   final ScrollController scrollController = ScrollController();
   String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
   final moneyController = TextEditingController();
-  final noteController = TextEditingController();
-  String categroyTitle = 'Category';
-  String categroy = '';
+  String categroyTitle = S.current.Category;
+  String categroy = S.current.Category;
   IconData categroyIcon = FontAwesomeIcons.layerGroup;
-  Color categroyColor = ColorTheme.greyquadradarker;
+  Color categroyTitleColor = ColorTheme.greyquadradarker;
+  Color categroyColor = ColorTheme.grey;
 
   int mark = 0;
   String currencyValue = 'EUR';
@@ -42,8 +44,6 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     List<CurrencyData> currencyData =
         Provider.of<ProviderData>(context).currencyData;
-    // CurrencyData currency = Provider.of<ProviderData>(context).currency;
-    // currencyValue = currency.short;
     if (currencyData != null && items.length == 0) {
       for (var i = 0; i < currencyData.length; i++) {
         items.add(DropdownMenuItem(
@@ -62,7 +62,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text('New Transaction', style: AppTheme.titleText),
+          title: Text(S.current.NewTransaction, style: AppTheme.titleText),
           leading: IconButton(
               icon: FaIcon(FontAwesomeIcons.times),
               iconSize: 20,
@@ -71,18 +71,6 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                 Navigator.pop(context);
               }),
           actions: <Widget>[
-            // IconButton(
-            //   icon: Icon(Icons.account_balance),
-            //   iconSize: 20,
-            //   color: ColorTheme.greytripledarker,
-            //   tooltip: 'Search',
-            //   onPressed: () {
-            //     Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => InvestImportView()));
-            //   },
-            // ),
             IconButton(
               icon: FaIcon(
                 FontAwesomeIcons.fileUpload,
@@ -124,6 +112,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                   keyboardAppearance: Brightness.light,
                   inputFormatters: [UsNumberTextInputFormatter()]),
             ),
+            OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0),
             InkWell(
                 onTap: () {
                   Navigator.push(context,
@@ -133,6 +122,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     if (data != null) {
                       setState(() {
                         categroyTitle = data['title'];
+                        categroyTitleColor = data['color'];
                         categroyColor = data['color'];
                         categroyIcon = data['icon'];
                         categroy = data['categroy'];
@@ -150,7 +140,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                         padding: EdgeInsets.only(top: 20, left: 20),
                         child: FaIcon(
                           categroyIcon,
-                          color: categroyColor,
+                          color: categroyTitleColor,
                           size: 20,
                         ),
                       ),
@@ -161,55 +151,42 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
-                            color: categroyColor,
+                            color: categroyTitleColor,
                           ),
                         ),
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 15, left: 20, right: 20),
-                    child: Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.pantone,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                    ),
-                  ),
+                  OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0)
                 ])),
-
-            // TransactionDetail(title: 'Category', icon: Icons.category)),
-            Padding(
-                padding: EdgeInsets.only(top: 8, left: 20, right: 20),
-                child: Column(children: [
-                  TextField(
-                    controller: noteController,
-                    autofocus: true,
-                    cursorColor: Colors.red,
-                    decoration: new InputDecoration(
-                      icon: FaIcon(
-                        FontAwesomeIcons.poll,
-                        color: ColorTheme.greyquadradarker,
-                        size: 20,
-                      ),
-                      hintText: "Note",
-                      border: InputBorder.none,
+            Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 20, left: 20),
+                    child: FaIcon(
+                      FontAwesomeIcons.poll,
+                      color: categroyColor,
+                      size: 20,
                     ),
-                    keyboardType: TextInputType.multiline,
-                    keyboardAppearance: Brightness.light,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.pantone,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+                    padding: EdgeInsets.only(top: 20, left: 15),
+                    child: Text(
+                      categroy,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16,
+                        color: categroyColor,
                       ),
                     ),
                   ),
-                ])),
+                ],
+              ),
+              OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0)
+            ]),
             Padding(
                 padding: EdgeInsets.only(top: 8, left: 20, right: 20),
                 child: Column(children: [
@@ -234,19 +211,12 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                           items: items,
                         ))
                   ]),
-                  Padding(
-                    padding: EdgeInsets.only(top: 4),
-                    child: Container(
-                      height: 1,
-                      decoration: BoxDecoration(
-                        color: ColorTheme.pantone,
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                    ),
-                  ),
+                  OneHeightBorder(top: 4, left: 0, right: 0, bottom: 0)
                 ])),
             Padding(
-              padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+              padding: EdgeInsets.only(
+                top: 20,
+              ),
               child: Column(children: [
                 InkWell(
                     onTap: () async {
@@ -269,11 +239,13 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        FaIcon(
-                          FontAwesomeIcons.solidCalendarAlt,
-                          color: ColorTheme.greyquadradarker,
-                          size: 20,
-                        ),
+                        Padding(
+                            padding: EdgeInsets.only(left: 20),
+                            child: FaIcon(
+                              FontAwesomeIcons.solidCalendarAlt,
+                              color: ColorTheme.greyquadradarker,
+                              size: 20,
+                            )),
                         Padding(
                           padding: EdgeInsets.only(left: 15),
                           child: Container(
@@ -286,33 +258,20 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                         ),
                       ],
                     )),
-                Padding(
-                  padding: EdgeInsets.only(top: 15),
-                  child: Container(
-                    height: 1,
-                    decoration: BoxDecoration(
-                      color: ColorTheme.pantone,
-                      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                    ),
-                  ),
-                ),
+                OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0)
               ]),
             ),
-            //TransactionDetail(title: 'Make recurring', icon: Icons.refresh),
             Padding(
                 padding: EdgeInsets.only(top: 60, left: 50, right: 50),
                 child: InkWell(
                   onTap: () async {
-                    if (moneyController.text == '' ||
-                        categroy == '' ||
-                        noteController.text == '') {
+                    if (moneyController.text == '' || categroy == '') {
                       var _alertDialog = AlertDialog(
-                        title: Text('Alert'),
-                        content: Text(
-                            'Please choose category and input amount and note.'),
+                        title: Text(S.current.Alert),
+                        content: Text(S.current.AlertNote),
                         actions: <Widget>[
                           FlatButton(
-                            child: Text("I know"),
+                            child: Text(S.current.Confirm),
                             onPressed: () => Navigator.of(context).pop(),
                           ),
                         ],
@@ -360,7 +319,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       ],
                     ),
                     child: Text(
-                      'Save',
+                      S.current.Save,
                       style: TextStyle(color: ColorTheme.white, fontSize: 16),
                     ),
                   ),
@@ -369,53 +328,6 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
-
-class TransactionDetail extends StatelessWidget {
-  final String title;
-  final IconData icon;
-
-  const TransactionDetail({Key key, this.title, this.icon}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 20, left: 20),
-            child: FaIcon(
-              FontAwesomeIcons.layerGroup,
-              color: ColorTheme.greyquadradarker,
-              size: 20,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 20, left: 15),
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 16,
-                color: ColorTheme.greydoubledarker,
-              ),
-            ),
-          ),
-        ],
-      ),
-      Padding(
-        padding: EdgeInsets.only(top: 15, left: 20, right: 20),
-        child: Container(
-          height: 1,
-          decoration: BoxDecoration(
-            color: ColorTheme.pantone,
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          ),
-        ),
-      ),
-    ]);
   }
 }
 
@@ -452,7 +364,7 @@ class UsNumberTextInputFormatter extends TextInputFormatter {
 
 class CategroyChoiceData {
   IconData categroyIcon = FontAwesomeIcons.layerGroup;
-  String categroyTitle = 'Category';
+  String categroyTitle = S.current.Category;
   Color color = ColorTheme.greyquadradarker;
   CategroyChoiceData({this.categroyIcon, this.categroyTitle, this.color});
 

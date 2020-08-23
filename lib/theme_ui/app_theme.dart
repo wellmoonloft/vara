@@ -3,7 +3,6 @@ import 'color_theme.dart';
 
 class AppTheme {
   AppTheme._();
-  //-----Padding-----
   static const double leftRightPadding = 16;
   static const outboxpadding =
       EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 10);
@@ -11,7 +10,6 @@ class AppTheme {
       EdgeInsets.only(left: 24, right: 24, top: 8, bottom: 5);
   static const chartTitlepadding =
       EdgeInsets.only(left: 24, right: 8, top: 8, bottom: 8);
-  //------TextStyle-----
 
   static const toptitleText = TextStyle(
     fontWeight: FontWeight.w700,
@@ -65,15 +63,17 @@ class AppTheme {
     color: ColorTheme.grey,
   );
 
-  //------BorderRadiusStyle-----
+  static const homeTitleText = TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 32,
+    letterSpacing: 0,
+    color: ColorTheme.greytripledarker,
+  );
 
   static const normalBorderRadius = BorderRadius.all(Radius.circular(8.0));
-
   static const smallBorderRadius = BorderRadius.all(Radius.circular(6.0));
-
   static const normalBoxShadow = BoxShadow(
       color: ColorTheme.grey, offset: Offset(1.1, 1.1), blurRadius: 5.0);
-
   static const boxDecoration = BoxDecoration(
     color: ColorTheme.white,
     borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -83,5 +83,29 @@ class AppTheme {
       BoxShadow(
           color: ColorTheme.white, offset: Offset(-1.1, -1.1), blurRadius: 8.0),
     ],
+  );
+}
+
+setHomeNumnberText(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 26,
+    color: color,
+  );
+}
+
+setHomeGraphNumnber(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w800,
+    fontSize: 18,
+    color: color,
+  );
+}
+
+setHomeGraphTitle(Color color) {
+  return TextStyle(
+    fontSize: 12,
+    letterSpacing: -0.5,
+    color: color,
   );
 }

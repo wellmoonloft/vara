@@ -7,7 +7,6 @@ import 'package:vara/models/provider_data.dart';
 class InvestChart extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
-
   InvestChart({this.animation, this.animationController});
 
   @override
@@ -28,22 +27,10 @@ class InvestChart extends StatelessWidget {
                           child: charts.ScatterPlotChart(
                             _createSampleData(context),
                             animate: false,
-                            // selectionModels: [
-                            //   charts.SelectionModelConfig(
-                            //       type: charts.SelectionModelType.info,
-                            //       changedListener: (SelectionModel model) {
-                            //         if (model.hasDatumSelection) {
-                            //           model.selectedDatum.forEach((element) {
-                            //             print(element);
-                            //           });
-                            //         }
-                            //       })
-                            // ],
                           )))));
         });
   }
 
-  /// Create one series with sample hard coded data.
   static List<charts.Series<LinearSales, int>> _createSampleData(context) {
     List<Invest> invest = Provider.of<ProviderData>(context).investList;
     List<LinearSales> data = [];
@@ -61,16 +48,13 @@ class InvestChart extends StatelessWidget {
         }
       }
     }
-
     final maxMeasure = 10.00;
 
     return [
       new charts.Series<LinearSales, int>(
         id: 'Sales',
-
         colorFn: (LinearSales sales, _) {
           final bucket = sales.year / maxMeasure;
-
           if (bucket < 1 / 3) {
             return charts.Color.fromHex(code: '#6baeb7');
           } else if (bucket < 2 / 3) {
@@ -89,11 +73,9 @@ class InvestChart extends StatelessWidget {
   }
 }
 
-/// Sample linear data type.
 class LinearSales {
   final int year;
   final num sales;
   final double radius;
-
   LinearSales(this.year, this.sales, this.radius);
 }

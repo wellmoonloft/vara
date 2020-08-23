@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 
 class CategroyView extends StatefulWidget {
   const CategroyView({Key key}) : super(key: key);
@@ -32,7 +34,7 @@ class _CategroyViewState extends State<CategroyView>
             brightness: Brightness.light,
             backgroundColor: ColorTheme.greydarker.withOpacity(0.7),
             elevation: 0,
-            title: Text('Categories', style: AppTheme.buttomTitle),
+            title: Text(S.current.Category, style: AppTheme.buttomTitle),
             leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.times),
                 color: ColorTheme.white,
@@ -217,16 +219,7 @@ class _GridTitleState extends State<GridTitle> {
                     ),
                   )
                 ])),
-        Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 5, bottom: 20),
-          child: Container(
-            height: 1,
-            decoration: BoxDecoration(
-              color: ColorTheme.pantone,
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            ),
-          ),
-        ),
+        OneHeightBorder(left: 20, right: 20, top: 5, bottom: 20),
         mark
             ? IconGridView(
                 icons: widget.icons,

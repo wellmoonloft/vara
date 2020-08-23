@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vara/input/import/transaction_import_view.dart';
-import 'package:vara/input/import/invest_import_view.dart';
-
 import 'package:vara/utils/toolkit.dart';
-
 import '../app_theme.dart';
 import '../color_theme.dart';
 
@@ -126,15 +122,9 @@ class SummaryTopTitile extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(left: 4, top: 5),
-                child: Text(
-                  value,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 26,
-                    color: color,
-                  ),
-                ),
+                child: Text(value,
+                    textAlign: TextAlign.center,
+                    style: setHomeNumnberText(color)),
               ),
             ],
           )
@@ -183,22 +173,11 @@ class SummaryTopGraph extends StatelessWidget {
                 Text(
                   value.toStringAsFixed(2) + '%',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                    color: color,
-                  ),
+                  style: setHomeGraphNumnber(color),
                 ),
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    letterSpacing: -0.5,
-                    color: ColorTheme.grey.withOpacity(0.5),
-                  ),
-                ),
+                Text(title,
+                    textAlign: TextAlign.center,
+                    style: setHomeGraphTitle(ColorTheme.grey)),
               ],
             ),
           ),
@@ -223,7 +202,6 @@ class BeforeTitle extends StatelessWidget {
   final double width;
   final double height;
   final Color color;
-
   const BeforeTitle({Key key, this.width, this.color, this.height})
       : super(key: key);
   @override
@@ -235,40 +213,6 @@ class BeforeTitle extends StatelessWidget {
         color: color.withOpacity(0.8),
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
       ),
-    );
-  }
-}
-
-class CustomButtom extends StatelessWidget {
-  final String title;
-  final String navigator;
-  final Color color;
-
-  const CustomButtom({Key key, this.title, this.navigator, this.color})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: AppTheme.normalBorderRadius,
-      ),
-      child: Container(
-          height: 40,
-          width: 180,
-          child: Padding(
-              padding: EdgeInsets.all(8),
-              child: InkWell(
-                  onTap: () {
-                    _navigateAndDisplaySelection(context, navigator);
-                  },
-                  child: Container(
-                    alignment: Alignment(0, 0),
-                    child: Text(
-                      title,
-                      style: AppTheme.buttomTitle,
-                    ),
-                  )))),
     );
   }
 }
@@ -301,18 +245,6 @@ class AppBarUI extends StatelessWidget {
                 transform: Matrix4.translationValues(
                     0.0, 30 * (1.0 - animation.value), 0.0),
                 child: Container(
-                  // decoration: BoxDecoration(
-                  //   color: ColorTheme.white.withOpacity(opacity),
-                  //   borderRadius: const BorderRadius.only(
-                  //     bottomLeft: Radius.circular(32.0),
-                  //   ),
-                  //   boxShadow: <BoxShadow>[
-                  //     BoxShadow(
-                  //         color: ColorTheme.grey.withOpacity(0.4 * opacity),
-                  //         offset: const Offset(1.1, 1.1),
-                  //         blurRadius: 10.0),
-                  //   ],
-                  // ),
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -329,14 +261,7 @@ class AppBarUI extends StatelessWidget {
                                 child: Text(
                                   title,
                                   textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    //fontFamily: AppTheme.fontName,
-                                    fontWeight: FontWeight.w700,
-                                    //fontSize: 22 + 6 - 6 * opacity,
-                                    fontSize: 32,
-                                    letterSpacing: 0,
-                                    color: ColorTheme.greytripledarker,
-                                  ),
+                                  style: AppTheme.homeTitleText,
                                 ),
                               ),
                             ),
@@ -535,16 +460,26 @@ class InvestList extends StatelessWidget {
   }
 }
 
-_navigateAndDisplaySelection(context, navigator) {
-  if (navigator == 'invest') {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => InvestImportView()),
+class OneHeightBorder extends StatelessWidget {
+  final double top;
+  final double left;
+  final double right;
+  final double bottom;
+
+  const OneHeightBorder({Key key, this.top, this.left, this.right, this.bottom})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.only(top: top, left: left, right: right, bottom: bottom),
+      child: Container(
+        height: 1,
+        decoration: BoxDecoration(
+          color: ColorTheme.pantone,
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
+        ),
+      ),
     );
-  } else if (navigator == 'bill') {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => new BillImportView()),
-    );
-  } else {}
+  }
 }

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
-
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
-import 'package:vara/utils/toolkit.dart';
 
 class InvestDetail extends StatelessWidget {
   final Invest investdetail;
-
   const InvestDetail({Key key, this.investdetail}) : super(key: key);
 
   @override
@@ -18,7 +17,7 @@ class InvestDetail extends StatelessWidget {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text('Invest Detail', style: AppTheme.titleText),
+          title: Text(S.current.InvestDetail, style: AppTheme.titleText),
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
               iconSize: 20,
@@ -30,28 +29,40 @@ class InvestDetail extends StatelessWidget {
         body: Container(
             color: ColorTheme.white,
             child: ListView(children: [
-              ListDetail(title: 'Invest Code:', value: investdetail.code),
-              ListDetail(title: 'Invest Time:', value: investdetail.date),
               ListDetail(
-                  title: 'Plan payment time:', value: investdetail.perDate),
+                  title: S.current.InvestCode + ':', value: investdetail.code),
+              ListDetail(title: S.current.Date + ':', value: investdetail.date),
               ListDetail(
-                  title: 'Final Payment Time:', value: investdetail.endDate),
+                  title: S.current.PlanPaymentDate + ':',
+                  value: investdetail.perDate),
               ListDetail(
-                  title: 'Invest Amount:',
-                  value: '€ ' + formatNum(investdetail.amount, 2).toString()),
+                  title: S.current.FinalPaymentDate + ':',
+                  value: investdetail.endDate),
               ListDetail(
-                  title: 'Received:',
-                  value: '€ ' + formatNum(investdetail.received, 2).toString()),
+                  title: S.current.Amount + ':',
+                  value: '€ ' +
+                      NumberFormat(" ###,###.0#", "en_US")
+                          .format(investdetail.amount)),
               ListDetail(
-                  title: 'Interest:',
-                  value: '€ ' + formatNum(investdetail.interest, 2).toString()),
+                  title: S.current.Received + ':',
+                  value: '€ ' +
+                      NumberFormat(" ###,###.0#", "en_US")
+                          .format(investdetail.received)),
               ListDetail(
-                  title: 'totalyield:',
-                  value:
-                      formatNum(investdetail.totalyield, 2).toString() + '%'),
-              ListDetail(title: 'Status:', value: investdetail.status),
-              ListDetail(title: 'Currency:', value: investdetail.currency),
-              ListDetail(title: 'Country:', value: investdetail.country),
+                  title: S.current.Interest + ':',
+                  value: '€ ' +
+                      NumberFormat(" ###,###.0#", "en_US")
+                          .format(investdetail.interest)),
+              ListDetail(
+                  title: S.current.TotalYieldYear + ':',
+                  value: investdetail.totalyield.toStringAsFixed(2) + '%'),
+              ListDetail(
+                  title: S.current.Status + ':', value: investdetail.status),
+              ListDetail(
+                  title: S.current.Currency + ':',
+                  value: investdetail.currency),
+              ListDetail(
+                  title: S.current.Country + ':', value: investdetail.country),
             ])));
   }
 }
