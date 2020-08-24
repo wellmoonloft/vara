@@ -65,7 +65,7 @@ class InvestSummaryView extends StatelessWidget {
                     if (totalInvest == 0 || mark == 0) {
                       totalYield = 0.0;
                     } else {
-                      totalYield = totalYield / mark * 100;
+                      totalYield = totalYield / mark;
                     }
 
                     return Container(
@@ -159,6 +159,7 @@ class InvestSummaryView extends StatelessWidget {
                                         value: totalYield * animation.value,
                                         color: ColorTheme.cassis,
                                         subcolor: ColorTheme.cassislighter,
+                                        mark: true,
                                       ),
                                     ),
                                   )

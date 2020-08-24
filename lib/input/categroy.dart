@@ -113,36 +113,42 @@ class Expenses extends StatelessWidget {
         icons: miscellaneousData.last.iconList,
         title: miscellaneousData.last.categroyTitle,
         color: miscellaneousData.last.color,
+        value: miscellaneousData.last.categroyValue,
         mark: 0,
       ),
       GridTitle(
         icons: entertainmentData.last.iconList,
         title: entertainmentData.last.categroyTitle,
         color: entertainmentData.last.color,
+        value: entertainmentData.last.categroyValue,
         mark: 0,
       ),
       GridTitle(
         icons: foodData.last.iconList,
         title: foodData.last.categroyTitle,
         color: foodData.last.color,
+        value: foodData.last.categroyValue,
         mark: 0,
       ),
       GridTitle(
         icons: housingData.last.iconList,
         title: housingData.last.categroyTitle,
         color: housingData.last.color,
+        value: housingData.last.categroyValue,
         mark: 0,
       ),
       GridTitle(
         icons: lifestyleData.last.iconList,
         title: lifestyleData.last.categroyTitle,
         color: lifestyleData.last.color,
+        value: lifestyleData.last.categroyValue,
         mark: 0,
       ),
       GridTitle(
         icons: transportationData.last.iconList,
         title: transportationData.last.categroyTitle,
         color: transportationData.last.color,
+        value: transportationData.last.categroyValue,
         mark: 0,
       )
     ]);
@@ -158,6 +164,7 @@ class Income extends StatelessWidget {
         icons: incomeData.last.iconList,
         title: incomeData.last.categroyTitle,
         color: incomeData.last.color,
+        value: incomeData.last.categroyValue,
         mark: 1,
       )
     ]);
@@ -173,6 +180,7 @@ class Savings extends StatelessWidget {
         icons: savingsData.last.iconList,
         title: savingsData.last.categroyTitle,
         color: savingsData.last.color,
+        value: savingsData.last.categroyValue,
         mark: 2,
       )
     ]);
@@ -183,8 +191,9 @@ class GridTitle extends StatefulWidget {
   final List<CategroyIcon> icons;
   final String title;
   final Color color;
+  final String value;
   final int mark;
-  GridTitle({this.icons, this.title, this.color, this.mark});
+  GridTitle({this.icons, this.title, this.color, this.mark, this.value});
 
   _GridTitleState createState() => _GridTitleState();
 }
@@ -201,7 +210,7 @@ class _GridTitleState extends State<GridTitle> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    widget.title,
+                    widget.value,
                     textAlign: TextAlign.left,
                     style: AppTheme.buttomTitle,
                   ),
@@ -224,6 +233,7 @@ class _GridTitleState extends State<GridTitle> {
                 icons: widget.icons,
                 color: widget.color,
                 title: widget.title,
+                value: widget.value,
                 mark: widget.mark,
               )
             : Container()
@@ -236,9 +246,10 @@ class IconGridView extends StatelessWidget {
   final List<CategroyIcon> icons;
   final String title;
   final Color color;
+  final String value;
   final int mark;
 
-  IconGridView({this.icons, this.color, this.title, this.mark});
+  IconGridView({this.icons, this.color, this.title, this.mark, this.value});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -257,9 +268,11 @@ class IconGridView extends StatelessWidget {
                   //var data = Map();
                   var data = {
                     'title': icons[index].title,
+                    'categroyValue': icons[index].value,
                     'color': color,
                     'icon': icons[index].icon,
                     'categroy': title,
+                    'value': value,
                     'mark': mark
                   };
                   Navigator.of(context).pop(data);
@@ -280,7 +293,7 @@ class IconGridView extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(top: 6),
                 child: Text(
-                  icons[index].title,
+                  icons[index].value,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,

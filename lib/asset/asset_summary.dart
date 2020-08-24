@@ -101,6 +101,7 @@ class AssetSummaryView extends StatelessWidget {
                                         value: debtService * animation.value,
                                         color: ColorTheme.puristbluedarker,
                                         subcolor: ColorTheme.puristbluelighter,
+                                        mark: true,
                                       ),
                                     ),
                                   )

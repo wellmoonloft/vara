@@ -562,6 +562,546 @@ class S {
       args: [bill],
     );
   }
+
+  /// `MisCellaneous`
+  String get MisCellaneous {
+    return Intl.message(
+      'MisCellaneous',
+      name: 'MisCellaneous',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Entertainment`
+  String get Entertainment {
+    return Intl.message(
+      'Entertainment',
+      name: 'Entertainment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Food & Drinks`
+  String get FoodDrinks {
+    return Intl.message(
+      'Food & Drinks',
+      name: 'FoodDrinks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Housing`
+  String get Housing {
+    return Intl.message(
+      'Housing',
+      name: 'Housing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lifestyle`
+  String get Lifestyle {
+    return Intl.message(
+      'Lifestyle',
+      name: 'Lifestyle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Transportation`
+  String get Transportation {
+    return Intl.message(
+      'Transportation',
+      name: 'Transportation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vacation Savings`
+  String get VacationSavings {
+    return Intl.message(
+      'Vacation Savings',
+      name: 'VacationSavings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency Savings`
+  String get EmergencySavings {
+    return Intl.message(
+      'Emergency Savings',
+      name: 'EmergencySavings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Salary`
+  String get Salary {
+    return Intl.message(
+      'Salary',
+      name: 'Salary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pension`
+  String get Pension {
+    return Intl.message(
+      'Pension',
+      name: 'Pension',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Investment`
+  String get Investment {
+    return Intl.message(
+      'Investment',
+      name: 'Investment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Child Benefit`
+  String get ChildBenefit {
+    return Intl.message(
+      'Child Benefit',
+      name: 'ChildBenefit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Taxi`
+  String get Taxi {
+    return Intl.message(
+      'Taxi',
+      name: 'Taxi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Repair`
+  String get Repair {
+    return Intl.message(
+      'Repair',
+      name: 'Repair',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Public Transport`
+  String get PublicTransport {
+    return Intl.message(
+      'Public Transport',
+      name: 'PublicTransport',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Parking`
+  String get Parking {
+    return Intl.message(
+      'Parking',
+      name: 'Parking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gas`
+  String get Gas {
+    return Intl.message(
+      'Gas',
+      name: 'Gas',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Flight`
+  String get Flight {
+    return Intl.message(
+      'Flight',
+      name: 'Flight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car Ioan`
+  String get CarIoan {
+    return Intl.message(
+      'Car Ioan',
+      name: 'CarIoan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car Insurance`
+  String get CarInsurance {
+    return Intl.message(
+      'Car Insurance',
+      name: 'CarInsurance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pharmacy`
+  String get Pharmacy {
+    return Intl.message(
+      'Pharmacy',
+      name: 'Pharmacy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pet`
+  String get Pet {
+    return Intl.message(
+      'Pet',
+      name: 'Pet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gift`
+  String get Gift {
+    return Intl.message(
+      'Gift',
+      name: 'Gift',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hotel`
+  String get Hotel {
+    return Intl.message(
+      'Hotel',
+      name: 'Hotel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Doctor`
+  String get Doctor {
+    return Intl.message(
+      'Doctor',
+      name: 'Doctor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dentist`
+  String get Dentist {
+    return Intl.message(
+      'Dentist',
+      name: 'Dentist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Child Care`
+  String get ChildCare {
+    return Intl.message(
+      'Child Care',
+      name: 'ChildCare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Water`
+  String get Water {
+    return Intl.message(
+      'Water',
+      name: 'Water',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Telephone`
+  String get Telephone {
+    return Intl.message(
+      'Telephone',
+      name: 'Telephone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TV`
+  String get TV {
+    return Intl.message(
+      'TV',
+      name: 'TV',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rent`
+  String get Rent {
+    return Intl.message(
+      'Rent',
+      name: 'Rent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maintenance`
+  String get Maintenance {
+    return Intl.message(
+      'Maintenance',
+      name: 'Maintenance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loan`
+  String get Loan {
+    return Intl.message(
+      'Loan',
+      name: 'Loan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Internet`
+  String get Internet {
+    return Intl.message(
+      'Internet',
+      name: 'Internet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Insurance`
+  String get Insurance {
+    return Intl.message(
+      'Insurance',
+      name: 'Insurance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electricity`
+  String get Electricity {
+    return Intl.message(
+      'Electricity',
+      name: 'Electricity',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Groceries`
+  String get Groceries {
+    return Intl.message(
+      'Groceries',
+      name: 'Groceries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Restaurant`
+  String get Restaurant {
+    return Intl.message(
+      'Restaurant',
+      name: 'Restaurant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drinks`
+  String get Drinks {
+    return Intl.message(
+      'Drinks',
+      name: 'Drinks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coffee`
+  String get Coffee {
+    return Intl.message(
+      'Coffee',
+      name: 'Coffee',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Candy`
+  String get Candy {
+    return Intl.message(
+      'Candy',
+      name: 'Candy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subscription`
+  String get Subscription {
+    return Intl.message(
+      'Subscription',
+      name: 'Subscription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sports`
+  String get Sports {
+    return Intl.message(
+      'Sports',
+      name: 'Sports',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nightclub`
+  String get Nightclub {
+    return Intl.message(
+      'Nightclub',
+      name: 'Nightclub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hobby`
+  String get Hobby {
+    return Intl.message(
+      'Hobby',
+      name: 'Hobby',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gym`
+  String get Gym {
+    return Intl.message(
+      'Gym',
+      name: 'Gym',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vacation`
+  String get Vacation {
+    return Intl.message(
+      'Vacation',
+      name: 'Vacation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Electronics`
+  String get Electronics {
+    return Intl.message(
+      'Electronics',
+      name: 'Electronics',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cinema`
+  String get Cinema {
+    return Intl.message(
+      'Cinema',
+      name: 'Cinema',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bowling`
+  String get Bowling {
+    return Intl.message(
+      'Bowling',
+      name: 'Bowling',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Student Loan`
+  String get StudentLoan {
+    return Intl.message(
+      'Student Loan',
+      name: 'StudentLoan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Healthcare`
+  String get Healthcare {
+    return Intl.message(
+      'Healthcare',
+      name: 'Healthcare',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bank Cost`
+  String get BankCost {
+    return Intl.message(
+      'Bank Cost',
+      name: 'BankCost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clothes`
+  String get Clothes {
+    return Intl.message(
+      'Clothes',
+      name: 'Clothes',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

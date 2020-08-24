@@ -139,15 +139,17 @@ class SummaryTopGraph extends StatelessWidget {
   final num value;
   final Color color;
   final Color subcolor;
+  final bool mark;
 
   const SummaryTopGraph(
-      {Key key, this.title, this.value, this.color, this.subcolor})
+      {Key key, this.title, this.value, this.color, this.subcolor, this.mark})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     double temp = 0.0;
-    if (value > 1) {
-      temp = value / 100;
+
+    if (mark) {
+      temp = value * 100;
     } else {
       temp = value;
     }
@@ -171,7 +173,7 @@ class SummaryTopGraph extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  value.toStringAsFixed(2) + '%',
+                  temp.toStringAsFixed(2) + (mark ? '%' : ''),
                   textAlign: TextAlign.center,
                   style: setHomeGraphNumnber(color),
                 ),
@@ -186,7 +188,7 @@ class SummaryTopGraph extends StatelessWidget {
           padding: const EdgeInsets.all(4.0),
           child: CustomPaint(
             painter: CurvePainter(
-                colors: [color, subcolor, subcolor], angle: (360 - 10) * temp),
+                colors: [color, subcolor, subcolor], angle: (360 - 10) * value),
             child: SizedBox(
               width: 108,
               height: 108,

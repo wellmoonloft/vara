@@ -27,6 +27,8 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   final moneyController = TextEditingController();
   String categroyTitle = S.current.Category;
   String categroy = S.current.Category;
+  String categroyTitleValue = S.current.Category;
+  String categroyValue = S.current.Category;
   IconData categroyIcon = FontAwesomeIcons.layerGroup;
   Color categroyTitleColor = ColorTheme.greyquadradarker;
   Color categroyColor = ColorTheme.grey;
@@ -109,10 +111,12 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     if (data != null) {
                       setState(() {
                         categroyTitle = data['title'];
+                        categroyTitleValue = data['categroyValue'];
                         categroyTitleColor = data['color'];
                         categroyColor = data['color'];
                         categroyIcon = data['icon'];
                         categroy = data['categroy'];
+                        categroyValue = data['value'];
                         mark = data['mark'];
                       });
                     }
@@ -134,7 +138,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       Padding(
                         padding: EdgeInsets.only(top: 20, left: 15),
                         child: Text(
-                          categroyTitle,
+                          categroyTitleValue,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 16,
@@ -162,7 +166,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                   Padding(
                     padding: EdgeInsets.only(top: 20, left: 15),
                     child: Text(
-                      categroy,
+                      categroyValue,
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 16,

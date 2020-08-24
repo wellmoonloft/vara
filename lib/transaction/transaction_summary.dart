@@ -113,6 +113,7 @@ class BillSummaryView extends StatelessWidget {
                                           color: ColorTheme.cantaloupe,
                                           subcolor:
                                               ColorTheme.cantaloupelighter,
+                                          mark: false,
                                         ),
                                       ),
                                     )
