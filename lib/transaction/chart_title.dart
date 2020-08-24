@@ -43,86 +43,74 @@ class ChartTitle extends StatelessWidget {
                         });
                       });
                     }
-                    return Container(
-                        height: 90,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              Padding(
-                                padding: AppTheme.chartTitlepadding,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      S.current.Income,
-                                      textAlign: TextAlign.start,
-                                      style: AppTheme.titleTextSmallLighter,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6, bottom: 6),
-                                      child: Text(
-                                          income > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(income *
-                                                          animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
+                    return Row(children: <Widget>[
+                      Padding(
+                        padding: AppTheme.chartTitlepadding,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              S.current.Income,
+                              textAlign: TextAlign.start,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6, bottom: 6),
+                              child: Text(
+                                  income > 100000.00
+                                      ? providerdata.currency.iconName +
+                                          ' ' +
+                                          NumberFormat.compact(
+                                                  locale:
                                                       Intl.getCurrentLocale())
-                                                  .format(
-                                                      income * animation.value),
-                                          textAlign: TextAlign.start,
-                                          style: setHomeNumnberText(
-                                              ColorTheme.puristbluedarker)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: AppTheme.chartTitlepadding,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      S.current.Expenses,
-                                      textAlign: TextAlign.end,
-                                      style: AppTheme.titleTextSmallLighter,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6, bottom: 6),
-                                      child: Text(
-                                          expenses > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(expenses *
-                                                          animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
+                                              .format(income * animation.value)
+                                      : NumberFormat(
+                                              providerdata.currency.iconName +
+                                                  " ###,###.0#",
+                                              Intl.getCurrentLocale())
+                                          .format(income * animation.value),
+                                  textAlign: TextAlign.start,
+                                  style: setHomeNumnberText(
+                                      ColorTheme.puristbluedarker)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: AppTheme.chartTitlepadding,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              S.current.Expenses,
+                              textAlign: TextAlign.end,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6, bottom: 6),
+                              child: Text(
+                                  expenses > 100000.00
+                                      ? providerdata.currency.iconName +
+                                          ' ' +
+                                          NumberFormat.compact(
+                                                  locale:
                                                       Intl.getCurrentLocale())
-                                                  .format(expenses *
-                                                      animation.value),
-                                          textAlign: TextAlign.end,
-                                          style: setHomeNumnberText(
-                                              ColorTheme.cassis)),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ]));
+                                              .format(
+                                                  expenses * animation.value)
+                                      : NumberFormat(
+                                              providerdata.currency.iconName +
+                                                  " ###,###.0#",
+                                              Intl.getCurrentLocale())
+                                          .format(expenses * animation.value),
+                                  textAlign: TextAlign.end,
+                                  style: setHomeNumnberText(ColorTheme.cassis)),
+                            ),
+                          ],
+                        ),
+                      )
+                    ]);
                   })));
         });
   }

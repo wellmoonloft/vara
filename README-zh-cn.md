@@ -45,8 +45,6 @@
 - [path_provider: ^1.6.11](https://pub.dev/packages/path_provider) Flutter插件，用于查找文件系统上的常用位置。
 - [file_picker: ^1.13.2](https://pub.dev/packages/file_picker) 用于本机文件浏览器来选择单个或多个绝对文件路径，并具有扩展名过滤支持。
 - [excel: ^1.1.4](https://pub.dev/packages/excel) 用于创建和更新XLSX文件的excel-sheets的Flutter Dart库。
-- [flutter_swiper: ^1.1.6](https://pub.dev/packages/flutter_swiper) flutter最强大的siwiper, 多种布局方式，无限轮播，Android和IOS双端适配。
-- [http: ^0.12.2](https://pub.dev/packages/http) 一个可组合的，基于Future的库，用于发出HTTP请求。
 - [provider: ^4.3.2](https://pub.dev/packages/provider) InheritedWidget的包装 ，使它们更易于使用和可重复使用。
 
 ## 进度

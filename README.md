@@ -40,8 +40,6 @@ Therefore I need an APP like this:
 - [path_provider: ^1.6.11](https://pub.dev/packages/path_provider) A Flutter plugin for finding commonly used locations on the filesystem. 
 - [file_picker: ^1.13.2](https://pub.dev/packages/file_picker) A package that allows you to use a native file explorer to pick single or multiple absolute file paths, with extensions filtering support.
 - [excel: ^1.1.4](https://pub.dev/packages/excel) Excel is a flutter and dart library for creating and updating excel-sheets for XLSX files.
-- [flutter_swiper: ^1.1.6](https://pub.dev/packages/flutter_swiper) The best swiper for flutter , with multiple layouts, infinite loop. Compatible with Android & iOS.
-- [http: ^0.12.2](https://pub.dev/packages/http) A composable, Future-based library for making HTTP requests.
 - [provider: ^4.3.2](https://pub.dev/packages/provider) A wrapper around InheritedWidget to make them easier to use and more reusable.
    
 ## Progress

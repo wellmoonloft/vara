@@ -4,7 +4,6 @@ import 'dart:io' as io;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
-import 'num_utils.dart';
 
 Database _db;
 
@@ -152,22 +151,22 @@ class DBHelper {
         } else if (invest.status == 'FINISHED') {
           Asset asset = new Asset();
           asset.debt = 0;
-          asset.asset = NumUtil.subtract(invest.received, invest.amount);
-          asset.asset = NumUtil.subtract(asset.asset, invest.amount);
+          asset.asset = invest.received - invest.amount;
+          asset.asset = asset.asset - invest.amount;
           asset.date = invest.endDate;
           asset.date = invest.currency;
           await updateAsset(asset);
 
-          invest.interest = NumUtil.subtract(invest.received, invest.amount);
-          double temp = NumUtil.divide(invest.interest, invest.amount);
+          invest.interest = invest.received - invest.amount;
+          double temp = invest.interest / invest.amount;
           if (temp == 0) {
             invest.totalyield = 0;
           } else {
             var starttime = DateTime.parse(invest.date);
             var endDate = DateTime.parse(invest.endDate);
             var daydifree = endDate.difference(starttime);
-            temp = NumUtil.divide(temp, daydifree.inDays);
-            invest.totalyield = NumUtil.multiply(temp, 365);
+            temp = temp / daydifree.inDays;
+            invest.totalyield = temp * 365;
           }
           await dbClient.insert('invest', invest.toJson());
         }
@@ -180,16 +179,16 @@ class DBHelper {
         var endDate = DateTime.parse(invest.endDate);
         var daydifree = endDate.difference(starttime);
 
-        asset.asset = NumUtil.subtract(invest.received, invest.amount);
+        asset.asset = invest.received - invest.amount;
         asset.date = invest.endDate;
         asset.currency = invest.currency;
-        invest.interest = NumUtil.subtract(invest.received, invest.amount);
-        double temp = NumUtil.divide(invest.interest, invest.amount);
+        invest.interest = invest.received - invest.amount;
+        double temp = invest.interest / invest.amount;
         if (temp == 0) {
           invest.totalyield = 0;
         } else {
-          temp = NumUtil.divide(temp, daydifree.inDays);
-          invest.totalyield = NumUtil.multiply(temp, 365);
+          temp = temp / daydifree.inDays;
+          invest.totalyield = temp * 365;
         }
         await dbClient.insert('invest', invest.toJson());
         await updateAsset(asset);

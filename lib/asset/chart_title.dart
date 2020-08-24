@@ -39,86 +39,73 @@ class ChartTitle extends StatelessWidget {
                         });
                       });
                     }
-                    return Container(
-                        height: 90,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: <Widget>[
-                              Padding(
-                                padding: AppTheme.chartTitlepadding,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      S.current.Asset,
-                                      textAlign: TextAlign.start,
-                                      style: AppTheme.titleTextSmallLighter,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6, bottom: 6),
-                                      child: Text(
-                                          asset > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(asset *
-                                                          animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
+                    return Row(children: <Widget>[
+                      Padding(
+                        padding: AppTheme.chartTitlepadding,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              S.current.Asset,
+                              textAlign: TextAlign.start,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6, bottom: 6),
+                              child: Text(
+                                  asset > 100000.00
+                                      ? providerdata.currency.iconName +
+                                          ' ' +
+                                          NumberFormat.compact(
+                                                  locale:
                                                       Intl.getCurrentLocale())
-                                                  .format(
-                                                      asset * animation.value),
-                                          textAlign: TextAlign.start,
-                                          style: setHomeNumnberText(
-                                              ColorTheme.cassis)),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: AppTheme.chartTitlepadding,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      S.current.Debt,
-                                      textAlign: TextAlign.end,
-                                      style: AppTheme.titleTextSmallLighter,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 6, bottom: 6),
-                                      child: Text(
-                                          debt > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(debt *
-                                                          animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
+                                              .format(asset * animation.value)
+                                      : NumberFormat(
+                                              providerdata.currency.iconName +
+                                                  " ###,###.0#",
+                                              Intl.getCurrentLocale())
+                                          .format(asset * animation.value),
+                                  textAlign: TextAlign.start,
+                                  style: setHomeNumnberText(ColorTheme.cassis)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: AppTheme.chartTitlepadding,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              S.current.Debt,
+                              textAlign: TextAlign.end,
+                              style: AppTheme.titleTextSmallLighter,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 6, bottom: 6),
+                              child: Text(
+                                  debt > 100000.00
+                                      ? providerdata.currency.iconName +
+                                          ' ' +
+                                          NumberFormat.compact(
+                                                  locale:
                                                       Intl.getCurrentLocale())
-                                                  .format(
-                                                      debt * animation.value),
-                                          textAlign: TextAlign.end,
-                                          style: setHomeNumnberText(
-                                              ColorTheme.cantaloupe)),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ]));
+                                              .format(debt * animation.value)
+                                      : NumberFormat(
+                                              providerdata.currency.iconName +
+                                                  " ###,###.0#",
+                                              Intl.getCurrentLocale())
+                                          .format(debt * animation.value),
+                                  textAlign: TextAlign.end,
+                                  style: setHomeNumnberText(
+                                      ColorTheme.cantaloupe)),
+                            ),
+                          ],
+                        ),
+                      )
+                    ]);
                   })));
         });
   }

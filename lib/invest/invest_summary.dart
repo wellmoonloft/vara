@@ -254,9 +254,6 @@ class InvestSummaryView extends StatelessWidget {
                                   )
                                 ],
                               ),
-                            ),
-                            SizedBox(
-                              height: 10,
                             )
                           ],
                         ));

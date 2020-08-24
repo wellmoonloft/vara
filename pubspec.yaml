@@ -21,9 +21,8 @@ dependencies:
   path_provider: ^1.6.11
   file_picker: ^1.13.2
   excel: ^1.1.4
-  http: ^0.12.2
   provider: ^4.3.2
-  decimal: ^0.3.5
+
 
 dev_dependencies:
   flutter_test:

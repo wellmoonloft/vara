@@ -16,6 +16,7 @@ class MineHome extends StatelessWidget {
       slivers: <Widget>[
         SliverAppBar(
           pinned: true,
+          brightness: Brightness.light,
           leading: IconButton(
               icon: FaIcon(FontAwesomeIcons.cog),
               iconSize: 20,
