@@ -72,7 +72,7 @@ class BillListState extends State<BillListView> {
                         ),
                         Expanded(
                           child: Text(
-                            'Mark',
+                            S.current.Category,
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
@@ -154,47 +154,7 @@ class BillListState extends State<BillListView> {
                               underline: Container(),
                               value: countryValue,
                               iconSize: 18,
-                              onChanged: (String newValue) {
-                                // if (newValue == 'ALL') {
-                                //   setState(() {
-                                //     current.clear();
-                                //     print(current.length);
-                                //     countryValue = newValue;
-                                //     if (billList != null) {
-                                //       billList.forEach((element) {
-                                //         current.add(element);
-                                //       });
-                                //     }
-                                //   });
-                                // } else if (newValue == 'CURRENT') {
-                                //   setState(() {
-                                //     current.clear();
-                                //     print(current.length);
-                                //     countryValue = newValue;
-                                //     if (billList != null) {
-                                //       billList.forEach((element) {
-                                //         if (element['status'] == 'CURRENT') {
-                                //           current.add(element);
-                                //         }
-                                //       });
-                                //     }
-                                //   });
-                                // } else {
-                                //   setState(() {
-                                //     current.clear();
-                                //     print(current.length);
-                                //     countryValue = newValue;
-                                //     if (billList != null) {
-                                //       billList.forEach((element) {
-                                //         if (element['status'] == 'LATE') {
-                                //           current.add(element);
-                                //         }
-                                //       });
-                                //       print(current.length);
-                                //     }
-                                //   });
-                                // }
-                              },
+                              onChanged: (String newValue) {},
                               items: <String>[
                                 'ALL',
                                 'CURRENT',
@@ -218,7 +178,7 @@ class BillListState extends State<BillListView> {
               itemBuilder: (BuildContext context, int index) {
                 var bill = billList[index];
                 return Dismissible(
-                    key: Key('key${billList[index]}'),
+                    key: UniqueKey(),
                     direction: DismissDirection.endToStart,
                     onDismissed: (direction) async {
                       setState(() {
@@ -273,122 +233,50 @@ class BillListState extends State<BillListView> {
                         color: ColorTheme.white,
                         width: MediaQuery.of(context).size.width,
                         child: Padding(
-                            padding: const EdgeInsets.only(top: 0),
-                            child: Column(
-                              children: <Widget>[
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Padding(
-                                  padding: AppTheme.inboxpadding,
-                                  child: Row(
+                            padding: AppTheme.inboxpadding,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Expanded(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              S.current.Date,
-                                              style: AppTheme.subtitleText,
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.only(
-                                                  top: 6, bottom: 6),
-                                              child: Text(
-                                                bill.date,
-                                                style: AppTheme
-                                                    .titleTextSmallLighter,
-                                              ),
-                                            ),
-                                          ],
+                                      Container(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 6),
+                                        child: Text(
+                                          (bill.mark == 0 ? '-' : '+') +
+                                              NumberFormat(
+                                                      "###,###.0#", "en_US")
+                                                  .format(bill.amount) +
+                                              bill.currency,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 16,
+                                            color: (bill.mark == 0)
+                                                ? ColorTheme.darkred
+                                                : ColorTheme.neogreendarker,
+                                          ),
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Row(
-                                          children: <Widget>[
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  S.current.Use,
-                                                  style: AppTheme.subtitleText,
-                                                ),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          3 -
-                                                      16,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 6, bottom: 6),
-                                                  child: Text(
-                                                    bill.use,
-                                                    softWrap: true,
-                                                    textAlign: TextAlign.left,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    maxLines: 1,
-                                                    style: AppTheme
-                                                        .titleTextSmallLighter,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                      Container(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 6),
+                                        child: Text(
+                                          bill.categroy + ' | ' + bill.use,
+                                          softWrap: true,
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 1,
+                                          style: AppTheme.subtitleText,
                                         ),
                                       ),
-                                      Expanded(
-                                        child: Row(
-                                          // mainAxisAlignment:
-                                          //     MainAxisAlignment.end,
-                                          children: <Widget>[
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: <Widget>[
-                                                Text(
-                                                  S.current.Amount,
-                                                  style: AppTheme.subtitleText,
-                                                ),
-                                                Container(
-                                                  width: MediaQuery.of(context)
-                                                              .size
-                                                              .width /
-                                                          3 -
-                                                      16,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 6, bottom: 6),
-                                                  child: Text(
-                                                    (bill.mark == 0
-                                                            ? '-'
-                                                            : '+') +
-                                                        NumberFormat(
-                                                                "###,###.0#",
-                                                                "en_US")
-                                                            .format(
-                                                                bill.amount) +
-                                                        bill.currency,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 16,
-                                                      color: (bill.mark == 0)
-                                                          ? ColorTheme.darkred
-                                                          : ColorTheme
-                                                              .neogreendarker,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
+                                    ]),
+                                Container(
+                                  padding:
+                                      const EdgeInsets.only(top: 6, bottom: 6),
+                                  child: Text(
+                                    bill.date,
+                                    style: AppTheme.titleTextSmallLighterS,
                                   ),
                                 ),
                               ],

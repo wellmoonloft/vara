@@ -37,6 +37,7 @@ class ProviderData extends ChangeNotifier {
   Future getinvestList() async {
     investList = await DBHelper().getInvestList();
     notifyListeners();
+    return investList;
   }
 
   Future updateInvest(Invest invest) async {

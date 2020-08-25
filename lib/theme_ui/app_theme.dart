@@ -57,6 +57,12 @@ class AppTheme {
     color: ColorTheme.greydarker,
   );
 
+  static const titleTextSmallLighterS = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+    color: ColorTheme.greydarker,
+  );
+
   static const subtitleText = TextStyle(
     fontSize: 12,
     letterSpacing: 0.0,

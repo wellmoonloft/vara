@@ -28,16 +28,12 @@ class InvestListState extends State<InvestListView> {
   @override
   void initState() {
     super.initState();
+    //_loadMore();
   }
 
   @override
   Widget build(BuildContext context) {
     investList = Provider.of<ProviderData>(context).investList;
-    if (investList != null) {
-      investList.forEach((element) {
-        current.add(element);
-      });
-    }
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -256,5 +252,18 @@ class InvestListState extends State<InvestListView> {
         ],
       ),
     );
+  }
+
+  Future _loadMore() async {
+    while (true) {
+      if (investList != null) {
+        setState(() {
+          investList.forEach((element) {
+            current.add(element);
+          });
+        });
+        break;
+      }
+    }
   }
 }

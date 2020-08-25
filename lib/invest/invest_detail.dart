@@ -55,7 +55,8 @@ class InvestDetail extends StatelessWidget {
                           .format(investdetail.interest)),
               ListDetail(
                   title: S.current.TotalYieldYear + ':',
-                  value: investdetail.totalyield.toStringAsFixed(2) + '%'),
+                  value:
+                      (investdetail.totalyield * 100).toStringAsFixed(2) + '%'),
               ListDetail(
                   title: S.current.Status + ':', value: investdetail.status),
               ListDetail(
