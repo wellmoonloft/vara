@@ -3,6 +3,7 @@ import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/title_view.dart';
+import 'package:vara/transaction/transaction_chart.dart';
 import 'chart_title.dart';
 import 'transaction_summary.dart';
 
@@ -24,7 +25,7 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
   }
 
   void addAllListData() {
-    const int count = 4;
+    const int count = 5;
     listViews.add(
       AppBarUI(
         title: S.current.Transaction,
@@ -51,7 +52,7 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
-                Interval((1 / count) * 1, 1.0, curve: Curves.fastOutSlowIn))),
+                Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
       ),
     );
@@ -66,6 +67,16 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
             parent: widget.animationController,
             curve:
                 Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+        animationController: widget.animationController,
+      ),
+    );
+
+    listViews.add(
+      TransactionChart(
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+            parent: widget.animationController,
+            curve:
+                Interval((1 / count) * 0, 1.0, curve: Curves.fastOutSlowIn))),
         animationController: widget.animationController,
       ),
     );

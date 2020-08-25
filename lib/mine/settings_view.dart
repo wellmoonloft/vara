@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
@@ -177,7 +176,7 @@ class _SettingsViewState extends State<SettingsView> {
 
                               await DBHelper().updateSettings(settings);
                               setState(() {
-                                print(Intl.getCurrentLocale());
+                                //print(Intl.getCurrentLocale());
                                 // update language data;
                               });
                             }
