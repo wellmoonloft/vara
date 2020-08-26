@@ -128,7 +128,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 20, left: 20),
+                        padding: EdgeInsets.only(top: 20, left: 18),
                         child: FaIcon(
                           categroyIcon,
                           color: categroyTitleColor,

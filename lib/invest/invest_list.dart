@@ -5,7 +5,6 @@ import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'package:vara/theme_ui/common/app_common.dart';
 import 'invest_detail.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
@@ -24,16 +23,24 @@ class InvestListState extends State<InvestListView> {
   String moneyValue = 'ALL';
   String termValue = 'ALL';
   String countryValue = 'ALL';
+  bool mark = true;
 
   @override
   void initState() {
     super.initState();
-    //_loadMore();
   }
 
   @override
   Widget build(BuildContext context) {
     investList = Provider.of<ProviderData>(context).investList;
+    if (investList != null) {
+      if (mark) {
+        investList.forEach((element) {
+          current.add(element);
+        });
+        mark = false;
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -64,15 +71,6 @@ class InvestListState extends State<InvestListView> {
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Text(
-                            S.current.Currency,
-                            textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
-                          ),
-                          flex: 1,
                         ),
                         Expanded(
                           child: Text(
@@ -80,7 +78,6 @@ class InvestListState extends State<InvestListView> {
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
-                          flex: 1,
                         ),
                       ],
                     ),
@@ -101,8 +98,8 @@ class InvestListState extends State<InvestListView> {
                                         .format(result)
                                         .toString();
                                   });
+                                  chooseDate(date, countryValue);
                                 }
-                                print('$result');
                               },
                               child: Container(
                                 alignment: Alignment(0, 0),
@@ -111,36 +108,6 @@ class InvestListState extends State<InvestListView> {
                                   style: AppTheme.titleTextSmallLighter,
                                 ),
                               )),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment(0, 0),
-                            child: DropdownButton<String>(
-                              dropdownColor: ColorTheme.white,
-                              value: moneyValue,
-                              iconSize: 18,
-                              underline: Container(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  moneyValue = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'ALL',
-                                'USD',
-                                'EUR',
-                                'CNY',
-                                'JPY'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          flex: 1,
                         ),
                         Expanded(
                           child: Container(
@@ -151,50 +118,16 @@ class InvestListState extends State<InvestListView> {
                               value: countryValue,
                               iconSize: 18,
                               onChanged: (String newValue) {
-                                if (newValue == 'ALL') {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
-                                        current.add(element);
-                                      });
-                                    }
-                                  });
-                                } else if (newValue == 'CURRENT') {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
-                                        if (element.status == 'CURRENT') {
-                                          current.add(element);
-                                        }
-                                      });
-                                    }
-                                  });
-                                } else {
-                                  setState(() {
-                                    current.clear();
-                                    print(current.length);
-                                    countryValue = newValue;
-                                    if (investList != null) {
-                                      investList.forEach((element) {
-                                        if (element.status == 'LATE') {
-                                          current.add(element);
-                                        }
-                                      });
-                                      print(current.length);
-                                    }
-                                  });
-                                }
+                                setState(() {
+                                  countryValue = newValue;
+                                });
+                                chooseDate(date, countryValue);
                               },
                               items: <String>[
                                 'ALL',
                                 'CURRENT',
-                                'LATE'
+                                'LATE',
+                                'FINISHED'
                               ].map<DropdownMenuItem<String>>((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
@@ -203,7 +136,6 @@ class InvestListState extends State<InvestListView> {
                               }).toList(),
                             ),
                           ),
-                          flex: 1,
                         ),
                       ],
                     )
@@ -226,20 +158,70 @@ class InvestListState extends State<InvestListView> {
                                         InvestDetail(investdetail: invest),
                                   ));
                             },
-                            child: InvestList(
-                              title1: S.current.Amount,
-                              title2: NumberFormat(" ###,###.0#", "en_US")
-                                      .format(invest.amount) +
-                                  invest.currency,
-                              title3: S.current.Date,
-                              title4: invest.date,
-                              title5: S.current.Interest,
-                              title6: NumberFormat(" ###,###.0#", "en_US")
-                                      .format(invest.interest) +
-                                  invest.currency,
-                              title7: S.current.Status,
-                              title8: invest.status,
-                            ))));
+                            child: Container(
+                                color: ColorTheme.white,
+                                width: MediaQuery.of(context).size.width,
+                                child: Padding(
+                                    padding: AppTheme.inboxpadding,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Container(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 6),
+                                                child: Text(
+                                                  // invest.code +
+                                                  //     ' | ' +
+                                                  NumberFormat("###,###.0#",
+                                                              "en_US")
+                                                          .format(
+                                                              invest.amount) +
+                                                      ' ' +
+                                                      invest.currency,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 18,
+                                                    color: ColorTheme
+                                                        .greydoubledarker,
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 6),
+                                                child: Text(
+                                                  invest.date +
+                                                      ' | ' +
+                                                      invest.endDate,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 1,
+                                                  style: AppTheme.subtitleText,
+                                                ),
+                                              ),
+                                            ]),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                              top: 6, bottom: 6),
+                                          child: Text(
+                                            invest.status,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                              color: (invest.status == 'LATE')
+                                                  ? ColorTheme.cantaloupedarker
+                                                  : ColorTheme.neogreendarker,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ))))));
               },
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(
@@ -254,16 +236,22 @@ class InvestListState extends State<InvestListView> {
     );
   }
 
-  Future _loadMore() async {
-    while (true) {
+  chooseDate(_date, _status) {
+    setState(() {
+      current.clear();
       if (investList != null) {
-        setState(() {
-          investList.forEach((element) {
-            current.add(element);
-          });
+        investList.forEach((element) {
+          if (element.date.substring(0, 7) == _date) {
+            if (_status == 'ALL') {
+              current.add(element);
+            } else {
+              if (element.status == _status) {
+                current.add(element);
+              }
+            }
+          }
         });
-        break;
       }
-    }
+    });
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
+import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
@@ -16,7 +17,7 @@ class BillListView extends StatefulWidget {
 }
 
 class BillListState extends State<BillListView> {
-  List<Map> current = List<Map>();
+  List<Bill> current = List<Bill>();
   List<Map> later = List<Map>();
   List<Map> finished = List<Map>();
   List<Bill> billList;
@@ -24,6 +25,9 @@ class BillListState extends State<BillListView> {
   String moneyValue = 'ALL';
   String termValue = 'ALL';
   String countryValue = 'ALL';
+  String currencyValue = 'EUR';
+  var items = List<DropdownMenuItem<String>>();
+  bool mark = true;
 
   @override
   void initState() {
@@ -33,11 +37,26 @@ class BillListState extends State<BillListView> {
   @override
   Widget build(BuildContext context) {
     billList = Provider.of<ProviderData>(context).billList;
-    // if (billList != null) {
-    //   billList.forEach((element) {
-    //     current.add(element);
-    //   });
-    // }
+    List<CurrencyData> currencyData =
+        Provider.of<ProviderData>(context).currencyData;
+    if (billList != null) {
+      if (mark) {
+        billList.forEach((element) {
+          current.add(element);
+        });
+        mark = false;
+      }
+    }
+
+    if (currencyData != null && items.length == 0) {
+      for (var i = 0; i < currencyData.length; i++) {
+        items.add(DropdownMenuItem(
+            child: Text(
+              currencyData[i].short,
+            ),
+            value: currencyData[i].short));
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -68,7 +87,6 @@ class BillListState extends State<BillListView> {
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
-                          flex: 1,
                         ),
                         Expanded(
                           child: Text(
@@ -76,15 +94,6 @@ class BillListState extends State<BillListView> {
                             textAlign: TextAlign.center,
                             style: AppTheme.subtitleText,
                           ),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Text(
-                            S.current.Use,
-                            textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
-                          ),
-                          flex: 1,
                         ),
                       ],
                     ),
@@ -105,6 +114,7 @@ class BillListState extends State<BillListView> {
                                         .format(result)
                                         .toString();
                                   });
+                                  chooseDate(date, currencyValue);
                                 }
                                 print('$result');
                               },
@@ -115,59 +125,23 @@ class BillListState extends State<BillListView> {
                                   style: AppTheme.titleTextSmallLighter,
                                 ),
                               )),
-                          flex: 1,
                         ),
                         Expanded(
                           child: Container(
-                            alignment: Alignment(0, 0),
-                            child: DropdownButton<String>(
-                              dropdownColor: ColorTheme.white,
-                              value: moneyValue,
-                              iconSize: 18,
-                              underline: Container(),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  moneyValue = newValue;
-                                });
-                              },
-                              items: <String>[
-                                'ALL',
-                                'USD',
-                                'EUR',
-                                'CNY',
-                                'JPY'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          flex: 1,
-                        ),
-                        Expanded(
-                          child: Container(
-                            alignment: Alignment(0, 0),
-                            child: DropdownButton<String>(
-                              dropdownColor: ColorTheme.white,
-                              underline: Container(),
-                              value: countryValue,
-                              iconSize: 18,
-                              onChanged: (String newValue) {},
-                              items: <String>[
-                                'ALL',
-                                'CURRENT',
-                                'LATE'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                          flex: 1,
+                              alignment: Alignment(0, 0),
+                              child: DropdownButton<String>(
+                                dropdownColor: ColorTheme.white,
+                                iconSize: 16,
+                                underline: Container(),
+                                value: currencyValue,
+                                onChanged: (String newValue) async {
+                                  setState(() {
+                                    currencyValue = newValue;
+                                  });
+                                  chooseDate(date, newValue.toString());
+                                },
+                                items: items,
+                              )),
                         ),
                       ],
                     )
@@ -293,5 +267,20 @@ class BillListState extends State<BillListView> {
         ],
       ),
     );
+  }
+
+  chooseDate(_date, _currency) {
+    setState(() {
+      current.clear();
+      if (billList != null) {
+        billList.forEach((element) {
+          if (element.date.substring(0, 7) == _date) {
+            if (element.currency == _currency) {
+              current.add(element);
+            }
+          }
+        });
+      }
+    });
   }
 }
