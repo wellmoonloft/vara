@@ -64,6 +64,7 @@ class _SplashPageState extends State<SplashPage> {
     await providerData.getAssetList();
     await providerData.getinvestList();
     await providerData.getBillList();
+    await providerData.getPerson();
     Settings settings = await dbHelper.getSettings();
     currencyTilte = settings.currency;
     String language = settings.language;

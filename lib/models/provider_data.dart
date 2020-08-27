@@ -10,6 +10,7 @@ class ProviderData extends ChangeNotifier {
   List<Bill> billList;
   List<CurrencyData> currencyData = CurrencyData.currencyList;
   CurrencyData currency;
+  Person person;
 
   setCurrencyData(eurData, currencyTilte) {
     currencyData.forEach((element) {
@@ -22,6 +23,16 @@ class ProviderData extends ChangeNotifier {
         currency = element;
       }
     });
+    notifyListeners();
+  }
+
+  Future getPerson() async {
+    person = await DBHelper().getPerson();
+    notifyListeners();
+  }
+
+  Future setPerson(Person _person) async {
+    await DBHelper().updatePerson(_person);
     notifyListeners();
   }
 

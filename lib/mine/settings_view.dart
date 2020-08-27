@@ -11,6 +11,7 @@ import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/utils/db_helper.dart';
 import 'currency_view.dart';
 import 'language_view.dart';
+import 'mine_view.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key key}) : super(key: key);
@@ -56,31 +57,40 @@ class _SettingsViewState extends State<SettingsView> {
               OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,
-                  child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MineView()));
+                      },
+                      child: Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              FaIcon(
-                                FontAwesomeIcons.userAlt,
-                                color: ColorTheme.greydarker,
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.userAlt,
+                                    color: ColorTheme.greydarker,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    S.current.UserName,
+                                    style: AppTheme.titleTextSmallLighter,
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                S.current.UserName,
-                                style: AppTheme.titleTextSmallLighter,
-                              ),
-                            ],
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text('data'),
-                          )
-                        ]),
-                  )),
+                              Consumer<ProviderData>(
+                                  builder: (context, providerdata, child) {
+                                return Text(
+                                  providerdata.person.firstname,
+                                );
+                              }),
+                            ]),
+                      ))),
               OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
@@ -59,12 +61,15 @@ class MineHome extends StatelessWidget {
                         FontAwesomeIcons.userAlt,
                         color: ColorTheme.grey,
                       )),
-                  Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: Text(
-                        'Basic Account',
-                        style: AppTheme.toptitleText,
-                      ))
+                  Consumer<ProviderData>(
+                      builder: (context, providerdata, child) {
+                    return Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: Text(
+                          providerdata.person.firstname,
+                          style: AppTheme.toptitleText,
+                        ));
+                  })
                 ])),
             background: Container(
               decoration: BoxDecoration(

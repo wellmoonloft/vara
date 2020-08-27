@@ -148,9 +148,9 @@ class BillListState extends State<BillListView> {
                   ])),
           Flexible(
             child: ListView.separated(
-              itemCount: billList.length,
+              itemCount: current.length,
               itemBuilder: (BuildContext context, int index) {
-                var bill = billList[index];
+                var bill = current[index];
                 return Dismissible(
                     key: UniqueKey(),
                     direction: DismissDirection.endToStart,

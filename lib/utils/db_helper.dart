@@ -41,7 +41,13 @@ class DBHelper {
     Settings settings = Settings();
     settings.currency = 'EUR';
     settings.language = 'EN';
-    db.insert('settings', settings.toJson());
+    await db.insert('settings', settings.toJson());
+    Person person = Person();
+    person.age = 25;
+    person.firstname = 'Vara';
+    person.lastname = 'wellmoonloft';
+    person.sex = 1;
+    await db.insert('person', person.toJson());
   }
 
   Future<Settings> getSettings() async {
@@ -295,7 +301,7 @@ class DBHelper {
     );
   }
 
-  Future<int> update(Person person) async {
+  Future<int> updatePerson(Person person) async {
     var dbClient = await db;
     return await dbClient.update(
       'person',
@@ -305,12 +311,11 @@ class DBHelper {
     );
   }
 
-  Future<List<Person>> getPerson() async {
+  Future<Person> getPerson() async {
     var dbClient = await db;
-    var result = await dbClient.query('asset',
+    var result = await dbClient.query('person',
         columns: ['id', 'firstname', 'midname', 'lastname', 'age', 'sex']);
-    List<Person> person = [];
-    result.forEach((element) => person.add(Person.fromJson(element)));
+    Person person = Person.fromJson(result.last);
     return person;
   }
 
