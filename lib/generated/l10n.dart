@@ -463,6 +463,106 @@ class S {
     );
   }
 
+  /// `First Name`
+  String get FirstName {
+    return Intl.message(
+      'First Name',
+      name: 'FirstName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mid Name`
+  String get MidName {
+    return Intl.message(
+      'Mid Name',
+      name: 'MidName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Last Name`
+  String get LastName {
+    return Intl.message(
+      'Last Name',
+      name: 'LastName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Age`
+  String get Age {
+    return Intl.message(
+      'Age',
+      name: 'Age',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sex`
+  String get Sex {
+    return Intl.message(
+      'Sex',
+      name: 'Sex',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Male`
+  String get Male {
+    return Intl.message(
+      'Male',
+      name: 'Male',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Famale`
+  String get Famale {
+    return Intl.message(
+      'Famale',
+      name: 'Famale',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Storage`
+  String get Storage {
+    return Intl.message(
+      'Storage',
+      name: 'Storage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Path`
+  String get Path {
+    return Intl.message(
+      'Path',
+      name: 'Path',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save on Cloud`
+  String get SaveOnCloud {
+    return Intl.message(
+      'Save on Cloud',
+      name: 'SaveOnCloud',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get Save {
     return Intl.message(

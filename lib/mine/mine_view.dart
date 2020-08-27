@@ -33,7 +33,8 @@ class _MineViewState extends State<MineView> {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Currency, style: AppTheme.titleText),
+              title:
+                  Text(S.current.AccountInformation, style: AppTheme.titleText),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,
@@ -49,7 +50,7 @@ class _MineViewState extends State<MineView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'First Name:',
+                          S.current.FirstName,
                           style: AppTheme.titleTextSmallLighter,
                         ),
                         Text(
@@ -69,7 +70,7 @@ class _MineViewState extends State<MineView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Mid Name:',
+                              S.current.MidName,
                               style: AppTheme.titleTextSmallLighter,
                             ),
                             Text(
@@ -85,7 +86,7 @@ class _MineViewState extends State<MineView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Last Name:',
+                          S.current.LastName,
                           style: AppTheme.titleTextSmallLighter,
                         ),
                         Text(
@@ -101,7 +102,7 @@ class _MineViewState extends State<MineView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Age:',
+                          S.current.Age,
                           style: AppTheme.titleTextSmallLighter,
                         ),
                         Text(
@@ -117,11 +118,11 @@ class _MineViewState extends State<MineView> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Sex:',
+                          S.current.Sex,
                           style: AppTheme.titleTextSmallLighter,
                         ),
                         Text(
-                          person.sex == 0 ? 'girl' : 'boy',
+                          person.sex == 0 ? S.current.Famale : S.current.Male,
                           style: AppTheme.titleTextSmallLighter,
                         )
                       ],

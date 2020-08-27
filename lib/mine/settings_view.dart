@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
@@ -21,6 +22,8 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
+  bool _value = true;
+  String _path = 'ss';
   @override
   void initState() {
     super.initState();
@@ -45,16 +48,16 @@ class _SettingsViewState extends State<SettingsView> {
           ),
           body: ListView(
             children: [
-              Padding(
-                  padding: AppTheme.outboxpadding,
-                  child: Container(
-                    child: Text(
-                      S.current.AccountInformation,
-                      textAlign: TextAlign.start,
-                      style: AppTheme.titleTextSmallLighter,
-                    ),
-                  )),
-              OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
+              // Padding(
+              //     padding: AppTheme.outboxpadding,
+              //     child: Container(
+              //       child: Text(
+              //         S.current.AccountInformation,
+              //         textAlign: TextAlign.start,
+              //         style: AppTheme.titleTextSmallLighter,
+              //       ),
+              //     )),
+              //OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,
                   child: InkWell(
@@ -78,7 +81,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     width: 10,
                                   ),
                                   Text(
-                                    S.current.UserName,
+                                    S.current.AccountInformation,
                                     style: AppTheme.titleTextSmallLighter,
                                   ),
                                 ],
@@ -216,7 +219,77 @@ class _SettingsViewState extends State<SettingsView> {
                                 color: ColorTheme.greydarker,
                               )
                             ])),
-                  ))
+                  )),
+              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 0),
+              Padding(
+                  padding: AppTheme.inboxpadding,
+                  child: Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.database,
+                                color: ColorTheme.greydarker,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                S.current.SaveOnCloud,
+                                style: AppTheme.titleTextSmallLighter,
+                              ),
+                            ],
+                          ),
+                          Switch(
+                            value: _value,
+                            onChanged: (newValue) {
+                              setState(() {
+                                _value = newValue;
+                              });
+                            },
+                            activeColor: Colors.red,
+                            activeTrackColor: Colors.red,
+                            inactiveThumbColor: Colors.green,
+                            inactiveTrackColor: Colors.green,
+                          ),
+                        ]),
+                  )),
+              OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
+              _value
+                  ? Container()
+                  : Padding(
+                      padding: AppTheme.inboxpadding,
+                      child: Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 2,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.locationArrow,
+                                    size: 18,
+                                    color: ColorTheme.greydarker,
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text(
+                                    S.current.Path,
+                                    style: AppTheme.titleTextSmallLighter,
+                                  ),
+                                ],
+                              ),
+                              Text(_path)
+                            ]),
+                      )),
+              _value
+                  ? Container()
+                  : OneHeightBorder(top: 15, left: 16, right: 16, bottom: 0),
             ],
           )),
     );

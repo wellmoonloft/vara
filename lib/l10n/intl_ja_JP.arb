@@ -43,7 +43,17 @@
     "UserName": "ユーザー名",
     "Language": "言語",
     "Use": "使用する",
-
+    "FirstName":"名前",
+    "MidName":"ミドルネーム",
+    "LastName":"苗字",
+    "Age":"年齢",
+    "Sex":"性別",
+    "Male":"男性",
+    "Famale":"女性",
+    "Storage":"ストレージ",
+    "Path":"パス",
+    "SaveOnCloud":"クラウドに保存",
+    
     "Save": "保存する",
     "Alert": "アラート",
     "AlertNote": "カテゴリを選択し、金額とメモを入力してください。",
