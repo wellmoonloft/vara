@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -115,4 +117,21 @@ class CategroyData {
 
   CategroyData(
       {this.iconList, this.categroyTitle, this.color, this.categroyValue});
+}
+
+class MayStoreage {
+  int isCloud;
+  String path;
+
+  MayStoreage({this.isCloud, this.path});
+  MayStoreage.fromJson(Map<String, dynamic> json) {
+    isCloud = json['isCloud'];
+    path = json['path'];
+  }
+  String toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['isCloud'] = this.isCloud;
+    map['path'] = this.path;
+    return json.encode(map);
+  }
 }

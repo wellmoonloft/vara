@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io' as io;
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
+import 'package:vara/models/default_data.dart';
+import 'package:vara/models/provider_data.dart';
 
 Database _db;
 
 class DBHelper {
+  String dir;
   Future<Database> get db async {
     if (_db != null) {
       return _db;

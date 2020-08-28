@@ -5,6 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
+import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
@@ -242,56 +243,94 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                             ],
                           ),
-                          Switch(
-                            value: _value,
-                            onChanged: (newValue) {
-                              setState(() {
-                                _value = newValue;
-                              });
+                          Consumer<ProviderData>(
+                            builder: (context, providerdata, child) {
+                              if (providerdata.mayStoreage != null) {
+                                if (providerdata.mayStoreage.isCloud == 0) {
+                                  _value = true;
+                                } else {
+                                  _value = false;
+                                }
+                              }
+                              return Switch(
+                                value: _value,
+                                onChanged: (newValue) async {
+                                  print(newValue);
+                                  MayStoreage _storeage = MayStoreage();
+                                  if (newValue) {
+                                    _storeage.isCloud = 0;
+                                    _value = true;
+                                  } else {
+                                    _storeage.isCloud = 1;
+                                    _value = false;
+                                  }
+                                  _storeage.path =
+                                      (await getApplicationDocumentsDirectory())
+                                          .path;
+
+                                  providerdata.setMayStoreage(_storeage);
+                                },
+                                activeColor: Colors.red,
+                                activeTrackColor: Colors.red,
+                                inactiveThumbColor: Colors.green,
+                                inactiveTrackColor: Colors.green,
+                              );
                             },
-                            activeColor: Colors.red,
-                            activeTrackColor: Colors.red,
-                            inactiveThumbColor: Colors.green,
-                            inactiveTrackColor: Colors.green,
-                          ),
+                          )
                         ]),
                   )),
               OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
-              _value
-                  ? Container()
-                  : Padding(
-                      padding: AppTheme.inboxpadding,
-                      child: Container(
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Padding(
+                  padding: AppTheme.inboxpadding,
+                  child: Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
                             children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  FaIcon(
-                                    FontAwesomeIcons.locationArrow,
-                                    size: 18,
-                                    color: ColorTheme.greydarker,
-                                  ),
-                                  SizedBox(
-                                    width: 16,
-                                  ),
-                                  Text(
-                                    S.current.Path,
-                                    style: AppTheme.titleTextSmallLighter,
-                                  ),
-                                ],
+                              SizedBox(
+                                width: 2,
                               ),
-                              Text(_path)
-                            ]),
-                      )),
-              _value
-                  ? Container()
-                  : OneHeightBorder(top: 15, left: 16, right: 16, bottom: 0),
+                              FaIcon(
+                                FontAwesomeIcons.locationArrow,
+                                size: 18,
+                                color: ColorTheme.greydarker,
+                              ),
+                              SizedBox(
+                                width: 16,
+                              ),
+                              Text(
+                                S.current.Path,
+                                style: AppTheme.titleTextSmallLighter,
+                              ),
+                            ],
+                          ),
+                          Consumer<ProviderData>(
+                              builder: (context, providerdata, child) {
+                            return Container(
+                                width: 200,
+                                child: Text(
+                                  providerdata.mayStoreage.path,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 20,
+                                ));
+                          })
+                        ]),
+                  )),
+              OneHeightBorder(top: 15, left: 16, right: 16, bottom: 0),
             ],
           )),
     );
+  }
+
+  setData() {
+    MayStoreage mayStoreage = Provider.of<ProviderData>(context).mayStoreage;
+    if (mayStoreage != null) {
+      if (mayStoreage.isCloud == 0) {
+        _value = true;
+      } else {
+        _value = false;
+      }
+    }
   }
 }

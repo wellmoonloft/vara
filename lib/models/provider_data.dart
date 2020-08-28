@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:vara/utils/db_helper.dart';
-
+import 'dart:io';
 import 'db_models.dart';
+import 'dart:convert';
 import 'default_data.dart';
 
 class ProviderData extends ChangeNotifier {
@@ -11,6 +13,34 @@ class ProviderData extends ChangeNotifier {
   List<CurrencyData> currencyData = CurrencyData.currencyList;
   CurrencyData currency;
   Person person;
+  MayStoreage mayStoreage;
+
+  Future<File> _getLocalFile() async {
+    String _dir = (await getApplicationDocumentsDirectory()).path;
+    return new File('$_dir/storeage.json');
+  }
+
+  Future<MayStoreage> getMayStoreage() async {
+    try {
+      File file = await _getLocalFile();
+      String contents = await file.readAsString();
+      mayStoreage = MayStoreage.fromJson(json.decode(contents));
+      return mayStoreage;
+    } on FileSystemException {
+      MayStoreage storeage = MayStoreage();
+      storeage.isCloud = 0;
+      storeage.path = (await getApplicationDocumentsDirectory()).path;
+      await setMayStoreage(storeage);
+      return storeage;
+    }
+  }
+
+  Future setMayStoreage(MayStoreage _storeage) async {
+    mayStoreage.isCloud = _storeage.isCloud;
+    mayStoreage.path = _storeage.path;
+    await (await _getLocalFile()).writeAsString(mayStoreage.toJson());
+    notifyListeners();
+  }
 
   setCurrencyData(eurData, currencyTilte) {
     currencyData.forEach((element) {

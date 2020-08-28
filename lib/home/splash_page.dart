@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'dart:convert';
@@ -49,21 +48,12 @@ class _SplashPageState extends State<SplashPage> {
   _navigatorAfterGetData() async {
     print("----get data start------");
     await _doDatabase();
-    await _getLocalFile();
-
     currency = await _getNetData('https://api.ratesapi.io/api/latest');
     var providerData = Provider.of<ProviderData>(context, listen: false);
     providerData.setCurrencyData(currency, currencyTilte);
-
     print("----get data done------");
     Navigator.of(context).pushReplacement(
         new MaterialPageRoute(builder: (context) => HomeScreen()));
-  }
-
-  Future<File> _getLocalFile() async {
-    // get the path to the document directory.
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    return new File('$dir/counter.txt');
   }
 
   _doDatabase() async {
@@ -73,6 +63,7 @@ class _SplashPageState extends State<SplashPage> {
     await providerData.getinvestList();
     await providerData.getBillList();
     await providerData.getPerson();
+    await providerData.getMayStoreage();
     Settings settings = await dbHelper.getSettings();
     currencyTilte = settings.currency;
     String language = settings.language;
