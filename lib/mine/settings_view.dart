@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,7 +25,6 @@ class SettingsView extends StatefulWidget {
 
 class _SettingsViewState extends State<SettingsView> {
   bool _value = true;
-  String _path = 'ss';
   @override
   void initState() {
     super.initState();
@@ -260,13 +260,26 @@ class _SettingsViewState extends State<SettingsView> {
                                   if (newValue) {
                                     _storeage.isCloud = 0;
                                     _value = true;
+                                    _storeage.path =
+                                        (await getApplicationDocumentsDirectory())
+                                            .path;
                                   } else {
-                                    _storeage.isCloud = 1;
-                                    _value = false;
+                                    try {
+                                      var _path =
+                                          await FilePicker.getDirectoryPath();
+                                      if (_path != null) {
+                                        print(_path);
+                                        _storeage.isCloud = 1;
+                                        _value = false;
+                                        _storeage.path =
+                                            (await getApplicationDocumentsDirectory())
+                                                .path;
+                                      }
+                                    } on PlatformException catch (e) {
+                                      print("Unsupported operation" +
+                                          e.toString());
+                                    }
                                   }
-                                  _storeage.path =
-                                      (await getApplicationDocumentsDirectory())
-                                          .path;
 
                                   providerdata.setMayStoreage(_storeage);
                                 },

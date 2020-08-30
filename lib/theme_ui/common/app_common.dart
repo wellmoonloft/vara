@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../app_theme.dart';
 import '../color_theme.dart';
@@ -255,17 +256,27 @@ class AppBarUI extends StatelessWidget {
                       Padding(
                         padding: AppTheme.outboxpadding,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Expanded(
-                              child: Container(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  title,
-                                  textAlign: TextAlign.left,
-                                  style: AppTheme.homeTitleText,
-                                ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                title,
+                                textAlign: TextAlign.left,
+                                style: AppTheme.homeTitleText,
                               ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                  onTap: () {
+                                    print('object');
+                                  },
+                                  child: FaIcon(
+                                    FontAwesomeIcons.infoCircle,
+                                    size: 16,
+                                    color: ColorTheme.greytripledarker,
+                                  )),
                             ),
                           ],
                         ),

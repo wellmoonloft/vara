@@ -10,11 +10,11 @@ import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
-class AssetChartView extends StatelessWidget {
+class AssetLineChartView extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
 
-  const AssetChartView({Key key, this.animationController, this.animation})
+  const AssetLineChartView({Key key, this.animationController, this.animation})
       : super(key: key);
 
   @override
@@ -31,8 +31,7 @@ class AssetChartView extends StatelessWidget {
                           0.0, 30 * (1.0 - animation.value), 0.0),
                       child: Container(
                           height: 330,
-                          child: Container(
-                              child: Stack(
+                          child: Stack(
                             overflow: Overflow.visible,
                             children: <Widget>[
                               charts.TimeSeriesChart(
@@ -81,7 +80,7 @@ class AssetChartView extends StatelessWidget {
                               ),
                               ShowDetail()
                             ],
-                          )))));
+                          ))));
             }));
   }
 

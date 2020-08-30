@@ -57,13 +57,15 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   _doDatabase() async {
-    DBHelper dbHelper = DBHelper();
     var providerData = Provider.of<ProviderData>(context, listen: false);
+    await providerData.getMayStoreage();
     await providerData.getAssetList();
     await providerData.getinvestList();
     await providerData.getBillList();
     await providerData.getPerson();
-    await providerData.getMayStoreage();
+
+    DBHelper dbHelper = DBHelper();
+    //dbHelper.initDatabase();
     Settings settings = await dbHelper.getSettings();
     currencyTilte = settings.currency;
     String language = settings.language;

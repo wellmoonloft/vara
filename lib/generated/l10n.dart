@@ -133,10 +133,10 @@ class S {
     );
   }
 
-  /// `Late Scatter Plot`
+  /// `Scatter Chart of Overdue`
   String get LateScatterPlot {
     return Intl.message(
-      'Late Scatter Plot',
+      'Scatter Chart of Overdue',
       name: 'LateScatterPlot',
       desc: '',
       args: [],

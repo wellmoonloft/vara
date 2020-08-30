@@ -90,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Investment" : MessageLookupByLibrary.simpleMessage("Investment"),
     "Language" : MessageLookupByLibrary.simpleMessage("Language"),
     "LastName" : MessageLookupByLibrary.simpleMessage("Last Name"),
-    "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Late Scatter Plot"),
+    "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Scatter Chart of Overdue"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("Lifestyle"),
     "Loan" : MessageLookupByLibrary.simpleMessage("Loan"),
     "Long" : MessageLookupByLibrary.simpleMessage("Long"),

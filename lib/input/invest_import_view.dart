@@ -20,8 +20,6 @@ class InvestImportView extends StatefulWidget {
 
 class _ImportViewState extends State<InvestImportView> {
   String _path;
-  String _extension;
-  FileType _pickingType = FileType.any;
   List<dynamic> dropdownmenu = List(10);
   List right = [
     'Invest Code',
@@ -108,11 +106,7 @@ class _ImportViewState extends State<InvestImportView> {
 
   _openFileExplorer() async {
     try {
-      _path = await FilePicker.getFilePath(
-          type: _pickingType,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
+      _path = await FilePicker.getFilePath();
       if (_path == null) {
         Navigator.pop(context);
       } else {

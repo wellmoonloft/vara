@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vara/asset/asset_chart.dart';
+import 'package:vara/asset/asset_line_chart.dart';
+import 'package:vara/asset/asset_pie_chart.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'account_view.dart';
 import 'asset_summary.dart';
 import 'chart_title.dart';
 
@@ -56,7 +56,7 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
     ));
 
     listViews.add(
-      AssetChartView(
+      AssetLineChartView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:
@@ -66,7 +66,7 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
     );
 
     listViews.add(
-      AccountView(
+      AssetPieChartView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:

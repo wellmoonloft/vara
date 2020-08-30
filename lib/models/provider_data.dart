@@ -13,7 +13,7 @@ class ProviderData extends ChangeNotifier {
   List<CurrencyData> currencyData = CurrencyData.currencyList;
   CurrencyData currency;
   Person person;
-  MayStoreage mayStoreage;
+  MayStoreage mayStoreage = MayStoreage();
 
   Future<File> _getLocalFile() async {
     String _dir = (await getApplicationDocumentsDirectory()).path;
@@ -25,12 +25,14 @@ class ProviderData extends ChangeNotifier {
       File file = await _getLocalFile();
       String contents = await file.readAsString();
       mayStoreage = MayStoreage.fromJson(json.decode(contents));
+      print(mayStoreage.path);
       return mayStoreage;
     } on FileSystemException {
       MayStoreage storeage = MayStoreage();
       storeage.isCloud = 0;
       storeage.path = (await getApplicationDocumentsDirectory()).path;
       await setMayStoreage(storeage);
+      print(storeage.path);
       return storeage;
     }
   }

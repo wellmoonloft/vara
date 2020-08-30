@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TabIconData {
+  IconData imagePath;
+  IconData selectedImagePath;
+  bool isSelected;
+  int index;
   TabIconData({
     this.imagePath,
     this.index = 0,
@@ -11,11 +15,6 @@ class TabIconData {
     this.isSelected = false,
     this.animationController,
   });
-
-  IconData imagePath;
-  IconData selectedImagePath;
-  bool isSelected;
-  int index;
 
   AnimationController animationController;
 

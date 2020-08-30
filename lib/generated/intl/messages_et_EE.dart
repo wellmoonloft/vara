@@ -90,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Investment" : MessageLookupByLibrary.simpleMessage("Investeerimine"),
     "Language" : MessageLookupByLibrary.simpleMessage("Keel"),
     "LastName" : MessageLookupByLibrary.simpleMessage("Perekonnanimi"),
-    "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Hiline hajumine"),
+    "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Tähtaja ületanud hajutustabel"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("Eluviis"),
     "Loan" : MessageLookupByLibrary.simpleMessage("Laen"),
     "Long" : MessageLookupByLibrary.simpleMessage("Pikk"),
