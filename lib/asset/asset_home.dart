@@ -8,8 +8,9 @@ import 'asset_summary.dart';
 import 'chart_title.dart';
 
 class AssetHome extends StatefulWidget {
-  const AssetHome({Key key, this.animationController}) : super(key: key);
   final AnimationController animationController;
+  const AssetHome({Key key, this.animationController}) : super(key: key);
+
   @override
   _AssetHomeState createState() => _AssetHomeState();
 }
