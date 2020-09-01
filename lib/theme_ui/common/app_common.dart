@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/mine/settings_view.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../app_theme.dart';
 import '../color_theme.dart';
@@ -226,6 +229,7 @@ class AppBarUI extends StatelessWidget {
   final AnimationController animationController;
   final Animation animation;
   final double opacity;
+  final String settings;
 
   const AppBarUI(
       {Key key,
@@ -233,7 +237,8 @@ class AppBarUI extends StatelessWidget {
       this.navigator,
       this.animationController,
       this.animation,
-      this.opacity})
+      this.opacity,
+      this.settings})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -256,7 +261,7 @@ class AppBarUI extends StatelessWidget {
                       Padding(
                         padding: AppTheme.outboxpadding,
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Container(
                               padding: const EdgeInsets.all(8.0),
@@ -266,21 +271,127 @@ class AppBarUI extends StatelessWidget {
                                 style: AppTheme.homeTitleText,
                               ),
                             ),
+                            settings == 'settings'
+                                ? Container(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: InkWell(
+                                        onTap: () {
+                                          Navigator.push(context,
+                                              MaterialPageRoute(builder:
+                                                  (BuildContext context) {
+                                            return SettingsView();
+                                          })).then((data) {
+                                            if (data != null) {}
+                                          });
+                                        },
+                                        child: FaIcon(
+                                          FontAwesomeIcons.cog,
+                                          size: 16,
+                                          color: ColorTheme.greytripledarker,
+                                        )),
+                                  )
+                                : Container(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        )
+      ],
+    );
+  }
+}
+
+class SettingsAppBarUI extends StatelessWidget {
+  final String title;
+  final String navigator;
+  final AnimationController animationController;
+  final Animation animation;
+  final double opacity;
+  final String settings;
+
+  const SettingsAppBarUI(
+      {Key key,
+      this.title,
+      this.navigator,
+      this.animationController,
+      this.animation,
+      this.opacity,
+      this.settings})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        AnimatedBuilder(
+          animation: animation,
+          builder: (BuildContext context, Widget child) {
+            return FadeTransition(
+              opacity: animation,
+              child: Transform(
+                transform: Matrix4.translationValues(
+                    0.0, 30 * (1.0 - animation.value), 0.0),
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: MediaQuery.of(context).padding.top,
+                      ),
+                      Padding(
+                        padding: AppTheme.outboxpadding,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
                             Container(
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                   onTap: () {
-                                    print('object');
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return SettingsView();
+                                    })).then((data) {
+                                      if (data != null) {}
+                                    });
                                   },
                                   child: FaIcon(
-                                    FontAwesomeIcons.infoCircle,
+                                    FontAwesomeIcons.cog,
                                     size: 16,
-                                    color: ColorTheme.greytripledarker,
+                                    color: ColorTheme.greyquadradarker,
                                   )),
                             ),
                           ],
                         ),
-                      )
+                      ),
+                      Column(children: <Widget>[
+                        Container(
+                            height: 65,
+                            width: 65,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: ColorTheme.background,
+                              shape: BoxShape.circle,
+                            ),
+                            child: FaIcon(
+                              FontAwesomeIcons.userAlt,
+                              color: ColorTheme.grey,
+                            )),
+                        Consumer<ProviderData>(
+                            builder: (context, providerdata, child) {
+                          return Padding(
+                              padding: EdgeInsets.only(top: 8),
+                              child: Text(
+                                providerdata.person.firstname,
+                                style: AppTheme.titleTextSmallLighterS,
+                              ));
+                        })
+                      ]),
+                      SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 ),
