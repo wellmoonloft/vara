@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';
 import 'dart:convert';
-import 'package:path/path.dart';
+//import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/default_data.dart';
@@ -35,14 +35,14 @@ class DBHelper {
 
   initDatabase() async {
     await getMayStoreage();
-    String path = join(_mayStoreage.path + '/', 'VaraDB', 'Vara.db');
+    // String path = join(_mayStoreage.path + '/', 'VaraDB', 'Vara.db');
+    String path = _mayStoreage.path + '/VaraDB/Vara.db';
     final db = await openDatabase(path, version: 1, onCreate: _onCreate);
     debugPrint(path);
     return db;
   }
 
   _onCreate(Database db, int version) async {
-    //Create Table in first time
     await db.execute(
         'CREATE TABLE person (id INTEGER PRIMARY KEY, firstname TEXT, midname TEXT, lastname TEXT, age INTEGER, sex INTEGER)');
     await db.execute(

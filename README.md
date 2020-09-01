@@ -32,14 +32,13 @@ Therefore I need an APP like this:
 
 ## Dependents
 
-- [charts_flutter: ^0.9.0](https://pub.dev/packages/charts_flutter) Material Design data visualization library written natively in Dart.
 - [font_awesome_flutter: ^8.8.1](https://pub.dev/packages/font_awesome_flutter) The Font Awesome Icon pack available as set of Flutter Icons.
 - [intl: ^0.16.1](https://pub.dev/packages/intl) This package provides internationalization and localization facilities, including message translation, plurals and genders, date/number formatting and parsing, and bidirectional text.
+- [charts_flutter: ^0.9.0](https://pub.dev/packages/charts_flutter) Material Design data visualization library written natively in Dart.
 - [sqflite: ^1.3.1](https://pub.dev/packages/sqflite) SQLite plugin for Flutter.
-- [path: ^1.7.0](https://pub.dev/packages/path) A comprehensive, cross-platform path manipulation library for Dart.
-- [path_provider: ^1.6.11](https://pub.dev/packages/path_provider) A Flutter plugin for finding commonly used locations on the filesystem. 
-- [file_picker: ^1.13.2](https://pub.dev/packages/file_picker) A package that allows you to use a native file explorer to pick single or multiple absolute file paths, with extensions filtering support.
-- [excel: ^1.1.4](https://pub.dev/packages/excel) Excel is a flutter and dart library for creating and updating excel-sheets for XLSX files.
+- [path_provider: ^1.6.14](https://pub.dev/packages/path_provider) A Flutter plugin for finding commonly used locations on the filesystem. 
+- [file_picker: ^1.13.3](https://pub.dev/packages/file_picker) A package that allows you to use a native file explorer to pick single or multiple absolute file paths, with extensions filtering support.
+- [excel: ^1.1.5](https://pub.dev/packages/excel) Excel is a flutter and dart library for creating and updating excel-sheets for XLSX files.
 - [provider: ^4.3.2](https://pub.dev/packages/provider) A wrapper around InheritedWidget to make them easier to use and more reusable.
    
 ## Progress

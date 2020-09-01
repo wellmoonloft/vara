@@ -8,27 +8,15 @@ import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
-class CurrencyView extends StatefulWidget {
-  const CurrencyView({Key key}) : super(key: key);
-
-  @override
-  _CurrencyViewState createState() => _CurrencyViewState();
-}
-
-class _CurrencyViewState extends State<CurrencyView> {
-  List<String> currencyList = [];
-  String currencyValue;
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class CurrencyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<String> currencyList = [];
+    // String currencyValue;
     List<CurrencyData> currencyData =
         Provider.of<ProviderData>(context).currencyData;
-    CurrencyData currency = Provider.of<ProviderData>(context).currency;
-    currencyValue = currency.short;
+    // CurrencyData currency = Provider.of<ProviderData>(context).currency;
+    //currencyValue = currency.short;
     if (currencyData != null) {
       currencyData.forEach((element) {
         currencyList.add(element.short);

@@ -9,19 +9,7 @@ import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
-class MineView extends StatefulWidget {
-  const MineView({Key key}) : super(key: key);
-
-  @override
-  _MineViewState createState() => _MineViewState();
-}
-
-class _MineViewState extends State<MineView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class MineView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Person person = Provider.of<ProviderData>(context).person;

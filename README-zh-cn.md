@@ -37,9 +37,9 @@
 
 ## 依赖
 
-- [charts_flutter: ^0.9.0](https://pub.dev/packages/charts_flutter) 用Dart原生编写的Material Design数据可视化库。
 - [font_awesome_flutter: ^8.8.1](https://pub.dev/packages/font_awesome_flutter) Font Awesome Icon 的字体图标包，可以用于flutter的图标。
 - [intl: ^0.16.1](https://pub.dev/packages/intl) 提供国际化和本地化功能，包括消息翻译，复数形式和性别，日期/数字格式和解析以及双向文本。
+- [charts_flutter: ^0.9.0](https://pub.dev/packages/charts_flutter) 用Dart原生编写的Material Design数据可视化库。
 - [sqflite: ^1.3.1](https://pub.dev/packages/sqflite) SQLite用于flutter的插件。
 - [path: ^1.7.0](https://pub.dev/packages/path) 适用于Dart的全面的跨平台路径处理库。
 - [path_provider: ^1.6.11](https://pub.dev/packages/path_provider) Flutter插件，用于查找文件系统上的常用位置。
