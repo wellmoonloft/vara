@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_home.dart';
 import 'package:vara/invest/invest_home.dart';
-import 'package:vara/mine/mine_home1.dart';
+import 'package:vara/mine/mine_home.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/bottom_bar_view.dart';

@@ -35,6 +35,9 @@
 3. 在项目目录中执行 `flutter packages get`
 
 
+## 参考
+- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) 引用了Best-Flutter-UI-Templates的Bottom_bar以及页面加载动画。
+
 ## 依赖
 
 - [font_awesome_flutter: ^8.8.1](https://pub.dev/packages/font_awesome_flutter) Font Awesome Icon 的字体图标包，可以用于flutter的图标。

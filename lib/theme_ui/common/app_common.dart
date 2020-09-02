@@ -336,6 +336,7 @@ class SettingsAppBarUI extends StatelessWidget {
                 transform: Matrix4.translationValues(
                     0.0, 30 * (1.0 - animation.value), 0.0),
                 child: Container(
+                  color: ColorTheme.white,
                   child: Column(
                     children: <Widget>[
                       SizedBox(
@@ -359,7 +360,7 @@ class SettingsAppBarUI extends StatelessWidget {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.cog,
-                                    size: 16,
+                                    size: 20,
                                     color: ColorTheme.greyquadradarker,
                                   )),
                             ),
@@ -368,24 +369,26 @@ class SettingsAppBarUI extends StatelessWidget {
                       ),
                       Column(children: <Widget>[
                         Container(
-                            height: 65,
-                            width: 65,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: ColorTheme.background,
-                              shape: BoxShape.circle,
+                          height: MediaQuery.of(context).size.width / 4,
+                          width: MediaQuery.of(context).size.width / 4,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage("assets/Images/userImage.png"),
+                              fit: BoxFit.cover,
                             ),
-                            child: FaIcon(
-                              FontAwesomeIcons.userAlt,
-                              color: ColorTheme.grey,
-                            )),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(100),
+                            ),
+                          ),
+                        ),
                         Consumer<ProviderData>(
                             builder: (context, providerdata, child) {
                           return Padding(
                               padding: EdgeInsets.only(top: 8),
                               child: Text(
                                 providerdata.person.firstname,
-                                style: AppTheme.titleTextSmallLighterS,
+                                style: AppTheme.titleTextSmall,
                               ));
                         })
                       ]),

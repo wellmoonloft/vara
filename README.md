@@ -30,6 +30,9 @@ Therefore I need an APP like this:
 
 3. Do `flutter packages get` in your project directory
 
+## Reference
+- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) Reference bottom bar and page loading animation from Best-Flutter-UI-Templates.
+
 ## Dependents
 
 - [font_awesome_flutter: ^8.8.1](https://pub.dev/packages/font_awesome_flutter) The Font Awesome Icon pack available as set of Flutter Icons.

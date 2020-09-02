@@ -27,11 +27,33 @@ class AccountView extends StatelessWidget {
                   child: Consumer<ProviderData>(
                       builder: (context, providerdata, child) {
                     double totalInvest = 0.0;
+                    double netIncome = 0.0;
+                    double income = 0.0;
+                    double expenses = 0.0;
+                    num rate = 1;
                     providerdata.investList.forEach((element) {
-                      if (element.status != 'FINISHED') {
-                        totalInvest = totalInvest + element.amount;
-                      }
+                      providerdata.currencyData.forEach((element1) {
+                        if (element.currency == element1.short) {
+                          rate = providerdata.currency.rate / element1.rate;
+                          if (element.status != 'FINISHED') {
+                            totalInvest = totalInvest + element.amount * rate;
+                          }
+                        }
+                      });
                     });
+                    providerdata.billList.forEach((element) {
+                      providerdata.currencyData.forEach((element1) {
+                        if (element.currency == element1.short) {
+                          rate = providerdata.currency.rate / element1.rate;
+                          if (element.mark == 0) {
+                            expenses = expenses + element.amount * rate;
+                          } else {
+                            income = income + element.amount * rate;
+                          }
+                        }
+                      });
+                    });
+                    netIncome = income - expenses;
 
                     return Container(
                         padding: EdgeInsets.only(
@@ -67,10 +89,22 @@ class AccountView extends StatelessWidget {
                                             height: 15,
                                           ),
                                           Text(
-                                            NumberFormat(
-                                                    "€ ###,###.0#", "en_US")
-                                                .format(totalInvest *
-                                                    animation.value),
+                                            totalInvest.abs() > 100000.00
+                                                ? providerdata
+                                                        .currency.iconName +
+                                                    ' ' +
+                                                    NumberFormat.compact(
+                                                            locale: Intl
+                                                                .getCurrentLocale())
+                                                        .format(totalInvest *
+                                                            animation.value)
+                                                : NumberFormat(
+                                                        providerdata.currency
+                                                                .iconName +
+                                                            " ###,###.0#",
+                                                        Intl.getCurrentLocale())
+                                                    .format(totalInvest *
+                                                        animation.value),
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w800,
@@ -146,7 +180,22 @@ class AccountView extends StatelessWidget {
                                             height: 15,
                                           ),
                                           Text(
-                                            '444',
+                                            netIncome.abs() > 100000.00
+                                                ? providerdata
+                                                        .currency.iconName +
+                                                    ' ' +
+                                                    NumberFormat.compact(
+                                                            locale: Intl
+                                                                .getCurrentLocale())
+                                                        .format(netIncome *
+                                                            animation.value)
+                                                : NumberFormat(
+                                                        providerdata.currency
+                                                                .iconName +
+                                                            " ###,###.0#",
+                                                        Intl.getCurrentLocale())
+                                                    .format(netIncome *
+                                                        animation.value),
                                             textAlign: TextAlign.start,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w800,
