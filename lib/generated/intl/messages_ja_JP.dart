@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Account" : MessageLookupByLibrary.simpleMessage("アカウント"),
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("口座情報"),
     "Age" : MessageLookupByLibrary.simpleMessage("年齢"),
     "Alert" : MessageLookupByLibrary.simpleMessage("アラート"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Candy" : MessageLookupByLibrary.simpleMessage("キャンディー"),
     "CarInsurance" : MessageLookupByLibrary.simpleMessage("自動車保険"),
     "CarIoan" : MessageLookupByLibrary.simpleMessage("車イオアン"),
+    "Cash" : MessageLookupByLibrary.simpleMessage("現金"),
     "Category" : MessageLookupByLibrary.simpleMessage("カテゴリー"),
     "ChildBenefit" : MessageLookupByLibrary.simpleMessage("児童手当"),
     "ChildCare" : MessageLookupByLibrary.simpleMessage("育児"),
@@ -88,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("投資資金"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("投資利益"),
     "Investment" : MessageLookupByLibrary.simpleMessage("投資"),
+    "Keepfinancialfreedom" : MessageLookupByLibrary.simpleMessage("100%以上の経済的自由を維持する"),
     "Language" : MessageLookupByLibrary.simpleMessage("言語"),
     "LastName" : MessageLookupByLibrary.simpleMessage("苗字"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("期限切れ散布図"),

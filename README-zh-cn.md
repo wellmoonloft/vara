@@ -54,8 +54,7 @@
 
 目前还未完成，上传到git只是因为我办公室和家里面有两台电脑，嗯。
 
-![](https://gitee.com/wellmoonloft/images/raw/master/20200820003452.png)
-![](https://gitee.com/wellmoonloft/images/raw/master/20200820003506.png)
+![](https://gitee.com/wellmoonloft/images/raw/master/20200902234054.jpg)
 ![](https://gitee.com/wellmoonloft/images/raw/master/20200818220058.jpg)
 
 ## Todo List 
@@ -82,7 +81,7 @@
   - [ ] 报表展示：货币分类图  
   - [ ] 报表展示：交易分类图            
 - [x] 我的页面  
-  - [ ] 投资账户、流动账户、财富自由度（投资性收入/支出）  
+  - [x] 投资账户、流动账户、财富自由度（投资性收入/支出）  
   - [x] 设置：多货币选项
   - [x] 设置：多语言选项 
 - [x] 插入及导入页面

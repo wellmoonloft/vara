@@ -8,6 +8,7 @@
     "DebtService":"債務サービス",
     "Debt": "債務",   
     "Invest": "投資",
+    "Cash": "現金",
     "InvestList": "投資リスト",
     "InvestDetail": "投資の詳細",
     "LateScatterPlot": "期限切れ散布図",
@@ -40,6 +41,7 @@
     "Category": "カテゴリー",
     "Settings": "設定",
     "AccountInformation": "口座情報",
+    "Account": "アカウント",
     "UserName": "ユーザー名",
     "Language": "言語",
     "Use": "使用する",
@@ -64,6 +66,7 @@
     "Delete": "削除する",
     "ConfirmNote": "この請求の削除を確認：{amount} {use}？",
     "DeleteNote": "この請求書：{bill}は削除されました。",
+    "Keepfinancialfreedom":"100%以上の経済的自由を維持する",
 
     "MisCellaneous": "雑多",
     "Entertainment": "エンターテインメント",

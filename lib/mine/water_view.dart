@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:vara/generated/l10n.dart';
+import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/mine/wave_view.dart';
@@ -29,260 +34,240 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
         return FadeTransition(
           opacity: widget.mainScreenAnimation,
           child: Transform(
-            transform: Matrix4.translationValues(
-                0.0, 30 * (1.0 - widget.mainScreenAnimation.value), 0.0),
-            child: Padding(
-              padding: AppTheme.outboxpadding,
-              child: Container(
-                // decoration: BoxDecoration(
-                //   color: ColorTheme.white,
-                //   borderRadius: const BorderRadius.only(
-                //       topLeft: Radius.circular(8.0),
-                //       bottomLeft: Radius.circular(8.0),
-                //       bottomRight: Radius.circular(8.0),
-                //       topRight: Radius.circular(8.0)),
-                //   boxShadow: <BoxShadow>[
-                //     BoxShadow(
-                //         color: ColorTheme.grey.withOpacity(0.2),
-                //         offset: const Offset(1.1, 1.1),
-                //         blurRadius: 10.0),
-                //   ],
-                // ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      top: 16, left: 16, right: 16, bottom: 16),
+              transform: Matrix4.translationValues(
+                  0.0, 30 * (1.0 - widget.mainScreenAnimation.value), 0.0),
+              child: Consumer<ProviderData>(
+                  builder: (context, providerdata, child) {
+                double investIncome = 0.0;
+                double investIncomeChange = 0.0;
+                double expenses = 0.0;
+                double expensesChange = 0.0;
+                double freedomService = 0.0;
+                num rate = 1;
+
+                providerdata.investList.forEach((element) {
+                  providerdata.currencyData.forEach((element1) {
+                    if (element.currency == element1.short) {
+                      rate = providerdata.currency.rate / element1.rate;
+                      if (element.status == 'FINISHED') {
+                        investIncome = investIncome +
+                            (element.interest != null
+                                ? element.interest * rate
+                                : 0);
+                      }
+                    }
+                  });
+                });
+
+                providerdata.billList.forEach((element) {
+                  providerdata.currencyData.forEach((element1) {
+                    if (element.currency == element1.short) {
+                      rate = providerdata.currency.rate / element1.rate;
+                      if (element.mark == 0) {
+                        expenses = expenses + element.amount * rate;
+                      }
+                    }
+                  });
+                });
+
+                if (expenses == 0) {
+                  if (investIncome == 0) {
+                    freedomService = 0;
+                    investIncomeChange = 1;
+                    expensesChange = 0;
+                  } else {
+                    freedomService = 100;
+                    investIncomeChange = 0;
+                    expensesChange = 0;
+                  }
+                } else {
+                  if (investIncome == 0) {
+                    freedomService = 0;
+                    investIncomeChange = expenses;
+                    expensesChange = expenses;
+                  } else {
+                    freedomService = investIncome / expenses * 100;
+                    if (investIncome >= expenses) {
+                      investIncomeChange = 0;
+                      expensesChange = 0;
+                    } else {
+                      investIncomeChange = expenses - investIncome;
+                      expensesChange = expenses - investIncome;
+                    }
+                  }
+                }
+
+                return Container(
+                  padding: AppTheme.inboxpadding,
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         child: Column(
                           children: <Widget>[
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: <Widget>[
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 4, bottom: 3),
-                                      child: Text(
-                                        '2100',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          //fontFamily: FintnessAppTheme.fontName,
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 32,
-                                          color: ColorTheme.paledarker,
-                                        ),
-                                      ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 4, bottom: 3),
+                                  child: Text(
+                                    investIncomeChange > 100000.00
+                                        ? '+' +
+                                            providerdata.currency.iconName +
+                                            NumberFormat.compact(
+                                                    locale:
+                                                        Intl.getCurrentLocale())
+                                                .format(
+                                                    investIncomeChange *
+                                                        widget
+                                                            .mainScreenAnimation
+                                                            .value)
+                                        : '+' +
+                                            NumberFormat(
+                                                    providerdata
+                                                            .currency.iconName +
+                                                        " ###,###.0#",
+                                                    Intl.getCurrentLocale())
+                                                .format(investIncomeChange *
+                                                    widget.mainScreenAnimation
+                                                        .value),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 32,
+                                      color: ColorTheme.puristbluedarker,
                                     ),
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(
-                                    //       left: 8, bottom: 8),
-                                    //   child: Text(
-                                    //     'ml',
-                                    //     textAlign: TextAlign.center,
-                                    //     style: TextStyle(
-                                    //       //fontFamily: FintnessAppTheme.fontName,
-                                    //       fontWeight: FontWeight.w500,
-                                    //       fontSize: 18,
-                                    //       letterSpacing: -0.2,
-                                    //       color: ColorTheme.paledarker,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
+                                  ),
                                 ),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //       left: 4, top: 2, bottom: 14),
-                                //   child: Text(
-                                //     'of daily goal 3.5L',
-                                //     textAlign: TextAlign.center,
-                                //     style: TextStyle(
-                                //       //fontFamily: FintnessAppTheme.fontName,
-                                //       fontWeight: FontWeight.w500,
-                                //       fontSize: 14,
-                                //       letterSpacing: 0.0,
-                                //       color: ColorTheme.greydarker,
-                                //     ),
-                                //   ),
-                                // ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, bottom: 8),
+                                  child: Text(
+                                    S.current.InvestedProfit,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      //fontFamily: FintnessAppTheme.fontName,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      letterSpacing: -0.2,
+                                      color: ColorTheme.puristbluedarker
+                                          .withOpacity(0.6),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                             Padding(
                               padding: const EdgeInsets.only(
-                                  left: 4, right: 4, top: 8, bottom: 16),
-                              child: Container(
-                                height: 2,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.background,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(4.0)),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 16),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                                  left: 4, right: 4, top: 18, bottom: 18),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 4),
-                                        child: Icon(
-                                          Icons.access_time,
-                                          color:
-                                              ColorTheme.grey.withOpacity(0.5),
-                                          size: 16,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(left: 4.0),
-                                        child: Text(
-                                          'Last drink 8:26 AM',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            //fontFamily: FintnessAppTheme.fontName,
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                            letterSpacing: 0.0,
-                                            color: ColorTheme.grey
-                                                .withOpacity(0.5),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  FaIcon(
+                                    FontAwesomeIcons.award,
+                                    size: 14,
+                                    color: ColorTheme.cantaloupedarker,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 4),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        SizedBox(
-                                          width: 24,
-                                          height: 24,
-                                          child: Image.asset(
-                                              'assets/Images/bell.png'),
-                                        ),
-                                        Flexible(
-                                          child: Text(
-                                            'Your bottle is empty, refill it!.',
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              //fontFamily: ColorTheme.fontName,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 12,
-                                              letterSpacing: 0.0,
-                                              color: HexColor('#F65283'),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Flexible(
+                                    child: Text(
+                                      S.current.Keepfinancialfreedom,
+                                      textAlign: TextAlign.start,
+                                      style: TextStyle(
+                                        //fontFamily: ColorTheme.fontName,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        letterSpacing: 0.0,
+                                        color: ColorTheme.cantaloupedarker,
+                                      ),
                                     ),
                                   ),
                                 ],
                               ),
-                            )
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: <Widget>[
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 4, bottom: 3),
+                                  child: Text(
+                                    expensesChange > 100000.00
+                                        ? '-' +
+                                            providerdata.currency.iconName +
+                                            ' ' +
+                                            NumberFormat.compact(
+                                                    locale:
+                                                        Intl.getCurrentLocale())
+                                                .format(
+                                                    expensesChange *
+                                                        widget
+                                                            .mainScreenAnimation
+                                                            .value)
+                                        : '-' +
+                                            NumberFormat(
+                                                    providerdata
+                                                            .currency.iconName +
+                                                        " ###,###.0#",
+                                                    Intl.getCurrentLocale())
+                                                .format(expensesChange *
+                                                    widget.mainScreenAnimation
+                                                        .value),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 32,
+                                      color: ColorTheme.cantaloupe,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 8, bottom: 8),
+                                  child: Text(
+                                    S.current.Expenses,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      //fontFamily: FintnessAppTheme.fontName,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      letterSpacing: -0.2,
+                                      color: ColorTheme.cantaloupe
+                                          .withOpacity(0.5),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
-                      // SizedBox(
-                      //   width: 34,
-                      //   child: Column(
-                      //     mainAxisAlignment: MainAxisAlignment.center,
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     children: <Widget>[
-                      //       Container(
-                      //         decoration: BoxDecoration(
-                      //           color: ColorTheme.white,
-                      //           shape: BoxShape.circle,
-                      //           boxShadow: <BoxShadow>[
-                      //             BoxShadow(
-                      //                 color: ColorTheme.paledarker
-                      //                     .withOpacity(0.4),
-                      //                 offset: const Offset(4.0, 4.0),
-                      //                 blurRadius: 8.0),
-                      //           ],
-                      //         ),
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.all(6.0),
-                      //           child: Icon(
-                      //             Icons.add,
-                      //             color: ColorTheme.paledarker,
-                      //             size: 24,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //       const SizedBox(
-                      //         height: 28,
-                      //       ),
-                      //       Container(
-                      //         decoration: BoxDecoration(
-                      //           color: ColorTheme.white,
-                      //           shape: BoxShape.circle,
-                      //           boxShadow: <BoxShadow>[
-                      //             BoxShadow(
-                      //                 color: ColorTheme.paledarker
-                      //                     .withOpacity(0.4),
-                      //                 offset: const Offset(4.0, 4.0),
-                      //                 blurRadius: 8.0),
-                      //           ],
-                      //         ),
-                      //         child: Padding(
-                      //           padding: const EdgeInsets.all(6.0),
-                      //           child: Icon(
-                      //             Icons.remove,
-                      //             color: ColorTheme.paledarker,
-                      //             size: 24,
-                      //           ),
-                      //         ),
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
                       Padding(
-                        padding:
-                            const EdgeInsets.only(left: 16, right: 8, top: 16),
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 8,
+                        ),
                         child: Container(
                           width: 60,
                           height: 160,
                           decoration: BoxDecoration(
-                            color: HexColor('#E8EDFE'),
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(80.0),
-                                bottomLeft: Radius.circular(80.0),
-                                bottomRight: Radius.circular(80.0),
-                                topRight: Radius.circular(80.0)),
-                            boxShadow: <BoxShadow>[
-                              BoxShadow(
-                                  color: ColorTheme.grey.withOpacity(0.4),
-                                  offset: const Offset(2, 2),
-                                  blurRadius: 4),
-                            ],
+                            color: ColorTheme.forWater,
+                            borderRadius: AppTheme.normalBorderRadius,
                           ),
                           child: WaveView(
-                            percentageValue: 60.0,
+                            percentageValue: freedomService,
                           ),
                         ),
                       )
                     ],
                   ),
-                ),
-              ),
-            ),
-          ),
+                );
+              })),
         );
       },
     );

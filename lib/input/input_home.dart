@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/input/invest_import_view.dart';
-import 'package:vara/mine/currency_view.dart';
+import 'package:vara/mine/settings/currency_view.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/models/provider_data.dart';

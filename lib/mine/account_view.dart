@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
-
+import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 
@@ -53,7 +53,11 @@ class AccountView extends StatelessWidget {
                         }
                       });
                     });
-                    netIncome = income - expenses;
+                    if (income >= expenses) {
+                      netIncome = income - expenses;
+                    } else {
+                      netIncome = 0;
+                    }
 
                     return Container(
                         padding: EdgeInsets.only(
@@ -82,7 +86,8 @@ class AccountView extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text(
-                                            "Invest Account",
+                                            S.current.Invest +
+                                                S.current.Account,
                                             style: AppTheme.toptitleBigText,
                                           ),
                                           SizedBox(
@@ -113,26 +118,7 @@ class AccountView extends StatelessWidget {
                                               color: ColorTheme.white,
                                             ),
                                           ),
-                                          SizedBox(height: 20),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
-                                                "Date:",
-                                                style: AppTheme.toptitleText,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                DateFormat('yyyy-MM-dd')
-                                                    .format(DateTime.now())
-                                                    .toString(),
-                                                style: AppTheme.toptitleText,
-                                              )
-                                            ],
-                                          )
+                                          SizedBox(height: 10),
                                         ],
                                       ),
                                     ),
@@ -173,7 +159,7 @@ class AccountView extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Text(
-                                            "Cash Account",
+                                            S.current.Cash + S.current.Account,
                                             style: AppTheme.toptitleBigText,
                                           ),
                                           SizedBox(
@@ -204,26 +190,7 @@ class AccountView extends StatelessWidget {
                                               color: ColorTheme.white,
                                             ),
                                           ),
-                                          SizedBox(height: 20),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Text(
-                                                "Date:",
-                                                style: AppTheme.toptitleText,
-                                              ),
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              Text(
-                                                DateFormat('yyyy-MM-dd')
-                                                    .format(DateTime.now())
-                                                    .toString(),
-                                                style: AppTheme.toptitleText,
-                                              )
-                                            ],
-                                          )
+                                          SizedBox(height: 10),
                                         ],
                                       ),
                                     ),

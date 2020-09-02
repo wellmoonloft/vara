@@ -26,6 +26,7 @@ class ColorTheme {
   static const Color neogreendarker = Color(0xFF008024);
   static const Color darkred = Color(0xFFcc0000);
 
+  static const Color forWater = Color(0xFFE8EDFE);
   static const Color puristblue = Color(0xFF9CC9CF);
   static const Color puristbluelighter = Color(0xFFd9eaed);
   static const Color puristbluedarker = Color(0xFF6baeb7);

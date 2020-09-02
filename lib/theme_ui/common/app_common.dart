@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:vara/mine/settings_view.dart';
+import 'package:vara/mine/settings/settings_view.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../app_theme.dart';

@@ -8,6 +8,7 @@
     "DebtService":"負債率",
     "Debt": "負債",   
     "Invest": "投資",
+    "Cash": "現金",
     "InvestList": "投資列表",
     "InvestDetail": "投資明細",
     "LateScatterPlot": "逾期投資散點圖",
@@ -40,6 +41,7 @@
     "Category": "類別",
     "Settings": "設定",
     "AccountInformation": "賬戶信息",
+    "Account": "賬戶",
     "UserName": "用戶名",
     "Language": "語言",
     "Use": "用途",
@@ -64,6 +66,7 @@
     "Delete": "刪除",
     "ConfirmNote": "確認刪除這個賬單：{amount} {use}？",
     "DeleteNote": "這個賬單 {bill} 已經被刪除。",
+    "Keepfinancialfreedom":"保持財務自由度超過100%",
 
     "MisCellaneous": "雜項",
     "Entertainment": "娛樂",

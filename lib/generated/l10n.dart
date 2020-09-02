@@ -113,6 +113,16 @@ class S {
     );
   }
 
+  /// `Cash`
+  String get Cash {
+    return Intl.message(
+      'Cash',
+      name: 'Cash',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Invest List`
   String get InvestList {
     return Intl.message(
@@ -433,6 +443,16 @@ class S {
     );
   }
 
+  /// `Account`
+  String get Account {
+    return Intl.message(
+      'Account',
+      name: 'Account',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `User Name`
   String get UserName {
     return Intl.message(
@@ -660,6 +680,16 @@ class S {
       name: 'DeleteNote',
       desc: '',
       args: [bill],
+    );
+  }
+
+  /// `Keep your financial freedom above 100%`
+  String get Keepfinancialfreedom {
+    return Intl.message(
+      'Keep your financial freedom above 100%',
+      name: 'Keepfinancialfreedom',
+      desc: '',
+      args: [],
     );
   }
 

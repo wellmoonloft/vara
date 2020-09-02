@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Account" : MessageLookupByLibrary.simpleMessage("Konto"),
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("Konto teave"),
     "Age" : MessageLookupByLibrary.simpleMessage("Vanus"),
     "Alert" : MessageLookupByLibrary.simpleMessage("Märguanne"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Candy" : MessageLookupByLibrary.simpleMessage("Kommid"),
     "CarInsurance" : MessageLookupByLibrary.simpleMessage("Autokindlustus"),
     "CarIoan" : MessageLookupByLibrary.simpleMessage("Car Ioan"),
+    "Cash" : MessageLookupByLibrary.simpleMessage("sularaha"),
     "Category" : MessageLookupByLibrary.simpleMessage("Kategooria"),
     "ChildBenefit" : MessageLookupByLibrary.simpleMessage("Lastetoetus"),
     "ChildCare" : MessageLookupByLibrary.simpleMessage("Lastehoid"),
@@ -88,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("Investeeritud fondid"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("Investeeritud kasum"),
     "Investment" : MessageLookupByLibrary.simpleMessage("Investeerimine"),
+    "Keepfinancialfreedom" : MessageLookupByLibrary.simpleMessage("Säilitage rahaline vabadus üle 100%"),
     "Language" : MessageLookupByLibrary.simpleMessage("Keel"),
     "LastName" : MessageLookupByLibrary.simpleMessage("Perekonnanimi"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Tähtaja ületanud hajutustabel"),

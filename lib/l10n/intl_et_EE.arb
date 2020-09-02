@@ -8,6 +8,7 @@
     "DebtService":"Võla teenus",
     "Debt": "Võlg",   
     "Invest": "Investeeri",
+    "Cash": "sularaha",
     "InvestList": "Investeerimisloend",
     "InvestDetail": "Investeerige üksikasjalikult",
     "LateScatterPlot": "Tähtaja ületanud hajutustabel",
@@ -40,6 +41,7 @@
     "Category": "Kategooria",
     "Settings": "Seadistused",
     "AccountInformation": "Konto teave",
+    "Account": "Konto",
     "UserName": "Kasutajanimi",
     "Language": "Keel",
     "Use": "kasutada",
@@ -64,6 +66,7 @@
     "Delete": "Delete",
     "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
     "DeleteNote": "This bill: {bill} was deleted.",
+    "Keepfinancialfreedom":"Säilitage rahaline vabadus üle 100%",
 
     "MisCellaneous": "Mitmesugused",
     "Entertainment": "Meelelahutus",

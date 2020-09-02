@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Account" : MessageLookupByLibrary.simpleMessage("Account"),
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("Account Information"),
     "Age" : MessageLookupByLibrary.simpleMessage("Age"),
     "Alert" : MessageLookupByLibrary.simpleMessage("Alert"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Candy" : MessageLookupByLibrary.simpleMessage("Candy"),
     "CarInsurance" : MessageLookupByLibrary.simpleMessage("Car Insurance"),
     "CarIoan" : MessageLookupByLibrary.simpleMessage("Car Ioan"),
+    "Cash" : MessageLookupByLibrary.simpleMessage("Cash"),
     "Category" : MessageLookupByLibrary.simpleMessage("Category"),
     "ChildBenefit" : MessageLookupByLibrary.simpleMessage("Child Benefit"),
     "ChildCare" : MessageLookupByLibrary.simpleMessage("Child Care"),
@@ -88,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("Invested Funds"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("Invested Profit"),
     "Investment" : MessageLookupByLibrary.simpleMessage("Investment"),
+    "Keepfinancialfreedom" : MessageLookupByLibrary.simpleMessage("Keep your financial freedom above 100%"),
     "Language" : MessageLookupByLibrary.simpleMessage("Language"),
     "LastName" : MessageLookupByLibrary.simpleMessage("Last Name"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Scatter Chart of Overdue"),

@@ -8,6 +8,7 @@
     "DebtService":"Debt service",
     "Debt": "Debt",   
     "Invest": "Invest",
+    "Cash": "Cash",
     "InvestList": "Invest List",
     "InvestDetail": "Invest Detail",
     "LateScatterPlot": "Scatter Chart of Overdue",
@@ -40,6 +41,7 @@
     "Category": "Category",
     "Settings": "Settings",
     "AccountInformation": "Account Information",
+    "Account": "Account",
     "UserName": "User Name",
     "Language": "Language",
     "Use": "Use",
@@ -64,6 +66,7 @@
     "Delete": "Delete",
     "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
     "DeleteNote": "This bill: {bill} was deleted.",
+    "Keepfinancialfreedom":"Keep your financial freedom above 100%",
     
     "MisCellaneous": "MisCellaneous",
     "Entertainment": "Entertainment",

@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
+    "Account" : MessageLookupByLibrary.simpleMessage("账户"),
     "AccountInformation" : MessageLookupByLibrary.simpleMessage("账号信息"),
     "Age" : MessageLookupByLibrary.simpleMessage("年龄"),
     "Alert" : MessageLookupByLibrary.simpleMessage("提示"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Candy" : MessageLookupByLibrary.simpleMessage("糖果"),
     "CarInsurance" : MessageLookupByLibrary.simpleMessage("汽车保险"),
     "CarIoan" : MessageLookupByLibrary.simpleMessage("汽车贷款"),
+    "Cash" : MessageLookupByLibrary.simpleMessage("现金"),
     "Category" : MessageLookupByLibrary.simpleMessage("类别"),
     "ChildBenefit" : MessageLookupByLibrary.simpleMessage("儿童补助金"),
     "ChildCare" : MessageLookupByLibrary.simpleMessage("育儿"),
@@ -88,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "InvestedFunds" : MessageLookupByLibrary.simpleMessage("投资金额"),
     "InvestedProfit" : MessageLookupByLibrary.simpleMessage("投资利润"),
     "Investment" : MessageLookupByLibrary.simpleMessage("投资"),
+    "Keepfinancialfreedom" : MessageLookupByLibrary.simpleMessage("保持财务自由度超过100%"),
     "Language" : MessageLookupByLibrary.simpleMessage("语言"),
     "LastName" : MessageLookupByLibrary.simpleMessage("姓"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("逾期投资散点图"),

@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vector_math/vector_math.dart' as vector;
 
@@ -84,27 +85,23 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
         ),
         builder: (context, child) => new Stack(
           children: <Widget>[
-            // new ClipPath(
-            //   child: new Container(
-            //     decoration: BoxDecoration(
-            //       color: ColorTheme.paledarker.withOpacity(0.5),
-            //       borderRadius: BorderRadius.only(
-            //           topLeft: Radius.circular(8.0),
-            //           bottomLeft: Radius.circular(8.0),
-            //           bottomRight: Radius.circular(8.0),
-            //           topRight: Radius.circular(8.0)),
-            //       gradient: LinearGradient(
-            //         colors: [
-            //           ColorTheme.paledarker.withOpacity(0.2),
-            //           ColorTheme.paledarker.withOpacity(0.5)
-            //         ],
-            //         begin: Alignment.topLeft,
-            //         end: Alignment.bottomRight,
-            //       ),
-            //     ),
-            //   ),
-            //   clipper: new WaveClipper(animationController.value, animList1),
-            // ),
+            new ClipPath(
+              child: new Container(
+                decoration: BoxDecoration(
+                  color: ColorTheme.paledarker.withOpacity(0.5),
+                  borderRadius: AppTheme.normalBorderRadius,
+                  gradient: LinearGradient(
+                    colors: [
+                      ColorTheme.paledarker.withOpacity(0.2),
+                      ColorTheme.paledarker.withOpacity(0.5)
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+              ),
+              clipper: new WaveClipper(animationController.value, animList1),
+            ),
             new ClipPath(
               child: new Container(
                 decoration: BoxDecoration(
@@ -117,12 +114,7 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.only(
-                      //topLeft: Radius.circular(8.0),
-                      // bottomLeft: Radius.circular(8.0),
-                      //bottomRight: Radius.circular(8.0),
-                      //topRight: Radius.circular(8.0)
-                      ),
+                  borderRadius: AppTheme.normalBorderRadius,
                 ),
               ),
               clipper: new WaveClipper(animationController.value, animList2),
@@ -140,25 +132,25 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                       style: TextStyle(
                         //fontFamily: FintnessAppTheme.fontName,
                         fontWeight: FontWeight.w500,
-                        fontSize: 24,
+                        fontSize: 22,
                         letterSpacing: 0.0,
                         color: ColorTheme.white,
                       ),
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(top: 3.0),
-                    //   child: Text(
-                    //     '%',
-                    //     textAlign: TextAlign.center,
-                    //     style: TextStyle(
-                    //       //fontFamily: FintnessAppTheme.fontName,
-                    //       fontWeight: FontWeight.w500,
-                    //       fontSize: 14,
-                    //       letterSpacing: 0.0,
-                    //       color: ColorTheme.white,
-                    //     ),
-                    //   ),
-                    // ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 3.0),
+                      child: Text(
+                        '%',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          //fontFamily: FintnessAppTheme.fontName,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          letterSpacing: 0.0,
+                          color: ColorTheme.white,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
