@@ -8,7 +8,7 @@ Personal asset management
 
 **Vara** [Estonian], means assets, A personal asset management app developed in flutter
 
-Because of Covid-19, this year people attach great importance to "after-sleep income", so the demand for personal asset management and value-added has grown by leaps and bounds. Personally, I also have funds that "have not been valued very much in the past and very little". I hope to check funds, invest and bookkeeping by one mobile APP.
+Because of Covid-19,people attach great importance to "after-sleep income" in this year , so the demand for personal asset management and value-added has grown by leaps and bounds. Personally, I also have funds that "have not been valued very much in the past and very little". I hope to check funds, invest and bookkeeping by one mobile APP.
 
 Since I have used most of the mainstream accounting apps in appstore. It is extremely uncomfortable for programmers to manual accounting. I mean this is 0202! People do not want to manual accounting. In addition, the biggest problem is those App need to log in! Log in will involve data upload. This is asset management App. Although my pockets are thin, it is also unbearable.
 

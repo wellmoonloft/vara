@@ -90,23 +90,11 @@ class InvestSummaryView extends StatelessWidget {
                                                   height: 50),
                                               SummaryTopTitile(
                                                 title: S.current.InvestedProfit,
-                                                value: investIncome > 100000.00
-                                                    ? providerdata
-                                                            .currency.iconName +
-                                                        '' +
-                                                        NumberFormat.compact(
-                                                                locale: Intl
-                                                                    .getCurrentLocale())
-                                                            .format(
-                                                                investIncome *
-                                                                    animation
-                                                                        .value)
-                                                    : NumberFormat(
-                                                            providerdata
-                                                                    .currency
-                                                                    .iconName +
-                                                                " ###,###.0#",
-                                                            Intl
+                                                value: providerdata
+                                                        .currency.iconName +
+                                                    ' ' +
+                                                    NumberFormat.compact(
+                                                            locale: Intl
                                                                 .getCurrentLocale())
                                                         .format(investIncome *
                                                             animation.value),
@@ -122,23 +110,11 @@ class InvestSummaryView extends StatelessWidget {
                                                   height: 50),
                                               SummaryTopTitile(
                                                 title: S.current.InvestedFunds,
-                                                value: totalInvest > 100000.00
-                                                    ? providerdata
-                                                            .currency.iconName +
-                                                        ' ' +
-                                                        NumberFormat.compact(
-                                                                locale: Intl
-                                                                    .getCurrentLocale())
-                                                            .format(
-                                                                totalInvest *
-                                                                    animation
-                                                                        .value)
-                                                    : NumberFormat(
-                                                            providerdata
-                                                                    .currency
-                                                                    .iconName +
-                                                                " ###,###.0#",
-                                                            Intl
+                                                value: providerdata
+                                                        .currency.iconName +
+                                                    ' ' +
+                                                    NumberFormat.compact(
+                                                            locale: Intl
                                                                 .getCurrentLocale())
                                                         .format(totalInvest *
                                                             animation.value),
@@ -174,19 +150,11 @@ class InvestSummaryView extends StatelessWidget {
                                     child: SummaryBottom(
                                       title: S.current.Short,
                                       subtitle: S.current.ShortSub,
-                                      value: short > 100000.00
-                                          ? providerdata.currency.iconName +
-                                              ' ' +
-                                              NumberFormat.compact(
-                                                      locale: Intl
-                                                          .getCurrentLocale())
-                                                  .format(
-                                                      short * animation.value)
-                                          : NumberFormat(
-                                                  providerdata
-                                                          .currency.iconName +
-                                                      " ###,###.0#",
-                                                  Intl.getCurrentLocale())
+                                      value: providerdata.currency.iconName +
+                                          ' ' +
+                                          NumberFormat.compact(
+                                                  locale:
+                                                      Intl.getCurrentLocale())
                                               .format(short * animation.value),
                                       color: ColorTheme.puristbluedarker,
                                       subcolor: '#87A0E5',
@@ -202,19 +170,12 @@ class InvestSummaryView extends StatelessWidget {
                                         SummaryBottom(
                                           title: S.current.Mid,
                                           subtitle: S.current.MidSub,
-                                          value: mid > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(
-                                                          mid * animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
-                                                      Intl.getCurrentLocale())
+                                          value: providerdata
+                                                  .currency.iconName +
+                                              ' ' +
+                                              NumberFormat.compact(
+                                                      locale: Intl
+                                                          .getCurrentLocale())
                                                   .format(
                                                       mid * animation.value),
                                           color: ColorTheme.cassis,
@@ -232,19 +193,12 @@ class InvestSummaryView extends StatelessWidget {
                                         SummaryBottom(
                                           title: S.current.Long,
                                           subtitle: S.current.LongSub,
-                                          value: long > 100000.00
-                                              ? providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(long *
-                                                          animation.value)
-                                              : NumberFormat(
-                                                      providerdata.currency
-                                                              .iconName +
-                                                          " ###,###.0#",
-                                                      Intl.getCurrentLocale())
+                                          value: providerdata
+                                                  .currency.iconName +
+                                              ' ' +
+                                              NumberFormat.compact(
+                                                      locale: Intl
+                                                          .getCurrentLocale())
                                                   .format(
                                                       long * animation.value),
                                           color: ColorTheme.cantaloupe,

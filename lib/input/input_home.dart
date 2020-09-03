@@ -51,7 +51,8 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text(S.current.NewTransaction, style: AppTheme.titleText),
+          title: Text(S.current.NewTransaction,
+              style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
           leading: IconButton(
               icon: FaIcon(FontAwesomeIcons.times),
               iconSize: 20,
@@ -85,7 +86,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
               padding: EdgeInsets.only(top: 20, left: 20, right: 20),
               child: TextField(
                   controller: moneyController,
-                  autofocus: true,
+                  //autofocus: true,
                   style: TextStyle(fontSize: 40),
                   cursorColor: Colors.red,
                   decoration: new InputDecoration(
@@ -139,11 +140,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                         padding: EdgeInsets.only(top: 20, left: 15),
                         child: Text(
                           categroyTitleValue,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: categroyTitleColor,
-                          ),
+                          style: setNoteTitleLighter(categroyTitleColor),
                         ),
                       ),
                     ],
@@ -167,11 +164,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     padding: EdgeInsets.only(top: 20, left: 15),
                     child: Text(
                       categroyValue,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 16,
-                        color: categroyColor,
-                      ),
+                      style: setNoteTitleLighter(categroyColor),
                     ),
                   ),
                 ],
@@ -210,11 +203,8 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                         padding: EdgeInsets.only(top: 20, left: 15),
                         child: Text(
                           currencyValue,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                            color: ColorTheme.greyquadradarker,
-                          ),
+                          style:
+                              setNoteTitleLighter(ColorTheme.greyquadradarker),
                         ),
                       ),
                     ],
@@ -260,7 +250,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                             alignment: Alignment(0, 0),
                             child: Text(
                               date,
-                              style: AppTheme.titleTextSmallLighter,
+                              style: setNoteTitleLighter(ColorTheme.greydarker),
                             ),
                           ),
                         ),
@@ -328,7 +318,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                     ),
                     child: Text(
                       S.current.Save,
-                      style: TextStyle(color: ColorTheme.white, fontSize: 16),
+                      style: setNoteTitle(ColorTheme.white),
                     ),
                   ),
                 )),

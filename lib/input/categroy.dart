@@ -28,15 +28,16 @@ class _CategroyViewState extends State<CategroyView>
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-          backgroundColor: ColorTheme.transparent,
+          //backgroundColor: ColorTheme.white,
           appBar: AppBar(
             brightness: Brightness.light,
-            backgroundColor: ColorTheme.greydarker.withOpacity(0.7),
+            backgroundColor: ColorTheme.white.withOpacity(0.4),
             elevation: 0,
-            title: Text(S.current.Category, style: AppTheme.buttomTitle),
+            title: Text(S.current.Category,
+                style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
             leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.times),
-                color: ColorTheme.white,
+                color: ColorTheme.greytripledarker,
                 onPressed: () {
                   Navigator.pop(context);
                 }),
@@ -46,7 +47,7 @@ class _CategroyViewState extends State<CategroyView>
                   FontAwesomeIcons.edit,
                   size: 20,
                 ),
-                color: ColorTheme.white,
+                color: ColorTheme.greytripledarker,
                 onPressed: () {
                   // Navigator.push(
                   //     context,
@@ -59,7 +60,7 @@ class _CategroyViewState extends State<CategroyView>
                   FontAwesomeIcons.plus,
                   size: 20,
                 ),
-                color: ColorTheme.white,
+                color: ColorTheme.greytripledarker,
                 onPressed: () {
                   // Navigator.push(
                   //     context,
@@ -69,7 +70,8 @@ class _CategroyViewState extends State<CategroyView>
               ),
             ],
             bottom: new TabBar(
-              indicatorColor: Colors.white,
+              indicatorColor: ColorTheme.boxbackground,
+              labelColor: ColorTheme.greydoubledarker,
               tabs: <Widget>[
                 new Tab(
                   text: S.current.Expenses,
@@ -85,7 +87,7 @@ class _CategroyViewState extends State<CategroyView>
             ),
           ),
           body: Container(
-            color: ColorTheme.greydarker.withOpacity(0.7),
+            color: ColorTheme.white.withOpacity(0.5),
             child: TabBarView(
               controller: _tabController,
               children: <Widget>[
@@ -315,6 +317,9 @@ class Expenses extends StatelessWidget {
         categroyValue: S.current.Transportation,
         color: ColorTheme.pale);
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      SizedBox(
+        height: 10,
+      ),
       GridTitle(
         icons: miscellaneousData.iconList,
         title: miscellaneousData.categroyTitle,
@@ -395,6 +400,9 @@ class Income extends StatelessWidget {
         categroyValue: S.current.Income,
         color: ColorTheme.neogreendarker);
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      SizedBox(
+        height: 10,
+      ),
       GridTitle(
         icons: incomeData.iconList,
         title: incomeData.categroyTitle,
@@ -428,6 +436,9 @@ class Savings extends StatelessWidget {
         categroyValue: S.current.Savings,
         color: ColorTheme.cassisdarker);
     return ListView(padding: const EdgeInsets.only(top: 20.0), children: [
+      SizedBox(
+        height: 10,
+      ),
       GridTitle(
         icons: savingsData.iconList,
         title: savingsData.categroyTitle,
@@ -461,11 +472,9 @@ class _GridTitleState extends State<GridTitle> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    widget.value,
-                    textAlign: TextAlign.left,
-                    style: AppTheme.buttomTitle,
-                  ),
+                  Text(widget.value,
+                      textAlign: TextAlign.left,
+                      style: setNoteTitleLighter(ColorTheme.greydarker)),
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -475,7 +484,7 @@ class _GridTitleState extends State<GridTitle> {
                     child: FaIcon(
                       mark ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye,
                       size: 16,
-                      color: ColorTheme.white,
+                      color: ColorTheme.greydoubledarker,
                     ),
                   )
                 ])),
@@ -547,11 +556,7 @@ class IconGridView extends StatelessWidget {
                 child: Text(
                   icons[index].value,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
-                    color: ColorTheme.white,
-                  ),
+                  style: setNoteTitleSmall(color),
                 ),
               )
             ],

@@ -73,23 +73,11 @@ class BillSummaryView extends StatelessWidget {
                                                     height: 50),
                                                 SummaryTopTitile(
                                                   title: S.current.NetIncome,
-                                                  value: netIncome.abs() >
-                                                          100000.00
-                                                      ? providerdata.currency
-                                                              .iconName +
-                                                          ' ' +
-                                                          NumberFormat.compact(
-                                                                  locale: Intl
-                                                                      .getCurrentLocale())
-                                                              .format(netIncome *
-                                                                  animation
-                                                                      .value)
-                                                      : NumberFormat(
-                                                              providerdata
-                                                                      .currency
-                                                                      .iconName +
-                                                                  " ###,###.0#",
-                                                              Intl
+                                                  value: providerdata
+                                                          .currency.iconName +
+                                                      ' ' +
+                                                      NumberFormat.compact(
+                                                              locale: Intl
                                                                   .getCurrentLocale())
                                                           .format(netIncome *
                                                               animation.value),

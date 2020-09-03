@@ -693,6 +693,16 @@ class S {
     );
   }
 
+  /// `Increase invest income or reduce expenses make financial freedom above 100%`
+  String get ReduceExpenses {
+    return Intl.message(
+      'Increase invest income or reduce expenses make financial freedom above 100%',
+      name: 'ReduceExpenses',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `MisCellaneous`
   String get MisCellaneous {
     return Intl.message(

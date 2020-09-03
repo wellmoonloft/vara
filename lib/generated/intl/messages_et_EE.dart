@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("Plaani maksmise kuupäev"),
     "PublicTransport" : MessageLookupByLibrary.simpleMessage("Ühistransport"),
     "Received" : MessageLookupByLibrary.simpleMessage("Vastu võetud"),
+    "ReduceExpenses" : MessageLookupByLibrary.simpleMessage("Suurendage investeerimistulu või vähendage kulutusi100% -lise finantsvabaduse saavutamiseks"),
     "Rent" : MessageLookupByLibrary.simpleMessage("Üür"),
     "Repair" : MessageLookupByLibrary.simpleMessage("Remont"),
     "Restaurant" : MessageLookupByLibrary.simpleMessage("Restoran"),

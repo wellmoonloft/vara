@@ -88,36 +88,23 @@ class AccountView extends StatelessWidget {
                                           Text(
                                             S.current.Invest +
                                                 S.current.Account,
-                                            style: AppTheme.toptitleBigText,
+                                            style:
+                                                setNoteTitle(ColorTheme.white),
                                           ),
                                           SizedBox(
                                             height: 15,
                                           ),
                                           Text(
-                                            totalInvest.abs() > 100000.00
-                                                ? providerdata
-                                                        .currency.iconName +
-                                                    ' ' +
-                                                    NumberFormat.compact(
-                                                            locale: Intl
-                                                                .getCurrentLocale())
-                                                        .format(totalInvest *
-                                                            animation.value)
-                                                : NumberFormat(
-                                                        providerdata.currency
-                                                                .iconName +
-                                                            " ###,###.0#",
-                                                        Intl.getCurrentLocale())
-                                                    .format(totalInvest *
-                                                        animation.value),
-                                            textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              letterSpacing: -1.0,
-                                              fontSize: 26,
-                                              color: ColorTheme.white,
-                                            ),
-                                          ),
+                                              providerdata.currency.iconName +
+                                                  ' ' +
+                                                  NumberFormat.compact(
+                                                          locale: Intl
+                                                              .getCurrentLocale())
+                                                      .format(totalInvest *
+                                                          animation.value),
+                                              textAlign: TextAlign.start,
+                                              style: setHomeNumnberText(
+                                                  ColorTheme.white)),
                                           SizedBox(height: 10),
                                         ],
                                       ),
@@ -160,35 +147,23 @@ class AccountView extends StatelessWidget {
                                         children: <Widget>[
                                           Text(
                                             S.current.Cash + S.current.Account,
-                                            style: AppTheme.toptitleBigText,
+                                            style:
+                                                setNoteTitle(ColorTheme.white),
                                           ),
                                           SizedBox(
                                             height: 15,
                                           ),
                                           Text(
-                                            netIncome.abs() > 100000.00
-                                                ? providerdata
-                                                        .currency.iconName +
-                                                    ' ' +
-                                                    NumberFormat.compact(
-                                                            locale: Intl
-                                                                .getCurrentLocale())
-                                                        .format(netIncome *
-                                                            animation.value)
-                                                : NumberFormat(
-                                                        providerdata.currency
-                                                                .iconName +
-                                                            " ###,###.0#",
-                                                        Intl.getCurrentLocale())
+                                            providerdata.currency.iconName +
+                                                ' ' +
+                                                NumberFormat.compact(
+                                                        locale: Intl
+                                                            .getCurrentLocale())
                                                     .format(netIncome *
                                                         animation.value),
                                             textAlign: TextAlign.start,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              letterSpacing: -1.0,
-                                              fontSize: 26,
-                                              color: ColorTheme.white,
-                                            ),
+                                            style: setHomeNumnberText(
+                                                ColorTheme.white),
                                           ),
                                           SizedBox(height: 10),
                                         ],

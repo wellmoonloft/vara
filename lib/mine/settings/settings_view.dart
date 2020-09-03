@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
+import 'package:vara/home/home_page.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
@@ -39,26 +40,21 @@ class _SettingsViewState extends State<SettingsView> {
             brightness: Brightness.light,
             backgroundColor: ColorTheme.white,
             elevation: 0,
-            title: Text(S.current.Settings, style: AppTheme.titleText),
+            title: Text(S.current.Settings,
+                style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
             leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.times),
                 color: ColorTheme.greyquadradarker,
                 onPressed: () {
-                  Navigator.pop(context);
+                  //Navigator.pop(context);
+                  Navigator.of(context).pushReplacement(new MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                            tabBodyView: 'MineHome',
+                          )));
                 }),
           ),
           body: ListView(
             children: [
-              // Padding(
-              //     padding: AppTheme.outboxpadding,
-              //     child: Container(
-              //       child: Text(
-              //         S.current.AccountInformation,
-              //         textAlign: TextAlign.start,
-              //         style: AppTheme.titleTextSmallLighter,
-              //       ),
-              //     )),
-              //OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,
                   child: InkWell(
@@ -83,7 +79,8 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                   Text(
                                     S.current.AccountInformation,
-                                    style: AppTheme.titleTextSmallLighter,
+                                    style: setNoteTitleLighter(
+                                        ColorTheme.greydarker),
                                   ),
                                 ],
                               ),
@@ -91,6 +88,8 @@ class _SettingsViewState extends State<SettingsView> {
                                   builder: (context, providerdata, child) {
                                 return Text(
                                   providerdata.person.firstname,
+                                  style: setNoteTitleLighter(
+                                      ColorTheme.greydarker),
                                 );
                               }),
                             ]),
@@ -136,7 +135,8 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                   Text(
                                     S.current.Currency,
-                                    style: AppTheme.titleTextSmallLighter,
+                                    style: setNoteTitleLighter(
+                                        ColorTheme.greydarker),
                                   ),
                                 ],
                               ),
@@ -210,7 +210,8 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                   Text(
                                     S.current.Language,
-                                    style: AppTheme.titleTextSmallLighter,
+                                    style: setNoteTitleLighter(
+                                        ColorTheme.greydarker),
                                   ),
                                 ],
                               ),
@@ -235,11 +236,12 @@ class _SettingsViewState extends State<SettingsView> {
                                 color: ColorTheme.greydarker,
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 14,
                               ),
                               Text(
                                 S.current.SaveOnCloud,
-                                style: AppTheme.titleTextSmallLighter,
+                                style:
+                                    setNoteTitleLighter(ColorTheme.greydarker),
                               ),
                             ],
                           ),
@@ -314,7 +316,8 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                               Text(
                                 S.current.Path,
-                                style: AppTheme.titleTextSmallLighter,
+                                style:
+                                    setNoteTitleLighter(ColorTheme.greydarker),
                               ),
                             ],
                           ),

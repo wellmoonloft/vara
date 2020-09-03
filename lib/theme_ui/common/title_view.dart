@@ -53,7 +53,8 @@ class TitleView extends StatelessWidget {
                       child: Text(
                         titleTxt,
                         textAlign: TextAlign.left,
-                        style: AppTheme.titleText,
+                        style: setHomeGraphNumnberLighter(
+                            ColorTheme.greydoubledarker),
                       ),
                     ),
                     InkWell(
@@ -69,11 +70,7 @@ class TitleView extends StatelessWidget {
                             Text(
                               subTxt,
                               textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 18,
-                                color: color,
-                              ),
+                              style: setNoteTitleLighter(color),
                             ),
                             subTxt == ''
                                 ? SizedBox()

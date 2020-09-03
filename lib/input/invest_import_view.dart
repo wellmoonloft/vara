@@ -144,7 +144,8 @@ class _ImportViewState extends State<InvestImportView> {
             appBar: AppBar(
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
-              title: Text(S.current.Import, style: AppTheme.titleText),
+              title: Text(S.current.Import,
+                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
               leading: BackButton(
                   color: ColorTheme.greytripledarker,
                   onPressed: () {
@@ -181,7 +182,7 @@ class _ImportViewState extends State<InvestImportView> {
                           alignment: Alignment.center,
                           child: Text(
                             S.current.ImportNote,
-                            style: AppTheme.titleTextSmallLighter,
+                            style: setNoteTitleLighter(ColorTheme.greydarker),
                           ),
                         ));
                   } else {
@@ -213,11 +214,7 @@ class _ImportViewState extends State<InvestImportView> {
                           child: Text(
                             '=>',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 16,
-                              color: ColorTheme.puristbluedarker,
-                            ),
+                            style: setNoteTitle(ColorTheme.puristbluedarker),
                           ),
                         ),
                         Expanded(
@@ -229,7 +226,8 @@ class _ImportViewState extends State<InvestImportView> {
                                 textAlign: TextAlign.left,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                                style: AppTheme.titleTextSmall,
+                                style:
+                                    setNoteTitle(ColorTheme.greytripledarker),
                               ),
                             )),
                       ],

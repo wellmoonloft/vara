@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("计划付款日"),
     "PublicTransport" : MessageLookupByLibrary.simpleMessage("公共交通"),
     "Received" : MessageLookupByLibrary.simpleMessage("已收款"),
+    "ReduceExpenses" : MessageLookupByLibrary.simpleMessage("增加投资收益或者减少支出使财务自由度达到100%"),
     "Rent" : MessageLookupByLibrary.simpleMessage("房租"),
     "Repair" : MessageLookupByLibrary.simpleMessage("修理"),
     "Restaurant" : MessageLookupByLibrary.simpleMessage("餐厅"),

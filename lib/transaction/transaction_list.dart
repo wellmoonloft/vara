@@ -62,7 +62,8 @@ class BillListState extends State<BillListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text(S.current.TransactionList, style: AppTheme.titleText),
+        title: Text(S.current.TransactionList,
+            style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -85,14 +86,14 @@ class BillListState extends State<BillListView> {
                           child: Text(
                             S.current.Date,
                             textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
+                            style: setNoteTitleSmall(ColorTheme.grey),
                           ),
                         ),
                         Expanded(
                           child: Text(
                             S.current.Category,
                             textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
+                            style: setNoteTitleSmall(ColorTheme.grey),
                           ),
                         ),
                       ],
@@ -122,7 +123,8 @@ class BillListState extends State<BillListView> {
                                 alignment: Alignment(0, 0),
                                 child: Text(
                                   date,
-                                  style: AppTheme.titleTextSmallLighter,
+                                  style: setNoteTitleLighter(
+                                      ColorTheme.greydarker),
                                 ),
                               )),
                         ),
@@ -155,14 +157,14 @@ class BillListState extends State<BillListView> {
                     key: UniqueKey(),
                     direction: DismissDirection.endToStart,
                     onDismissed: (direction) async {
-                      setState(() {
-                        billList.removeAt(index);
-                      });
                       var providerData =
                           Provider.of<ProviderData>(context, listen: false);
                       await providerData.deleteBill(bill);
                       await providerData.getBillList();
                       await providerData.getAssetList();
+                      setState(() {
+                        billList.removeAt(index);
+                      });
                     },
                     confirmDismiss: (direction) async {
                       var _alertDialog = AlertDialog(
@@ -241,7 +243,8 @@ class BillListState extends State<BillListView> {
                                           softWrap: true,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
-                                          style: AppTheme.subtitleText,
+                                          style: setHomeGraphTitle(
+                                              ColorTheme.grey),
                                         ),
                                       ),
                                     ]),
@@ -250,7 +253,8 @@ class BillListState extends State<BillListView> {
                                       const EdgeInsets.only(top: 6, bottom: 6),
                                   child: Text(
                                     bill.date,
-                                    style: AppTheme.titleTextSmallLighterS,
+                                    style: setNoteTitleSmall(
+                                        ColorTheme.greydarker),
                                   ),
                                 ),
                               ],

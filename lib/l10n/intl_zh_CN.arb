@@ -67,6 +67,7 @@
     "ConfirmNote": "确认删除这个账单：{amount} {use}？",
     "DeleteNote": "这个账单： {bill} 已经被删除。",
     "Keepfinancialfreedom":"保持财务自由度超过100%",
+    "ReduceExpenses":  "增加投资收益或者减少支出使财务自由度达到100%",
 
     "MisCellaneous": "杂项",
     "Entertainment": "娱乐",

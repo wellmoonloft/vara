@@ -53,22 +53,15 @@ class ChartTitle extends StatelessWidget {
                             Text(
                               S.current.Income,
                               textAlign: TextAlign.start,
-                              style: AppTheme.titleTextSmallLighter,
+                              style: setNoteTitleLighter(ColorTheme.greydarker),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 6, bottom: 6),
                               child: Text(
-                                  income > 100000.00
-                                      ? providerdata.currency.iconName +
-                                          ' ' +
-                                          NumberFormat.compact(
-                                                  locale:
-                                                      Intl.getCurrentLocale())
-                                              .format(income * animation.value)
-                                      : NumberFormat(
-                                              providerdata.currency.iconName +
-                                                  " ###,###.0#",
-                                              Intl.getCurrentLocale())
+                                  providerdata.currency.iconName +
+                                      ' ' +
+                                      NumberFormat.compact(
+                                              locale: Intl.getCurrentLocale())
                                           .format(income * animation.value),
                                   textAlign: TextAlign.start,
                                   style: setHomeNumnberText(
@@ -86,23 +79,15 @@ class ChartTitle extends StatelessWidget {
                             Text(
                               S.current.Expenses,
                               textAlign: TextAlign.end,
-                              style: AppTheme.titleTextSmallLighter,
+                              style: setNoteTitleLighter(ColorTheme.greydarker),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 6, bottom: 6),
                               child: Text(
-                                  expenses > 100000.00
-                                      ? providerdata.currency.iconName +
-                                          ' ' +
-                                          NumberFormat.compact(
-                                                  locale:
-                                                      Intl.getCurrentLocale())
-                                              .format(
-                                                  expenses * animation.value)
-                                      : NumberFormat(
-                                              providerdata.currency.iconName +
-                                                  " ###,###.0#",
-                                              Intl.getCurrentLocale())
+                                  providerdata.currency.iconName +
+                                      ' ' +
+                                      NumberFormat.compact(
+                                              locale: Intl.getCurrentLocale())
                                           .format(expenses * animation.value),
                                   textAlign: TextAlign.end,
                                   style: setHomeNumnberText(ColorTheme.cassis)),

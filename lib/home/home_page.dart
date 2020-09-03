@@ -8,6 +8,9 @@ import 'package:vara/theme_ui/common/bottom_bar_view.dart';
 import 'package:vara/transaction/transaction_home.dart';
 
 class HomeScreen extends StatefulWidget {
+  final String tabBodyView;
+
+  const HomeScreen({Key key, this.tabBodyView}) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -32,6 +35,13 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = AssetHome(animationController: animationController);
     super.initState();
+    if (widget.tabBodyView == 'MineHome') {
+      tabIconsList[0].isSelected = false;
+      tabIconsList[3].isSelected = true;
+      setState(() {
+        tabBody = MineHome(animationController: animationController);
+      });
+    }
   }
 
   @override

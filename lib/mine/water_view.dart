@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
@@ -41,7 +40,6 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                 double investIncome = 0.0;
                 double investIncomeChange = 0.0;
                 double expenses = 0.0;
-                double expensesChange = 0.0;
                 double freedomService = 0.0;
                 num rate = 1;
 
@@ -74,25 +72,21 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                   if (investIncome == 0) {
                     freedomService = 0;
                     investIncomeChange = 1;
-                    expensesChange = 0;
                   } else {
                     freedomService = 100;
                     investIncomeChange = 0;
-                    expensesChange = 0;
                   }
                 } else {
                   if (investIncome == 0) {
                     freedomService = 0;
                     investIncomeChange = expenses;
-                    expensesChange = expenses;
                   } else {
-                    freedomService = investIncome / expenses * 100;
                     if (investIncome >= expenses) {
+                      freedomService = 100;
                       investIncomeChange = 0;
-                      expensesChange = 0;
                     } else {
+                      freedomService = investIncome / expenses * 100;
                       investIncomeChange = expenses - investIncome;
-                      expensesChange = expenses - investIncome;
                     }
                   }
                 }
@@ -100,168 +94,55 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                 return Container(
                   padding: AppTheme.inboxpadding,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Expanded(
+                      Container(
+                        height: 130,
+                        width: MediaQuery.of(context).size.width - 58 - 60,
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 4, bottom: 3),
-                                  child: Text(
-                                    investIncomeChange > 100000.00
-                                        ? '+' +
-                                            providerdata.currency.iconName +
-                                            NumberFormat.compact(
-                                                    locale:
-                                                        Intl.getCurrentLocale())
-                                                .format(
-                                                    investIncomeChange *
-                                                        widget
-                                                            .mainScreenAnimation
-                                                            .value)
-                                        : '+' +
-                                            NumberFormat(
-                                                    providerdata
-                                                            .currency.iconName +
-                                                        " ###,###.0#",
-                                                    Intl.getCurrentLocale())
-                                                .format(investIncomeChange *
-                                                    widget.mainScreenAnimation
-                                                        .value),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 32,
-                                      color: ColorTheme.puristbluedarker,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, bottom: 8),
-                                  child: Text(
-                                    S.current.InvestedProfit,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      //fontFamily: FintnessAppTheme.fontName,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      letterSpacing: -0.2,
-                                      color: ColorTheme.puristbluedarker
-                                          .withOpacity(0.6),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 4, right: 4, top: 18, bottom: 18),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  FaIcon(
-                                    FontAwesomeIcons.award,
-                                    size: 14,
-                                    color: ColorTheme.cantaloupedarker,
-                                  ),
-                                  SizedBox(
-                                    width: 5,
-                                  ),
-                                  Flexible(
-                                    child: Text(
-                                      S.current.Keepfinancialfreedom,
-                                      textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                        //fontFamily: ColorTheme.fontName,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12,
-                                        letterSpacing: 0.0,
-                                        color: ColorTheme.cantaloupedarker,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              padding:
+                                  const EdgeInsets.only(left: 0, bottom: 15),
+                              child: Text(
+                                providerdata.currency.iconName +
+                                    ' ' +
+                                    NumberFormat.compact(
+                                            locale: Intl.getCurrentLocale())
+                                        .format(investIncomeChange *
+                                            widget.mainScreenAnimation.value),
+                                textAlign: TextAlign.start,
+                                style: setHomeNumnberText(
+                                    ColorTheme.puristbluedarker),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: <Widget>[
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 4, bottom: 3),
-                                  child: Text(
-                                    expensesChange > 100000.00
-                                        ? '-' +
-                                            providerdata.currency.iconName +
-                                            ' ' +
-                                            NumberFormat.compact(
-                                                    locale:
-                                                        Intl.getCurrentLocale())
-                                                .format(
-                                                    expensesChange *
-                                                        widget
-                                                            .mainScreenAnimation
-                                                            .value)
-                                        : '-' +
-                                            NumberFormat(
-                                                    providerdata
-                                                            .currency.iconName +
-                                                        " ###,###.0#",
-                                                    Intl.getCurrentLocale())
-                                                .format(expensesChange *
-                                                    widget.mainScreenAnimation
-                                                        .value),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 32,
-                                      color: ColorTheme.cantaloupe,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 8, bottom: 8),
-                                  child: Text(
-                                    S.current.Expenses,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      //fontFamily: FintnessAppTheme.fontName,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      letterSpacing: -0.2,
-                                      color: ColorTheme.cantaloupe
-                                          .withOpacity(0.5),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            Container(
+                              alignment: Alignment.centerLeft,
+                              padding:
+                                  const EdgeInsets.only(left: 0, bottom: 3),
+                              child: Text(
+                                S.current.ReduceExpenses,
+                                textAlign: TextAlign.start,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    setNoteTitle(ColorTheme.cantaloupedarker),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 8,
+                      Container(
+                        width: 60,
+                        height: 160,
+                        decoration: BoxDecoration(
+                          color: ColorTheme.forWater,
+                          borderRadius: AppTheme.normalBorderRadius,
                         ),
-                        child: Container(
-                          width: 60,
-                          height: 160,
-                          decoration: BoxDecoration(
-                            color: ColorTheme.forWater,
-                            borderRadius: AppTheme.normalBorderRadius,
-                          ),
-                          child: WaveView(
-                            percentageValue: freedomService,
-                          ),
+                        child: WaveView(
+                          percentageValue: freedomService,
                         ),
                       )
                     ],

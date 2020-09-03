@@ -116,6 +116,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "PlanPaymentDate" : MessageLookupByLibrary.simpleMessage("Plan Payment Date"),
     "PublicTransport" : MessageLookupByLibrary.simpleMessage("Public Transport"),
     "Received" : MessageLookupByLibrary.simpleMessage("Received"),
+    "ReduceExpenses" : MessageLookupByLibrary.simpleMessage("Increase invest income or reduce expenses make financial freedom above 100%"),
     "Rent" : MessageLookupByLibrary.simpleMessage("Rent"),
     "Repair" : MessageLookupByLibrary.simpleMessage("Repair"),
     "Restaurant" : MessageLookupByLibrary.simpleMessage("Restaurant"),

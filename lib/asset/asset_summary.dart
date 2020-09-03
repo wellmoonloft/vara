@@ -70,20 +70,12 @@ class AssetSummaryView extends StatelessWidget {
                                               height: 50),
                                           SummaryTopTitile(
                                             title: S.current.NetAsset,
-                                            value: netAsset.abs() > 100000.00
-                                                ? providerdata
-                                                        .currency.iconName +
-                                                    ' ' +
-                                                    NumberFormat.compact(
-                                                            locale: Intl
-                                                                .getCurrentLocale())
-                                                        .format(netAsset *
-                                                            animation.value)
-                                                : NumberFormat(
-                                                        providerdata.currency
-                                                                .iconName +
-                                                            " ###,###.0#",
-                                                        Intl.getCurrentLocale())
+                                            value: providerdata
+                                                    .currency.iconName +
+                                                ' ' +
+                                                NumberFormat.compact(
+                                                        locale: Intl
+                                                            .getCurrentLocale())
                                                     .format(netAsset *
                                                         animation.value),
                                             color: ColorTheme.puristbluedarker,

@@ -16,7 +16,8 @@ class LanguageView extends StatelessWidget {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Language, style: AppTheme.titleText),
+              title: Text(S.current.Language,
+                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,
@@ -67,7 +68,8 @@ class LanguageView extends StatelessWidget {
                               Text(
                                 language[index],
                                 textAlign: TextAlign.start,
-                                style: AppTheme.titleTextSmallLighter,
+                                style:
+                                    setNoteTitleLighter(ColorTheme.greydarker),
                               ),
                               // FaIcon(
                               //   FontAwesomeIcons.check,

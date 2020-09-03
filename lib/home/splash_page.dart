@@ -52,8 +52,10 @@ class _SplashPageState extends State<SplashPage> {
     var providerData = Provider.of<ProviderData>(context, listen: false);
     providerData.setCurrencyData(currency, currencyTilte);
     print("----get data done------");
-    Navigator.of(context).pushReplacement(
-        new MaterialPageRoute(builder: (context) => HomeScreen()));
+    Navigator.of(context).pushReplacement(new MaterialPageRoute(
+        builder: (context) => HomeScreen(
+              tabBodyView: 'AssetHome',
+            )));
   }
 
   _doDatabase() async {
@@ -65,7 +67,6 @@ class _SplashPageState extends State<SplashPage> {
     await providerData.getPerson();
 
     DBHelper dbHelper = DBHelper();
-    //dbHelper.initDatabase();
     Settings settings = await dbHelper.getSettings();
     currencyTilte = settings.currency;
     String language = settings.language;
@@ -76,7 +77,6 @@ class _SplashPageState extends State<SplashPage> {
           S.load(Locale('zh', 'CN'));
         }
         break;
-
       case 'HK':
         {
           S.load(Locale('zh', 'HK'));

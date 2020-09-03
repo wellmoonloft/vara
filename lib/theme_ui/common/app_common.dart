@@ -30,12 +30,7 @@ class SummaryBottom extends StatelessWidget {
       children: <Widget>[
         Text(
           title,
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 16,
-            letterSpacing: -0.2,
-            color: ColorTheme.greydarker,
-          ),
+          style: setNoteTitle(ColorTheme.greydarker),
         ),
         subtitle == ''
             ? Padding(padding: const EdgeInsets.only(top: 4))
@@ -44,11 +39,7 @@ class SummaryBottom extends StatelessWidget {
                 child: Text(
                   subtitle,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    color: ColorTheme.grey.withOpacity(0.5),
-                  ),
+                  style: setHomeGraphTitle(ColorTheme.grey.withOpacity(0.5)),
                 ),
               ),
         Padding(
@@ -82,12 +73,7 @@ class SummaryBottom extends StatelessWidget {
           child: Text(
             value,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              letterSpacing: -0.5,
-              fontSize: 14,
-              color: color,
-            ),
+            style: setNoteTitleSmall(color),
           ),
         ),
       ],
@@ -118,7 +104,7 @@ class SummaryTopTitile extends StatelessWidget {
             padding: const EdgeInsets.only(left: 4, bottom: 2),
             child: Text(title,
                 textAlign: TextAlign.center,
-                style: AppTheme.titleTextSmallLighter),
+                style: setNoteTitle(ColorTheme.greydarker)),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -268,7 +254,8 @@ class AppBarUI extends StatelessWidget {
                               child: Text(
                                 title,
                                 textAlign: TextAlign.left,
-                                style: AppTheme.homeTitleText,
+                                style: setHomeNumnberText(
+                                    ColorTheme.greytripledarker),
                               ),
                             ),
                             settings == 'settings'
@@ -388,7 +375,7 @@ class SettingsAppBarUI extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8),
                               child: Text(
                                 providerdata.person.firstname,
-                                style: AppTheme.titleTextSmall,
+                                style: setNoteTitle(ColorTheme.greydarker),
                               ));
                         })
                       ]),
@@ -424,11 +411,7 @@ class ListDetail extends StatelessWidget {
               padding: EdgeInsets.only(top: 20, left: 20),
               child: Text(
                 title,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: ColorTheme.greydarker,
-                ),
+                style: setNoteTitleLighter(ColorTheme.greydarker),
               ),
             ),
           ),
@@ -438,11 +421,7 @@ class ListDetail extends StatelessWidget {
               child: Text(
                 value,
                 textAlign: TextAlign.end,
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  color: ColorTheme.greydarker,
-                ),
+                style: setNoteTitleLighter(ColorTheme.greydarker),
               ),
             ),
           ),

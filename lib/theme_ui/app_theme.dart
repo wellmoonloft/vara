@@ -11,71 +11,6 @@ class AppTheme {
   static const chartTitlepadding =
       EdgeInsets.only(left: 24, right: 8, top: 8, bottom: 8);
 
-  static const toptitleText = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 14,
-    letterSpacing: 0,
-    color: ColorTheme.white,
-  );
-
-  static const chartText = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 12,
-    letterSpacing: 0,
-    color: ColorTheme.white,
-  );
-
-  static const toptitleBigText = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 16,
-    letterSpacing: 0,
-    color: ColorTheme.white,
-  );
-
-  static const buttomTitle = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 18,
-    letterSpacing: 1,
-    color: ColorTheme.white,
-  );
-
-  static const titleText = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 20,
-    color: ColorTheme.greytripledarker,
-  );
-
-  static const titleTextSmall = TextStyle(
-    fontWeight: FontWeight.w700,
-    fontSize: 16,
-    color: ColorTheme.greytripledarker,
-  );
-
-  static const titleTextSmallLighter = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 16,
-    color: ColorTheme.greydarker,
-  );
-
-  static const titleTextSmallLighterS = TextStyle(
-    fontWeight: FontWeight.w500,
-    fontSize: 14,
-    color: ColorTheme.greydarker,
-  );
-
-  static const subtitleText = TextStyle(
-    fontSize: 12,
-    letterSpacing: 0.0,
-    color: ColorTheme.grey,
-  );
-
-  static const homeTitleText = TextStyle(
-    fontWeight: FontWeight.w800,
-    fontSize: 32,
-    letterSpacing: 0,
-    color: ColorTheme.greytripledarker,
-  );
-
   static const normalBorderRadius = BorderRadius.all(Radius.circular(8.0));
   static const smallBorderRadius = BorderRadius.all(Radius.circular(6.0));
   static const normalBoxShadow = BoxShadow(
@@ -95,7 +30,7 @@ class AppTheme {
 setHomeNumnberText(Color color) {
   return TextStyle(
     fontWeight: FontWeight.w800,
-    fontSize: 26,
+    fontSize: 32,
     color: color,
   );
 }
@@ -103,13 +38,46 @@ setHomeNumnberText(Color color) {
 setHomeGraphNumnber(Color color) {
   return TextStyle(
     fontWeight: FontWeight.w800,
-    fontSize: 18,
+    fontSize: 20,
+    color: color,
+  );
+}
+
+setHomeGraphNumnberLighter(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20,
+    color: color,
+  );
+}
+
+setNoteTitle(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    color: color,
+  );
+}
+
+setNoteTitleSmall(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 14,
+    color: color,
+  );
+}
+
+setNoteTitleLighter(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
     color: color,
   );
 }
 
 setHomeGraphTitle(Color color) {
   return TextStyle(
+    fontWeight: FontWeight.w500,
     fontSize: 12,
     letterSpacing: -0.5,
     color: color,

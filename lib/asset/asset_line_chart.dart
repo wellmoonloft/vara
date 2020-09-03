@@ -173,7 +173,7 @@ class ShowDetail extends StatelessWidget {
                               providerdata.date == null
                                   ? S.current.Date
                                   : S.current.Date + ': ' + providerdata.date,
-                              style: AppTheme.chartText,
+                              style: setNoteTitleSmall(ColorTheme.white),
                             ),
                             Consumer<ProviderData>(
                                 builder: (context, providerdata1, child) {
@@ -182,14 +182,13 @@ class ShowDetail extends StatelessWidget {
                                     ? S.current.Asset + ': 0'
                                     : S.current.Asset +
                                         ': ' +
-                                        NumberFormat(
-                                                providerdata1
-                                                        .currency.iconName +
-                                                    " ###,###.0#",
-                                                Intl.getCurrentLocale())
+                                        providerdata1.currency.iconName +
+                                        ' ' +
+                                        NumberFormat.compact(
+                                                locale: Intl.getCurrentLocale())
                                             .format(
-                                                (providerdata.number['Asset'])),
-                                style: AppTheme.chartText,
+                                                providerdata.number['Asset']),
+                                style: setNoteTitleSmall(ColorTheme.white),
                               );
                             }),
                             Consumer<ProviderData>(
@@ -199,14 +198,13 @@ class ShowDetail extends StatelessWidget {
                                     ? S.current.Debt + ': 0'
                                     : S.current.Debt +
                                         ': ' +
-                                        NumberFormat(
-                                                providerdata1
-                                                        .currency.iconName +
-                                                    " ###,###.0#",
-                                                Intl.getCurrentLocale())
+                                        providerdata1.currency.iconName +
+                                        ' ' +
+                                        NumberFormat.compact(
+                                                locale: Intl.getCurrentLocale())
                                             .format(
-                                                (providerdata.number['Debt'])),
-                                style: AppTheme.chartText,
+                                                providerdata.number['Debt']),
+                                style: setNoteTitleSmall(ColorTheme.white),
                               );
                             }),
                             Consumer<ProviderData>(
@@ -216,14 +214,13 @@ class ShowDetail extends StatelessWidget {
                                     ? S.current.NetAsset + ': 0'
                                     : S.current.NetAsset +
                                         ': ' +
-                                        NumberFormat(
-                                                providerdata1
-                                                        .currency.iconName +
-                                                    " ###,###.0#",
-                                                Intl.getCurrentLocale())
-                                            .format((providerdata
-                                                .number['NetAsset'])),
-                                style: AppTheme.chartText,
+                                        providerdata1.currency.iconName +
+                                        ' ' +
+                                        NumberFormat.compact(
+                                                locale: Intl.getCurrentLocale())
+                                            .format(providerdata
+                                                .number['NetAsset']),
+                                style: setNoteTitleSmall(ColorTheme.white),
                               );
                             })
                           ],

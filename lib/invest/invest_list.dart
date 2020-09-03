@@ -46,7 +46,8 @@ class InvestListState extends State<InvestListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text(S.current.InvestList, style: AppTheme.titleText),
+        title: Text(S.current.InvestList,
+            style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -69,14 +70,14 @@ class InvestListState extends State<InvestListView> {
                           child: Text(
                             S.current.Date,
                             textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
+                            style: setNoteTitleSmall(ColorTheme.grey),
                           ),
                         ),
                         Expanded(
                           child: Text(
                             S.current.Status,
                             textAlign: TextAlign.center,
-                            style: AppTheme.subtitleText,
+                            style: setNoteTitleSmall(ColorTheme.grey),
                           ),
                         ),
                       ],
@@ -105,7 +106,8 @@ class InvestListState extends State<InvestListView> {
                                 alignment: Alignment(0, 0),
                                 child: Text(
                                   date,
-                                  style: AppTheme.titleTextSmallLighter,
+                                  style: setNoteTitleLighter(
+                                      ColorTheme.greydarker),
                                 ),
                               )),
                         ),
@@ -202,7 +204,8 @@ class InvestListState extends State<InvestListView> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
-                                                  style: AppTheme.subtitleText,
+                                                  style: setHomeGraphTitle(
+                                                      ColorTheme.grey),
                                                 ),
                                               ),
                                             ]),

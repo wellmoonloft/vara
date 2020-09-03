@@ -30,7 +30,8 @@ class CurrencyView extends StatelessWidget {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Currency, style: AppTheme.titleText),
+              title: Text(S.current.Currency,
+                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,
@@ -53,7 +54,8 @@ class CurrencyView extends StatelessWidget {
                               Text(
                                 currencyList[index],
                                 textAlign: TextAlign.start,
-                                style: AppTheme.titleTextSmallLighter,
+                                style:
+                                    setNoteTitleLighter(ColorTheme.greydarker),
                               ),
                               // FaIcon(
                               //   FontAwesomeIcons.check,

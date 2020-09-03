@@ -129,26 +129,14 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                     Text(
                       widget.percentageValue.round().toString(),
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        //fontFamily: FintnessAppTheme.fontName,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 22,
-                        letterSpacing: 0.0,
-                        color: ColorTheme.white,
-                      ),
+                      style: setHomeGraphNumnberLighter(ColorTheme.white),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(
                         '%',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                          //fontFamily: FintnessAppTheme.fontName,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                          letterSpacing: 0.0,
-                          color: ColorTheme.white,
-                        ),
+                        style: setNoteTitleLighter(ColorTheme.white),
                       ),
                     ),
                   ],
@@ -232,14 +220,6 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            // Column(
-            //   children: <Widget>[
-            //     AspectRatio(
-            //       aspectRatio: 1,
-            //       child: Image.asset("assets/Images/bottle.png"),
-            //     ),
-            //   ],
-            // )
           ],
         ),
       ),
@@ -249,17 +229,13 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
 
 class WaveClipper extends CustomClipper<Path> {
   final double animation;
-
   List<Offset> waveList1 = [];
-
   WaveClipper(this.animation, this.waveList1);
 
   @override
   Path getClip(Size size) {
     Path path = new Path();
-
     path.addPolygon(waveList1, false);
-
     path.lineTo(size.width, size.height);
     path.lineTo(0.0, size.height);
     path.close();
