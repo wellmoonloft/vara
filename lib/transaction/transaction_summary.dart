@@ -28,7 +28,7 @@ class BillSummaryView extends StatelessWidget {
                     double netIncome = 0.0;
                     double income = 0.0;
                     double expenses = 0.0;
-                    double freedomService = 0.0;
+                    //double freedomService = 0.0;
                     num rate = 1;
                     providerdata.billList.forEach((element) {
                       providerdata.currencyData.forEach((element1) {
@@ -43,11 +43,11 @@ class BillSummaryView extends StatelessWidget {
                       });
                     });
                     netIncome = income - expenses;
-                    if (expenses == 0 || income == 0) {
-                      freedomService = 0;
-                    } else {
-                      freedomService = income / expenses * 100;
-                    }
+                    // if (expenses == 0 || income == 0) {
+                    //   freedomService = 0;
+                    // } else {
+                    //   freedomService = income / expenses * 100;
+                    // }
 
                     return Container(
                         width: MediaQuery.of(context).size.width,
@@ -90,21 +90,21 @@ class BillSummaryView extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: AppTheme.leftRightPadding),
-                                      child: Center(
-                                        child: SummaryTopGraph(
-                                          title: S.current.FinancialFreedom,
-                                          value:
-                                              freedomService * animation.value,
-                                          color: ColorTheme.cantaloupe,
-                                          subcolor:
-                                              ColorTheme.cantaloupelighter,
-                                          mark: false,
-                                        ),
-                                      ),
-                                    )
+                                    // Padding(
+                                    //   padding: const EdgeInsets.only(
+                                    //       right: AppTheme.leftRightPadding),
+                                    //   child: Center(
+                                    //     child: SummaryTopGraph(
+                                    //       title: S.current.FinancialFreedom,
+                                    //       value:
+                                    //           freedomService * animation.value,
+                                    //       color: ColorTheme.cantaloupe,
+                                    //       subcolor:
+                                    //           ColorTheme.cantaloupelighter,
+                                    //       mark: false,
+                                    //     ),
+                                    //   ),
+                                    // )
                                   ],
                                 ),
                               )

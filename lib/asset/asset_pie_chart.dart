@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
@@ -24,26 +25,30 @@ class AssetPieChartView extends StatelessWidget {
               child: Transform(
                   transform: new Matrix4.translationValues(
                       0.0, 30 * (1.0 - animation.value), 0.0),
-                  child: Container(
-                      padding: EdgeInsets.only(
-                          left: 0, right: 20, top: 30, bottom: 20),
-                      height: 380,
-                      child: charts.BarChart(_createSampleData(context),
+                  child: Consumer<ProviderData>(
+                      builder: (context, providerdata, child) {
+                    return Container(
+                        padding: EdgeInsets.only(
+                            left: 16, right: 0, top: 30, bottom: 0),
+                        height: 300,
+                        child: charts.BarChart(
+                          _createSampleData(context),
                           animate: true,
+                          vertical: false,
                           domainAxis: charts.OrdinalAxisSpec(
                             renderSpec: charts.SmallTickRendererSpec(
-                              labelOffsetFromAxisPx: 12,
-                              labelStyle: charts.TextStyleSpec(
-                                color: charts.MaterialPalette.black,
-                                fontSize: 12,
-                              ),
+                              // labelOffsetFromAxisPx: 12,
+                              // labelStyle: charts.TextStyleSpec(
+                              //   color: charts.MaterialPalette.black,
+                              //   fontSize: 12,
+                              // ),
                               lineStyle: charts.LineStyleSpec(
                                   thickness: 0,
                                   color: charts.MaterialPalette.white),
-                              axisLineStyle: charts.LineStyleSpec(
-                                thickness: 3,
-                                color: charts.Color.fromHex(code: '#6baeb7'),
-                              ),
+                              // axisLineStyle: charts.LineStyleSpec(
+                              //   thickness: 0,
+                              //   color: charts.MaterialPalette.white,
+                              // ),
                             ),
                           ),
                           primaryMeasureAxis: charts.NumericAxisSpec(
@@ -51,24 +56,24 @@ class AssetPieChartView extends StatelessWidget {
                           barGroupingType: charts.BarGroupingType.grouped,
                           behaviors: [
                             new charts.SeriesLegend(
-                              defaultHiddenSeries: ['Other'],
-                            )
+                              position: charts.BehaviorPosition.top,
+                              horizontalFirst: false,
+                              cellPadding:
+                                  new EdgeInsets.only(right: 0.0, bottom: 0.0),
+                              showMeasures: true,
+                              measureFormatter: (num value) {
+                                return value == null
+                                    ? '-'
+                                    : providerdata.currency.iconName +
+                                        ' ' +
+                                        NumberFormat.compact(
+                                                locale: Intl.getCurrentLocale())
+                                            .format(value);
+                              },
+                            ),
                           ],
-                          selectionModels: [
-                            charts.SelectionModelConfig(
-                                type: charts.SelectionModelType.info,
-                                changedListener: (SelectionModel model) {
-                                  if (model.hasDatumSelection) {
-                                    // final measures = <String, num>{};
-
-                                    // model.selectedDatum.forEach(
-                                    //     (charts.SeriesDatum datumPair) {
-                                    //   measures[datumPair.series.displayName] =
-                                    //       datumPair.datum.sales;
-                                    // });
-                                  }
-                                })
-                          ]))));
+                        ));
+                  })));
         });
   }
 
