@@ -23,6 +23,7 @@ class ColorTheme {
 
   static const Color neogreen = Color(0xFF64e4ab);
   static const Color neogreenlighter = Color(0xFFaaf0d1);
+  static const Color greenlighter = Color(0xFF66DD98);
   static const Color neogreendarker = Color(0xFF008024);
   static const Color darkred = Color(0xFFcc0000);
 
@@ -34,6 +35,7 @@ class ColorTheme {
   static const Color cassis = Color(0xFFc79ba6);
   static const Color cassislighter = Color(0xFFe7d4d8);
   static const Color cassisdarker = Color(0xFF915261);
+  static const Color redlighter = Color(0xFFEC5690);
 
   static const Color cantaloupe = Color(0xFFff6a4e);
   static const Color cantaloupelighter = Color(0xFFffb0a1);

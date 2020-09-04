@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/mine/settings/settings_view.dart';
 import 'package:vara/models/provider_data.dart';
+import 'package:vara/transaction/transaction_list.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../app_theme.dart';
 import '../color_theme.dart';
@@ -100,12 +101,14 @@ class SummaryTopTitile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(left: 4, bottom: 2),
-            child: Text(title,
-                textAlign: TextAlign.center,
-                style: setNoteTitle(ColorTheme.greydarker)),
-          ),
+          title != ''
+              ? Container()
+              : Padding(
+                  padding: const EdgeInsets.only(left: 4, bottom: 2),
+                  child: Text(title,
+                      textAlign: TextAlign.center,
+                      style: setNoteTitle(ColorTheme.greydarker)),
+                ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -254,8 +257,8 @@ class AppBarUI extends StatelessWidget {
                               child: Text(
                                 title,
                                 textAlign: TextAlign.left,
-                                style: setHomeNumnberText(
-                                    ColorTheme.greytripledarker),
+                                style:
+                                    setTitleText(ColorTheme.greytripledarker),
                               ),
                             ),
                             settings == 'settings'
@@ -263,16 +266,15 @@ class AppBarUI extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: InkWell(
                                         onTap: () {
-                                          Navigator.push(context,
-                                              MaterialPageRoute(builder:
-                                                  (BuildContext context) {
-                                            return SettingsView();
-                                          })).then((data) {
-                                            if (data != null) {}
-                                          });
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    BillListView()),
+                                          );
                                         },
                                         child: FaIcon(
-                                          FontAwesomeIcons.cog,
+                                          FontAwesomeIcons.list,
                                           size: 16,
                                           color: ColorTheme.greytripledarker,
                                         )),

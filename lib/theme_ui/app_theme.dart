@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'color_theme.dart';
 
 class AppTheme {
@@ -30,7 +31,15 @@ class AppTheme {
 setHomeNumnberText(Color color) {
   return TextStyle(
     fontWeight: FontWeight.w800,
-    fontSize: 32,
+    fontSize: 40,
+    color: color,
+  );
+}
+
+setTitleText(Color color) {
+  return TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 28,
     color: color,
   );
 }
@@ -55,6 +64,7 @@ setNoteTitle(Color color) {
   return TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 16,
+    letterSpacing: -0.5,
     color: color,
   );
 }

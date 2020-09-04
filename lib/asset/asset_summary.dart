@@ -51,57 +51,141 @@ class AssetSummaryView extends StatelessWidget {
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
-                            child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: AppTheme.outboxpadding,
-                              child: Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
+                            child: Column(children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: 20, right: 0, top: 16, bottom: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 8, right: 8, top: 4),
-                                      child: Row(
-                                        children: <Widget>[
-                                          BeforeTitle(
-                                              color:
-                                                  ColorTheme.puristbluedarker,
-                                              width: 3,
-                                              height: 50),
-                                          SummaryTopTitile(
-                                            title: S.current.NetAsset,
-                                            value: providerdata
-                                                    .currency.iconName +
+                                          left: 4, bottom: 2),
+                                      child: Text(S.current.NetAsset,
+                                          textAlign: TextAlign.center,
+                                          style: setNoteTitle(
+                                              ColorTheme.greydarker)),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 4, top: 5),
+                                          child: Text(
+                                              netAsset.abs() > 100000.00
+                                                  ? providerdata
+                                                          .currency.iconName +
+                                                      ' ' +
+                                                      NumberFormat.compact(locale: Intl.getCurrentLocale())
+                                                          .format(netAsset *
+                                                              animation.value)
+                                                  : NumberFormat(
+                                                          providerdata.currency
+                                                                  .iconName +
+                                                              " ###,###.00",
+                                                          Intl
+                                                              .getCurrentLocale())
+                                                      .format(netAsset *
+                                                          animation.value),
+                                              textAlign: TextAlign.center,
+                                              style: setHomeNumnberText(
+                                                  ColorTheme.greytripledarker)),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: AppTheme.leftRightPadding),
+                                  child: Center(
+                                    child: SummaryTopGraph(
+                                      title: S.current.DebtService,
+                                      value: debtService * animation.value,
+                                      color: ColorTheme.puristbluedarker,
+                                      subcolor: ColorTheme.puristbluelighter,
+                                      mark: true,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                              //mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Padding(
+                                  padding: AppTheme.chartTitlepadding,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        S.current.Asset,
+                                        textAlign: TextAlign.start,
+                                        style:
+                                            setNoteTitle(ColorTheme.greydarker),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 6, bottom: 6),
+                                        child: Text(
+                                            providerdata.currency.iconName +
                                                 ' ' +
                                                 NumberFormat.compact(
                                                         locale: Intl
                                                             .getCurrentLocale())
-                                                    .format(netAsset *
+                                                    .format(asset *
                                                         animation.value),
-                                            color: ColorTheme.puristbluedarker,
-                                          )
-                                        ],
+                                            textAlign: TextAlign.start,
+                                            style: setTitleText(
+                                                ColorTheme.cassis)),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: AppTheme.leftRightPadding),
-                                    child: Center(
-                                      child: SummaryTopGraph(
-                                        title: S.current.DebtService,
-                                        value: debtService * animation.value,
-                                        color: ColorTheme.puristbluedarker,
-                                        subcolor: ColorTheme.puristbluelighter,
-                                        mark: true,
+                                ),
+                                Padding(
+                                  padding: AppTheme.chartTitlepadding,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        S.current.Debt,
+                                        textAlign: TextAlign.end,
+                                        style:
+                                            setNoteTitle(ColorTheme.greydarker),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ],
-                        )));
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 6, bottom: 6),
+                                        child: Text(
+                                            providerdata.currency.iconName +
+                                                ' ' +
+                                                NumberFormat.compact(
+                                                        locale: Intl
+                                                            .getCurrentLocale())
+                                                    .format(
+                                                        debt * animation.value),
+                                            textAlign: TextAlign.end,
+                                            style: setTitleText(
+                                                ColorTheme.cantaloupe)),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ])
+                        ])));
                   })));
         });
   }

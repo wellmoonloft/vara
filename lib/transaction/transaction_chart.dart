@@ -3,7 +3,6 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
-import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 
 class TransactionChart extends StatelessWidget {
@@ -25,7 +24,7 @@ class TransactionChart extends StatelessWidget {
                   child: Consumer<ProviderData>(
                       builder: (context, providerdata, child) {
                     return Container(
-                        padding: EdgeInsets.only(left: 16, right: 16, top: 10),
+                        padding: EdgeInsets.only(left: 16, right: 16, top: 40),
                         height: 500,
                         child: charts.BarChart(
                           _createSampleData(context),
