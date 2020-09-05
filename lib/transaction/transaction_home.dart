@@ -27,7 +27,7 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
     listViews.add(
       AppBarUI(
         title: S.current.Transaction,
-        settings: 'settings',
+        settings: 'bill',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:

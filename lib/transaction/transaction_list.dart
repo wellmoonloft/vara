@@ -62,12 +62,11 @@ class BillListState extends State<BillListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text(S.current.TransactionList,
-            style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+        title: Text(S.current.TransactionList, style: AppTheme.subPageTitle),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
-            color: ColorTheme.greytripledarker,
+            color: ColorTheme.mainBlack,
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -86,14 +85,14 @@ class BillListState extends State<BillListView> {
                           child: Text(
                             S.current.Date,
                             textAlign: TextAlign.center,
-                            style: setNoteTitleSmall(ColorTheme.grey),
+                            style: AppTheme.listTitle,
                           ),
                         ),
                         Expanded(
                           child: Text(
                             S.current.Category,
                             textAlign: TextAlign.center,
-                            style: setNoteTitleSmall(ColorTheme.grey),
+                            style: AppTheme.listTitle,
                           ),
                         ),
                       ],
@@ -123,8 +122,7 @@ class BillListState extends State<BillListView> {
                                 alignment: Alignment(0, 0),
                                 child: Text(
                                   date,
-                                  style: setNoteTitleLighter(
-                                      ColorTheme.greydarker),
+                                  style: AppTheme.noteTitle,
                                 ),
                               )),
                         ),
@@ -243,8 +241,7 @@ class BillListState extends State<BillListView> {
                                           softWrap: true,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
-                                          style: setHomeGraphTitle(
-                                              ColorTheme.grey),
+                                          style: AppTheme.noteSubTitle,
                                         ),
                                       ),
                                     ]),

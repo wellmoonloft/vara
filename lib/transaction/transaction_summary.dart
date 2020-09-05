@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
-import 'package:intl/intl.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import '../theme_ui/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
@@ -52,53 +52,28 @@ class BillSummaryView extends StatelessWidget {
                     return Container(
                         width: MediaQuery.of(context).size.width,
                         child: Container(
+                          padding: EdgeInsets.only(
+                              left: 16, right: 16, top: 16, bottom: 20),
                           child: Column(
                             children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 16, right: 16, top: 16, bottom: 20),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        children: <Widget>[
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 4, top: 5),
-                                            child: Text(
-                                                netIncome.abs() > 100000.00
-                                                    ? providerdata
-                                                            .currency.iconName +
-                                                        ' ' +
-                                                        NumberFormat.compact(locale: Intl.getCurrentLocale())
-                                                            .format(netIncome *
-                                                                animation.value)
-                                                    : NumberFormat(
-                                                            providerdata
-                                                                    .currency
-                                                                    .iconName +
-                                                                " ###,###.00#",
-                                                            Intl
-                                                                .getCurrentLocale())
-                                                        .format(netIncome *
-                                                            animation.value),
-                                                textAlign: TextAlign.center,
-                                                style: setHomeNumnberText(
-                                                    ColorTheme.greytripledarker)),
-                                          ),
-                                        ],
-                                      )
-                                    ],
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    S.current.Income,
+                                    textAlign: TextAlign.start,
+                                    style: AppTheme.noteTitle,
                                   ),
-                                ),
+                                  Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 20),
+                                      child: NumbersText(
+                                          value: netIncome * animation.value,
+                                          style: AppTheme.mainNumbers,
+                                          currency:
+                                              providerdata.currency.iconName)),
+                                ],
                               ),
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -111,8 +86,8 @@ class BillSummaryView extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Container(
-                                                width: 60,
-                                                height: 60,
+                                                width: 50,
+                                                height: 50,
                                                 decoration: BoxDecoration(
                                                   color: ColorTheme.white,
                                                   borderRadius:
@@ -120,13 +95,13 @@ class BillSummaryView extends StatelessWidget {
                                                     Radius.circular(100.0),
                                                   ),
                                                   border: new Border.all(
-                                                      width: 5,
+                                                      width: 4,
                                                       color: ColorTheme
                                                           .greenlighter),
                                                 ),
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 18, left: 18),
+                                                      top: 14, left: 14),
                                                   child: FaIcon(
                                                     FontAwesomeIcons.sortUp,
                                                     color:
@@ -144,35 +119,19 @@ class BillSummaryView extends StatelessWidget {
                                                 Text(
                                                   S.current.Income,
                                                   textAlign: TextAlign.start,
-                                                  style: setNoteTitleSmall(
-                                                      ColorTheme.greydarker),
+                                                  style: AppTheme.noteTitle,
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 6, bottom: 6),
-                                                  child: Text(
-                                                      income.abs() > 100000.00
-                                                          ? providerdata
-                                                                  .currency
-                                                                  .iconName +
-                                                              ' ' +
-                                                              NumberFormat.compact(
-                                                                      locale: Intl
-                                                                          .getCurrentLocale())
-                                                                  .format(income *
-                                                                      animation
-                                                                          .value)
-                                                          : NumberFormat(
-                                                                  providerdata
-                                                                          .currency
-                                                                          .iconName +
-                                                                      " ###,###.00#",
-                                                                  Intl.getCurrentLocale())
-                                                              .format(income * animation.value),
-                                                      textAlign: TextAlign.start,
-                                                      style: setNoteTitle(ColorTheme.greytripledarker)),
-                                                ),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 6, bottom: 6),
+                                                    child: NumbersText(
+                                                      value: income,
+                                                      style:
+                                                          AppTheme.subNumbers,
+                                                      currency: providerdata
+                                                          .currency.iconName,
+                                                    )),
                                               ],
                                             ),
                                           ],
@@ -185,8 +144,8 @@ class BillSummaryView extends StatelessWidget {
                                               padding:
                                                   const EdgeInsets.all(8.0),
                                               child: Container(
-                                                width: 60,
-                                                height: 60,
+                                                width: 50,
+                                                height: 50,
                                                 decoration: BoxDecoration(
                                                   color: ColorTheme.white,
                                                   borderRadius:
@@ -194,13 +153,13 @@ class BillSummaryView extends StatelessWidget {
                                                     Radius.circular(100.0),
                                                   ),
                                                   border: new Border.all(
-                                                      width: 5,
+                                                      width: 4,
                                                       color: ColorTheme
                                                           .redlighter),
                                                 ),
                                                 child: Padding(
                                                   padding: EdgeInsets.only(
-                                                      top: 9, left: 18),
+                                                      top: 4, left: 14),
                                                   child: FaIcon(
                                                     FontAwesomeIcons.sortDown,
                                                     color:
@@ -218,35 +177,19 @@ class BillSummaryView extends StatelessWidget {
                                                 Text(
                                                   S.current.Expenses,
                                                   textAlign: TextAlign.end,
-                                                  style: setNoteTitleSmall(
-                                                      ColorTheme.greydarker),
+                                                  style: AppTheme.noteTitle,
                                                 ),
                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 6, bottom: 6),
-                                                  child: Text(
-                                                      expenses.abs() > 100000.00
-                                                          ? providerdata
-                                                                  .currency
-                                                                  .iconName +
-                                                              ' ' +
-                                                              NumberFormat.compact(
-                                                                      locale: Intl
-                                                                          .getCurrentLocale())
-                                                                  .format(expenses *
-                                                                      animation
-                                                                          .value)
-                                                          : NumberFormat(
-                                                                  providerdata
-                                                                          .currency
-                                                                          .iconName +
-                                                                      " ###,###.00#",
-                                                                  Intl.getCurrentLocale())
-                                                              .format(expenses * animation.value),
-                                                      textAlign: TextAlign.end,
-                                                      style: setNoteTitle(ColorTheme.greytripledarker)),
-                                                ),
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 6, bottom: 6),
+                                                    child: NumbersText(
+                                                      value: expenses,
+                                                      style:
+                                                          AppTheme.subNumbers,
+                                                      currency: providerdata
+                                                          .currency.iconName,
+                                                    )),
                                               ],
                                             )
                                           ],

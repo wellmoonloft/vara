@@ -31,56 +31,62 @@ class AssetLineChartView extends StatelessWidget {
                           0.0, 30 * (1.0 - animation.value), 0.0),
                       child: Container(
                           height: 330,
-                          child: Stack(
-                            overflow: Overflow.visible,
-                            children: <Widget>[
-                              charts.TimeSeriesChart(
-                                _createSampleData(context),
-                                animate: true,
+                          padding: AppTheme.inboxpadding,
+                          child: Container(
+                              decoration: AppTheme.boxDecoration,
+                              child: Stack(
+                                overflow: Overflow.visible,
+                                children: <Widget>[
+                                  charts.TimeSeriesChart(
+                                    _createSampleData(context),
+                                    animate: false,
 
-                                primaryMeasureAxis: charts.NumericAxisSpec(
-                                    renderSpec: charts.NoneRenderSpec()),
-                                // primaryMeasureAxis: charts.NumericAxisSpec(
-                                //   tickFormatterSpec:
-                                //       new charts.BasicNumericTickFormatterSpec(
-                                //           (value) => '${value / 1000}M'),
-                                defaultRenderer: charts.LineRendererConfig(
-                                    includeArea: true,
-                                    includePoints: false,
-                                    includeLine: true,
-                                    stacked: false,
-                                    strokeWidthPx: 3),
-                                selectionModels: [
-                                  charts.SelectionModelConfig(
-                                      type: charts.SelectionModelType.info,
-                                      changedListener: (SelectionModel model) {
-                                        if (model.hasDatumSelection) {
-                                          var chartData =
-                                              Provider.of<ChartData>(context,
-                                                  listen: false);
-                                          final measures = <String, num>{};
-                                          String time = '';
-                                          model.selectedDatum.forEach(
-                                              (charts.SeriesDatum datumPair) {
-                                            measures[datumPair
-                                                    .series.displayName] =
-                                                datumPair.datum.sales;
-                                          });
-                                          time = DateFormat('yyyy-MM-dd')
-                                              .format(model.selectedDatum.first
-                                                  .datum.time)
-                                              .toString();
-                                          chartData.setDate(time);
-                                          chartData.setNumber(measures);
-                                        }
-                                      })
+                                    primaryMeasureAxis: charts.NumericAxisSpec(
+                                        renderSpec: charts.NoneRenderSpec()),
+                                    // primaryMeasureAxis: charts.NumericAxisSpec(
+                                    //   tickFormatterSpec:
+                                    //       new charts.BasicNumericTickFormatterSpec(
+                                    //           (value) => '${value / 1000}M'),
+                                    defaultRenderer: charts.LineRendererConfig(
+                                        includeArea: true,
+                                        includePoints: false,
+                                        includeLine: true,
+                                        stacked: false,
+                                        strokeWidthPx: 3),
+                                    selectionModels: [
+                                      charts.SelectionModelConfig(
+                                          type: charts.SelectionModelType.info,
+                                          changedListener:
+                                              (SelectionModel model) {
+                                            if (model.hasDatumSelection) {
+                                              var chartData =
+                                                  Provider.of<ChartData>(
+                                                      context,
+                                                      listen: false);
+                                              final measures = <String, num>{};
+                                              String time = '';
+                                              model.selectedDatum.forEach(
+                                                  (charts.SeriesDatum
+                                                      datumPair) {
+                                                measures[datumPair
+                                                        .series.displayName] =
+                                                    datumPair.datum.sales;
+                                              });
+                                              time = DateFormat('yyyy-MM-dd')
+                                                  .format(model.selectedDatum
+                                                      .first.datum.time)
+                                                  .toString();
+                                              chartData.setDate(time);
+                                              chartData.setNumber(measures);
+                                            }
+                                          })
+                                    ],
+                                    dateTimeFactory:
+                                        const charts.LocalDateTimeFactory(),
+                                  ),
+                                  ShowDetail()
                                 ],
-                                dateTimeFactory:
-                                    const charts.LocalDateTimeFactory(),
-                              ),
-                              ShowDetail()
-                            ],
-                          ))));
+                              )))));
             }));
   }
 

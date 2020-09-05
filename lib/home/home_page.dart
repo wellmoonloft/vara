@@ -52,16 +52,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorTheme.background,
-      child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Stack(
-            children: <Widget>[
-              tabBody,
-              bottomBar(),
-            ],
-          )),
+    return Scaffold(
+      backgroundColor: ColorTheme.white,
+      body: Stack(
+        children: <Widget>[
+          tabBody,
+          bottomBar(),
+        ],
+      ),
     );
   }
 

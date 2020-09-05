@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 
 class AccountView extends StatelessWidget {
   final AnimationController animationController;
@@ -60,54 +60,36 @@ class AccountView extends StatelessWidget {
                     }
 
                     return Container(
-                        padding: EdgeInsets.only(
-                            left: 20, right: 20, top: 30, bottom: 20),
+                        padding: AppTheme.outboxpadding,
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                padding: AppTheme.outboxpadding,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.cassis.withOpacity(0.6),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
+                                padding: AppTheme.inboxpadding,
+                                decoration: AppTheme.boxDecoration,
                                 child: Stack(
                                   children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width -
-                                          40,
-                                      padding: EdgeInsets.only(
-                                          left: 0, right: 30, top: 0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            S.current.Invest +
-                                                S.current.Account,
-                                            style:
-                                                setNoteTitle(ColorTheme.white),
-                                          ),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          Text(
-                                              providerdata.currency.iconName +
-                                                  ' ' +
-                                                  NumberFormat.compact(
-                                                          locale: Intl
-                                                              .getCurrentLocale())
-                                                      .format(totalInvest *
-                                                          animation.value),
-                                              textAlign: TextAlign.start,
-                                              style: setHomeNumnberText(
-                                                  ColorTheme.white)),
-                                          SizedBox(height: 10),
-                                        ],
-                                      ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          S.current.Invest + S.current.Account,
+                                          style: AppTheme.noteTitle,
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        NumbersText(
+                                            value:
+                                                totalInvest * animation.value,
+                                            style: AppTheme.subNumbers,
+                                            currency:
+                                                providerdata.currency.iconName),
+                                        SizedBox(height: 10),
+                                      ],
                                     ),
                                     Positioned(
                                       top: -14,
@@ -115,8 +97,8 @@ class AccountView extends StatelessWidget {
                                       child: IconButton(
                                           icon: FaIcon(
                                             FontAwesomeIcons.plus,
-                                            size: 16,
-                                            color: ColorTheme.white,
+                                            size: 14,
+                                            color: ColorTheme.greylighter,
                                           ),
                                           onPressed: null),
                                     ),
@@ -124,16 +106,12 @@ class AccountView extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 30,
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width,
-                                padding: AppTheme.outboxpadding,
-                                decoration: BoxDecoration(
-                                  color: ColorTheme.cantaloupelighter,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8.0)),
-                                ),
+                                padding: AppTheme.inboxpadding,
+                                decoration: AppTheme.boxDecoration,
                                 child: Stack(
                                   children: <Widget>[
                                     Container(
@@ -147,24 +125,17 @@ class AccountView extends StatelessWidget {
                                         children: <Widget>[
                                           Text(
                                             S.current.Cash + S.current.Account,
-                                            style:
-                                                setNoteTitle(ColorTheme.white),
+                                            style: AppTheme.noteTitle,
                                           ),
                                           SizedBox(
-                                            height: 15,
+                                            height: 16,
                                           ),
-                                          Text(
-                                            providerdata.currency.iconName +
-                                                ' ' +
-                                                NumberFormat.compact(
-                                                        locale: Intl
-                                                            .getCurrentLocale())
-                                                    .format(netIncome *
-                                                        animation.value),
-                                            textAlign: TextAlign.start,
-                                            style: setHomeNumnberText(
-                                                ColorTheme.white),
-                                          ),
+                                          NumbersText(
+                                              value:
+                                                  netIncome * animation.value,
+                                              style: AppTheme.subNumbers,
+                                              currency: providerdata
+                                                  .currency.iconName),
                                           SizedBox(height: 10),
                                         ],
                                       ),
@@ -175,8 +146,8 @@ class AccountView extends StatelessWidget {
                                       child: IconButton(
                                           icon: FaIcon(
                                             FontAwesomeIcons.plus,
-                                            size: 16,
-                                            color: ColorTheme.white,
+                                            size: 14,
+                                            color: ColorTheme.greylighter,
                                           ),
                                           onPressed: null),
                                     ),

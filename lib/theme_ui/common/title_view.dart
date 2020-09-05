@@ -7,18 +7,15 @@ import '../color_theme.dart';
 class TitleView extends StatelessWidget {
   final String titleTxt;
   final String subTxt;
-  final Color color;
   final String navigator;
   final AnimationController animationController;
   final Animation animation;
-
   const TitleView(
       {Key key,
       this.titleTxt: "",
       this.subTxt: "",
       this.animationController,
       this.animation,
-      this.color,
       this.navigator})
       : super(key: key);
 
@@ -37,28 +34,14 @@ class TitleView extends StatelessWidget {
                 padding:
                     EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      height: 28,
-                      width: 4,
-                      decoration: BoxDecoration(
-                        color: color.withOpacity(0.8),
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Expanded(
-                      child: Text(
-                        titleTxt,
-                        textAlign: TextAlign.left,
-                        style: setHomeGraphNumnberLighter(
-                            ColorTheme.greydoubledarker),
-                      ),
+                    Text(
+                      titleTxt,
+                      textAlign: TextAlign.left,
+                      style: AppTheme.listTitle,
                     ),
                     InkWell(
-                      highlightColor: Colors.transparent,
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),
                       onTap: () {
                         _navigator(context, navigator);
@@ -70,7 +53,7 @@ class TitleView extends StatelessWidget {
                             Text(
                               subTxt,
                               textAlign: TextAlign.left,
-                              style: setNoteTitleLighter(color),
+                              style: AppTheme.noteTitle,
                             ),
                             subTxt == ''
                                 ? SizedBox()
@@ -79,8 +62,8 @@ class TitleView extends StatelessWidget {
                                     width: 26,
                                     child: Icon(
                                       Icons.arrow_forward,
-                                      color: ColorTheme.greydarker,
-                                      size: 18,
+                                      color: ColorTheme.greylighter,
+                                      size: 16,
                                     ),
                                   ),
                           ],

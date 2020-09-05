@@ -22,7 +22,7 @@ class MineView extends StatelessWidget {
               backgroundColor: ColorTheme.white,
               elevation: 0,
               title: Text(S.current.AccountInformation,
-                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+                  style: AppTheme.subPageTitle),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,

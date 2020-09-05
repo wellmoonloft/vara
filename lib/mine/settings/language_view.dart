@@ -16,8 +16,7 @@ class LanguageView extends StatelessWidget {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Language,
-                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+              title: Text(S.current.Language, style: AppTheme.subPageTitle),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,

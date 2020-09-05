@@ -6,6 +6,7 @@ import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class AssetPieChartView extends StatelessWidget {
   final AnimationController animationController;
@@ -27,51 +28,54 @@ class AssetPieChartView extends StatelessWidget {
                   child: Consumer<ProviderData>(
                       builder: (context, providerdata, child) {
                     return Container(
-                        padding: EdgeInsets.only(
-                            left: 16, right: 0, top: 30, bottom: 0),
+                        padding: AppTheme.inboxpadding,
                         height: 300,
-                        child: charts.BarChart(
-                          _createSampleData(context),
-                          animate: true,
-                          vertical: false,
-                          domainAxis: charts.OrdinalAxisSpec(
-                            renderSpec: charts.SmallTickRendererSpec(
-                              // labelOffsetFromAxisPx: 12,
-                              // labelStyle: charts.TextStyleSpec(
-                              //   color: charts.MaterialPalette.black,
-                              //   fontSize: 12,
-                              // ),
-                              lineStyle: charts.LineStyleSpec(
-                                  thickness: 0,
-                                  color: charts.MaterialPalette.white),
-                              // axisLineStyle: charts.LineStyleSpec(
-                              //   thickness: 0,
-                              //   color: charts.MaterialPalette.white,
-                              // ),
-                            ),
-                          ),
-                          primaryMeasureAxis: charts.NumericAxisSpec(
-                              renderSpec: charts.NoneRenderSpec()),
-                          barGroupingType: charts.BarGroupingType.grouped,
-                          behaviors: [
-                            new charts.SeriesLegend(
-                              position: charts.BehaviorPosition.top,
-                              horizontalFirst: false,
-                              cellPadding:
-                                  new EdgeInsets.only(right: 0.0, bottom: 0.0),
-                              showMeasures: true,
-                              measureFormatter: (num value) {
-                                return value == null
-                                    ? '-'
-                                    : providerdata.currency.iconName +
-                                        ' ' +
-                                        NumberFormat.compact(
-                                                locale: Intl.getCurrentLocale())
-                                            .format(value);
-                              },
-                            ),
-                          ],
-                        ));
+                        child: Container(
+                            padding: AppTheme.inboxpadding,
+                            decoration: AppTheme.boxDecoration,
+                            child: charts.BarChart(
+                              _createSampleData(context),
+                              animate: false,
+                              vertical: false,
+                              domainAxis: charts.OrdinalAxisSpec(
+                                renderSpec: charts.SmallTickRendererSpec(
+                                  // labelOffsetFromAxisPx: 12,
+                                  // labelStyle: charts.TextStyleSpec(
+                                  //   color: charts.MaterialPalette.black,
+                                  //   fontSize: 12,
+                                  // ),
+                                  lineStyle: charts.LineStyleSpec(
+                                      thickness: 0,
+                                      color: charts.MaterialPalette.white),
+                                  // axisLineStyle: charts.LineStyleSpec(
+                                  //   thickness: 0,
+                                  //   color: charts.MaterialPalette.white,
+                                  // ),
+                                ),
+                              ),
+                              primaryMeasureAxis: charts.NumericAxisSpec(
+                                  renderSpec: charts.NoneRenderSpec()),
+                              barGroupingType: charts.BarGroupingType.grouped,
+                              behaviors: [
+                                new charts.SeriesLegend(
+                                  position: charts.BehaviorPosition.top,
+                                  horizontalFirst: false,
+                                  cellPadding: new EdgeInsets.only(
+                                      right: 0.0, bottom: 0.0),
+                                  showMeasures: true,
+                                  measureFormatter: (num value) {
+                                    return value == null
+                                        ? '-'
+                                        : providerdata.currency.iconName +
+                                            ' ' +
+                                            NumberFormat.compact(
+                                                    locale:
+                                                        Intl.getCurrentLocale())
+                                                .format(value);
+                                  },
+                                ),
+                              ],
+                            )));
                   })));
         });
   }

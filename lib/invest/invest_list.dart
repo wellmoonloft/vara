@@ -46,8 +46,7 @@ class InvestListState extends State<InvestListView> {
         brightness: Brightness.light,
         backgroundColor: ColorTheme.white,
         elevation: 0,
-        title: Text(S.current.InvestList,
-            style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+        title: Text(S.current.InvestList, style: AppTheme.subPageTitle),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             iconSize: 20,
@@ -204,8 +203,7 @@ class InvestListState extends State<InvestListView> {
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 1,
-                                                  style: setHomeGraphTitle(
-                                                      ColorTheme.grey),
+                                                  style: AppTheme.noteSubTitle,
                                                 ),
                                               ),
                                             ]),

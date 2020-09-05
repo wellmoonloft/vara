@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/mine/settings/settings_view.dart';
 import 'package:vara/models/provider_data.dart';
@@ -11,17 +12,11 @@ import '../color_theme.dart';
 class SummaryBottom extends StatelessWidget {
   final String title;
   final String subtitle;
-  final String value;
-  final Color color;
-  final String subcolor;
+  final double value;
+  final String currency;
 
   const SummaryBottom(
-      {Key key,
-      this.title,
-      this.subtitle,
-      this.value,
-      this.color,
-      this.subcolor})
+      {Key key, this.title, this.subtitle, this.value, this.currency})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -31,98 +26,24 @@ class SummaryBottom extends StatelessWidget {
       children: <Widget>[
         Text(
           title,
-          style: setNoteTitle(ColorTheme.greydarker),
-        ),
-        subtitle == ''
-            ? Padding(padding: const EdgeInsets.only(top: 4))
-            : Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Text(
-                  subtitle,
-                  textAlign: TextAlign.center,
-                  style: setHomeGraphTitle(ColorTheme.grey.withOpacity(0.5)),
-                ),
-              ),
-        Padding(
-          padding: const EdgeInsets.only(right: 0, top: 6),
-          child: Container(
-            height: 4,
-            width: 70,
-            decoration: BoxDecoration(
-              color: HexColor(subcolor).withOpacity(0.2),
-              borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            ),
-            child: Row(
-              children: <Widget>[
-                Container(
-                  width: ((70 / 2.5)),
-                  height: 4,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: [
-                      HexColor(subcolor),
-                      HexColor(subcolor).withOpacity(0.1),
-                    ]),
-                    borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          style: AppTheme.listTitleWhite,
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 6),
           child: Text(
-            value,
+            subtitle,
             textAlign: TextAlign.center,
-            style: setNoteTitleSmall(color),
+            style: AppTheme.noteSubTitleWhite,
           ),
         ),
+        Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: NumbersText(
+              value: value,
+              style: AppTheme.inboxNumber,
+              currency: currency,
+            )),
       ],
-    );
-  }
-}
-
-class SummaryTopTitile extends StatelessWidget {
-  final String title;
-  final String value;
-  final Color color;
-
-  const SummaryTopTitile({
-    Key key,
-    this.title,
-    this.value,
-    this.color,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          title != ''
-              ? Container()
-              : Padding(
-                  padding: const EdgeInsets.only(left: 4, bottom: 2),
-                  child: Text(title,
-                      textAlign: TextAlign.center,
-                      style: setNoteTitle(ColorTheme.greydarker)),
-                ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 4, top: 5),
-                child: Text(value,
-                    textAlign: TextAlign.center,
-                    style: setHomeNumnberText(color)),
-              ),
-            ],
-          )
-        ],
-      ),
     );
   }
 }
@@ -130,12 +51,9 @@ class SummaryTopTitile extends StatelessWidget {
 class SummaryTopGraph extends StatelessWidget {
   final String title;
   final num value;
-  final Color color;
-  final Color subcolor;
   final bool mark;
 
-  const SummaryTopGraph(
-      {Key key, this.title, this.value, this.color, this.subcolor, this.mark})
+  const SummaryTopGraph({Key key, this.title, this.value, this.mark})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -159,7 +77,7 @@ class SummaryTopGraph extends StatelessWidget {
               borderRadius: BorderRadius.all(
                 Radius.circular(100.0),
               ),
-              border: new Border.all(width: 4, color: color.withOpacity(0.5)),
+              border: new Border.all(width: 4, color: ColorTheme.bgColor),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -168,11 +86,10 @@ class SummaryTopGraph extends StatelessWidget {
                 Text(
                   temp.toStringAsFixed(2) + (mark ? '%' : ''),
                   textAlign: TextAlign.center,
-                  style: setHomeGraphNumnber(color),
+                  style: AppTheme.subNumbers,
                 ),
                 Text(title,
-                    textAlign: TextAlign.center,
-                    style: setHomeGraphTitle(ColorTheme.grey)),
+                    textAlign: TextAlign.center, style: AppTheme.noteSubTitle),
               ],
             ),
           ),
@@ -180,8 +97,10 @@ class SummaryTopGraph extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: CustomPaint(
-            painter: CurvePainter(
-                colors: [color, subcolor, subcolor], angle: (360 - 10) * value),
+            painter: CurvePainter(colors: [
+              ColorTheme.mainGreen,
+              ColorTheme.mainGreen.withOpacity(0.4)
+            ], angle: (360 - 10) * value),
             child: SizedBox(
               width: 108,
               height: 108,
@@ -189,25 +108,6 @@ class SummaryTopGraph extends StatelessWidget {
           ),
         )
       ],
-    );
-  }
-}
-
-class BeforeTitle extends StatelessWidget {
-  final double width;
-  final double height;
-  final Color color;
-  const BeforeTitle({Key key, this.width, this.color, this.height})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: height,
-      width: width,
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.8),
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      ),
     );
   }
 }
@@ -248,7 +148,8 @@ class AppBarUI extends StatelessWidget {
                         height: MediaQuery.of(context).padding.top,
                       ),
                       Padding(
-                        padding: AppTheme.outboxpadding,
+                        padding: EdgeInsets.only(
+                            left: 16, right: 16, top: 0, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
@@ -257,11 +158,10 @@ class AppBarUI extends StatelessWidget {
                               child: Text(
                                 title,
                                 textAlign: TextAlign.left,
-                                style:
-                                    setTitleText(ColorTheme.greytripledarker),
+                                style: AppTheme.pageTitle,
                               ),
                             ),
-                            settings == 'settings'
+                            settings == 'bill'
                                 ? Container(
                                     padding: const EdgeInsets.all(8.0),
                                     child: InkWell(
@@ -463,6 +363,29 @@ class OneHeightBorder extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
       ),
+    );
+  }
+}
+
+class NumbersText extends StatelessWidget {
+  final double value;
+  final TextStyle style;
+  final String currency;
+
+  const NumbersText({Key key, this.value, this.style, this.currency})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      value.abs() > AppTheme.maxNumber
+          ? currency +
+              ' ' +
+              NumberFormat.compact(locale: Intl.getCurrentLocale())
+                  .format(value)
+          : NumberFormat(currency + " ###,##0.00", Intl.getCurrentLocale())
+              .format(value),
+      textAlign: TextAlign.start,
+      style: style,
     );
   }
 }

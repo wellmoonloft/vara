@@ -264,7 +264,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                           : widget.tabIconData.imagePath,
                       color: widget.tabIconData.isSelected
                           ? ColorTheme.pale
-                          : ColorTheme.grey,
+                          : ColorTheme.greylighter,
                       size: 28,
                     ),
                   ),

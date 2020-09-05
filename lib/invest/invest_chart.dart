@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
+import 'package:vara/theme_ui/app_theme.dart';
 
 class InvestChart extends StatelessWidget {
   final AnimationController animationController;
@@ -21,9 +22,9 @@ class InvestChart extends StatelessWidget {
                       0.0, 30 * (1.0 - animation.value), 0.0),
                   child: Container(
                       height: 330,
-                      child: Padding(
-                          padding: EdgeInsets.only(
-                              left: 24, right: 10, top: 10, bottom: 15),
+                      padding: AppTheme.inboxpadding,
+                      child: Container(
+                          decoration: AppTheme.boxDecoration,
                           child: charts.ScatterPlotChart(
                             _createSampleData(context),
                             animate: false,
@@ -56,11 +57,11 @@ class InvestChart extends StatelessWidget {
         colorFn: (LinearSales sales, _) {
           final bucket = sales.year / maxMeasure;
           if (bucket < 1 / 3) {
-            return charts.Color.fromHex(code: '#6baeb7');
+            return charts.Color.fromHex(code: '#66DD98');
           } else if (bucket < 2 / 3) {
-            return charts.Color.fromHex(code: '#c79ba6');
+            return charts.Color.fromHex(code: '#f0d198');
           } else {
-            return charts.Color.fromHex(code: '#ff6a4e');
+            return charts.Color.fromHex(code: '#ff320b');
           }
         },
         domainFn: (LinearSales sales, _) => sales.year,

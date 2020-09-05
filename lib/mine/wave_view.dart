@@ -88,12 +88,12 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
             new ClipPath(
               child: new Container(
                 decoration: BoxDecoration(
-                  color: ColorTheme.paledarker.withOpacity(0.5),
+                  color: ColorTheme.mainGreen.withOpacity(0.5),
                   borderRadius: AppTheme.normalBorderRadius,
                   gradient: LinearGradient(
                     colors: [
-                      ColorTheme.paledarker.withOpacity(0.2),
-                      ColorTheme.paledarker.withOpacity(0.5)
+                      ColorTheme.mainGreen.withOpacity(0.2),
+                      ColorTheme.mainGreen.withOpacity(0.5)
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -105,11 +105,11 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
             new ClipPath(
               child: new Container(
                 decoration: BoxDecoration(
-                  color: ColorTheme.paledarker,
+                  color: ColorTheme.mainGreen,
                   gradient: LinearGradient(
                     colors: [
-                      ColorTheme.paledarker.withOpacity(0.4),
-                      ColorTheme.paledarker
+                      ColorTheme.mainGreen.withOpacity(0.4),
+                      ColorTheme.mainGreen
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -126,11 +126,14 @@ class _WaveViewState extends State<WaveView> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      widget.percentageValue.round().toString(),
-                      textAlign: TextAlign.center,
-                      style: setHomeGraphNumnberLighter(ColorTheme.white),
-                    ),
+                    Text(widget.percentageValue.round().toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: -0.5,
+                          fontSize: 20,
+                          color: ColorTheme.white,
+                        )),
                     Padding(
                       padding: const EdgeInsets.only(top: 3.0),
                       child: Text(

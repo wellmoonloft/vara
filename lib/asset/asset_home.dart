@@ -71,18 +71,15 @@ class _AssetHomeState extends State<AssetHome> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: ColorTheme.white,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: <Widget>[
-            getMainListViewUI(),
-            SizedBox(
-              height: MediaQuery.of(context).padding.bottom,
-            )
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: ColorTheme.white,
+      body: Stack(
+        children: <Widget>[
+          getMainListViewUI(),
+          SizedBox(
+            height: MediaQuery.of(context).padding.bottom,
+          )
+        ],
       ),
     );
   }

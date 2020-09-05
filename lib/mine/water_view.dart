@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
-import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/mine/wave_view.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 
 class WaterView extends StatefulWidget {
   const WaterView(
@@ -92,55 +91,44 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                 }
 
                 return Container(
-                  padding: AppTheme.inboxpadding,
+                  width: MediaQuery.of(context).size.width,
+                  padding: AppTheme.outboxpadding,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Container(
-                        height: 130,
-                        width: MediaQuery.of(context).size.width - 58 - 60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding:
-                                  const EdgeInsets.only(left: 0, bottom: 15),
-                              child: Text(
-                                providerdata.currency.iconName +
-                                    ' ' +
-                                    NumberFormat.compact(
-                                            locale: Intl.getCurrentLocale())
-                                        .format(investIncomeChange *
-                                            widget.mainScreenAnimation.value),
-                                textAlign: TextAlign.start,
-                                style: setHomeNumnberText(
-                                    ColorTheme.puristbluedarker),
-                              ),
-                            ),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding:
-                                  const EdgeInsets.only(left: 0, bottom: 3),
-                              child: Text(
-                                S.current.ReduceExpenses,
-                                textAlign: TextAlign.start,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style:
-                                    setNoteTitle(ColorTheme.cantaloupedarker),
-                              ),
-                            ),
-                          ],
-                        ),
+                        //decoration: AppTheme.boxDecoration,
+                        height: 160,
+                        width: MediaQuery.of(context).size.width - 50 - 60,
+                        child: Container(
+                            padding: AppTheme.inboxwithout,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                NumbersText(
+                                  value: investIncomeChange *
+                                      widget.mainScreenAnimation.value,
+                                  style: AppTheme.mainNumbers,
+                                  currency: providerdata.currency.iconName,
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Text(
+                                  S.current.ReduceExpenses,
+                                  textAlign: TextAlign.start,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTheme.noteUnderNumbers,
+                                ),
+                              ],
+                            )),
                       ),
                       Container(
                         width: 60,
                         height: 160,
-                        decoration: BoxDecoration(
-                          color: ColorTheme.forWater,
-                          borderRadius: AppTheme.normalBorderRadius,
-                        ),
+                        decoration: AppTheme.boxDecoration,
                         child: WaveView(
                           percentageValue: freedomService,
                         ),

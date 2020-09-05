@@ -16,6 +16,7 @@ class ColorTheme {
   static const Color greytripledarker = Color(0xFF2c2c2c);
   static const Color greyquadradarker = Color(0xFF191919);
   static const Color greylighter = Color(0xFFa0a0a0);
+  static const Color greydoublelighter = Color(0xFFd8d8d8);
 
   static const Color pale = Color(0xFF5E61DE);
   static const Color palelighter = Color(0xFFa0a1eb);
@@ -44,6 +45,12 @@ class ColorTheme {
   static const Color mellowyellow = Color(0xFFe6b254);
   static const Color mellowyellowlighter = Color(0xFFf0d198);
   static const Color mellowyellowdarker = Color(0xFFdb9920);
+
+  static const Color bgColor = Color(0xFFE7EBF4);
+  static const Color mainBlack = Color(0xFF161617);
+  static const Color mainGreen = Color(0xFF36F740);
+  static const Color mainRed = Color(0xFFFF4646);
+  static const Color mainPink = Color(0xFFEC5690);
 }
 
 class HexColor extends Color {

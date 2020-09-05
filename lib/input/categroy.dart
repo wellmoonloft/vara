@@ -33,8 +33,7 @@ class _CategroyViewState extends State<CategroyView>
             brightness: Brightness.light,
             backgroundColor: ColorTheme.white.withOpacity(0.4),
             elevation: 0,
-            title: Text(S.current.Category,
-                style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+            title: Text(S.current.Category, style: AppTheme.subPageTitle),
             leading: IconButton(
                 icon: FaIcon(FontAwesomeIcons.times),
                 color: ColorTheme.greytripledarker,

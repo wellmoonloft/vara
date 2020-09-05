@@ -30,8 +30,7 @@ class CurrencyView extends StatelessWidget {
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
               elevation: 0,
-              title: Text(S.current.Currency,
-                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+              title: Text(S.current.Currency, style: AppTheme.subPageTitle),
               leading: IconButton(
                   icon: FaIcon(FontAwesomeIcons.times),
                   color: ColorTheme.greyquadradarker,

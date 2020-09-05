@@ -51,8 +51,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text(S.current.NewTransaction,
-              style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+          title: Text(S.current.NewTransaction, style: AppTheme.subPageTitle),
           leading: IconButton(
               icon: FaIcon(FontAwesomeIcons.times),
               iconSize: 20,

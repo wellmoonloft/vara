@@ -40,11 +40,13 @@ class _SettingsViewState extends State<SettingsView> {
             brightness: Brightness.light,
             backgroundColor: ColorTheme.white,
             elevation: 0,
-            title: Text(S.current.Settings,
-                style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+            title: Text(S.current.Settings, style: AppTheme.subPageTitle),
             leading: IconButton(
-                icon: FaIcon(FontAwesomeIcons.times),
-                color: ColorTheme.greyquadradarker,
+                icon: FaIcon(
+                  FontAwesomeIcons.times,
+                  size: 20,
+                  color: ColorTheme.mainBlack,
+                ),
                 onPressed: () {
                   //Navigator.pop(context);
                   Navigator.of(context).pushReplacement(new MaterialPageRoute(
@@ -72,15 +74,15 @@ class _SettingsViewState extends State<SettingsView> {
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.userAlt,
-                                    color: ColorTheme.greydarker,
+                                    color: ColorTheme.mainBlack,
+                                    size: 20,
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Text(
                                     S.current.AccountInformation,
-                                    style: setNoteTitleLighter(
-                                        ColorTheme.greydarker),
+                                    style: AppTheme.listTitle,
                                   ),
                                 ],
                               ),
@@ -88,8 +90,7 @@ class _SettingsViewState extends State<SettingsView> {
                                   builder: (context, providerdata, child) {
                                 return Text(
                                   providerdata.person.firstname,
-                                  style: setNoteTitleLighter(
-                                      ColorTheme.greydarker),
+                                  style: AppTheme.listTitle,
                                 );
                               }),
                             ]),
@@ -127,7 +128,8 @@ class _SettingsViewState extends State<SettingsView> {
                                       builder: (context, providerdata, child) {
                                     return FaIcon(
                                       providerdata.currency.icon,
-                                      color: ColorTheme.greydarker,
+                                      color: ColorTheme.mainBlack,
+                                      size: 22,
                                     );
                                   }),
                                   SizedBox(
@@ -135,15 +137,14 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                   Text(
                                     S.current.Currency,
-                                    style: setNoteTitleLighter(
-                                        ColorTheme.greydarker),
+                                    style: AppTheme.listTitle,
                                   ),
                                 ],
                               ),
                               FaIcon(
                                 FontAwesomeIcons.chevronRight,
-                                size: 18,
-                                color: ColorTheme.greydarker,
+                                size: 16,
+                                color: ColorTheme.mainBlack,
                               )
                             ])),
                   )),
@@ -203,22 +204,22 @@ class _SettingsViewState extends State<SettingsView> {
                                 children: [
                                   FaIcon(
                                     FontAwesomeIcons.globeAsia,
-                                    color: ColorTheme.greydarker,
+                                    color: ColorTheme.mainBlack,
+                                    size: 20,
                                   ),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Text(
                                     S.current.Language,
-                                    style: setNoteTitleLighter(
-                                        ColorTheme.greydarker),
+                                    style: AppTheme.listTitle,
                                   ),
                                 ],
                               ),
                               FaIcon(
                                 FontAwesomeIcons.chevronRight,
-                                size: 18,
-                                color: ColorTheme.greydarker,
+                                size: 16,
+                                color: ColorTheme.mainBlack,
                               )
                             ])),
                   )),
@@ -233,15 +234,15 @@ class _SettingsViewState extends State<SettingsView> {
                             children: [
                               FaIcon(
                                 FontAwesomeIcons.database,
-                                color: ColorTheme.greydarker,
+                                color: ColorTheme.mainBlack,
+                                size: 20,
                               ),
                               SizedBox(
                                 width: 14,
                               ),
                               Text(
                                 S.current.SaveOnCloud,
-                                style:
-                                    setNoteTitleLighter(ColorTheme.greydarker),
+                                style: AppTheme.listTitle,
                               ),
                             ],
                           ),
@@ -309,15 +310,14 @@ class _SettingsViewState extends State<SettingsView> {
                               FaIcon(
                                 FontAwesomeIcons.locationArrow,
                                 size: 18,
-                                color: ColorTheme.greydarker,
+                                color: ColorTheme.mainBlack,
                               ),
                               SizedBox(
                                 width: 16,
                               ),
                               Text(
                                 S.current.Path,
-                                style:
-                                    setNoteTitleLighter(ColorTheme.greydarker),
+                                style: AppTheme.listTitle,
                               ),
                             ],
                           ),

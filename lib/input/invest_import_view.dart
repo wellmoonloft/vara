@@ -144,8 +144,7 @@ class _ImportViewState extends State<InvestImportView> {
             appBar: AppBar(
               brightness: Brightness.light,
               backgroundColor: ColorTheme.white,
-              title: Text(S.current.Import,
-                  style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+              title: Text(S.current.Import, style: AppTheme.subPageTitle),
               leading: BackButton(
                   color: ColorTheme.greytripledarker,
                   onPressed: () {

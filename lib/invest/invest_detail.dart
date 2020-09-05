@@ -17,8 +17,7 @@ class InvestDetail extends StatelessWidget {
           brightness: Brightness.light,
           backgroundColor: ColorTheme.white,
           elevation: 0,
-          title: Text(S.current.InvestDetail,
-              style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
+          title: Text(S.current.InvestDetail, style: AppTheme.subPageTitle),
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
               iconSize: 20,
