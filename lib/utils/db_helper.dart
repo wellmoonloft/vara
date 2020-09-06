@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'dart:io';
-import 'dart:convert';
-//import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:vara/models/db_models.dart';
-import 'package:vara/models/default_data.dart';
+import 'package:vara/utils/global.dart' as Globals;
 
 Database _db;
-MayStoreage _mayStoreage;
 
 class DBHelper {
   Future<Database> get db async {
@@ -20,23 +15,8 @@ class DBHelper {
     }
   }
 
-  Future<File> _getLocalFile() async {
-    String _dir = (await getApplicationDocumentsDirectory()).path;
-    return new File('$_dir/storeage.json');
-  }
-
-  getMayStoreage() async {
-    try {
-      File file = await _getLocalFile();
-      String contents = await file.readAsString();
-      _mayStoreage = MayStoreage.fromJson(json.decode(contents));
-    } on FileSystemException {}
-  }
-
   initDatabase() async {
-    await getMayStoreage();
-    // String path = join(_mayStoreage.path + '/', 'VaraDB', 'Vara.db');
-    String path = _mayStoreage.path + '/VaraDB/Vara.db';
+    String path = Globals.Global.myStoreage.path + '/VaraDB/Vara.db';
     final db = await openDatabase(path, version: 1, onCreate: _onCreate);
     debugPrint(path);
     return db;

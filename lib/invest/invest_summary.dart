@@ -66,13 +66,12 @@ class InvestSummaryView extends StatelessWidget {
                     }
                     return Container(
                         width: MediaQuery.of(context).size.width,
-                        //padding: AppTheme.outboxpadding,
-                        child: Container(
-                            // decoration: AppTheme.boxDecoration,
-                            child: Column(children: <Widget>[
+                        child: Column(children: <Widget>[
+                          SizedBox(
+                            height: 5,
+                          ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                left: 20, right: 0, top: 16, bottom: 20),
+                            padding: EdgeInsets.all(20),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
@@ -134,14 +133,11 @@ class InvestSummaryView extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Center(
-                                    child: SummaryTopGraph(
-                                      title: S.current.TotalYieldYear,
-                                      value: totalYield * animation.value,
-                                      mark: true,
-                                    ),
+                                Center(
+                                  child: SummaryTopGraph(
+                                    title: S.current.TotalYieldYear,
+                                    value: totalYield * animation.value,
+                                    mark: true,
                                   ),
                                 )
                               ],
@@ -262,7 +258,7 @@ class InvestSummaryView extends StatelessWidget {
                                   )
                                 ],
                               ))
-                        ])));
+                        ]));
                   })));
         });
   }

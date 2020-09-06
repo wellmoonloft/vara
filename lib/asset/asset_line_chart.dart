@@ -29,7 +29,7 @@ class AssetLineChartView extends StatelessWidget {
                       transform: new Matrix4.translationValues(
                           0.0, 30 * (1.0 - animation.value), 0.0),
                       child: Container(
-                          height: 330,
+                          height: 350,
                           child: Stack(
                             overflow: Overflow.visible,
                             children: <Widget>[
@@ -169,7 +169,7 @@ class ShowDetail extends StatelessWidget {
                               providerdata.date == null
                                   ? S.current.Date
                                   : S.current.Date + ': ' + providerdata.date,
-                              style: AppTheme.noteSubTitle,
+                              style: AppTheme.noteSubTitleBlack,
                             ),
                             Consumer<ProviderData>(
                                 builder: (context, providerdata1, child) {
@@ -184,7 +184,7 @@ class ShowDetail extends StatelessWidget {
                                                 locale: Intl.getCurrentLocale())
                                             .format(
                                                 providerdata.number['Asset']),
-                                style: AppTheme.noteSubTitle,
+                                style: AppTheme.noteSubTitleBlack,
                               );
                             }),
                             Consumer<ProviderData>(
@@ -200,7 +200,7 @@ class ShowDetail extends StatelessWidget {
                                                 locale: Intl.getCurrentLocale())
                                             .format(
                                                 providerdata.number['Debt']),
-                                style: AppTheme.noteSubTitle,
+                                style: AppTheme.noteSubTitleBlack,
                               );
                             }),
                             Consumer<ProviderData>(
@@ -216,7 +216,7 @@ class ShowDetail extends StatelessWidget {
                                                 locale: Intl.getCurrentLocale())
                                             .format(providerdata
                                                 .number['NetAsset']),
-                                style: AppTheme.noteSubTitle,
+                                style: AppTheme.noteSubTitleBlack,
                               );
                             })
                           ],

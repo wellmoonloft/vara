@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
@@ -7,6 +8,7 @@ import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/models/db_models.dart';
+import 'package:vara/theme_ui/common/calendar_popup_view.dart';
 
 class BillListView extends StatefulWidget {
   //final List<Map> investList;
@@ -64,9 +66,11 @@ class BillListState extends State<BillListView> {
         elevation: 0,
         title: Text(S.current.TransactionList, style: AppTheme.subPageTitle),
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            iconSize: 20,
-            color: ColorTheme.mainBlack,
+            icon: FaIcon(
+              FontAwesomeIcons.arrowLeft,
+              size: 18,
+              color: ColorTheme.mainBlack,
+            ),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -102,21 +106,7 @@ class BillListState extends State<BillListView> {
                         Expanded(
                           child: InkWell(
                               onTap: () async {
-                                var result = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    initialDatePickerMode: DatePickerMode.day,
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2030));
-                                if (result != null) {
-                                  setState(() {
-                                    date = DateFormat('yyyy-MM')
-                                        .format(result)
-                                        .toString();
-                                  });
-                                  chooseDate(date, currencyValue);
-                                }
-                                print('$result');
+                                showCalendar(context: context);
                               },
                               child: Container(
                                 alignment: Alignment(0, 0),
@@ -216,23 +206,59 @@ class BillListState extends State<BillListView> {
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Container(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 6),
-                                        child: Text(
-                                          (bill.mark == 0 ? '-' : '+') +
-                                              NumberFormat(
-                                                      "###,###.0#", "en_US")
-                                                  .format(bill.amount) +
-                                              bill.currency,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 16,
-                                            color: (bill.mark == 0)
-                                                ? ColorTheme.darkred
-                                                : ColorTheme.neogreendarker,
-                                          ),
-                                        ),
-                                      ),
+                                          padding:
+                                              const EdgeInsets.only(bottom: 6),
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(top: 10),
+                                                  child: FaIcon(
+                                                    bill.mark == 0
+                                                        ? FontAwesomeIcons.plus
+                                                        : FontAwesomeIcons
+                                                            .minus,
+                                                    size: 16,
+                                                    color: (bill.mark == 0)
+                                                        ? ColorTheme.darkred
+                                                        : ColorTheme
+                                                            .neogreendarker,
+                                                  )),
+                                              SizedBox(
+                                                width: 6,
+                                              ),
+                                              Text(
+                                                bill.amount.abs() >
+                                                        AppTheme.maxNumber
+                                                    ? NumberFormat.compact(
+                                                            locale: Intl
+                                                                .getCurrentLocale())
+                                                        .format(bill.amount)
+                                                    : NumberFormat("###,##0.00",
+                                                            Intl.getCurrentLocale())
+                                                        .format(bill.amount),
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontSize: 28,
+                                                  color: (bill.mark == 0)
+                                                      ? ColorTheme.darkred
+                                                      : ColorTheme
+                                                          .neogreendarker,
+                                                ),
+                                              ),
+                                              Text(
+                                                ' ' + bill.currency,
+                                                style: TextStyle(
+                                                  color: (bill.mark == 0)
+                                                      ? ColorTheme.darkred
+                                                      : ColorTheme
+                                                          .neogreendarker,
+                                                ),
+                                              ),
+                                            ],
+                                          )),
                                       Container(
                                         padding:
                                             const EdgeInsets.only(bottom: 6),
@@ -241,7 +267,7 @@ class BillListState extends State<BillListView> {
                                           softWrap: true,
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
-                                          style: AppTheme.noteSubTitle,
+                                          style: AppTheme.noteContent,
                                         ),
                                       ),
                                     ]),
@@ -249,7 +275,7 @@ class BillListState extends State<BillListView> {
                                   padding:
                                       const EdgeInsets.only(top: 6, bottom: 6),
                                   child: Text(bill.date,
-                                      style: AppTheme.listTitle),
+                                      style: AppTheme.noteContent),
                                 ),
                               ],
                             ))));
@@ -263,6 +289,31 @@ class BillListState extends State<BillListView> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void showCalendar({BuildContext context}) {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => CalendarPopupView(
+        barrierDismissible: true,
+        minimumDate: DateTime.now(),
+        //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
+        // initialEndDate: endDate,
+        // initialStartDate: startDate,
+        onApplyClick: (DateTime startData, DateTime endData, String month) {
+          print(startData);
+          print(endData);
+          print(month);
+          if (month != null) {
+            setState(() {
+              date = month;
+            });
+            chooseDate(month, currencyValue);
+          }
+        },
+        onCancelClick: () {},
       ),
     );
   }

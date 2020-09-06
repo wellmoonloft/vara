@@ -36,7 +36,7 @@
 
 
 ## 参考
-- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) 引用了Best-Flutter-UI-Templates的Bottom_bar以及页面加载动画。
+- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) 引用了Best-Flutter-UI-Templates的一些组件。
 
 ## 依赖
 

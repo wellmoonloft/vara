@@ -32,7 +32,7 @@ class TitleView extends StatelessWidget {
             child: Container(
               child: Padding(
                 padding:
-                    EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
+                    EdgeInsets.only(left: 24, right: 24, top: 10, bottom: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[

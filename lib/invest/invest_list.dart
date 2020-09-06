@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
@@ -6,6 +7,7 @@ import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
+import 'package:vara/theme_ui/common/calendar_popup_view.dart';
 import 'invest_detail.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
@@ -49,9 +51,11 @@ class InvestListState extends State<InvestListView> {
         elevation: 0,
         title: Text(S.current.InvestList, style: AppTheme.subPageTitle),
         leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            iconSize: 20,
-            color: ColorTheme.greytripledarker,
+            icon: FaIcon(
+              FontAwesomeIcons.arrowLeft,
+              size: 18,
+              color: ColorTheme.mainBlack,
+            ),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -69,12 +73,12 @@ class InvestListState extends State<InvestListView> {
                         Expanded(
                           child: Text(S.current.Date,
                               textAlign: TextAlign.center,
-                              style: AppTheme.noteTitle),
+                              style: AppTheme.listTitle),
                         ),
                         Expanded(
                           child: Text(S.current.Status,
                               textAlign: TextAlign.center,
-                              style: AppTheme.noteTitle),
+                              style: AppTheme.listTitle),
                         ),
                       ],
                     ),
@@ -83,26 +87,13 @@ class InvestListState extends State<InvestListView> {
                         Expanded(
                           child: InkWell(
                               onTap: () async {
-                                var result = await showDatePicker(
-                                    context: context,
-                                    initialDate: DateTime.now(),
-                                    initialDatePickerMode: DatePickerMode.day,
-                                    firstDate: DateTime(2020),
-                                    lastDate: DateTime(2030));
-                                if (result != null) {
-                                  setState(() {
-                                    date = DateFormat('yyyy-MM')
-                                        .format(result)
-                                        .toString();
-                                  });
-                                  chooseDate(date, countryValue);
-                                }
+                                showCalendar(context: context);
                               },
                               child: Container(
                                 alignment: Alignment(0, 0),
                                 child: Text(
                                   date,
-                                  style: AppTheme.listTitle,
+                                  style: AppTheme.noteTitle,
                                 ),
                               )),
                         ),
@@ -197,7 +188,7 @@ class InvestListState extends State<InvestListView> {
                                                 child: Text(
                                                   invest.status,
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.w600,
                                                     fontSize: 14,
                                                     color: (invest.status ==
                                                             'LATE')
@@ -230,6 +221,31 @@ class InvestListState extends State<InvestListView> {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  void showCalendar({BuildContext context}) {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => CalendarPopupView(
+        barrierDismissible: true,
+        minimumDate: DateTime.now(),
+        //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
+        // initialEndDate: endDate,
+        // initialStartDate: startDate,
+        onApplyClick: (DateTime startData, DateTime endData, String month) {
+          print(startData);
+          print(endData);
+          print(month);
+          if (month != null) {
+            setState(() {
+              date = month;
+            });
+            chooseDate(month, countryValue);
+          }
+        },
+        onCancelClick: () {},
       ),
     );
   }

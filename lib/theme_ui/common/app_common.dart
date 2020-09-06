@@ -300,7 +300,7 @@ class SettingsAppBarUI extends StatelessWidget {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.cog,
-                                    size: 20,
+                                    size: 18,
                                     color: ColorTheme.greyquadradarker,
                                   )),
                             ),

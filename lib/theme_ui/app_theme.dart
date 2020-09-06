@@ -31,6 +31,16 @@ class AppTheme {
     fontSize: 16,
     color: ColorTheme.mainBlack,
   );
+  static const listTitleThin = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+    color: ColorTheme.mainBlack,
+  );
+  static const noteSubTitleBlack = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+    color: ColorTheme.mainBlack,
+  );
 
   static const noteContent = TextStyle(
     fontWeight: FontWeight.w400,
@@ -68,6 +78,12 @@ class AppTheme {
     color: ColorTheme.white,
   );
 
+  static const subPageTitlePale = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    color: ColorTheme.pale,
+  );
+
   static const normalBorderRadius = BorderRadius.all(Radius.circular(8.0));
   static const smallBorderRadius = BorderRadius.all(Radius.circular(6.0));
   static const normalBoxShadow = BoxShadow(
@@ -93,7 +109,7 @@ class AppTheme {
     ],
   );
   static const boxDecorationBlack = BoxDecoration(
-    color: ColorTheme.mainBlack,
+    color: ColorTheme.pale,
     borderRadius: BorderRadius.all(Radius.circular(12.0)),
     boxShadow: <BoxShadow>[
       BoxShadow(

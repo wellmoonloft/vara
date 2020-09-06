@@ -91,7 +91,7 @@ class AssetSummaryView extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                height: 20,
+                                height: 25,
                               ),
                               SummaryBox(
                                 title1: S.current.Asset,

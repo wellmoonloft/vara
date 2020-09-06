@@ -27,7 +27,7 @@ class CurvePainter extends CustomPainter {
     canvas.drawArc(
         new Rect.fromCircle(center: shdowPaintCenter, radius: shdowPaintRadius),
         degreeToRadians(278),
-        degreeToRadians(360 - (365 - angle)),
+        degreeToRadians(365 - (365 - angle)),
         false,
         shdowPaint);
 
@@ -49,7 +49,7 @@ class CurvePainter extends CustomPainter {
     canvas.drawArc(
         new Rect.fromCircle(center: center, radius: radius),
         degreeToRadians(278),
-        degreeToRadians(360 - (365 - angle)),
+        degreeToRadians(365 - (365 - angle)),
         false,
         paint);
 

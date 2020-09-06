@@ -192,7 +192,7 @@ class Expenses extends StatelessWidget {
         ],
         categroyTitle: 'FoodDrinks',
         categroyValue: S.current.FoodDrinks,
-        color: ColorTheme.neogreenlighter);
+        color: ColorTheme.greenlighter);
     CategroyData housingData = CategroyData(
         iconList: <CategroyIcon>[
           CategroyIcon(

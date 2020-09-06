@@ -63,30 +63,6 @@ class _MineHomeState extends State<MineHome> with TickerProviderStateMixin {
       color: ColorTheme.pale,
       child: Scaffold(
         backgroundColor: ColorTheme.white,
-        // appBar: AppBar(
-        //   brightness: Brightness.light,
-        //   backgroundColor: ColorTheme.white,
-        //   elevation: 0,
-        //   //title: Text(S.current.InvestList, style: setHomeGraphNumnber(ColorTheme.greytripledarker)),
-        //   leading: IconButton(
-        //       padding: EdgeInsets.only(left: 8),
-        //       icon: FaIcon(
-        //         FontAwesomeIcons.cog,
-        //         size: 20,
-        //         color: ColorTheme.greyquadradarker,
-        //       ),
-        //       onPressed: () {
-        //         Navigator.push(context,
-        //             MaterialPageRoute(builder: (BuildContext context) {
-        //           return SettingsView();
-        //         })).then((data) {
-        //           //if (data != null) {}
-        //           setState(() {
-        //             //
-        //           });
-        //         });
-        //       }),
-        // ),
         body: Stack(
           children: <Widget>[
             getMainListViewUI(),

@@ -16,6 +16,7 @@ import 'package:vara/utils/db_helper.dart';
 import 'currency_view.dart';
 import 'language_view.dart';
 import 'mine_view.dart';
+import 'package:vara/utils/global.dart' as Globals;
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key key}) : super(key: key);
@@ -25,7 +26,7 @@ class SettingsView extends StatefulWidget {
 }
 
 class _SettingsViewState extends State<SettingsView> {
-  bool _value = true;
+  bool _value = Globals.Global.myStoreage.isCloud;
   @override
   void initState() {
     super.initState();
@@ -238,7 +239,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 size: 20,
                               ),
                               SizedBox(
-                                width: 14,
+                                width: 12,
                               ),
                               Text(
                                 S.current.SaveOnCloud,
@@ -246,52 +247,43 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                             ],
                           ),
-                          Consumer<ProviderData>(
-                            builder: (context, providerdata, child) {
-                              if (providerdata.mayStoreage != null) {
-                                if (providerdata.mayStoreage.isCloud == 0) {
-                                  _value = true;
-                                } else {
-                                  _value = false;
-                                }
-                              }
-                              return Switch(
-                                value: _value,
-                                onChanged: (newValue) async {
-                                  print(newValue);
-                                  MayStoreage _storeage = MayStoreage();
-                                  if (newValue) {
-                                    _storeage.isCloud = 0;
-                                    _value = true;
+                          Switch(
+                            value: _value,
+                            onChanged: (newValue) async {
+                              print(newValue);
+                              MyStoreage _storeage = MyStoreage();
+                              if (newValue) {
+                                _storeage.isCloud = false;
+                                _value = true;
+                                _storeage.path =
+                                    (await getApplicationDocumentsDirectory())
+                                        .path;
+                              } else {
+                                try {
+                                  var _path =
+                                      await FilePicker.getDirectoryPath();
+                                  if (_path != null) {
+                                    print(_path);
+                                    _storeage.isCloud = true;
+                                    _value = false;
                                     _storeage.path =
                                         (await getApplicationDocumentsDirectory())
                                             .path;
-                                  } else {
-                                    try {
-                                      var _path =
-                                          await FilePicker.getDirectoryPath();
-                                      if (_path != null) {
-                                        print(_path);
-                                        _storeage.isCloud = 1;
-                                        _value = false;
-                                        _storeage.path =
-                                            (await getApplicationDocumentsDirectory())
-                                                .path;
-                                      }
-                                    } on PlatformException catch (e) {
-                                      print("Unsupported operation" +
-                                          e.toString());
-                                    }
                                   }
-
-                                  providerdata.setMayStoreage(_storeage);
-                                },
-                                activeColor: Colors.red,
-                                activeTrackColor: Colors.red,
-                                inactiveThumbColor: Colors.green,
-                                inactiveTrackColor: Colors.green,
-                              );
+                                } on PlatformException catch (e) {
+                                  print("Unsupported operation" + e.toString());
+                                }
+                              }
+                              if (_storeage.isCloud == null ||
+                                  _storeage.path == null) {
+                              } else {
+                                //providerdata.setMayStoreage(_storeage);
+                              }
                             },
+                            activeColor: Colors.red,
+                            activeTrackColor: Colors.red,
+                            inactiveThumbColor: Colors.green,
+                            inactiveTrackColor: Colors.green,
                           )
                         ]),
                   )),
@@ -313,7 +305,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 color: ColorTheme.mainBlack,
                               ),
                               SizedBox(
-                                width: 16,
+                                width: 10,
                               ),
                               Text(
                                 S.current.Path,
@@ -321,32 +313,18 @@ class _SettingsViewState extends State<SettingsView> {
                               ),
                             ],
                           ),
-                          Consumer<ProviderData>(
-                              builder: (context, providerdata, child) {
-                            return Container(
-                                width: 200,
-                                child: Text(
-                                  providerdata.mayStoreage.path,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 20,
-                                ));
-                          })
+                          Container(
+                              width: 200,
+                              child: Text(
+                                Globals.Global.myStoreage.path,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 20,
+                              ))
                         ]),
                   )),
               OneHeightBorder(top: 15, left: 16, right: 16, bottom: 0),
             ],
           )),
     );
-  }
-
-  setData() {
-    MayStoreage mayStoreage = Provider.of<ProviderData>(context).mayStoreage;
-    if (mayStoreage != null) {
-      if (mayStoreage.isCloud == 0) {
-        _value = true;
-      } else {
-        _value = false;
-      }
-    }
   }
 }

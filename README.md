@@ -31,7 +31,7 @@ Therefore I need an APP like this:
 3. Do `flutter packages get` in your project directory
 
 ## Reference
-- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) Reference bottom bar and page loading animation from Best-Flutter-UI-Templates.
+- [Best-Flutter-UI-Templates](https://github.com/mitesh77/Best-Flutter-UI-Templates) Reference some components from Best-Flutter-UI-Templates.
 
 ## Dependents
 

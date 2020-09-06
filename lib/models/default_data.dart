@@ -118,12 +118,12 @@ class CategroyData {
       {this.iconList, this.categroyTitle, this.color, this.categroyValue});
 }
 
-class MayStoreage {
-  int isCloud;
+class MyStoreage {
+  bool isCloud;
   String path;
 
-  MayStoreage({this.isCloud, this.path});
-  MayStoreage.fromJson(Map<String, dynamic> json) {
+  MyStoreage({this.isCloud, this.path});
+  MyStoreage.fromJson(Map<String, dynamic> json) {
     isCloud = json['isCloud'];
     path = json['path'];
   }
