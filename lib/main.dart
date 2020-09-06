@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
+            theme: ThemeData(fontFamily: 'Roboto'),
             supportedLocales: S.delegate.supportedLocales,
             debugShowCheckedModeBanner: false,
             home: SplashPage()));

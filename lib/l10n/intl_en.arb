@@ -66,8 +66,9 @@
     "Delete": "Delete",
     "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
     "DeleteNote": "This bill: {bill} was deleted.",
-    "Keepfinancialfreedom":"Keep your financial freedom above 100%",
+    "Keepfinancialfreedom":"You have achieved financial freedom!",
     "ReduceExpenses":  "Increase invest income or reduce expenses make financial freedom above 100%",
+    "Congratulations": "Congratulations!",
     
     "MisCellaneous": "MisCellaneous",
     "Entertainment": "Entertainment",

@@ -181,7 +181,7 @@ class _ImportViewState extends State<InvestImportView> {
                           alignment: Alignment.center,
                           child: Text(
                             S.current.ImportNote,
-                            style: setNoteTitleLighter(ColorTheme.greydarker),
+                            style: AppTheme.listTitle,
                           ),
                         ));
                   } else {
@@ -210,24 +210,19 @@ class _ImportViewState extends State<InvestImportView> {
                             )),
                         Expanded(
                           flex: 1,
-                          child: Text(
-                            '=>',
-                            textAlign: TextAlign.center,
-                            style: setNoteTitle(ColorTheme.puristbluedarker),
-                          ),
+                          child: Text('=>',
+                              textAlign: TextAlign.center,
+                              style: AppTheme.listTitle),
                         ),
                         Expanded(
                             flex: 4,
                             child: Padding(
                               padding: EdgeInsets.only(top: 0),
-                              child: Text(
-                                right[index - 2],
-                                textAlign: TextAlign.left,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                style:
-                                    setNoteTitle(ColorTheme.greytripledarker),
-                              ),
+                              child: Text(right[index - 2],
+                                  textAlign: TextAlign.left,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: AppTheme.listTitle),
                             )),
                       ],
                     );

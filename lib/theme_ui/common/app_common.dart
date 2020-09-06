@@ -4,45 +4,115 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/mine/settings/settings_view.dart';
 import 'package:vara/models/provider_data.dart';
-import 'package:vara/transaction/transaction_list.dart';
 import 'package:vara/utils/toolkit.dart';
 import '../app_theme.dart';
 import '../color_theme.dart';
 
-class SummaryBottom extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final double value;
+class SummaryBox extends StatelessWidget {
+  final String title1;
+  final String title2;
+  final String title3;
+  final double value1;
+  final double value2;
+  final double value3;
   final String currency;
+  final bool mark;
 
-  const SummaryBottom(
-      {Key key, this.title, this.subtitle, this.value, this.currency})
+  const SummaryBox(
+      {Key key,
+      this.title1,
+      this.title2,
+      this.title3,
+      this.value1,
+      this.value2,
+      this.value3,
+      this.currency,
+      this.mark})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          title,
-          style: AppTheme.listTitleWhite,
+    return Row(
+      children: [
+        Container(
+            padding: EdgeInsets.all(20),
+            decoration: AppTheme.boxDecoration,
+            width: (MediaQuery.of(context).size.width - 48) / 2,
+            child: Stack(children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title1,
+                    textAlign: TextAlign.start,
+                    style: AppTheme.noteTitle,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  NumbersText(
+                    value: value1,
+                    style: AppTheme.subPageTitle,
+                    currency: currency,
+                  )
+                ],
+              ),
+              mark
+                  ? Positioned(
+                      top: -14,
+                      right: -10,
+                      child: IconButton(
+                          icon: FaIcon(
+                            FontAwesomeIcons.plus,
+                            size: 14,
+                            color: ColorTheme.greylighter,
+                          ),
+                          onPressed: null),
+                    )
+                  : Container()
+            ])),
+        SizedBox(
+          width: 16,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 6),
-          child: Text(
-            subtitle,
-            textAlign: TextAlign.center,
-            style: AppTheme.noteSubTitleWhite,
-          ),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: NumbersText(
-              value: value,
-              style: AppTheme.inboxNumber,
-              currency: currency,
-            )),
+        Container(
+            padding: EdgeInsets.all(20),
+            decoration: AppTheme.boxDecoration,
+            width: (MediaQuery.of(context).size.width - 48) / 2,
+            child: Stack(children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    title2,
+                    textAlign: TextAlign.end,
+                    style: AppTheme.noteTitle,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  NumbersText(
+                    value: value2,
+                    style: AppTheme.subPageTitle,
+                    currency: currency,
+                  )
+                ],
+              ),
+              mark
+                  ? Positioned(
+                      top: -14,
+                      right: -10,
+                      child: IconButton(
+                          icon: FaIcon(
+                            FontAwesomeIcons.plus,
+                            size: 14,
+                            color: ColorTheme.greylighter,
+                          ),
+                          onPressed: null),
+                    )
+                  : Container()
+            ]))
       ],
     );
   }
@@ -86,7 +156,7 @@ class SummaryTopGraph extends StatelessWidget {
                 Text(
                   temp.toStringAsFixed(2) + (mark ? '%' : ''),
                   textAlign: TextAlign.center,
-                  style: AppTheme.subNumbers,
+                  style: AppTheme.subPageTitle,
                 ),
                 Text(title,
                     textAlign: TextAlign.center, style: AppTheme.noteSubTitle),
@@ -161,25 +231,6 @@ class AppBarUI extends StatelessWidget {
                                 style: AppTheme.pageTitle,
                               ),
                             ),
-                            settings == 'bill'
-                                ? Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    BillListView()),
-                                          );
-                                        },
-                                        child: FaIcon(
-                                          FontAwesomeIcons.list,
-                                          size: 16,
-                                          color: ColorTheme.greytripledarker,
-                                        )),
-                                  )
-                                : Container(),
                           ],
                         ),
                       )
@@ -277,7 +328,7 @@ class SettingsAppBarUI extends StatelessWidget {
                               padding: EdgeInsets.only(top: 8),
                               child: Text(
                                 providerdata.person.firstname,
-                                style: setNoteTitle(ColorTheme.greydarker),
+                                style: AppTheme.listTitle,
                               ));
                         })
                       ]),
@@ -313,7 +364,7 @@ class ListDetail extends StatelessWidget {
               padding: EdgeInsets.only(top: 20, left: 20),
               child: Text(
                 title,
-                style: setNoteTitleLighter(ColorTheme.greydarker),
+                style: AppTheme.listTitle,
               ),
             ),
           ),
@@ -323,7 +374,7 @@ class ListDetail extends StatelessWidget {
               child: Text(
                 value,
                 textAlign: TextAlign.end,
-                style: setNoteTitleLighter(ColorTheme.greydarker),
+                style: AppTheme.listTitle,
               ),
             ),
           ),
@@ -376,16 +427,21 @@ class NumbersText extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Text(
-      value.abs() > AppTheme.maxNumber
-          ? currency +
-              ' ' +
-              NumberFormat.compact(locale: Intl.getCurrentLocale())
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          value.abs() > AppTheme.maxNumber
+              ? NumberFormat.compact(locale: Intl.getCurrentLocale())
                   .format(value)
-          : NumberFormat(currency + " ###,##0.00", Intl.getCurrentLocale())
-              .format(value),
-      textAlign: TextAlign.start,
-      style: style,
+              : NumberFormat("###,##0.00", Intl.getCurrentLocale())
+                  .format(value),
+          style: style,
+        ),
+        Text(
+          ' ' + currency,
+        ),
+      ],
     );
   }
 }

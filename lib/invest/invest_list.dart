@@ -5,6 +5,7 @@ import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 import 'invest_detail.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
@@ -66,18 +67,14 @@ class InvestListState extends State<InvestListView> {
                     Row(
                       children: <Widget>[
                         Expanded(
-                          child: Text(
-                            S.current.Date,
-                            textAlign: TextAlign.center,
-                            style: setNoteTitleSmall(ColorTheme.grey),
-                          ),
+                          child: Text(S.current.Date,
+                              textAlign: TextAlign.center,
+                              style: AppTheme.noteTitle),
                         ),
                         Expanded(
-                          child: Text(
-                            S.current.Status,
-                            textAlign: TextAlign.center,
-                            style: setNoteTitleSmall(ColorTheme.grey),
-                          ),
+                          child: Text(S.current.Status,
+                              textAlign: TextAlign.center,
+                              style: AppTheme.noteTitle),
                         ),
                       ],
                     ),
@@ -105,8 +102,7 @@ class InvestListState extends State<InvestListView> {
                                 alignment: Alignment(0, 0),
                                 child: Text(
                                   date,
-                                  style: setNoteTitleLighter(
-                                      ColorTheme.greydarker),
+                                  style: AppTheme.listTitle,
                                 ),
                               )),
                         ),
@@ -173,54 +169,55 @@ class InvestListState extends State<InvestListView> {
                                                 CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 6),
+                                                  child: Text(
+                                                    invest.code,
+                                                    style: AppTheme.noteContent,
+                                                  )),
+                                              Container(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 6),
+                                                  child: NumbersText(
+                                                      value: invest.amount
+                                                          .toDouble(),
+                                                      style: AppTheme.pageTitle,
+                                                      currency:
+                                                          invest.currency)),
+                                            ]),
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: <Widget>[
+                                              Container(
                                                 padding: const EdgeInsets.only(
-                                                    bottom: 6),
+                                                    top: 6, bottom: 6),
                                                 child: Text(
-                                                  // invest.code +
-                                                  //     ' | ' +
-                                                  NumberFormat("###,###.0#",
-                                                              "en_US")
-                                                          .format(
-                                                              invest.amount) +
-                                                      ' ' +
-                                                      invest.currency,
+                                                  invest.status,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w500,
-                                                    fontSize: 18,
-                                                    color: ColorTheme
-                                                        .greydoubledarker,
+                                                    fontSize: 14,
+                                                    color: (invest.status ==
+                                                            'LATE')
+                                                        ? ColorTheme
+                                                            .cantaloupedarker
+                                                        : ColorTheme
+                                                            .neogreendarker,
                                                   ),
                                                 ),
                                               ),
-                                              Container(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 6),
-                                                child: Text(
-                                                  invest.date +
-                                                      ' | ' +
-                                                      invest.endDate,
-                                                  softWrap: true,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  maxLines: 1,
-                                                  style: AppTheme.noteSubTitle,
-                                                ),
+                                              Text(
+                                                invest.date +
+                                                    ' | ' +
+                                                    invest.endDate,
+                                                softWrap: true,
+                                                overflow: TextOverflow.ellipsis,
+                                                maxLines: 1,
+                                                style: AppTheme.noteContent,
                                               ),
-                                            ]),
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                              top: 6, bottom: 6),
-                                          child: Text(
-                                            invest.status,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 14,
-                                              color: (invest.status == 'LATE')
-                                                  ? ColorTheme.cantaloupedarker
-                                                  : ColorTheme.neogreendarker,
-                                            ),
-                                          ),
-                                        ),
+                                            ])
                                       ],
                                     ))))));
               },

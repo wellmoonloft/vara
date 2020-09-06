@@ -472,8 +472,7 @@ class _GridTitleState extends State<GridTitle> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(widget.value,
-                      textAlign: TextAlign.left,
-                      style: setNoteTitleLighter(ColorTheme.greydarker)),
+                      textAlign: TextAlign.left, style: AppTheme.listTitle),
                   InkWell(
                     onTap: () {
                       setState(() {
@@ -552,11 +551,13 @@ class IconGridView extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(top: 6),
-                child: Text(
-                  icons[index].value,
-                  textAlign: TextAlign.center,
-                  style: setNoteTitleSmall(color),
-                ),
+                child: Text(icons[index].value,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: color,
+                    )),
               )
             ],
           );

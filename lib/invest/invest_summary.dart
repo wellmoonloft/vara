@@ -135,8 +135,7 @@ class InvestSummaryView extends StatelessWidget {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(
-                                      right: AppTheme.leftRightPadding),
+                                  padding: const EdgeInsets.only(right: 16),
                                   child: Center(
                                     child: SummaryTopGraph(
                                       title: S.current.TotalYieldYear,
@@ -149,55 +148,120 @@ class InvestSummaryView extends StatelessWidget {
                             ),
                           ),
                           Container(
-                              padding: AppTheme.inboxpadding,
-                              child: Container(
-                                  padding: AppTheme.inboxpadding,
-                                  decoration: AppTheme.boxDecorationBlack,
-                                  child: Row(
-                                      //mainAxisAlignment: MainAxisAlignment.center,
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, top: 16, bottom: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.all(14),
+                                    decoration: AppTheme.boxDecoration,
+                                    width: (MediaQuery.of(context).size.width -
+                                            48) /
+                                        3,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: <Widget>[
-                                        Expanded(
-                                          child: SummaryBottom(
-                                              title: S.current.Short,
-                                              subtitle: S.current.ShortSub,
-                                              currency: providerdata
-                                                  .currency.iconName,
-                                              value: short * animation.value),
+                                        Text(
+                                          S.current.Short,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteTitle,
                                         ),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              SummaryBottom(
-                                                  title: S.current.Mid,
-                                                  subtitle: S.current.MidSub,
-                                                  currency: providerdata
-                                                      .currency.iconName,
-                                                  value: mid * animation.value),
-                                            ],
-                                          ),
+                                        Text(
+                                          S.current.ShortSub,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteSubTitle,
                                         ),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.end,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: <Widget>[
-                                              SummaryBottom(
-                                                  title: S.current.Long,
-                                                  subtitle: S.current.LongSub,
-                                                  currency: providerdata
-                                                      .currency.iconName,
-                                                  value:
-                                                      long * animation.value),
-                                            ],
-                                          ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        NumbersText(
+                                          value: short * animation.value,
+                                          style: AppTheme.listTitle,
+                                          currency:
+                                              providerdata.currency.iconName,
                                         )
-                                      ])))
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(14),
+                                    decoration: AppTheme.boxDecoration,
+                                    width: (MediaQuery.of(context).size.width -
+                                            48) /
+                                        3,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          S.current.Mid,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteTitle,
+                                        ),
+                                        Text(
+                                          S.current.MidSub,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteSubTitle,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        NumbersText(
+                                          value: mid * animation.value,
+                                          style: AppTheme.listTitle,
+                                          currency:
+                                              providerdata.currency.iconName,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 8,
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(14),
+                                    decoration: AppTheme.boxDecoration,
+                                    width: (MediaQuery.of(context).size.width -
+                                            48) /
+                                        3,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          S.current.Long,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteTitle,
+                                        ),
+                                        Text(
+                                          S.current.LongSub,
+                                          textAlign: TextAlign.start,
+                                          style: AppTheme.noteSubTitle,
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        NumbersText(
+                                          value: long * animation.value,
+                                          style: AppTheme.listTitle,
+                                          currency:
+                                              providerdata.currency.iconName,
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ))
                         ])));
                   })));
         });

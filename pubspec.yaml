@@ -31,5 +31,11 @@ flutter:
 
   assets:
     - assets/Images/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+
 flutter_intl:
   enabled: true

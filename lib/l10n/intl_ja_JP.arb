@@ -66,8 +66,9 @@
     "Delete": "削除する",
     "ConfirmNote": "この請求の削除を確認：{amount} {use}？",
     "DeleteNote": "この請求書：{bill}は削除されました。",
-    "Keepfinancialfreedom":"100%以上の経済的自由を維持する",
+    "Keepfinancialfreedom":"経済的自由を達成しました！",
     "ReduceExpenses":  "投資収益を増やすか、支出を減らして、100％の経済的自由を実現します",
+    "Congratulations": "おめでとう！",
 
     "MisCellaneous": "雑多",
     "Entertainment": "エンターテインメント",

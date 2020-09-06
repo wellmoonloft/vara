@@ -66,8 +66,9 @@
     "Delete": "刪除",
     "ConfirmNote": "確認刪除這個賬單：{amount} {use}？",
     "DeleteNote": "這個賬單 {bill} 已經被刪除。",
-    "Keepfinancialfreedom":"保持財務自由度超過100%",
+    "Keepfinancialfreedom":"您已經實現了財務自由！",
     "ReduceExpenses":  "增加投資收益或者減少支出使財務自由度達到100%",
+    "Congratulations": "恭喜您！",
 
     "MisCellaneous": "雜項",
     "Entertainment": "娛樂",

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
-import '../theme_ui/color_theme.dart';
 
 class BillSummaryView extends StatelessWidget {
   final AnimationController animationController;
@@ -58,16 +56,18 @@ class BillSummaryView extends StatelessWidget {
                             children: <Widget>[
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    S.current.Income,
-                                    textAlign: TextAlign.start,
-                                    style: AppTheme.noteTitle,
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, bottom: 2),
+                                    child: Text(S.current.Income,
+                                        textAlign: TextAlign.center,
+                                        style: AppTheme.noteTitle),
                                   ),
                                   Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20),
+                                      padding: const EdgeInsets.only(
+                                          left: 10, top: 5),
                                       child: NumbersText(
                                           value: netIncome * animation.value,
                                           style: AppTheme.mainNumbers,
@@ -75,126 +75,17 @@ class BillSummaryView extends StatelessWidget {
                                               providerdata.currency.iconName)),
                                 ],
                               ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Padding(
-                                        padding: EdgeInsets.only(right: 10),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: ColorTheme.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(100.0),
-                                                  ),
-                                                  border: new Border.all(
-                                                      width: 4,
-                                                      color: ColorTheme
-                                                          .greenlighter),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 14, left: 14),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.sortUp,
-                                                    color:
-                                                        ColorTheme.greenlighter,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  S.current.Income,
-                                                  textAlign: TextAlign.start,
-                                                  style: AppTheme.noteTitle,
-                                                ),
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6, bottom: 6),
-                                                    child: NumbersText(
-                                                      value: income,
-                                                      style:
-                                                          AppTheme.subNumbers,
-                                                      currency: providerdata
-                                                          .currency.iconName,
-                                                    )),
-                                              ],
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Container(
-                                                width: 50,
-                                                height: 50,
-                                                decoration: BoxDecoration(
-                                                  color: ColorTheme.white,
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                    Radius.circular(100.0),
-                                                  ),
-                                                  border: new Border.all(
-                                                      width: 4,
-                                                      color: ColorTheme
-                                                          .redlighter),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 4, left: 14),
-                                                  child: FaIcon(
-                                                    FontAwesomeIcons.sortDown,
-                                                    color:
-                                                        ColorTheme.redlighter,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  S.current.Expenses,
-                                                  textAlign: TextAlign.end,
-                                                  style: AppTheme.noteTitle,
-                                                ),
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 6, bottom: 6),
-                                                    child: NumbersText(
-                                                      value: expenses,
-                                                      style:
-                                                          AppTheme.subNumbers,
-                                                      currency: providerdata
-                                                          .currency.iconName,
-                                                    )),
-                                              ],
-                                            )
-                                          ],
-                                        ))
-                                  ])
+                              SizedBox(
+                                height: 40,
+                              ),
+                              SummaryBox(
+                                title1: S.current.Income,
+                                title2: S.current.Expenses,
+                                value1: income * animation.value,
+                                value2: expenses * animation.value,
+                                currency: providerdata.currency.iconName,
+                                mark: false,
+                              ),
                             ],
                           ),
                         ));

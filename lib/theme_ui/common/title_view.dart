@@ -39,7 +39,7 @@ class TitleView extends StatelessWidget {
                     Text(
                       titleTxt,
                       textAlign: TextAlign.left,
-                      style: AppTheme.listTitle,
+                      style: AppTheme.subPageTitle,
                     ),
                     InkWell(
                       borderRadius: BorderRadius.all(Radius.circular(4.0)),

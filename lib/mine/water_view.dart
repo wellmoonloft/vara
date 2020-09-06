@@ -101,34 +101,42 @@ class _WaterViewState extends State<WaterView> with TickerProviderStateMixin {
                         height: 160,
                         width: MediaQuery.of(context).size.width - 50 - 60,
                         child: Container(
-                            padding: AppTheme.inboxwithout,
+                            padding: EdgeInsets.only(
+                                left: 10, right: 16, top: 16, bottom: 16),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                NumbersText(
-                                  value: investIncomeChange *
-                                      widget.mainScreenAnimation.value,
-                                  style: AppTheme.mainNumbers,
-                                  currency: providerdata.currency.iconName,
-                                ),
+                                investIncomeChange == 0
+                                    ? Text(S.current.Congratulations,
+                                        style: AppTheme.mainNumbers)
+                                    : NumbersText(
+                                        value: investIncomeChange *
+                                            widget.mainScreenAnimation.value,
+                                        style: AppTheme.mainNumbers,
+                                        currency:
+                                            providerdata.currency.iconName,
+                                      ),
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Text(
-                                  S.current.ReduceExpenses,
-                                  textAlign: TextAlign.start,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: AppTheme.noteUnderNumbers,
-                                ),
+                                investIncomeChange == 0
+                                    ? Text(S.current.Keepfinancialfreedom,
+                                        style: AppTheme.noteContent)
+                                    : Text(
+                                        S.current.ReduceExpenses,
+                                        textAlign: TextAlign.start,
+                                        maxLines: 3,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: AppTheme.noteContent,
+                                      ),
                               ],
                             )),
                       ),
                       Container(
                         width: 60,
                         height: 160,
-                        decoration: AppTheme.boxDecoration,
+                        decoration: AppTheme.boxDecorationBottle,
                         child: WaveView(
                           percentageValue: freedomService,
                         ),

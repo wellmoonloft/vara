@@ -683,10 +683,10 @@ class S {
     );
   }
 
-  /// `Keep your financial freedom above 100%`
+  /// `You have achieved financial freedom!`
   String get Keepfinancialfreedom {
     return Intl.message(
-      'Keep your financial freedom above 100%',
+      'You have achieved financial freedom!',
       name: 'Keepfinancialfreedom',
       desc: '',
       args: [],
@@ -698,6 +698,16 @@ class S {
     return Intl.message(
       'Increase invest income or reduce expenses make financial freedom above 100%',
       name: 'ReduceExpenses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Congratulations!`
+  String get Congratulations {
+    return Intl.message(
+      'Congratulations!',
+      name: 'Congratulations',
       desc: '',
       args: [],
     );

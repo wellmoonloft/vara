@@ -27,43 +27,39 @@ class TransactionChart extends StatelessWidget {
                     return Container(
                         height: 500,
                         padding: AppTheme.inboxpadding,
-                        child: Container(
-                            padding: AppTheme.inboxpadding,
-                            decoration: AppTheme.boxDecoration,
-                            child: charts.BarChart(
-                              _createSampleData(context),
-                              animate: false,
-                              vertical: false,
-                              domainAxis: charts.OrdinalAxisSpec(
-                                renderSpec: charts.SmallTickRendererSpec(
-                                  lineStyle: charts.LineStyleSpec(
-                                      thickness: 0,
-                                      color: charts.MaterialPalette.white),
-                                ),
-                              ),
-                              primaryMeasureAxis: charts.NumericAxisSpec(
-                                  renderSpec: charts.NoneRenderSpec()),
-                              barGroupingType: charts.BarGroupingType.grouped,
-                              behaviors: [
-                                new charts.SeriesLegend(
-                                  //position: charts.BehaviorPosition.top,
-                                  horizontalFirst: false,
-                                  cellPadding: new EdgeInsets.only(
-                                      right: 0.0, bottom: 0.0),
-                                  showMeasures: true,
-                                  measureFormatter: (num value) {
-                                    return value == null
-                                        ? '-'
-                                        : providerdata.currency.iconName +
-                                            ' ' +
-                                            NumberFormat.compact(
-                                                    locale:
-                                                        Intl.getCurrentLocale())
-                                                .format(value);
-                                  },
-                                ),
-                              ],
-                            )));
+                        child: charts.BarChart(
+                          _createSampleData(context),
+                          animate: false,
+                          vertical: false,
+                          domainAxis: charts.OrdinalAxisSpec(
+                            renderSpec: charts.SmallTickRendererSpec(
+                              lineStyle: charts.LineStyleSpec(
+                                  thickness: 0,
+                                  color: charts.MaterialPalette.white),
+                            ),
+                          ),
+                          primaryMeasureAxis: charts.NumericAxisSpec(
+                              renderSpec: charts.NoneRenderSpec()),
+                          barGroupingType: charts.BarGroupingType.grouped,
+                          behaviors: [
+                            new charts.SeriesLegend(
+                              //position: charts.BehaviorPosition.top,
+                              horizontalFirst: false,
+                              cellPadding:
+                                  new EdgeInsets.only(right: 0.0, bottom: 0.0),
+                              showMeasures: true,
+                              measureFormatter: (num value) {
+                                return value == null
+                                    ? '-'
+                                    : providerdata.currency.iconName +
+                                        ' ' +
+                                        NumberFormat.compact(
+                                                locale: Intl.getCurrentLocale())
+                                            .format(value);
+                              },
+                            ),
+                          ],
+                        ));
                   })));
         });
   }

@@ -129,11 +129,11 @@ class _SettingsViewState extends State<SettingsView> {
                                     return FaIcon(
                                       providerdata.currency.icon,
                                       color: ColorTheme.mainBlack,
-                                      size: 22,
+                                      size: 20,
                                     );
                                   }),
                                   SizedBox(
-                                    width: 16,
+                                    width: 12,
                                   ),
                                   Text(
                                     S.current.Currency,

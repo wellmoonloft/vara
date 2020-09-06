@@ -24,7 +24,10 @@ class MineView extends StatelessWidget {
               title: Text(S.current.AccountInformation,
                   style: AppTheme.subPageTitle),
               leading: IconButton(
-                  icon: FaIcon(FontAwesomeIcons.times),
+                  icon: FaIcon(
+                    FontAwesomeIcons.times,
+                    size: 18,
+                  ),
                   color: ColorTheme.greyquadradarker,
                   onPressed: () {
                     Navigator.pop(context);
@@ -39,11 +42,11 @@ class MineView extends StatelessWidget {
                       children: [
                         Text(
                           S.current.FirstName,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         ),
                         Text(
                           person.firstname,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         )
                       ],
                     )),
@@ -59,11 +62,11 @@ class MineView extends StatelessWidget {
                           children: [
                             Text(
                               S.current.MidName,
-                              style: setNoteTitleLighter(ColorTheme.greydarker),
+                              style: AppTheme.listTitle,
                             ),
                             Text(
                               person.midname,
-                              style: setNoteTitleLighter(ColorTheme.greydarker),
+                              style: AppTheme.listTitle,
                             )
                           ],
                         )),
@@ -75,11 +78,11 @@ class MineView extends StatelessWidget {
                       children: [
                         Text(
                           S.current.LastName,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         ),
                         Text(
                           person.lastname,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         )
                       ],
                     )),
@@ -91,11 +94,11 @@ class MineView extends StatelessWidget {
                       children: [
                         Text(
                           S.current.Age,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         ),
                         Text(
                           person.age.toString(),
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         )
                       ],
                     )),
@@ -107,11 +110,11 @@ class MineView extends StatelessWidget {
                       children: [
                         Text(
                           S.current.Sex,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         ),
                         Text(
                           person.sex == 0 ? S.current.Famale : S.current.Male,
-                          style: setNoteTitleLighter(ColorTheme.greydarker),
+                          style: AppTheme.listTitle,
                         )
                       ],
                     )),

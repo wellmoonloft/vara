@@ -66,8 +66,9 @@
     "Delete": "Delete",
     "ConfirmNote": "Confirm delete this bill: {amount} {use}?",
     "DeleteNote": "This bill: {bill} was deleted.",
-    "Keepfinancialfreedom":"Säilitage rahaline vabadus üle 100%",
+    "Keepfinancialfreedom":"Olete saavutanud rahalise vabaduse!",
     "ReduceExpenses":  "Suurendage investeerimistulu või vähendage kulutusi100% -lise finantsvabaduse saavutamiseks",
+    "Congratulations": "Palju õnne!",
 
     "MisCellaneous": "Mitmesugused",
     "Entertainment": "Meelelahutus",

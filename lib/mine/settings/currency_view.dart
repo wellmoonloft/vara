@@ -32,7 +32,10 @@ class CurrencyView extends StatelessWidget {
               elevation: 0,
               title: Text(S.current.Currency, style: AppTheme.subPageTitle),
               leading: IconButton(
-                  icon: FaIcon(FontAwesomeIcons.times),
+                  icon: FaIcon(
+                    FontAwesomeIcons.times,
+                    size: 18,
+                  ),
                   color: ColorTheme.greyquadradarker,
                   onPressed: () {
                     Navigator.pop(context);
@@ -42,19 +45,18 @@ class CurrencyView extends StatelessWidget {
               itemCount: currencyList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                    padding: AppTheme.outboxpadding,
+                    padding: AppTheme.inboxpadding,
                     child: InkWell(
                         onTap: () {
                           Navigator.of(context).pop(currencyList[index]);
                         },
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 currencyList[index],
                                 textAlign: TextAlign.start,
-                                style:
-                                    setNoteTitleLighter(ColorTheme.greydarker),
+                                style: AppTheme.listTitle,
                               ),
                               // FaIcon(
                               //   FontAwesomeIcons.check,
@@ -66,7 +68,7 @@ class CurrencyView extends StatelessWidget {
               separatorBuilder: (BuildContext context, int index) {
                 return Divider(
                   color: ColorTheme.pantone,
-                  height: 2,
+                  height: 1,
                 );
               },
             )));

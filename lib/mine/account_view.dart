@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/app_theme.dart';
-import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
 class AccountView extends StatelessWidget {
@@ -61,100 +59,14 @@ class AccountView extends StatelessWidget {
 
                     return Container(
                         padding: AppTheme.outboxpadding,
-                        child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: AppTheme.inboxpadding,
-                                decoration: AppTheme.boxDecoration,
-                                child: Stack(
-                                  children: <Widget>[
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          S.current.Invest + S.current.Account,
-                                          style: AppTheme.noteTitle,
-                                        ),
-                                        SizedBox(
-                                          height: 16,
-                                        ),
-                                        NumbersText(
-                                            value:
-                                                totalInvest * animation.value,
-                                            style: AppTheme.subNumbers,
-                                            currency:
-                                                providerdata.currency.iconName),
-                                        SizedBox(height: 10),
-                                      ],
-                                    ),
-                                    Positioned(
-                                      top: -14,
-                                      right: -10,
-                                      child: IconButton(
-                                          icon: FaIcon(
-                                            FontAwesomeIcons.plus,
-                                            size: 14,
-                                            color: ColorTheme.greylighter,
-                                          ),
-                                          onPressed: null),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: AppTheme.inboxpadding,
-                                decoration: AppTheme.boxDecoration,
-                                child: Stack(
-                                  children: <Widget>[
-                                    Container(
-                                      width: MediaQuery.of(context).size.width -
-                                          40,
-                                      padding: EdgeInsets.only(
-                                          left: 0, right: 30, top: 0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            S.current.Cash + S.current.Account,
-                                            style: AppTheme.noteTitle,
-                                          ),
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                          NumbersText(
-                                              value:
-                                                  netIncome * animation.value,
-                                              style: AppTheme.subNumbers,
-                                              currency: providerdata
-                                                  .currency.iconName),
-                                          SizedBox(height: 10),
-                                        ],
-                                      ),
-                                    ),
-                                    Positioned(
-                                      top: -14,
-                                      right: -10,
-                                      child: IconButton(
-                                          icon: FaIcon(
-                                            FontAwesomeIcons.plus,
-                                            size: 14,
-                                            color: ColorTheme.greylighter,
-                                          ),
-                                          onPressed: null),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ]));
+                        child: SummaryBox(
+                          title1: S.current.Invest + S.current.Account,
+                          title2: S.current.Cash + S.current.Account,
+                          value1: totalInvest * animation.value,
+                          value2: netIncome * animation.value,
+                          currency: providerdata.currency.iconName,
+                          mark: true,
+                        ));
                   })));
         });
   }

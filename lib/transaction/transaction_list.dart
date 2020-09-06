@@ -248,11 +248,8 @@ class BillListState extends State<BillListView> {
                                 Container(
                                   padding:
                                       const EdgeInsets.only(top: 6, bottom: 6),
-                                  child: Text(
-                                    bill.date,
-                                    style: setNoteTitleSmall(
-                                        ColorTheme.greydarker),
-                                  ),
+                                  child: Text(bill.date,
+                                      style: AppTheme.listTitle),
                                 ),
                               ],
                             ))));

@@ -18,7 +18,10 @@ class LanguageView extends StatelessWidget {
               elevation: 0,
               title: Text(S.current.Language, style: AppTheme.subPageTitle),
               leading: IconButton(
-                  icon: FaIcon(FontAwesomeIcons.times),
+                  icon: FaIcon(
+                    FontAwesomeIcons.times,
+                    size: 18,
+                  ),
                   color: ColorTheme.greyquadradarker,
                   onPressed: () {
                     Navigator.pop(context);
@@ -28,7 +31,7 @@ class LanguageView extends StatelessWidget {
               itemCount: language.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                    padding: AppTheme.outboxpadding,
+                    padding: AppTheme.inboxpadding,
                     child: InkWell(
                         onTap: () {
                           switch (index.toString()) {
@@ -67,8 +70,7 @@ class LanguageView extends StatelessWidget {
                               Text(
                                 language[index],
                                 textAlign: TextAlign.start,
-                                style:
-                                    setNoteTitleLighter(ColorTheme.greydarker),
+                                style: AppTheme.listTitle,
                               ),
                               // FaIcon(
                               //   FontAwesomeIcons.check,

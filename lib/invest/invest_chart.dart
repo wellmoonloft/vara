@@ -23,12 +23,10 @@ class InvestChart extends StatelessWidget {
                   child: Container(
                       height: 330,
                       padding: AppTheme.inboxpadding,
-                      child: Container(
-                          decoration: AppTheme.boxDecoration,
-                          child: charts.ScatterPlotChart(
-                            _createSampleData(context),
-                            animate: false,
-                          )))));
+                      child: charts.ScatterPlotChart(
+                        _createSampleData(context),
+                        animate: false,
+                      ))));
         });
   }
 
