@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Groceries" : MessageLookupByLibrary.simpleMessage("杂费"),
     "Gym" : MessageLookupByLibrary.simpleMessage("健身房"),
     "Healthcare" : MessageLookupByLibrary.simpleMessage("保健"),
+    "Help" : MessageLookupByLibrary.simpleMessage("帮助"),
     "Hobby" : MessageLookupByLibrary.simpleMessage("爱好"),
     "Hotel" : MessageLookupByLibrary.simpleMessage("旅店"),
     "Housing" : MessageLookupByLibrary.simpleMessage("居家"),
@@ -96,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "LastName" : MessageLookupByLibrary.simpleMessage("姓"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("逾期投资散点图"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("生活方式"),
+    "LiquidityRatio" : MessageLookupByLibrary.simpleMessage("流动性比率"),
     "Loan" : MessageLookupByLibrary.simpleMessage("贷款"),
     "Long" : MessageLookupByLibrary.simpleMessage("长期"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("超过365天"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "MidName" : MessageLookupByLibrary.simpleMessage("中间名"),
     "MidSub" : MessageLookupByLibrary.simpleMessage("少于365天"),
     "MisCellaneous" : MessageLookupByLibrary.simpleMessage("杂项"),
+    "Month" : MessageLookupByLibrary.simpleMessage("本月"),
     "NetAsset" : MessageLookupByLibrary.simpleMessage("净资产"),
     "NetIncome" : MessageLookupByLibrary.simpleMessage("净收入"),
     "NewTransaction" : MessageLookupByLibrary.simpleMessage("新交易"),
@@ -146,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "UserName" : MessageLookupByLibrary.simpleMessage("用户名"),
     "Vacation" : MessageLookupByLibrary.simpleMessage("度假"),
     "VacationSavings" : MessageLookupByLibrary.simpleMessage("度假存款"),
-    "Water" : MessageLookupByLibrary.simpleMessage("水费")
+    "Water" : MessageLookupByLibrary.simpleMessage("水费"),
+    "Week" : MessageLookupByLibrary.simpleMessage("本周"),
+    "Year" : MessageLookupByLibrary.simpleMessage("本年")
   };
 }

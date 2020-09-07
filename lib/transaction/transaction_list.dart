@@ -9,6 +9,7 @@ import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/theme_ui/common/calendar_popup_view.dart';
 import 'package:vara/utils/dateutil.dart';
+import 'package:vara/theme_ui/common/app_common.dart';
 
 class BillListView extends StatefulWidget {
   final AnimationController animationController;
@@ -97,7 +98,6 @@ class BillListState extends State<BillListView> {
                                             weekBottom = true;
                                             monthBottom = false;
                                             yearBottom = false;
-                                            date = 'This Week';
                                             current.clear();
                                             DateTime weekStart =
                                                 DateUtils.weekStart(
@@ -122,7 +122,7 @@ class BillListState extends State<BillListView> {
                                         }
                                       },
                                       child: Text(
-                                        'Week',
+                                        S.current.Week,
                                         textAlign: TextAlign.center,
                                         style: weekBottom
                                             ? AppTheme.subPageTitle
@@ -138,7 +138,6 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = true;
                                             yearBottom = false;
-                                            date = 'This Month';
                                             String _date = DateFormat('yyyy-MM')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -155,7 +154,7 @@ class BillListState extends State<BillListView> {
                                         }
                                       },
                                       child: Text(
-                                        'Month',
+                                        S.current.Month,
                                         textAlign: TextAlign.center,
                                         style: monthBottom
                                             ? AppTheme.subPageTitle
@@ -171,7 +170,6 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = false;
                                             yearBottom = true;
-                                            date = 'This Year';
                                             String _date = DateFormat('yyyy')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -188,7 +186,7 @@ class BillListState extends State<BillListView> {
                                         }
                                       },
                                       child: Text(
-                                        'Year',
+                                        S.current.Year,
                                         textAlign: TextAlign.center,
                                         style: yearBottom
                                             ? AppTheme.subPageTitle
@@ -290,77 +288,44 @@ class BillListState extends State<BillListView> {
                                                           const EdgeInsets.only(
                                                               bottom: 6),
                                                       child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(top: 6),
-                                                              child: FaIcon(
-                                                                bill.mark == 0
-                                                                    ? FontAwesomeIcons
-                                                                        .minus
-                                                                    : FontAwesomeIcons
-                                                                        .plus,
-                                                                size: 14,
-                                                                color: (bill.mark ==
-                                                                        0)
-                                                                    ? ColorTheme
-                                                                        .darkred
-                                                                    : ColorTheme
-                                                                        .neogreendarker,
-                                                              )),
-                                                          SizedBox(
-                                                            width: 6,
-                                                          ),
-                                                          Text(
-                                                            bill.amount.abs() >
-                                                                    AppTheme
-                                                                        .maxNumber
-                                                                ? NumberFormat.compact(
-                                                                        locale: Intl
-                                                                            .getCurrentLocale())
-                                                                    .format(bill
-                                                                            .amount *
-                                                                        widget
-                                                                            .animation
-                                                                            .value)
-                                                                : NumberFormat(
-                                                                        "###,##0.00",
-                                                                        Intl
-                                                                            .getCurrentLocale())
-                                                                    .format(bill
-                                                                            .amount *
-                                                                        widget
-                                                                            .animation
-                                                                            .value),
-                                                            style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              fontSize: 20,
-                                                              color: (bill.mark ==
-                                                                      0)
-                                                                  ? ColorTheme
-                                                                      .darkred
-                                                                  : ColorTheme
-                                                                      .neogreendarker,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        top: 9),
+                                                                child: FaIcon(
+                                                                  bill.mark == 0
+                                                                      ? FontAwesomeIcons
+                                                                          .minus
+                                                                      : FontAwesomeIcons
+                                                                          .plus,
+                                                                  size: 8,
+                                                                  color: ColorTheme
+                                                                      .mainBlack,
+                                                                )),
+                                                            SizedBox(
+                                                              width: 6,
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            ' ' + bill.currency,
-                                                            style: TextStyle(
-                                                              color: (bill.mark ==
-                                                                      0)
-                                                                  ? ColorTheme
-                                                                      .darkred
-                                                                  : ColorTheme
-                                                                      .neogreendarker,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      )),
+                                                            NumbersText(
+                                                              value: bill.mark ==
+                                                                      0
+                                                                  ? bill.amount *
+                                                                      widget
+                                                                          .animation
+                                                                          .value
+                                                                  : bill.amount *
+                                                                      widget
+                                                                          .animation
+                                                                          .value,
+                                                              style: AppTheme
+                                                                  .subPageTitle,
+                                                              currency:
+                                                                  bill.currency,
+                                                            )
+                                                          ])),
                                                   Container(
                                                     padding:
                                                         const EdgeInsets.only(

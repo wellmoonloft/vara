@@ -26,7 +26,7 @@ class BillSummaryView extends StatelessWidget {
                     double netIncome = 0.0;
                     double income = 0.0;
                     double expenses = 0.0;
-                    //double freedomService = 0.0;
+                    double freedomService = 0.0;
                     num rate = 1;
                     providerdata.billList.forEach((element) {
                       providerdata.currencyData.forEach((element1) {
@@ -41,11 +41,11 @@ class BillSummaryView extends StatelessWidget {
                       });
                     });
                     netIncome = income - expenses;
-                    // if (expenses == 0 || income == 0) {
-                    //   freedomService = 0;
-                    // } else {
-                    //   freedomService = income / expenses * 100;
-                    // }
+                    if (expenses == 0 || income == 0) {
+                      freedomService = 0;
+                    } else {
+                      freedomService = income / expenses;
+                    }
 
                     return Container(
                         width: MediaQuery.of(context).size.width,
@@ -54,29 +54,47 @@ class BillSummaryView extends StatelessWidget {
                               left: 16, right: 16, top: 16, bottom: 20),
                           child: Column(
                             children: <Widget>[
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 10, bottom: 2),
-                                    child: Text(S.current.Income,
-                                        textAlign: TextAlign.center,
-                                        style: AppTheme.noteTitle),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 10, bottom: 2),
+                                        child: Text(S.current.NetIncome,
+                                            textAlign: TextAlign.center,
+                                            style: AppTheme.noteTitle),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10, top: 5),
+                                          child: NumbersText(
+                                              value:
+                                                  netIncome * animation.value,
+                                              style: AppTheme.mainNumbers,
+                                              currency: providerdata
+                                                  .currency.iconName)),
+                                    ],
                                   ),
                                   Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 10, top: 5),
-                                      child: NumbersText(
-                                          value: netIncome * animation.value,
-                                          style: AppTheme.mainNumbers,
-                                          currency:
-                                              providerdata.currency.iconName)),
+                                    padding: const EdgeInsets.only(right: 16),
+                                    child: Center(
+                                      child: SummaryTopGraph(
+                                        title: S.current.LiquidityRatio,
+                                        value: freedomService * animation.value,
+                                        mark: false,
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
                               SizedBox(
-                                height: 35,
+                                height: 25,
                               ),
                               SummaryBox(
                                 title1: S.current.Income,

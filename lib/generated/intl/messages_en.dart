@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Groceries" : MessageLookupByLibrary.simpleMessage("Groceries"),
     "Gym" : MessageLookupByLibrary.simpleMessage("Gym"),
     "Healthcare" : MessageLookupByLibrary.simpleMessage("Healthcare"),
+    "Help" : MessageLookupByLibrary.simpleMessage("Help"),
     "Hobby" : MessageLookupByLibrary.simpleMessage("Hobby"),
     "Hotel" : MessageLookupByLibrary.simpleMessage("Hotel"),
     "Housing" : MessageLookupByLibrary.simpleMessage("Housing"),
@@ -96,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "LastName" : MessageLookupByLibrary.simpleMessage("Last Name"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Scatter Chart of Overdue"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("Lifestyle"),
+    "LiquidityRatio" : MessageLookupByLibrary.simpleMessage("Liquidity ratio"),
     "Loan" : MessageLookupByLibrary.simpleMessage("Loan"),
     "Long" : MessageLookupByLibrary.simpleMessage("Long"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("over 365 days"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "MidName" : MessageLookupByLibrary.simpleMessage("Mid Name"),
     "MidSub" : MessageLookupByLibrary.simpleMessage("less 365 days"),
     "MisCellaneous" : MessageLookupByLibrary.simpleMessage("MisCellaneous"),
+    "Month" : MessageLookupByLibrary.simpleMessage("Month"),
     "NetAsset" : MessageLookupByLibrary.simpleMessage("Net Asset"),
     "NetIncome" : MessageLookupByLibrary.simpleMessage("Net Income"),
     "NewTransaction" : MessageLookupByLibrary.simpleMessage("New Transaction"),
@@ -146,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "UserName" : MessageLookupByLibrary.simpleMessage("User Name"),
     "Vacation" : MessageLookupByLibrary.simpleMessage("Vacation"),
     "VacationSavings" : MessageLookupByLibrary.simpleMessage("Vacation Savings"),
-    "Water" : MessageLookupByLibrary.simpleMessage("Water")
+    "Water" : MessageLookupByLibrary.simpleMessage("Water"),
+    "Week" : MessageLookupByLibrary.simpleMessage("Week"),
+    "Year" : MessageLookupByLibrary.simpleMessage("Year")
   };
 }

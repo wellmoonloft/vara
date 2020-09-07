@@ -63,6 +63,16 @@ class S {
     );
   }
 
+  /// `Help`
+  String get Help {
+    return Intl.message(
+      'Help',
+      name: 'Help',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Asset`
   String get Asset {
     return Intl.message(
@@ -393,11 +403,51 @@ class S {
     );
   }
 
+  /// `Liquidity ratio`
+  String get LiquidityRatio {
+    return Intl.message(
+      'Liquidity ratio',
+      name: 'LiquidityRatio',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Savings`
   String get Savings {
     return Intl.message(
       'Savings',
       name: 'Savings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Week`
+  String get Week {
+    return Intl.message(
+      'Week',
+      name: 'Week',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Month`
+  String get Month {
+    return Intl.message(
+      'Month',
+      name: 'Month',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year`
+  String get Year {
+    return Intl.message(
+      'Year',
+      name: 'Year',
       desc: '',
       args: [],
     );

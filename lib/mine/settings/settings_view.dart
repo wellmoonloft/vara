@@ -134,7 +134,7 @@ class _SettingsViewState extends State<SettingsView> {
                                     );
                                   }),
                                   SizedBox(
-                                    width: 12,
+                                    width: 14,
                                   ),
                                   Text(
                                     S.current.Currency,
@@ -224,6 +224,43 @@ class _SettingsViewState extends State<SettingsView> {
                               )
                             ])),
                   )),
+              OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
+              Padding(
+                  padding: AppTheme.inboxpadding,
+                  child: Container(
+                    child: InkWell(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return CurrencyView();
+                          })).then((data) async {});
+                        },
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.solidQuestionCircle,
+                                    color: ColorTheme.mainBlack,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    S.current.Help,
+                                    style: AppTheme.listTitle,
+                                  ),
+                                ],
+                              ),
+                              FaIcon(
+                                FontAwesomeIcons.chevronRight,
+                                size: 16,
+                                color: ColorTheme.mainBlack,
+                              )
+                            ])),
+                  )),
               OneHeightBorder(top: 10, left: 16, right: 16, bottom: 0),
               Padding(
                   padding: AppTheme.inboxpadding,
@@ -288,41 +325,6 @@ class _SettingsViewState extends State<SettingsView> {
                         ]),
                   )),
               OneHeightBorder(top: 0, left: 16, right: 16, bottom: 10),
-              Padding(
-                  padding: AppTheme.inboxpadding,
-                  child: Container(
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SizedBox(
-                                width: 2,
-                              ),
-                              FaIcon(
-                                FontAwesomeIcons.locationArrow,
-                                size: 18,
-                                color: ColorTheme.mainBlack,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                S.current.Path,
-                                style: AppTheme.listTitle,
-                              ),
-                            ],
-                          ),
-                          Container(
-                              width: 200,
-                              child: Text(
-                                Globals.Global.myStoreage.path,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 20,
-                              ))
-                        ]),
-                  )),
-              OneHeightBorder(top: 15, left: 16, right: 16, bottom: 0),
             ],
           )),
     );

@@ -2,6 +2,7 @@
     "Date": "日付",
     "Amount": "量",
     "Status": "状態",
+    "Help": "手伝って",
 
     "Asset": "資産",
     "NetAsset": "純資産",
@@ -36,6 +37,10 @@
     "FinancialFreedom": "経済的自由",
     "Income": "所得",
     "Expenses": "経費",
+    "LiquidityRatio": "流動性比率",
+    "Week": "今週",
+    "Month": "今月",
+    "Year": "今年",
     "Savings": "貯蓄",
     "NewTransaction": "新規取引",
     "Category": "カテゴリー",

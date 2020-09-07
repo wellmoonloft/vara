@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Groceries" : MessageLookupByLibrary.simpleMessage("食料品"),
     "Gym" : MessageLookupByLibrary.simpleMessage("ジム"),
     "Healthcare" : MessageLookupByLibrary.simpleMessage("健康管理"),
+    "Help" : MessageLookupByLibrary.simpleMessage("手伝って"),
     "Hobby" : MessageLookupByLibrary.simpleMessage("趣味"),
     "Hotel" : MessageLookupByLibrary.simpleMessage("ホテル"),
     "Housing" : MessageLookupByLibrary.simpleMessage("ハウジング"),
@@ -96,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "LastName" : MessageLookupByLibrary.simpleMessage("苗字"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("期限切れ散布図"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("暮らし"),
+    "LiquidityRatio" : MessageLookupByLibrary.simpleMessage("流動性比率"),
     "Loan" : MessageLookupByLibrary.simpleMessage("ローン"),
     "Long" : MessageLookupByLibrary.simpleMessage("長期"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("365日以上"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "MidName" : MessageLookupByLibrary.simpleMessage("ミドルネーム"),
     "MidSub" : MessageLookupByLibrary.simpleMessage("365日未満"),
     "MisCellaneous" : MessageLookupByLibrary.simpleMessage("雑多"),
+    "Month" : MessageLookupByLibrary.simpleMessage("今月"),
     "NetAsset" : MessageLookupByLibrary.simpleMessage("純資産"),
     "NetIncome" : MessageLookupByLibrary.simpleMessage("純利益"),
     "NewTransaction" : MessageLookupByLibrary.simpleMessage("新規取引"),
@@ -146,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "UserName" : MessageLookupByLibrary.simpleMessage("ユーザー名"),
     "Vacation" : MessageLookupByLibrary.simpleMessage("休暇"),
     "VacationSavings" : MessageLookupByLibrary.simpleMessage("休暇の節約"),
-    "Water" : MessageLookupByLibrary.simpleMessage("水")
+    "Water" : MessageLookupByLibrary.simpleMessage("水"),
+    "Week" : MessageLookupByLibrary.simpleMessage("今週"),
+    "Year" : MessageLookupByLibrary.simpleMessage("今年")
   };
 }

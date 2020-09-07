@@ -74,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Groceries" : MessageLookupByLibrary.simpleMessage("Toiduained"),
     "Gym" : MessageLookupByLibrary.simpleMessage("Jõusaal"),
     "Healthcare" : MessageLookupByLibrary.simpleMessage("Tervishoid"),
+    "Help" : MessageLookupByLibrary.simpleMessage("Aita"),
     "Hobby" : MessageLookupByLibrary.simpleMessage("Hobi"),
     "Hotel" : MessageLookupByLibrary.simpleMessage("Hotell"),
     "Housing" : MessageLookupByLibrary.simpleMessage("Eluase"),
@@ -96,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "LastName" : MessageLookupByLibrary.simpleMessage("Perekonnanimi"),
     "LateScatterPlot" : MessageLookupByLibrary.simpleMessage("Tähtaja ületanud hajutustabel"),
     "Lifestyle" : MessageLookupByLibrary.simpleMessage("Eluviis"),
+    "LiquidityRatio" : MessageLookupByLibrary.simpleMessage("Likviidsuse suhe"),
     "Loan" : MessageLookupByLibrary.simpleMessage("Laen"),
     "Long" : MessageLookupByLibrary.simpleMessage("Pikk"),
     "LongSub" : MessageLookupByLibrary.simpleMessage("üle 365 päeva"),
@@ -105,6 +107,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "MidName" : MessageLookupByLibrary.simpleMessage("Keskmine nimi"),
     "MidSub" : MessageLookupByLibrary.simpleMessage("vähem 365 päeva"),
     "MisCellaneous" : MessageLookupByLibrary.simpleMessage("Mitmesugused"),
+    "Month" : MessageLookupByLibrary.simpleMessage("Kuu"),
     "NetAsset" : MessageLookupByLibrary.simpleMessage("Netovara"),
     "NetIncome" : MessageLookupByLibrary.simpleMessage("Neto sissetulek"),
     "NewTransaction" : MessageLookupByLibrary.simpleMessage("Uus tehing"),
@@ -146,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "UserName" : MessageLookupByLibrary.simpleMessage("Kasutajanimi"),
     "Vacation" : MessageLookupByLibrary.simpleMessage("Puhkus"),
     "VacationSavings" : MessageLookupByLibrary.simpleMessage("Puhkuse kokkuhoid"),
-    "Water" : MessageLookupByLibrary.simpleMessage("Vesi")
+    "Water" : MessageLookupByLibrary.simpleMessage("Vesi"),
+    "Week" : MessageLookupByLibrary.simpleMessage("Nädal"),
+    "Year" : MessageLookupByLibrary.simpleMessage("Aasta")
   };
 }

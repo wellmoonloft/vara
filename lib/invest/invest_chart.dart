@@ -21,7 +21,7 @@ class InvestChart extends StatelessWidget {
                   transform: new Matrix4.translationValues(
                       0.0, 30 * (1.0 - animation.value), 0.0),
                   child: Container(
-                      height: 330,
+                      height: MediaQuery.of(context).size.width - 20,
                       padding: AppTheme.inboxpadding,
                       child: charts.ScatterPlotChart(
                         _createSampleData(context),

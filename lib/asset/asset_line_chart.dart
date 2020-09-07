@@ -32,7 +32,7 @@ class AssetLineChartView extends StatelessWidget {
                         overflow: Overflow.visible,
                         children: <Widget>[
                           Container(
-                              height: 350,
+                              height: MediaQuery.of(context).size.width - 20,
                               child: charts.TimeSeriesChart(
                                 _createSampleData(context),
                                 animate: false,

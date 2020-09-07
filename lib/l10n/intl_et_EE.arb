@@ -2,6 +2,7 @@
     "Date": "Kuupäev",
     "Amount": "Summa",
     "Status": "Olek",
+    "Help": "Aita",
 
     "Asset": "Vara",
     "NetAsset": "Netovara",
@@ -36,6 +37,10 @@
     "FinancialFreedom": "Finantsvabadus",
     "Income": "Sissetulek",
     "Expenses": "Kulud",
+    "LiquidityRatio": "Likviidsuse suhe",
+    "Week": "Nädal",
+    "Month": "Kuu",
+    "Year": "Aasta",
     "Savings": "Säästud",
     "NewTransaction": "Uus tehing",
     "Category": "Kategooria",

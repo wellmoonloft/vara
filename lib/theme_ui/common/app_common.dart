@@ -153,10 +153,16 @@ class SummaryTopGraph extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                SizedBox(
+                  height: 6,
+                ),
                 Text(
                   temp.toStringAsFixed(2) + (mark ? '%' : ''),
                   textAlign: TextAlign.center,
                   style: AppTheme.subPageTitle,
+                ),
+                SizedBox(
+                  height: 5,
                 ),
                 Text(title,
                     textAlign: TextAlign.center, style: AppTheme.noteSubTitle),
@@ -167,10 +173,9 @@ class SummaryTopGraph extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: CustomPaint(
-            painter: CurvePainter(colors: [
-              ColorTheme.mainGreen,
-              ColorTheme.mainGreen.withOpacity(0.4)
-            ], angle: (360 - 10) * value),
+            painter: CurvePainter(
+                colors: [ColorTheme.mainGreen, ColorTheme.mainGreen],
+                angle: (360 - 10) * value),
             child: SizedBox(
               width: 108,
               height: 108,
