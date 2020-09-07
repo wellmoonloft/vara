@@ -98,21 +98,21 @@ class TransactionChart extends StatelessWidget {
     return [
       new charts.Series<OrdinalSales, String>(
         id: S.current.NetIncome,
-        colorFn: (_, __) => charts.Color.fromHex(code: '#c79ba6'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#66DD98'),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: desktopSalesData,
       ),
       new charts.Series<OrdinalSales, String>(
         id: S.current.Income,
-        colorFn: (_, __) => charts.Color.fromHex(code: '#ff6a4e'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#f0d198'),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: tabletSalesData,
       ),
       new charts.Series<OrdinalSales, String>(
         id: S.current.Expenses,
-        colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#ff320b'),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: mobileSalesData,

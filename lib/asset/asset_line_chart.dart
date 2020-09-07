@@ -28,12 +28,12 @@ class AssetLineChartView extends StatelessWidget {
                   child: Transform(
                       transform: new Matrix4.translationValues(
                           0.0, 30 * (1.0 - animation.value), 0.0),
-                      child: Container(
-                          height: 350,
-                          child: Stack(
-                            overflow: Overflow.visible,
-                            children: <Widget>[
-                              charts.TimeSeriesChart(
+                      child: Stack(
+                        overflow: Overflow.visible,
+                        children: <Widget>[
+                          Container(
+                              height: 350,
+                              child: charts.TimeSeriesChart(
                                 _createSampleData(context),
                                 animate: false,
 
@@ -76,10 +76,10 @@ class AssetLineChartView extends StatelessWidget {
                                 ],
                                 dateTimeFactory:
                                     const charts.LocalDateTimeFactory(),
-                              ),
-                              ShowDetail()
-                            ],
-                          ))));
+                              )),
+                          ShowDetail()
+                        ],
+                      )));
             }));
   }
 
@@ -117,21 +117,21 @@ class AssetLineChartView extends StatelessWidget {
     return [
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Asset',
-        colorFn: (_, __) => charts.Color.fromHex(code: '#c79ba6'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#f0d198'),
         domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: assetSalesData,
       ),
       new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Debt',
-        colorFn: (_, __) => charts.Color.fromHex(code: '#ff6a4e'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#ff320b'),
         domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: investSalesData,
       ),
       new charts.Series<TimeSeriesSales, DateTime>(
           id: 'NetAsset',
-          colorFn: (_, __) => charts.Color.fromHex(code: '#6baeb7'),
+          colorFn: (_, __) => charts.Color.fromHex(code: '#66DD98'),
           domainFn: (TimeSeriesSales sales, _) => sales.time,
           measureFn: (TimeSeriesSales sales, _) => sales.sales,
           data: netAssetSalesData)

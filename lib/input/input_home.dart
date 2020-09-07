@@ -23,10 +23,10 @@ class InputHome extends StatefulWidget {
 class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
   List<Widget> listViews = <Widget>[];
   final ScrollController scrollController = ScrollController();
-  String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+  String date = DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now());
   final moneyController = TextEditingController();
   String categroyTitle = S.current.Category;
-  String categroy = S.current.Category;
+  String categroy = '';
   String categroyTitleValue = S.current.Category;
   String categroyValue = S.current.Category;
   IconData categroyIcon = FontAwesomeIcons.layerGroup;
@@ -228,12 +228,10 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                           lastDate: DateTime(2030));
                       if (result != null) {
                         setState(() {
-                          date = DateFormat('yyyy-MM-dd')
-                              .format(result)
-                              .toString();
+                          date =
+                              DateFormat('yyyy-MM-dd HH:mm:ss').format(result);
                         });
                       }
-                      print('$result');
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -298,11 +296,14 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                       await providerData.getBillList();
                       await providerData.getAssetList();
                       Navigator.pop(context);
+                      setState(() {
+                        //
+                      });
                     }
                   },
                   child: Container(
-                    height: 40,
-                    width: 200,
+                    height: 45,
+                    //width: 200,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       color: ColorTheme.pale,

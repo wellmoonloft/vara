@@ -49,7 +49,7 @@ class SummaryBox extends StatelessWidget {
                     style: AppTheme.noteTitle,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   NumbersText(
                     value: value1,
@@ -60,8 +60,8 @@ class SummaryBox extends StatelessWidget {
               ),
               mark
                   ? Positioned(
-                      top: -14,
-                      right: -10,
+                      top: -18,
+                      right: -18,
                       child: IconButton(
                           icon: FaIcon(
                             FontAwesomeIcons.plus,
@@ -70,7 +70,7 @@ class SummaryBox extends StatelessWidget {
                           ),
                           onPressed: null),
                     )
-                  : Container()
+                  : Container(),
             ])),
         SizedBox(
           width: 16,
@@ -90,7 +90,7 @@ class SummaryBox extends StatelessWidget {
                     style: AppTheme.noteTitle,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   NumbersText(
                     value: value2,
@@ -101,8 +101,8 @@ class SummaryBox extends StatelessWidget {
               ),
               mark
                   ? Positioned(
-                      top: -14,
-                      right: -10,
+                      top: -18,
+                      right: -18,
                       child: IconButton(
                           icon: FaIcon(
                             FontAwesomeIcons.plus,

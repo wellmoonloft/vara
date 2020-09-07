@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'package:vara/theme_ui/common/title_view.dart';
-import 'package:vara/transaction/transaction_chart.dart';
+import 'package:vara/transaction/transaction_list.dart';
 import 'transaction_summary.dart';
 
 class BillHome extends StatefulWidget {
@@ -47,22 +46,22 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
       ),
     );
 
-    listViews.add(
-      TitleView(
-        titleTxt: 'ffff',
-        subTxt: S.current.TransactionList,
-        navigator: 'bill',
-        // color: ColorTheme.cantaloupe,
-        animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-            parent: widget.animationController,
-            curve:
-                Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
-        animationController: widget.animationController,
-      ),
-    );
+    // listViews.add(
+    //   TitleView(
+    //     titleTxt: 'ffff',
+    //     subTxt: S.current.TransactionList,
+    //     navigator: 'bill',
+    //     // color: ColorTheme.cantaloupe,
+    //     animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+    //         parent: widget.animationController,
+    //         curve:
+    //             Interval((1 / count) * 2, 1.0, curve: Curves.fastOutSlowIn))),
+    //     animationController: widget.animationController,
+    //   ),
+    // );
 
     listViews.add(
-      TransactionChart(
+      BillListView(
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,
             curve:

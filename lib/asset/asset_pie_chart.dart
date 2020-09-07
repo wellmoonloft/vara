@@ -115,14 +115,14 @@ class AssetPieChartView extends StatelessWidget {
     return [
       new charts.Series<OrdinalSales, String>(
         id: S.current.Asset,
-        colorFn: (_, __) => charts.Color.fromHex(code: '#c79ba6'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#f0d198'),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: assetSalesData,
       ),
       new charts.Series<OrdinalSales, String>(
         id: S.current.Debt,
-        colorFn: (_, __) => charts.Color.fromHex(code: '#ff6a4e'),
+        colorFn: (_, __) => charts.Color.fromHex(code: '#ff320b'),
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: debtSalesData,
