@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vara/asset/asset_line_chart.dart';
-import 'package:vara/asset/asset_pie_chart.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';

@@ -33,6 +33,7 @@
     "Transaction": "Transaction",
     "TransactionSummary": "Transaction Summary",
     "TransactionList": "Transaction List",
+    "Bill": "Bill",
     "NetIncome": "Net Income",
     "FinancialFreedom": "Financial Freedom",
     "Income": "Income",

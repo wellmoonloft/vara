@@ -7,9 +7,9 @@ import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
-class TransactionDetail extends StatelessWidget {
+class BillDetail extends StatelessWidget {
   final Bill billdetail;
-  const TransactionDetail({Key key, this.billdetail}) : super(key: key);
+  const BillDetail({Key key, this.billdetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

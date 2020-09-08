@@ -363,6 +363,16 @@ class S {
     );
   }
 
+  /// `Bill`
+  String get Bill {
+    return Intl.message(
+      'Bill',
+      name: 'Bill',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Net Income`
   String get NetIncome {
     return Intl.message(

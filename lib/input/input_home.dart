@@ -10,6 +10,7 @@ import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
+import 'package:vara/theme_ui/common/calendar_popup_view.dart';
 import 'categroy.dart';
 import 'package:vara/models/db_models.dart';
 
@@ -220,18 +221,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
               child: Column(children: [
                 InkWell(
                     onTap: () async {
-                      var result = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          initialDatePickerMode: DatePickerMode.day,
-                          firstDate: DateTime(2020),
-                          lastDate: DateTime(2030));
-                      if (result != null) {
-                        setState(() {
-                          date =
-                              DateFormat('yyyy-MM-dd HH:mm:ss').format(result);
-                        });
-                      }
+                      showCalendar(context: context);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -324,6 +314,30 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                 )),
           ]),
         ),
+      ),
+    );
+  }
+
+  void showCalendar({BuildContext context}) {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => CalendarPopupView(
+        barrierDismissible: true,
+        isSingleDate: true,
+        //minimumDate: DateTime.now(),
+        //maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
+        //initialEndDate: endDate,
+        initialStartDate: DateTime.now(),
+        onApplyClick: (DateTime startData, DateTime endData, String month) {
+          setState(() {
+            if (startData != null) {
+              date = DateFormat('yyyy-MM-dd HH:mm:ss')
+                  .format(startData)
+                  .toString();
+            }
+          });
+        },
+        onCancelClick: () {},
       ),
     );
   }

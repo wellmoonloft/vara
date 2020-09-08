@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "Amount" : MessageLookupByLibrary.simpleMessage("量"),
     "Asset" : MessageLookupByLibrary.simpleMessage("資産"),
     "BankCost" : MessageLookupByLibrary.simpleMessage("銀行費用"),
+    "Bill" : MessageLookupByLibrary.simpleMessage("ビル"),
     "Bowling" : MessageLookupByLibrary.simpleMessage("ボウリング"),
     "Cancel" : MessageLookupByLibrary.simpleMessage("キャンセル"),
     "Candy" : MessageLookupByLibrary.simpleMessage("キャンディー"),

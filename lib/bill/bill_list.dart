@@ -8,7 +8,7 @@ import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/theme_ui/common/calendar_popup_view.dart';
-import 'package:vara/transaction/transaction_detail.dart';
+import 'package:vara/bill/bill_detail.dart';
 import 'package:vara/utils/dateutil.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
@@ -26,7 +26,8 @@ class BillListView extends StatefulWidget {
 class BillListState extends State<BillListView> {
   List<Bill> current = List<Bill>();
   List<Bill> billList;
-  String date = DateFormat('yyyy-MM-dd').format(DateTime.now()).toString();
+  String date = 'Choose Date';
+  String date1;
   bool mark = true;
   bool dayBottom = false;
   bool weekBottom = false;
@@ -73,23 +74,61 @@ class BillListState extends State<BillListView> {
                                   child: InkWell(
                                       onTap: () async {
                                         showCalendar(context: context);
-                                        setState(() {
-                                          dayBottom = true;
-                                          weekBottom = false;
-                                          monthBottom = false;
-                                          yearBottom = false;
-                                        });
                                       },
-                                      child: Container(
-                                        alignment: Alignment(0, 0),
-                                        child: Text(
-                                          date,
-                                          style: dayBottom
-                                              ? AppTheme.subPageTitle
-                                              : AppTheme.noteTitle,
-                                        ),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                children: [
+                                                  Text(
+                                                    date,
+                                                    style: dayBottom
+                                                        ? AppTheme.subPageTitle
+                                                        : AppTheme.noteTitle,
+                                                  ),
+                                                  date1 == null
+                                                      ? Container()
+                                                      : Text(
+                                                          date1,
+                                                          style: dayBottom
+                                                              ? AppTheme
+                                                                  .subPageTitle
+                                                              : AppTheme
+                                                                  .noteTitle,
+                                                        )
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              FaIcon(
+                                                FontAwesomeIcons.chevronDown,
+                                                size: 12,
+                                                color: dayBottom
+                                                    ? ColorTheme.mainBlack
+                                                    : ColorTheme.greylighter,
+                                              )
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 8,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            decoration: BoxDecoration(
+                                              color: dayBottom
+                                                  ? ColorTheme.mainGreen
+                                                  : ColorTheme.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.0)),
+                                            ),
+                                          )
+                                        ],
                                       )),
-                                  flex: 3),
+                                  flex: 2),
                               Expanded(
                                   child: InkWell(
                                       onTap: () {
@@ -99,6 +138,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = true;
                                             monthBottom = false;
                                             yearBottom = false;
+                                            date = 'Choose Date';
                                             current.clear();
                                             DateTime weekStart =
                                                 DateUtils.weekStart(
@@ -122,14 +162,31 @@ class BillListState extends State<BillListView> {
                                           });
                                         }
                                       },
-                                      child: Text(
-                                        S.current.Week,
-                                        textAlign: TextAlign.center,
-                                        style: weekBottom
-                                            ? AppTheme.subPageTitle
-                                            : AppTheme.noteTitle,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            S.current.Week,
+                                            textAlign: TextAlign.center,
+                                            style: weekBottom
+                                                ? AppTheme.subPageTitle
+                                                : AppTheme.noteTitle,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            decoration: BoxDecoration(
+                                              color: weekBottom
+                                                  ? ColorTheme.mainGreen
+                                                  : ColorTheme.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.0)),
+                                            ),
+                                          )
+                                        ],
                                       )),
-                                  flex: 2),
+                                  flex: 1),
                               Expanded(
                                   child: InkWell(
                                       onTap: () {
@@ -139,6 +196,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = true;
                                             yearBottom = false;
+                                            date = 'Choose Date';
                                             String _date = DateFormat('yyyy-MM')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -154,14 +212,31 @@ class BillListState extends State<BillListView> {
                                           });
                                         }
                                       },
-                                      child: Text(
-                                        S.current.Month,
-                                        textAlign: TextAlign.center,
-                                        style: monthBottom
-                                            ? AppTheme.subPageTitle
-                                            : AppTheme.noteTitle,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            S.current.Month,
+                                            textAlign: TextAlign.center,
+                                            style: monthBottom
+                                                ? AppTheme.subPageTitle
+                                                : AppTheme.noteTitle,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            decoration: BoxDecoration(
+                                              color: monthBottom
+                                                  ? ColorTheme.mainGreen
+                                                  : ColorTheme.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.0)),
+                                            ),
+                                          )
+                                        ],
                                       )),
-                                  flex: 2),
+                                  flex: 1),
                               Expanded(
                                   child: InkWell(
                                       onTap: () {
@@ -171,6 +246,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = false;
                                             yearBottom = true;
+                                            date = 'Choose Date';
                                             String _date = DateFormat('yyyy')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -186,14 +262,31 @@ class BillListState extends State<BillListView> {
                                           });
                                         }
                                       },
-                                      child: Text(
-                                        S.current.Year,
-                                        textAlign: TextAlign.center,
-                                        style: yearBottom
-                                            ? AppTheme.subPageTitle
-                                            : AppTheme.noteTitle,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            S.current.Year,
+                                            textAlign: TextAlign.center,
+                                            style: yearBottom
+                                                ? AppTheme.subPageTitle
+                                                : AppTheme.noteTitle,
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Container(
+                                            height: 2,
+                                            decoration: BoxDecoration(
+                                              color: yearBottom
+                                                  ? ColorTheme.mainGreen
+                                                  : ColorTheme.white,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4.0)),
+                                            ),
+                                          )
+                                        ],
                                       )),
-                                  flex: 2),
+                                  flex: 1),
                             ],
                           ),
                           SizedBox(
@@ -217,7 +310,7 @@ class BillListState extends State<BillListView> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            TransactionDetail(billdetail: bill),
+                                            BillDetail(billdetail: bill),
                                       ));
                                 },
                                 child: Container(
@@ -328,21 +421,17 @@ class BillListState extends State<BillListView> {
       context: context,
       builder: (BuildContext context) => CalendarPopupView(
         barrierDismissible: true,
-        minimumDate: DateTime.now(),
-        //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
-        // initialEndDate: endDate,
-        // initialStartDate: startDate,
+        isSingleDate: false,
+        //minimumDate: DateTime.now(),
+        //maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
+        //initialEndDate: endDate,
+        initialStartDate: DateTime.now(),
         onApplyClick: (DateTime startData, DateTime endData, String month) {
-          print(startData);
-          print(endData);
-          print(month);
-
           if (startData != null) {
             if (endData != null) {
               setState(() {
-                date = DateFormat('yyyy-MM-dd').format(startData).toString() +
-                    ' ' +
-                    DateFormat('yyyy-MM-dd').format(endData).toString();
+                date = DateFormat('yyyy-MM-dd').format(startData).toString();
+                date1 = DateFormat('yyyy-MM-dd').format(endData).toString();
                 current.clear();
                 if (billList != null) {
                   billList.forEach((element) {
@@ -356,11 +445,14 @@ class BillListState extends State<BillListView> {
             } else {
               setState(() {
                 date = DateFormat('yyyy-MM-dd').format(startData).toString();
+                date1 = null;
                 current.clear();
                 if (billList != null) {
                   billList.forEach((element) {
                     DateTime _date = DateTime.parse(element.date);
-                    if (_date.isAfter(startData)) {
+                    String _date1 =
+                        DateFormat('yyyy-MM-dd').format(_date).toString();
+                    if (date == _date1) {
                       current.add(element);
                     }
                   });
@@ -370,6 +462,7 @@ class BillListState extends State<BillListView> {
           } else {
             setState(() {
               date = month.toString();
+              date1 = null;
               current.clear();
               if (billList != null) {
                 billList.forEach((element) {
@@ -380,6 +473,12 @@ class BillListState extends State<BillListView> {
               }
             });
           }
+          setState(() {
+            dayBottom = true;
+            weekBottom = false;
+            monthBottom = false;
+            yearBottom = false;
+          });
         },
         onCancelClick: () {},
       ),

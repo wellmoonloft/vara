@@ -20,6 +20,7 @@ class BottomBarView extends StatefulWidget {
 class _BottomBarViewState extends State<BottomBarView>
     with TickerProviderStateMixin {
   AnimationController animationController;
+  int tabindex;
 
   @override
   void initState() {
@@ -156,11 +157,12 @@ class _BottomBarViewState extends State<BottomBarView>
                           highlightColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           onTap: () {
+                            print(widget.changeIndex);
                             showGeneralDialog(
                                 context: context,
                                 barrierColor: Colors.black.withOpacity(.5),
                                 barrierDismissible: true,
-                                barrierLabel: '33',
+                                barrierLabel: 'InputHome',
                                 transitionDuration: Duration(milliseconds: 200),
                                 pageBuilder: (BuildContext context,
                                     Animation<double> animation,

@@ -5,7 +5,7 @@ import 'package:vara/mine/mine_home.dart';
 import 'package:vara/models/default_data.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/bottom_bar_view.dart';
-import 'package:vara/transaction/transaction_home.dart';
+import 'package:vara/bill/bill_home.dart';
 
 class HomeScreen extends StatefulWidget {
   final String tabBodyView;

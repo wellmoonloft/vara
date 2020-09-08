@@ -14,6 +14,7 @@ class CalendarPopupView extends StatefulWidget {
       this.onApplyClick,
       this.onCancelClick,
       this.barrierDismissible = true,
+      this.isSingleDate = false,
       this.minimumDate,
       this.maximumDate})
       : super(key: key);
@@ -21,6 +22,7 @@ class CalendarPopupView extends StatefulWidget {
   final DateTime minimumDate;
   final DateTime maximumDate;
   final bool barrierDismissible;
+  final bool isSingleDate;
   final DateTime initialStartDate;
   final DateTime initialEndDate;
   final Function(DateTime, DateTime, String) onApplyClick;
@@ -110,15 +112,17 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: <Widget>[
-                                      Text(
-                                        'From',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w100,
-                                            fontSize: 16,
-                                            color:
-                                                Colors.grey.withOpacity(0.8)),
-                                      ),
+                                      widget.isSingleDate
+                                          ? Container()
+                                          : Text(
+                                              'From',
+                                              textAlign: TextAlign.left,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w100,
+                                                  fontSize: 16,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.8)),
+                                            ),
                                       const SizedBox(
                                         height: 4,
                                       ),
@@ -140,35 +144,38 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                   // width: 0,
                                   // color: ColorTheme.grey,
                                 ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Text(
-                                        'To',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w100,
-                                            fontSize: 16,
-                                            color:
-                                                Colors.grey.withOpacity(0.8)),
-                                      ),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        endDate != null
-                                            ? DateFormat('EEE, dd MMM')
-                                                .format(endDate)
-                                            : month,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 16),
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                widget.isSingleDate
+                                    ? Container()
+                                    : Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Text(
+                                              'To',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w100,
+                                                  fontSize: 16,
+                                                  color: Colors.grey
+                                                      .withOpacity(0.8)),
+                                            ),
+                                            const SizedBox(
+                                              height: 4,
+                                            ),
+                                            Text(
+                                              endDate != null
+                                                  ? DateFormat('EEE, dd MMM')
+                                                      .format(endDate)
+                                                  : month,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16),
+                                            ),
+                                          ],
+                                        ),
+                                      )
                               ],
                             ),
                             const Divider(
@@ -179,6 +186,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                 maximumDate: widget.maximumDate,
                                 initialEndDate: widget.initialEndDate,
                                 initialStartDate: widget.initialStartDate,
+                                isSingleDate: widget.isSingleDate,
                                 startEndDateChange: (DateTime startDateData,
                                     DateTime endDateData) {
                                   setState(() {

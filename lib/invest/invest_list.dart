@@ -163,20 +163,21 @@ class InvestListState extends State<InvestListView> {
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 6),
-                                                  child: Text(
-                                                    invest.code,
-                                                    style: AppTheme.noteContent,
-                                                  )),
+                                                  child: NumbersText(
+                                                      value: invest.amount
+                                                          .toDouble(),
+                                                      style:
+                                                          AppTheme.subPageTitle,
+                                                      currency:
+                                                          invest.currency)),
                                               Container(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 6),
-                                                  child: NumbersText(
-                                                      value: invest.amount
-                                                          .toDouble(),
-                                                      style: AppTheme.pageTitle,
-                                                      currency:
-                                                          invest.currency)),
+                                                  child: Text(
+                                                    invest.code,
+                                                    style: AppTheme.noteContent,
+                                                  )),
                                             ]),
                                         Column(
                                             crossAxisAlignment:
@@ -230,10 +231,11 @@ class InvestListState extends State<InvestListView> {
       context: context,
       builder: (BuildContext context) => CalendarPopupView(
         barrierDismissible: true,
-        minimumDate: DateTime.now(),
+        isSingleDate: false,
+        //minimumDate: DateTime.now(),
         //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
         // initialEndDate: endDate,
-        // initialStartDate: startDate,
+        initialStartDate: DateTime.now(),
         onApplyClick: (DateTime startData, DateTime endData, String month) {
           print(startData);
           print(endData);

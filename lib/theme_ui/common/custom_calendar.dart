@@ -11,13 +11,15 @@ class CustomCalendarView extends StatefulWidget {
       this.startEndDateChange,
       this.minimumDate,
       this.maximumDate,
-      this.monthChange})
+      this.monthChange,
+      this.isSingleDate})
       : super(key: key);
 
   final DateTime minimumDate;
   final DateTime maximumDate;
   final DateTime initialStartDate;
   final DateTime initialEndDate;
+  final bool isSingleDate;
 
   final Function(DateTime, DateTime) startEndDateChange;
   final Function(String) monthChange;
@@ -326,7 +328,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                       ),
                     ),
                     Positioned(
-                      bottom: 4,
+                      bottom: 6,
                       right: 0,
                       left: 0,
                       child: Container(
@@ -413,32 +415,35 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
     }
   }
 
-//就是这里就是这里
   void onDateClick(DateTime date) {
-    if (startDate == null) {
+    if (widget.isSingleDate) {
       startDate = date;
-    } else if (startDate != date && endDate == null) {
-      endDate = date;
-    } else if (startDate.day == date.day && startDate.month == date.month) {
-      startDate = null;
-    } else if (endDate.day == date.day && endDate.month == date.month) {
-      endDate = null;
-    }
-    if (startDate == null && endDate != null) {
-      startDate = endDate;
-      endDate = null;
-    }
-    if (startDate != null && endDate != null) {
-      if (!endDate.isAfter(startDate)) {
-        final DateTime d = startDate;
-        startDate = endDate;
-        endDate = d;
-      }
-      if (date.isBefore(startDate)) {
+    } else {
+      if (startDate == null) {
         startDate = date;
-      }
-      if (date.isAfter(endDate)) {
+      } else if (startDate != date && endDate == null) {
         endDate = date;
+      } else if (startDate.day == date.day && startDate.month == date.month) {
+        startDate = null;
+      } else if (endDate.day == date.day && endDate.month == date.month) {
+        endDate = null;
+      }
+      if (startDate == null && endDate != null) {
+        startDate = endDate;
+        endDate = null;
+      }
+      if (startDate != null && endDate != null) {
+        if (!endDate.isAfter(startDate)) {
+          final DateTime d = startDate;
+          startDate = endDate;
+          endDate = d;
+        }
+        if (date.isBefore(startDate)) {
+          startDate = date;
+        }
+        if (date.isAfter(endDate)) {
+          endDate = date;
+        }
       }
     }
     setState(() {

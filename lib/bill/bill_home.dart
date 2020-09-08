@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'package:vara/transaction/transaction_list.dart';
-import 'transaction_summary.dart';
+import 'package:vara/bill/bill_list.dart';
+import 'bill_summary.dart';
 
 class BillHome extends StatefulWidget {
   const BillHome({Key key, this.animationController}) : super(key: key);
@@ -26,7 +26,7 @@ class _BillHomeState extends State<BillHome> with TickerProviderStateMixin {
     const int count = 4;
     listViews.add(
       AppBarUI(
-        title: S.current.Transaction,
+        title: S.current.Bill,
         settings: 'bill',
         animation: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
             parent: widget.animationController,

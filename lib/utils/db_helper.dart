@@ -117,7 +117,7 @@ class DBHelper {
           'country',
           'totalyield'
         ],
-        orderBy: 'date');
+        orderBy: 'date DESC');
 
     List<Invest> invest = [];
     result.forEach((element) => invest.add(Invest.fromJson(element)));
@@ -222,15 +222,17 @@ class DBHelper {
 
   Future<List<Bill>> getBill() async {
     var dbClient = await db;
-    var result = await dbClient.query('bill', columns: [
-      'id',
-      'date',
-      'currency',
-      'use',
-      'amount',
-      'mark',
-      'categroy'
-    ]);
+    var result = await dbClient.query('bill',
+        columns: [
+          'id',
+          'date',
+          'currency',
+          'use',
+          'amount',
+          'mark',
+          'categroy'
+        ],
+        orderBy: 'date DESC');
     List<Bill> bill = [];
     result.forEach((element) => bill.add(Bill.fromJson(element)));
     return bill;
