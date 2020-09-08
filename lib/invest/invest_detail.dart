@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/models/db_models.dart';
@@ -19,9 +20,11 @@ class InvestDetail extends StatelessWidget {
           elevation: 0,
           title: Text(S.current.InvestDetail, style: AppTheme.subPageTitle),
           leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              iconSize: 20,
-              color: ColorTheme.greytripledarker,
+              icon: FaIcon(
+                FontAwesomeIcons.arrowLeft,
+                size: 18,
+                color: ColorTheme.mainBlack,
+              ),
               onPressed: () {
                 Navigator.pop(context);
               }),
@@ -40,19 +43,22 @@ class InvestDetail extends StatelessWidget {
                   value: investdetail.endDate),
               ListDetail(
                   title: S.current.Amount + ':',
-                  value: '€ ' +
-                      NumberFormat(" ###,###.0#", "en_US")
-                          .format(investdetail.amount)),
+                  value: NumberFormat(" ###,##0.00#", Intl.getCurrentLocale())
+                          .format(investdetail.amount) +
+                      ' ' +
+                      investdetail.currency),
               ListDetail(
                   title: S.current.Received + ':',
-                  value: '€ ' +
-                      NumberFormat(" ###,###.0#", "en_US")
-                          .format(investdetail.received)),
+                  value: NumberFormat(" ###,##0.00", Intl.getCurrentLocale())
+                          .format(investdetail.received) +
+                      ' ' +
+                      investdetail.currency),
               ListDetail(
                   title: S.current.Interest + ':',
-                  value: '€ ' +
-                      NumberFormat(" ###,###.0#", "en_US")
-                          .format(investdetail.interest)),
+                  value: NumberFormat(" ###,##0.00", Intl.getCurrentLocale())
+                          .format(investdetail.interest) +
+                      ' ' +
+                      investdetail.currency),
               ListDetail(
                   title: S.current.TotalYieldYear + ':',
                   value:

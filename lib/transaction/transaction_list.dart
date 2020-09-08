@@ -8,6 +8,7 @@ import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/models/db_models.dart';
 import 'package:vara/theme_ui/common/calendar_popup_view.dart';
+import 'package:vara/transaction/transaction_detail.dart';
 import 'package:vara/utils/dateutil.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
@@ -209,64 +210,16 @@ class BillListState extends State<BillListView> {
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, int index) {
                             var bill = current[index];
-                            return Dismissible(
-                                key: UniqueKey(),
-                                direction: DismissDirection.endToStart,
-                                onDismissed: (direction) async {
-                                  setState(() {
-                                    billList.removeAt(index);
-                                  });
-                                  var providerData = Provider.of<ProviderData>(
-                                      context,
-                                      listen: false);
-                                  await providerData.deleteBill(bill);
-                                  await providerData.getBillList();
-                                  await providerData.getAssetList();
-                                },
-                                confirmDismiss: (direction) async {
-                                  var _alertDialog = AlertDialog(
-                                    title: Text(S.current.Alert),
-                                    content: Text(S.current
-                                        .ConfirmNote(bill.amount, bill.use)),
-                                    actions: <Widget>[
-                                      FlatButton(
-                                        child: Text(S.current.Cancel),
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                      ),
-                                      FlatButton(
-                                        child: Text(S.current.Delete),
-                                        onPressed: () {
-                                          Navigator.of(context).pop(true);
-                                          Scaffold.of(context).showSnackBar(
-                                              SnackBar(
-                                                  content: Text(S.current
-                                                      .DeleteNote(
-                                                          billList[index]))));
-                                        },
-                                      ),
-                                    ],
-                                  );
 
-                                  var isDismiss = await showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return _alertDialog;
-                                      });
-                                  return isDismiss;
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            TransactionDetail(billdetail: bill),
+                                      ));
                                 },
-                                background: Container(
-                                  width: 50,
-                                  color: Colors.red,
-                                  child: ListTile(
-                                    trailing: Padding(
-                                        padding: EdgeInsets.only(top: 35),
-                                        child: Icon(
-                                          Icons.delete,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
                                 child: Container(
                                     width: MediaQuery.of(context).size.width,
                                     child: Padding(

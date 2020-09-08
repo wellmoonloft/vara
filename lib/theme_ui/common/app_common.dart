@@ -355,8 +355,10 @@ class SettingsAppBarUI extends StatelessWidget {
 class ListDetail extends StatelessWidget {
   final String title;
   final String value;
+  final bool number;
 
-  const ListDetail({Key key, this.title, this.value}) : super(key: key);
+  const ListDetail({Key key, this.title, this.value, this.number})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -385,16 +387,12 @@ class ListDetail extends StatelessWidget {
           ),
         ],
       ),
-      Padding(
-        padding: EdgeInsets.only(top: 20, left: 20, right: 20),
-        child: Container(
-          height: 1,
-          decoration: BoxDecoration(
-            color: ColorTheme.pantone,
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          ),
-        ),
-      ),
+      OneHeightBorder(
+        top: 20,
+        left: 20,
+        right: 20,
+        bottom: 0,
+      )
     ]);
   }
 }
