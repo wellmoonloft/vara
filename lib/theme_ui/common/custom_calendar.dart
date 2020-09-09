@@ -11,7 +11,7 @@ class CustomCalendarView extends StatefulWidget {
       this.startEndDateChange,
       this.minimumDate,
       this.maximumDate,
-      this.monthChange,
+      this.monthConfirm,
       this.isSingleDate})
       : super(key: key);
 
@@ -22,7 +22,7 @@ class CustomCalendarView extends StatefulWidget {
   final bool isSingleDate;
 
   final Function(DateTime, DateTime) startEndDateChange;
-  final Function(String) monthChange;
+  final Function(DateTime) monthConfirm;
 
   @override
   _CustomCalendarViewState createState() => _CustomCalendarViewState();
@@ -102,9 +102,6 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                 currentMonthDate.month, 0);
                             setListOfDate(currentMonthDate);
                           });
-                          widget.monthChange(
-                              DateFormat('yyyy-MM').format(currentMonthDate));
-                          print(DateFormat('yyyy-MM').format(currentMonthDate));
                         },
                         child: Icon(
                           Icons.keyboard_arrow_left,
@@ -115,11 +112,16 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                   ),
                 ),
                 Expanded(
-                  child: Center(
-                    child: Text(
-                        DateFormat('MMMM, yyyy').format(currentMonthDate),
-                        style: AppTheme.subPageTitle),
-                  ),
+                  child: InkWell(
+                      onTap: () {
+                        widget.monthConfirm(currentMonthDate);
+                        print(currentMonthDate);
+                      },
+                      child: Center(
+                        child: Text(
+                            DateFormat('MMMM, yyyy').format(currentMonthDate),
+                            style: AppTheme.subPageTitle),
+                      )),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -144,9 +146,6 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                                 currentMonthDate.month + 2, 0);
                             setListOfDate(currentMonthDate);
                           });
-                          widget.monthChange(
-                              DateFormat('yyyy-MM').format(currentMonthDate));
-                          print(DateFormat('yyyy-MM').format(currentMonthDate));
                         },
                         child: Icon(
                           Icons.keyboard_arrow_right,
@@ -328,7 +327,7 @@ class _CustomCalendarViewState extends State<CustomCalendarView> {
                       ),
                     ),
                     Positioned(
-                      bottom: 6,
+                      bottom: 8,
                       right: 0,
                       left: 0,
                       child: Container(

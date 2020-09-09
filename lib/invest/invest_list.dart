@@ -236,16 +236,61 @@ class InvestListState extends State<InvestListView> {
         //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
         // initialEndDate: endDate,
         initialStartDate: DateTime.now(),
-        onApplyClick: (DateTime startData, DateTime endData, String month) {
+        onApplyClick:
+            (DateTime startData, DateTime endData, DateTime month, int mark) {
           print(startData);
           print(endData);
           print(month);
-          if (month != null) {
-            setState(() {
-              date = month;
-            });
-            chooseDate(month, countryValue);
-          }
+          setState(() {
+            current.clear();
+            if (mark == 0) {
+              if (investList != null) {
+                investList.forEach((element) {
+                  if (element.date.substring(0, 7) ==
+                      DateFormat('yyyy-MM').format(month)) {
+                    if (countryValue == 'ALL') {
+                      current.add(element);
+                    } else {
+                      if (element.status == countryValue) {
+                        current.add(element);
+                      }
+                    }
+                  }
+                });
+              }
+            } else if (mark == 1) {
+              if (investList != null) {
+                investList.forEach((element) {
+                  DateTime _date = DateTime.parse(element.date);
+                  if (DateFormat('yyyy-MM-dd').format(_date) ==
+                      DateFormat('yyyy-MM-dd').format(startData)) {
+                    if (countryValue == 'ALL') {
+                      current.add(element);
+                    } else {
+                      if (element.status == countryValue) {
+                        current.add(element);
+                      }
+                    }
+                  }
+                });
+              }
+            } else {
+              if (investList != null) {
+                investList.forEach((element) {
+                  DateTime _date = DateTime.parse(element.date);
+                  if (_date.isAfter(startData) && _date.isBefore(endData)) {
+                    if (countryValue == 'ALL') {
+                      current.add(element);
+                    } else {
+                      if (element.status == countryValue) {
+                        current.add(element);
+                      }
+                    }
+                  }
+                });
+              }
+            }
+          });
         },
         onCancelClick: () {},
       ),

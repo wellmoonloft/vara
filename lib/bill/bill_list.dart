@@ -139,6 +139,7 @@ class BillListState extends State<BillListView> {
                                             monthBottom = false;
                                             yearBottom = false;
                                             date = 'Choose Date';
+                                            date1 = null;
                                             current.clear();
                                             DateTime weekStart =
                                                 DateUtils.weekStart(
@@ -197,6 +198,7 @@ class BillListState extends State<BillListView> {
                                             monthBottom = true;
                                             yearBottom = false;
                                             date = 'Choose Date';
+                                            date1 = null;
                                             String _date = DateFormat('yyyy-MM')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -247,6 +249,7 @@ class BillListState extends State<BillListView> {
                                             monthBottom = false;
                                             yearBottom = true;
                                             date = 'Choose Date';
+                                            date1 = null;
                                             String _date = DateFormat('yyyy')
                                                 .format(DateTime.now());
                                             current.clear();
@@ -425,59 +428,48 @@ class BillListState extends State<BillListView> {
         //minimumDate: DateTime.now(),
         //maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
         //initialEndDate: endDate,
-        initialStartDate: DateTime.now(),
-        onApplyClick: (DateTime startData, DateTime endData, String month) {
-          if (startData != null) {
-            if (endData != null) {
-              setState(() {
-                date = DateFormat('yyyy-MM-dd').format(startData).toString();
-                date1 = DateFormat('yyyy-MM-dd').format(endData).toString();
-                current.clear();
-                if (billList != null) {
-                  billList.forEach((element) {
-                    DateTime _date = DateTime.parse(element.date);
-                    if (_date.isAfter(startData) && _date.isBefore(endData)) {
-                      current.add(element);
-                    }
-                  });
-                }
-              });
-            } else {
-              setState(() {
-                date = DateFormat('yyyy-MM-dd').format(startData).toString();
-                date1 = null;
-                current.clear();
-                if (billList != null) {
-                  billList.forEach((element) {
-                    DateTime _date = DateTime.parse(element.date);
-                    String _date1 =
-                        DateFormat('yyyy-MM-dd').format(_date).toString();
-                    if (date == _date1) {
-                      current.add(element);
-                    }
-                  });
-                }
-              });
-            }
-          } else {
-            setState(() {
-              date = month.toString();
-              date1 = null;
-              current.clear();
-              if (billList != null) {
-                billList.forEach((element) {
-                  if (element.date.substring(0, 7) == month) {
-                    current.add(element);
-                  }
-                });
-              }
-            });
-          }
+        //initialStartDate: DateTime.now(),
+        onApplyClick:
+            (DateTime startData, DateTime endData, DateTime month, int mark) {
           setState(() {
+            current.clear();
             dayBottom = true;
             weekBottom = false;
             monthBottom = false;
             yearBottom = false;
+            if (mark == 0) {
+              if (billList != null) {
+                billList.forEach((element) {
+                  if (element.date.substring(0, 7) ==
+                      DateFormat('yyyy-MM').format(month)) {
+                    current.add(element);
+                  }
+                });
+                date = DateFormat('yyyy-MM').format(month);
+              }
+            } else if (mark == 1) {
+              if (billList != null) {
+                billList.forEach((element) {
+                  DateTime _date = DateTime.parse(element.date);
+                  if (DateFormat('yyyy-MM-dd').format(_date) ==
+                      DateFormat('yyyy-MM-dd').format(startData)) {
+                    current.add(element);
+                  }
+                });
+                date = DateFormat('yyyy-MM-dd').format(startData);
+              }
+            } else {
+              if (billList != null) {
+                billList.forEach((element) {
+                  DateTime _date = DateTime.parse(element.date);
+                  if (_date.isAfter(startData) && _date.isBefore(endData)) {
+                    current.add(element);
+                  }
+                });
+                date = DateFormat('yyyy-MM-dd').format(startData);
+                date1 = DateFormat('yyyy-MM-dd').format(endData);
+              }
+            }
           });
         },
         onCancelClick: () {},

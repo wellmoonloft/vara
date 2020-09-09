@@ -328,7 +328,8 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
         //maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
         //initialEndDate: endDate,
         initialStartDate: DateTime.now(),
-        onApplyClick: (DateTime startData, DateTime endData, String month) {
+        onApplyClick:
+            (DateTime startData, DateTime endData, DateTime month, int mark) {
           setState(() {
             if (startData != null) {
               date = DateFormat('yyyy-MM-dd HH:mm:ss')
