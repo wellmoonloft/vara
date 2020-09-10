@@ -109,7 +109,7 @@ class AppTheme {
     ],
   );
   static const boxDecorationBlack = BoxDecoration(
-    color: ColorTheme.pale,
+    color: ColorTheme.mainBlack,
     borderRadius: BorderRadius.all(Radius.circular(12.0)),
     boxShadow: <BoxShadow>[
       BoxShadow(

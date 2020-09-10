@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:vara/generated/l10n.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
-import 'calendar_time.dart';
+
+import 'dart:math';
 import 'custom_calendar.dart';
 
 class CalendarPopupView extends StatefulWidget {
@@ -39,7 +41,14 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
   DateTime startDate;
   DateTime endDate;
   String month = DateFormat('yyyy-MM').format(DateTime.now());
-  bool timeMark = false;
+  bool timeMark = true;
+  double _hourValue = 12;
+  double _minuteValue = 30;
+  double _secondValue = 30;
+
+  int hour = 12;
+  int minute = 30;
+  int second = 30;
 
   @override
   void initState() {
@@ -66,6 +75,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
     return Center(
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         body: AnimatedBuilder(
           animation: animationController,
           builder: (BuildContext context, Widget child) {
@@ -86,6 +96,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: Container(
+                      height: MediaQuery.of(context).size.width + 150,
                       decoration: BoxDecoration(
                         color: ColorTheme.background,
                         borderRadius:
@@ -153,7 +164,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                         onTap: () {
                                           if (widget.isSingleDate) {
                                             setState(() {
-                                              timeMark = true;
+                                              timeMark = !timeMark;
                                             });
                                           }
                                         },
@@ -176,22 +187,51 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                             const SizedBox(
                                               height: 4,
                                             ),
-                                            Text(
-                                              widget.isSingleDate
-                                                  ? DateFormat('Hms')
-                                                      .format(startDate)
-                                                  : (endDate != null
-                                                      ? DateFormat(
-                                                              'EEE, dd MMM')
-                                                          .format(endDate)
-                                                      : month),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  letterSpacing:
-                                                      widget.isSingleDate
-                                                          ? 1.3
-                                                          : 0,
-                                                  fontSize: 16),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  widget.isSingleDate
+                                                      ? (hour < 10
+                                                              ? '0' +
+                                                                  hour
+                                                                      .toString()
+                                                              : hour
+                                                                  .toString()) +
+                                                          ':' +
+                                                          minute.toString() +
+                                                          ':' +
+                                                          second.toString()
+                                                      : (endDate != null
+                                                          ? DateFormat(
+                                                                  'EEE, dd MMM')
+                                                              .format(endDate)
+                                                          : month),
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      letterSpacing:
+                                                          widget.isSingleDate
+                                                              ? 1.3
+                                                              : 0,
+                                                      fontSize: 16),
+                                                ),
+                                                widget.isSingleDate
+                                                    ? SizedBox(
+                                                        width: 5,
+                                                      )
+                                                    : Container(),
+                                                widget.isSingleDate
+                                                    ? FaIcon(
+                                                        FontAwesomeIcons
+                                                            .chevronDown,
+                                                        size: 12,
+                                                        color: ColorTheme
+                                                            .mainBlack,
+                                                      )
+                                                    : Container()
+                                              ],
                                             ),
                                           ],
                                         ),
@@ -232,7 +272,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                             child: Text(
                                               S.current.Cancel,
                                               textAlign: TextAlign.end,
-                                              style: AppTheme.subPageTitle,
+                                              style: AppTheme.listTitle,
                                             )),
                                         SizedBox(
                                           width: 28,
@@ -257,19 +297,83 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                             child: Text(
                                               S.current.Confirm,
                                               textAlign: TextAlign.end,
-                                              style: AppTheme.subPageTitle,
+                                              style: AppTheme.listTitle,
                                             )),
                                       ],
                                     )),
                               ],
                             ),
                             timeMark
-                                ? CalendarTime()
+                                ? Container()
                                 : Positioned(
-                                    left: 0,
-                                    top: 0,
-                                    child: Container(),
-                                  )
+                                    right: 3,
+                                    top: 60,
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      transform: Matrix4.rotationZ(pi / 4),
+                                      decoration: BoxDecoration(
+                                        color: ColorTheme.mainBlack,
+                                      ),
+                                    ),
+                                  ),
+                            timeMark
+                                ? Container()
+                                : Positioned(
+                                    right: 16,
+                                    top: 80,
+                                    child: Container(
+                                        padding: AppTheme.inboxpadding,
+                                        decoration: BoxDecoration(
+                                          color: ColorTheme.mainBlack,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12.0)),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Slider(
+                                              min: 0,
+                                              max: 24,
+                                              activeColor: ColorTheme.mainGreen,
+                                              inactiveColor: ColorTheme.grey,
+                                              value: _hourValue,
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  _hourValue = v;
+                                                  hour = v.toInt();
+                                                });
+                                              },
+                                            ),
+                                            Slider(
+                                              min: 0,
+                                              max: 60,
+                                              activeColor: ColorTheme.mainGreen,
+                                              inactiveColor: ColorTheme.grey,
+                                              value: _minuteValue,
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  _minuteValue = v;
+                                                  minute = v.toInt();
+                                                });
+                                              },
+                                            ),
+                                            Slider(
+                                              min: 0,
+                                              max: 60,
+                                              activeColor: ColorTheme.mainGreen,
+                                              inactiveColor: ColorTheme.grey,
+                                              value: _secondValue,
+                                              onChanged: (v) {
+                                                setState(() {
+                                                  _secondValue = v;
+                                                  second = v.toInt();
+                                                });
+                                              },
+                                            )
+                                          ],
+                                        )))
                           ])),
                     ),
                   ),
@@ -280,5 +384,26 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
         ),
       ),
     );
+  }
+
+  void changeDate({BuildContext context}) {
+    String _date = DateFormat('yyyy-MM-dd').format(startDate);
+    if (hour <= 9) {
+      _date = _date +
+          ' 0' +
+          hour.toString() +
+          ':' +
+          minute.toString() +
+          ':' +
+          second.toString();
+    } else {
+      _date = _date +
+          ' ' +
+          hour.toString() +
+          ':' +
+          minute.toString() +
+          ':' +
+          second.toString();
+    }
   }
 }
