@@ -61,6 +61,10 @@
     "Storage":"存储",
     "Path":"路径",
     "SaveOnCloud":"储存在云端",
+    "From":"自",
+    "To":"到",
+    "Time":"时间",
+    "ChooseDate":"选择日期",
 
     "Save": "保存",
     "Alert": "提示",

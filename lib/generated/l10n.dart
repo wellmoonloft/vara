@@ -643,6 +643,46 @@ class S {
     );
   }
 
+  /// `From`
+  String get From {
+    return Intl.message(
+      'From',
+      name: 'From',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get To {
+    return Intl.message(
+      'To',
+      name: 'To',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time`
+  String get Time {
+    return Intl.message(
+      'Time',
+      name: 'Time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Date`
+  String get ChooseDate {
+    return Intl.message(
+      'Choose Date',
+      name: 'ChooseDate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get Save {
     return Intl.message(

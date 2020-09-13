@@ -61,6 +61,10 @@
     "Storage":"ストレージ",
     "Path":"パス",
     "SaveOnCloud":"クラウドに保存",
+    "From":"から",
+    "To":"に",
+    "Time":"時間",
+    "ChooseDate":"日付を選択",
     
     "Save": "保存する",
     "Alert": "アラート",

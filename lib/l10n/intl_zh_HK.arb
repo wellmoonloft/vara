@@ -61,6 +61,10 @@
     "Storage":"存儲",
     "Path":"路徑",
     "SaveOnCloud":"存儲在雲端",
+    "From":"自",
+    "To":"到",
+    "Time":"時間",
+    "ChooseDate":"選擇日期",
 
     "Save": "保存",
     "Alert": "提示",

@@ -61,6 +61,10 @@
     "Storage":"Storage",
     "Path":"Path",
     "SaveOnCloud":"Save on Cloud",
+    "From":"From",
+    "To":"To",
+    "Time":"Time",
+    "ChooseDate":"Choose Date",
 
     "Save": "Save",
     "Alert": "Alert",

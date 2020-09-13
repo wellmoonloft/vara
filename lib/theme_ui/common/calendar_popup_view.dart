@@ -128,13 +128,9 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                           Text(
                                             widget.isSingleDate
                                                 ? S.current.Date
-                                                : 'From',
+                                                : S.current.From,
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w100,
-                                                fontSize: 16,
-                                                color: Colors.grey
-                                                    .withOpacity(0.8)),
+                                            style: AppTheme.listTitleThin,
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -174,13 +170,9 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                           children: <Widget>[
                                             Text(
                                               widget.isSingleDate
-                                                  ? 'Time'
-                                                  : 'To',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w100,
-                                                  fontSize: 16,
-                                                  color: Colors.grey
-                                                      .withOpacity(0.8)),
+                                                  ? S.current.Time
+                                                  : S.current.To,
+                                              style: AppTheme.listTitleThin,
                                             ),
                                             const SizedBox(
                                               height: 4,
@@ -311,10 +303,9 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                     right: 30,
                                     top: 65,
                                     child: Container(
-                                        //padding: AppTheme.inboxpadding,
                                         decoration: BoxDecoration(
                                           color: ColorTheme.mainBlack
-                                              .withOpacity(0.2),
+                                              .withOpacity(0.1),
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(12.0)),
                                         ),

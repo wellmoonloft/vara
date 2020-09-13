@@ -84,18 +84,8 @@ class CurrencyData {
         rate: 1),
     CurrencyData(
         icon: FontAwesomeIcons.dollarSign,
-        iconName: 'NZ\$',
-        short: 'NZD',
-        rate: 1),
-    CurrencyData(
-        icon: FontAwesomeIcons.dollarSign,
         iconName: 'HK\$',
         short: 'HKD',
-        rate: 1),
-    CurrencyData(
-        icon: FontAwesomeIcons.dollarSign,
-        iconName: 'S\$',
-        short: 'SGD',
         rate: 1),
   ];
 }

@@ -26,7 +26,7 @@ class BillListView extends StatefulWidget {
 class BillListState extends State<BillListView> {
   List<Bill> current = List<Bill>();
   List<Bill> billList;
-  String date = 'Choose Date';
+  String date = S.current.ChooseDate;
   String date1;
   bool mark = true;
   bool dayBottom = false;
@@ -138,7 +138,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = true;
                                             monthBottom = false;
                                             yearBottom = false;
-                                            date = 'Choose Date';
+                                            date = S.current.ChooseDate;
                                             date1 = null;
                                             current.clear();
                                             DateTime weekStart =
@@ -197,7 +197,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = true;
                                             yearBottom = false;
-                                            date = 'Choose Date';
+                                            date = S.current.ChooseDate;
                                             date1 = null;
                                             String _date = DateFormat('yyyy-MM')
                                                 .format(DateTime.now());
@@ -248,7 +248,7 @@ class BillListState extends State<BillListView> {
                                             weekBottom = false;
                                             monthBottom = false;
                                             yearBottom = true;
-                                            date = 'Choose Date';
+                                            date = S.current.ChooseDate;
                                             date1 = null;
                                             String _date = DateFormat('yyyy')
                                                 .format(DateTime.now());

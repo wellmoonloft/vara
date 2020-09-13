@@ -61,6 +61,10 @@
     "Storage":"Ladustamine",
     "Path":"Tee",
     "SaveOnCloud":"Salvestage pilves",
+    "From":"Alates",
+    "To":"Kuni",
+    "Time":"Aeg",
+    "ChooseDate":"Valige Kuupäev",
 
     "Save": "Salvesta",
     "Alert": "Märguanne",
