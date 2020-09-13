@@ -13,9 +13,12 @@ class ProviderData extends ChangeNotifier {
 
   setCurrencyData(eurData, currencyTilte) {
     currencyData.forEach((element) {
-      if (eurData[element.short] != null) {
+      if (eurData != null) {
         element.rate = eurData[element.short];
+      } else {
+        element.rate = 1;
       }
+
       if (element.short == currencyTilte) {
         currency = element;
       }

@@ -16,7 +16,7 @@ class Global {
     } else {
       MyStoreage storeage = MyStoreage();
       storeage.isCloud = true;
-      storeage.path = (await getApplicationDocumentsDirectory()).path;
+      storeage.path = _dir;
       await file.writeAsString(storeage.toJson());
       myStoreage = storeage;
     }
