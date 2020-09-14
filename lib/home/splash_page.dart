@@ -93,7 +93,7 @@ class _SplashPageState extends State<SplashPage> {
         break;
       default:
         {
-          S.load(Locale('en'));
+          S.load(Locale('en', 'UK'));
         }
         break;
     }

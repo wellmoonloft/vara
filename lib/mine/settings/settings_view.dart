@@ -87,67 +87,87 @@ class _SettingsViewState extends State<SettingsView> {
                                   ),
                                 ],
                               ),
-                              Consumer<ProviderData>(
-                                  builder: (context, providerdata, child) {
-                                return Text(
-                                  providerdata.person.firstname,
-                                  style: AppTheme.listTitle,
-                                );
-                              }),
+                              Row(
+                                children: [
+                                  Consumer<ProviderData>(
+                                      builder: (context, providerdata, child) {
+                                    return Text(
+                                      providerdata.person.firstname,
+                                      style: AppTheme.listTitle,
+                                    );
+                                  }),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  FaIcon(
+                                    FontAwesomeIcons.chevronRight,
+                                    size: 16,
+                                    color: ColorTheme.mainBlack,
+                                  ),
+                                ],
+                              ),
                             ]),
                       ))),
               OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
               Padding(
                   padding: AppTheme.inboxpadding,
                   child: Container(
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return CurrencyView();
-                          })).then((data) async {
-                            if (data != null) {
-                              var providerData = Provider.of<ProviderData>(
-                                  context,
-                                  listen: false);
-                              await providerData.setCurrency(data);
-                              Settings settings = Settings();
-                              settings.currency = data;
-                              await DBHelper().updateSettings(settings);
-                            }
-                          });
-                        },
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 2,
-                                  ),
-                                  Consumer<ProviderData>(
-                                      builder: (context, providerdata, child) {
-                                    return FaIcon(
-                                      providerdata.currency.icon,
-                                      color: ColorTheme.mainBlack,
-                                      size: 20,
-                                    );
-                                  }),
-                                  SizedBox(
-                                    width: 14,
-                                  ),
-                                  Text(
-                                    S.current.Currency,
-                                    style: AppTheme.listTitle,
-                                  ),
-                                ],
-                              ),
-                              FaIcon(
-                                FontAwesomeIcons.chevronRight,
-                                size: 16,
-                                color: ColorTheme.mainBlack,
-                              )
-                            ])),
+                    child: InkWell(onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return CurrencyView();
+                      })).then((data) async {
+                        if (data != null) {
+                          var providerData =
+                              Provider.of<ProviderData>(context, listen: false);
+                          await providerData.setCurrency(data);
+                          Settings settings = Settings();
+                          settings.currency = data;
+                          await DBHelper().updateSettings(settings);
+                        }
+                      });
+                    }, child: Consumer<ProviderData>(
+                        builder: (context, providerdata, child) {
+                      return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 2,
+                                ),
+                                FaIcon(
+                                  providerdata.currency.icon,
+                                  color: ColorTheme.mainBlack,
+                                  size: 20,
+                                ),
+                                SizedBox(
+                                  width: 14,
+                                ),
+                                Text(
+                                  S.current.Currency,
+                                  style: AppTheme.listTitle,
+                                ),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  providerdata.currency.short,
+                                  style: AppTheme.listTitle,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                FaIcon(
+                                  FontAwesomeIcons.chevronRight,
+                                  size: 16,
+                                  color: ColorTheme.mainBlack,
+                                ),
+                              ],
+                            )
+                          ]);
+                    })),
                   )),
               OneHeightBorder(top: 10, left: 16, right: 16, bottom: 10),
               Padding(

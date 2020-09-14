@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:vara/generated/l10n.dart';
-import 'package:vara/models/default_data.dart';
 import 'package:vara/models/provider_data.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
@@ -11,18 +10,6 @@ import 'package:vara/theme_ui/color_theme.dart';
 class CurrencyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> currencyList = [];
-    // String currencyValue;
-    List<CurrencyData> currencyData =
-        Provider.of<ProviderData>(context).currencyData;
-    // CurrencyData currency = Provider.of<ProviderData>(context).currency;
-    //currencyValue = currency.short;
-    if (currencyData != null) {
-      currencyData.forEach((element) {
-        currencyList.add(element.short);
-      });
-    }
-
     return Container(
         child: Scaffold(
             backgroundColor: ColorTheme.white,
@@ -41,36 +28,55 @@ class CurrencyView extends StatelessWidget {
                     Navigator.pop(context);
                   }),
             ),
-            body: ListView.separated(
-              itemCount: currencyList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                    padding: AppTheme.inboxpadding,
-                    child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop(currencyList[index]);
-                        },
-                        child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                currencyList[index],
-                                textAlign: TextAlign.start,
-                                style: AppTheme.listTitle,
-                              ),
-                              // FaIcon(
-                              //   FontAwesomeIcons.check,
-                              //   color: ColorTheme.grey,
-                              //   size: 18,
-                              // )
-                            ])));
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  color: ColorTheme.pantone,
-                  height: 1,
-                );
-              },
-            )));
+            body:
+                Consumer<ProviderData>(builder: (context, providerdata, child) {
+              return ListView.separated(
+                itemCount: providerdata.currencyData.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                      padding: AppTheme.inboxpadding,
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pop(providerdata.currencyData[index].short);
+                          },
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Image(
+                                      width: 40,
+                                      height: 40,
+                                      image: AssetImage(providerdata
+                                          .currencyData[index].flags),
+                                      fit: BoxFit.fill,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      providerdata.currencyData[index].nation,
+                                      textAlign: TextAlign.start,
+                                      style: AppTheme.listTitle,
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  providerdata.currencyData[index].short,
+                                  textAlign: TextAlign.start,
+                                  style: AppTheme.listTitle,
+                                ),
+                              ])));
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    color: ColorTheme.pantone,
+                    height: 1,
+                  );
+                },
+              );
+            })));
   }
 }

@@ -8,7 +8,28 @@ import 'package:vara/theme_ui/color_theme.dart';
 class LanguageView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> language = ['繁體中文', '简体中文', 'English', '日本語', 'Eestlane'];
+    List<LanguageData> languageList = <LanguageData>[
+      LanguageData(
+          flags: 'assets/flags/hongkong.png',
+          languageName: '繁體中文',
+          nation: 'Hong Kong'),
+      LanguageData(
+          flags: 'assets/flags/china.png',
+          languageName: '简体中文',
+          nation: 'China'),
+      LanguageData(
+          flags: 'assets/flags/uk.png',
+          languageName: 'English',
+          nation: 'United Kingdom'),
+      LanguageData(
+          flags: 'assets/flags/japan.png',
+          languageName: '日本語',
+          nation: 'Japan'),
+      LanguageData(
+          flags: 'assets/flags/estonia.png',
+          languageName: 'Eestlane',
+          nation: 'Estonia')
+    ];
     return Container(
         child: Scaffold(
             backgroundColor: ColorTheme.white,
@@ -28,7 +49,7 @@ class LanguageView extends StatelessWidget {
                   }),
             ),
             body: ListView.separated(
-              itemCount: language.length,
+              itemCount: languageList.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                     padding: AppTheme.inboxpadding,
@@ -48,7 +69,7 @@ class LanguageView extends StatelessWidget {
                               break;
                             case '2':
                               {
-                                S.load(Locale('en'));
+                                S.load(Locale('en', 'UK'));
                               }
                               break;
                             case '3':
@@ -67,8 +88,28 @@ class LanguageView extends StatelessWidget {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image(
+                                    width: 40,
+                                    height: 40,
+                                    image:
+                                        AssetImage(languageList[index].flags),
+                                    fit: BoxFit.fill,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    languageList[index].nation,
+                                    textAlign: TextAlign.start,
+                                    style: AppTheme.listTitle,
+                                  ),
+                                ],
+                              ),
                               Text(
-                                language[index],
+                                languageList[index].languageName,
                                 textAlign: TextAlign.start,
                                 style: AppTheme.listTitle,
                               ),
@@ -87,4 +128,12 @@ class LanguageView extends StatelessWidget {
               },
             )));
   }
+}
+
+class LanguageData {
+  String flags;
+  String languageName;
+  String nation;
+
+  LanguageData({this.languageName, this.flags, this.nation});
 }
