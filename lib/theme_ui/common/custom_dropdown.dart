@@ -7,8 +7,8 @@ import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/color_theme.dart';
 import 'custom_calendar.dart';
 
-class CalendarPopupView extends StatefulWidget {
-  const CalendarPopupView(
+class CustomDropdownView extends StatefulWidget {
+  const CustomDropdownView(
       {Key key,
       this.initialStartDate,
       this.initialEndDate,
@@ -30,10 +30,10 @@ class CalendarPopupView extends StatefulWidget {
 
   final Function onCancelClick;
   @override
-  _CalendarPopupViewState createState() => _CalendarPopupViewState();
+  _CustomDropdownViewState createState() => _CustomDropdownViewState();
 }
 
-class _CalendarPopupViewState extends State<CalendarPopupView>
+class _CustomDropdownViewState extends State<CustomDropdownView>
     with TickerProviderStateMixin {
   AnimationController animationController;
   DateTime startDate;

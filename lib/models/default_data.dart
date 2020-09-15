@@ -114,14 +114,14 @@ class CurrencyData {
         iconName: 'C\$',
         short: 'CAD',
         rate: 1,
-        nation: 'Australia',
+        nation: 'Canada',
         flags: 'assets/flags/canada.png'),
     CurrencyData(
         icon: FontAwesomeIcons.dollarSign,
         iconName: 'NZ\$',
         short: 'NZD',
         rate: 1,
-        nation: 'Canada',
+        nation: 'New Zealand',
         flags: 'assets/flags/newzealand.png'),
     CurrencyData(
         icon: FontAwesomeIcons.dollarSign,
