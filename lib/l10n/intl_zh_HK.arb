@@ -65,6 +65,9 @@
     "To":"到",
     "Time":"時間",
     "ChooseDate":"選擇日期",
+    "CURRENT":"當前",
+    "LATE":"延誤",
+    "FINISHED":"完成",
 
     "Save": "保存",
     "Alert": "提示",

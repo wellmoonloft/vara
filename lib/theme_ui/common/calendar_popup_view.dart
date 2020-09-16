@@ -38,7 +38,6 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
   AnimationController animationController;
   DateTime startDate;
   DateTime endDate;
-  String month = DateFormat('yyyy-MM').format(DateTime.now());
   bool timeMark = true;
   double _hourValue = 12;
   double _minuteValue = 30;
@@ -138,7 +137,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                             startDate != null
                                                 ? DateFormat('EEE, dd MMM')
                                                     .format(startDate)
-                                                : month,
+                                                : '/',
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 16,
@@ -194,7 +193,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                                           ? DateFormat(
                                                                   'EEE, dd MMM')
                                                               .format(endDate)
-                                                          : month),
+                                                          : '/'),
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,

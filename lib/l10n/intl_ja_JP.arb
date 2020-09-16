@@ -65,6 +65,9 @@
     "To":"に",
     "Time":"時間",
     "ChooseDate":"日付を選択",
+    "CURRENT":"電流",
+    "LATE":"ディレイ",
+    "FINISHED":"実施する",
     
     "Save": "保存する",
     "Alert": "アラート",

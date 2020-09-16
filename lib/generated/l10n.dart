@@ -683,6 +683,36 @@ class S {
     );
   }
 
+  /// `CURRENT`
+  String get CURRENT {
+    return Intl.message(
+      'CURRENT',
+      name: 'CURRENT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `LATE`
+  String get LATE {
+    return Intl.message(
+      'LATE',
+      name: 'LATE',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FINISHED`
+  String get FINISHED {
+    return Intl.message(
+      'FINISHED',
+      name: 'FINISHED',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Save`
   String get Save {
     return Intl.message(

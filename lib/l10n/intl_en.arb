@@ -65,6 +65,9 @@
     "To":"To",
     "Time":"Time",
     "ChooseDate":"Choose Date",
+    "CURRENT":"CURRENT",
+    "LATE":"LATE",
+    "FINISHED":"FINISHED",
 
     "Save": "Save",
     "Alert": "Alert",
