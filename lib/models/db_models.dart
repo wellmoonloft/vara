@@ -114,6 +114,110 @@ class Invest {
   }
 }
 
+class Invest1 {
+  int id;
+  String code;
+  String date;
+  num amount;
+  String country;
+  String originator;
+  String brand;
+  String currency;
+  num term;
+  String type;
+
+  Invest1({
+    this.id,
+    this.date,
+    this.code,
+    this.amount,
+    this.country,
+    this.originator,
+    this.brand,
+    this.currency,
+    this.term,
+    this.type,
+  });
+  Invest1.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    date = json['date'];
+    code = json['code'];
+    amount = json['amount'];
+    country = json['country'];
+    originator = json['originator'];
+    brand = json['brand'];
+    currency = json['currency'];
+    term = json['term'];
+    type = json['type'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['date'] = this.date;
+    map['code'] = this.code;
+    map['amount'] = this.amount;
+    map['country'] = this.country;
+    map['originator'] = this.originator;
+    map['brand'] = this.brand;
+    map['currency'] = this.currency;
+    map['term'] = this.term;
+    map['type'] = this.type;
+    return map;
+  }
+}
+
+class InvestDetail {
+  int id;
+  String investcode;
+  num number;
+  num days;
+  String perdate;
+  String finaldate;
+  num rate;
+  String status;
+  num received;
+  num interest;
+
+  InvestDetail({
+    this.id,
+    this.number,
+    this.investcode,
+    this.days,
+    this.perdate,
+    this.finaldate,
+    this.rate,
+    this.status,
+    this.received,
+    this.interest,
+  });
+  InvestDetail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    number = json['number'];
+    investcode = json['investcode'];
+    days = json['days'];
+    perdate = json['perdate'];
+    finaldate = json['finaldate'];
+    rate = json['rate'];
+    status = json['status'];
+    received = json['received'];
+    interest = json['interest'];
+  }
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> map = new Map<String, dynamic>();
+    map['id'] = this.id;
+    map['number'] = this.number;
+    map['investcode'] = this.investcode;
+    map['days'] = this.days;
+    map['perdate'] = this.perdate;
+    map['finaldate'] = this.finaldate;
+    map['rate'] = this.rate;
+    map['status'] = this.status;
+    map['received'] = this.received;
+    map['interest'] = this.interest;
+    return map;
+  }
+}
+
 class Asset {
   int id;
   String date;

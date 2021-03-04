@@ -99,4 +99,77 @@
 - [x] 自定义日期弹窗(時間選擇器)
 - [ ] 自定义下拉菜单
 
+### 数据库表结构
 
+**1.投资表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    code  |  INTEGER   |
+| date |  TEXT   |
+|    amount   |  INTEGER   |
+| country |  TEXT   |
+|  originator  | TEXT |
+|  brand    | TEXT |
+| currency |  TEXT   |
+|  term  | INTEGER |
+|  type    | TEXT |
+
+**2.投资细节表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    invest code  |  INTEGER   |
+| number |  INTEGER   |
+|    days   |  INTEGER   |
+| per-payment date |  TEXT   |
+|  final-payment date  | TEXT |
+|  rate    | INTEGER |
+| status |  TEXT   |
+|  received  | INTEGER |
+|  interest    | INTEGER |
+
+
+**3.交易表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    date  |  TEXT   |
+| currency |  TEXT   |
+|    use   |  TEXT   |
+| categroy |  TEXT   |
+|  amount  | INTEGER |
+|  mark    | INTEGER |
+
+**4.资产表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    date  |  TEXT   |
+| currency |  TEXT   |
+|  asset  | INTEGER |
+|  debt    | INTEGER |
+
+**5.用户表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    firstname  |  TEXT   |
+| midname |  TEXT   |
+|    lastname   |  TEXT   |
+|  age  | INTEGER |
+|  sex    | INTEGER |
+
+
+**6.设置表**
+
+|   字段名  | 字段类型 |
+|   :----: | :----:  |
+|    id    | INTEGER |
+|    currency  |  TEXT   |
+| language |  TEXT   |

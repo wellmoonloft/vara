@@ -1,4 +1,4 @@
-class DateUtils {
+class MyDateUtils {
   static int currentWeek() {
     return weekOfYear(DateTime.now());
   }

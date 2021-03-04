@@ -7,9 +7,9 @@ import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 
-class InvestDetail extends StatelessWidget {
+class InvestListDetail extends StatelessWidget {
   final Invest investdetail;
-  const InvestDetail({Key key, this.investdetail}) : super(key: key);
+  const InvestListDetail({Key key, this.investdetail}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

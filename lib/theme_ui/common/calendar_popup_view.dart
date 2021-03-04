@@ -186,9 +186,19 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
                                                               : hour
                                                                   .toString()) +
                                                           ' : ' +
-                                                          minute.toString() +
+                                                          (minute < 10
+                                                              ? '0' +
+                                                                  minute
+                                                                      .toString()
+                                                              : minute
+                                                                  .toString()) +
                                                           ' : ' +
-                                                          second.toString()
+                                                          (second < 10
+                                                              ? '0' +
+                                                                  second
+                                                                      .toString()
+                                                              : second
+                                                                  .toString())
                                                       : (endDate != null
                                                           ? DateFormat(
                                                                   'EEE, dd MMM')
@@ -370,23 +380,27 @@ class _CalendarPopupViewState extends State<CalendarPopupView>
 
   void changeDate() {
     String _date = DateFormat('yyyy-MM-dd').format(startDate);
+    String _hour;
+    String _minute;
+    String _second;
+
     if (hour <= 9) {
-      _date = _date +
-          ' 0' +
-          hour.toString() +
-          ':' +
-          minute.toString() +
-          ':' +
-          second.toString();
+      _hour = '0' + hour.toString();
     } else {
-      _date = _date +
-          ' ' +
-          hour.toString() +
-          ':' +
-          minute.toString() +
-          ':' +
-          second.toString();
+      _hour = hour.toString();
     }
+    if (minute <= 9) {
+      _minute = '0' + minute.toString();
+    } else {
+      _minute = minute.toString();
+    }
+    if (second <= 9) {
+      _second = '0' + second.toString();
+    } else {
+      _second = second.toString();
+    }
+    _date = _date + ' ' + _hour + ':' + _minute + ':' + _second;
+
     setState(() {
       startDate = DateTime.parse(_date);
     });

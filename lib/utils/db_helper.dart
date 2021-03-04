@@ -33,6 +33,10 @@ class DBHelper {
         'CREATE TABLE bill (id INTEGER PRIMARY KEY, date TEXT, currency TEXT, use TEXT, categroy TEXT,amount INTEGER, mark INTEGER)');
     await db.execute(
         'CREATE TABLE settings (id INTEGER PRIMARY KEY, currency TEXT,language TEXT)');
+    await db.execute(
+        'CREATE TABLE invest1 (id INTEGER PRIMARY KEY, date TEXT, code TEXT, amount INTEGER, country TEXT, originator TEXT, brand TEXT,currency TEXT, term INTEGER,type TEXT)');
+    await db.execute(
+        'CREATE TABLE investdetail (id INTEGER PRIMARY KEY, investcode TEXT, number INTEGER, days INTEGER, perdate TEXT, finaldate TEXT, rate INTEGER,status TEXT, received INTEGER,interest INTEGER)');
 
     Settings settings = Settings();
     settings.currency = 'EUR';

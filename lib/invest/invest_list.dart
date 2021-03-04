@@ -9,7 +9,7 @@ import 'package:vara/theme_ui/color_theme.dart';
 import 'package:vara/theme_ui/common/app_common.dart';
 import 'package:vara/theme_ui/common/calendar_popup_view.dart';
 import 'package:vara/utils/dateutil.dart';
-import 'invest_detail.dart';
+import 'invest_list_detail.dart';
 import 'package:vara/theme_ui/app_theme.dart';
 
 class InvestListView extends StatefulWidget {
@@ -171,11 +171,11 @@ class InvestListState extends State<InvestListView>
                                     date1 = null;
                                     current.clear();
                                     DateTime weekStart =
-                                        DateUtils.weekStart(DateTime.now());
+                                        MyDateUtils.weekStart(DateTime.now());
                                     //print(weekStart);
 
                                     DateTime weekEnd =
-                                        DateUtils.weekEnd(DateTime.now())
+                                        MyDateUtils.weekEnd(DateTime.now())
                                             .add(Duration(days: 1));
                                     List<Invest> _data = List<Invest>();
                                     if (investList != null) {
@@ -341,15 +341,20 @@ class InvestListState extends State<InvestListView>
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => InvestDetail(
-                                              investdetail: invest),
+                                          builder: (context) =>
+                                              InvestListDetail(
+                                                  investdetail: invest),
                                         ));
                                   },
                                   child: Container(
                                       color: ColorTheme.white,
                                       width: MediaQuery.of(context).size.width,
                                       child: Padding(
-                                          padding: AppTheme.inboxpadding,
+                                          padding: EdgeInsets.only(
+                                              left: 16,
+                                              right: 16,
+                                              top: 10,
+                                              bottom: 8),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,

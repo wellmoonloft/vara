@@ -102,7 +102,7 @@ class _InputHomeState extends State<InputHome> with TickerProviderStateMixin {
                   keyboardAppearance: Brightness.light,
                   inputFormatters: [UsNumberTextInputFormatter()]),
             ),
-            OneHeightBorder(top: 20, left: 20, right: 20, bottom: 0),
+            OneHeightBorder(top: 10, left: 20, right: 20, bottom: 0),
             InkWell(
                 onTap: () {
                   Navigator.push(context,

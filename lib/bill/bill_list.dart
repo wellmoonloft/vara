@@ -142,12 +142,12 @@ class BillListState extends State<BillListView> {
                                             date1 = null;
                                             current.clear();
                                             DateTime weekStart =
-                                                DateUtils.weekStart(
+                                                MyDateUtils.weekStart(
                                                     DateTime.now());
                                             //print(weekStart);
 
                                             DateTime weekEnd =
-                                                DateUtils.weekEnd(
+                                                MyDateUtils.weekEnd(
                                                         DateTime.now())
                                                     .add(Duration(days: 1));
                                             if (billList != null) {
